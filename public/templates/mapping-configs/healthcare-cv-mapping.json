@@ -1,0 +1,462 @@
+{
+  "metadata": {
+    "name": "Healthcare CV Mapping Configuration",
+    "description": "Specialized mapping configuration for healthcare and medical professionals",
+    "version": "1.0.0",
+    "createdAt": "2024-01-01T00:00:00.000Z",
+    "industryContext": "Healthcare",
+    "compatibleFlows": ["healthcare-cv-flow", "medical-cv-flow"]
+  },
+  "config": {
+    "name": "Healthcare CV Builder Mapping",
+    "description": "Smart mapping configuration for Healthcare CV Builder flow",
+    "industryContext": "Healthcare",
+    "mappings": [
+      {
+        "id": "map_personal_info",
+        "sourceNodeId": "personalInfo",
+        "sourceVariable": "fullName",
+        "targetCvField": "fullName",
+        "targetSection": "personal",
+        "mappingType": "direct",
+        "priority": 1,
+        "confidence": 0.95,
+        "isActive": true
+      },
+      {
+        "id": "map_contact_info",
+        "sourceNodeId": "contactInfo",
+        "sourceVariable": "email",
+        "targetCvField": "contact.email",
+        "targetSection": "contact",
+        "mappingType": "direct",
+        "priority": 1,
+        "confidence": 0.98,
+        "isActive": true
+      },
+      {
+        "id": "map_medical_license",
+        "sourceNodeId": "medicalLicense",
+        "sourceVariable": "licenseNumber",
+        "targetCvField": "certifications.0.credential_id",
+        "targetSection": "certifications",
+        "mappingType": "direct",
+        "priority": 1,
+        "confidence": 0.95,
+        "isActive": true
+      },
+      {
+        "id": "map_license_state",
+        "sourceNodeId": "medicalLicense",
+        "sourceVariable": "licenseState",
+        "targetCvField": "certifications.0.issuer",
+        "targetSection": "certifications",
+        "mappingType": "direct",
+        "priority": 1,
+        "confidence": 0.9,
+        "isActive": true
+      },
+      {
+        "id": "map_specialization",
+        "sourceNodeId": "specialization",
+        "sourceVariable": "specialization",
+        "targetCvField": "title",
+        "targetSection": "personal",
+        "mappingType": "direct",
+        "priority": 1,
+        "confidence": 0.95,
+        "isActive": true
+      },
+      {
+        "id": "map_years_experience",
+        "sourceNodeId": "yearsExperience",
+        "sourceVariable": "yearsExperience",
+        "targetCvField": "experience.0.dates",
+        "targetSection": "experience",
+        "mappingType": "transformed",
+        "priority": 1,
+        "confidence": 0.85,
+        "isActive": true
+      },
+      {
+        "id": "map_medical_education",
+        "sourceNodeId": "medicalEducation",
+        "sourceVariable": "medicalSchool",
+        "targetCvField": "education.0.institution",
+        "targetSection": "education",
+        "mappingType": "direct",
+        "priority": 1,
+        "confidence": 0.95,
+        "isActive": true
+      },
+      {
+        "id": "map_medical_degree",
+        "sourceNodeId": "medicalEducation",
+        "sourceVariable": "degree",
+        "targetCvField": "education.0.degree",
+        "targetSection": "education",
+        "mappingType": "direct",
+        "priority": 1,
+        "confidence": 0.95,
+        "isActive": true
+      },
+      {
+        "id": "map_residency",
+        "sourceNodeId": "residency",
+        "sourceVariable": "residencyProgram",
+        "targetCvField": "education.1.institution",
+        "targetSection": "education",
+        "mappingType": "direct",
+        "priority": 1,
+        "confidence": 0.9,
+        "isActive": true
+      },
+      {
+        "id": "map_fellowship",
+        "sourceNodeId": "fellowship",
+        "sourceVariable": "fellowshipProgram",
+        "targetCvField": "education.2.institution",
+        "targetSection": "education",
+        "mappingType": "conditional",
+        "conditions": [
+          {
+            "field": "fellowshipProgram",
+            "operator": "is_not_empty",
+            "value": ""
+          }
+        ],
+        "priority": 1,
+        "confidence": 0.9,
+        "isActive": true
+      },
+      {
+        "id": "map_medical_skills",
+        "sourceNodeId": "medicalSkills",
+        "sourceVariable": "medicalSkills",
+        "targetCvField": "skills.technical",
+        "targetSection": "skills",
+        "mappingType": "transformed",
+        "priority": 1,
+        "confidence": 0.9,
+        "isActive": true
+      },
+      {
+        "id": "map_procedures",
+        "sourceNodeId": "procedures",
+        "sourceVariable": "procedures",
+        "targetCvField": "skills.industry",
+        "targetSection": "skills",
+        "mappingType": "transformed",
+        "priority": 1,
+        "confidence": 0.85,
+        "isActive": true
+      },
+      {
+        "id": "map_soft_skills",
+        "sourceNodeId": "softSkills",
+        "sourceVariable": "softSkills",
+        "targetCvField": "skills.soft",
+        "targetSection": "skills",
+        "mappingType": "transformed",
+        "priority": 1,
+        "confidence": 0.85,
+        "isActive": true
+      },
+      {
+        "id": "map_certifications",
+        "sourceNodeId": "certifications",
+        "sourceVariable": "certifications",
+        "targetCvField": "certifications",
+        "targetSection": "certifications",
+        "mappingType": "transformed",
+        "priority": 1,
+        "confidence": 0.9,
+        "isActive": true
+      },
+      {
+        "id": "map_publications",
+        "sourceNodeId": "publications",
+        "sourceVariable": "publications",
+        "targetCvField": "publicationsResearch",
+        "targetSection": "publications",
+        "mappingType": "transformed",
+        "priority": 1,
+        "confidence": 0.8,
+        "isActive": true
+      },
+      {
+        "id": "map_languages",
+        "sourceNodeId": "languages",
+        "sourceVariable": "languages",
+        "targetCvField": "languages",
+        "targetSection": "languages",
+        "mappingType": "transformed",
+        "priority": 1,
+        "confidence": 0.8,
+        "isActive": true
+      },
+      {
+        "id": "map_work_authorization",
+        "sourceNodeId": "workAuthorization",
+        "sourceVariable": "workAuthorization",
+        "targetCvField": "workAuthorization",
+        "targetSection": "personal",
+        "mappingType": "direct",
+        "priority": 1,
+        "confidence": 0.9,
+        "isActive": true
+      }
+    ],
+    "transformations": [
+      {
+        "id": "format_phone",
+        "field": "contact.phone",
+        "transformationType": "format_phone",
+        "parameters": {
+          "format": "international",
+          "countryCode": "US"
+        }
+      },
+      {
+        "id": "format_medical_license",
+        "field": "certifications.0.credential_id",
+        "transformationType": "format_license",
+        "parameters": {
+          "format": "medical_license",
+          "includeState": true
+        }
+      },
+      {
+        "id": "process_medical_skills",
+        "field": "skills.technical",
+        "transformationType": "extract_keywords",
+        "parameters": {
+          "sourceField": "medicalSkills",
+          "category": "medical"
+        }
+      },
+      {
+        "id": "process_procedures",
+        "field": "skills.industry",
+        "transformationType": "extract_keywords",
+        "parameters": {
+          "sourceField": "procedures",
+          "category": "procedures"
+        }
+      },
+      {
+        "id": "process_soft_skills",
+        "field": "skills.soft",
+        "transformationType": "extract_keywords",
+        "parameters": {
+          "sourceField": "softSkills",
+          "category": "soft"
+        }
+      },
+      {
+        "id": "remove_duplicate_medical_skills",
+        "field": "skills.technical",
+        "transformationType": "remove_duplicates",
+        "parameters": {
+          "caseSensitive": false
+        }
+      },
+      {
+        "id": "remove_duplicate_procedures",
+        "field": "skills.industry",
+        "transformationType": "remove_duplicates",
+        "parameters": {
+          "caseSensitive": false
+        }
+      },
+      {
+        "id": "remove_duplicate_soft_skills",
+        "field": "skills.soft",
+        "transformationType": "remove_duplicates",
+        "parameters": {
+          "caseSensitive": false
+        }
+      },
+      {
+        "id": "sort_medical_skills",
+        "field": "skills.technical",
+        "transformationType": "sort",
+        "parameters": {
+          "order": "alphabetical"
+        }
+      },
+      {
+        "id": "sort_procedures",
+        "field": "skills.industry",
+        "transformationType": "sort",
+        "parameters": {
+          "order": "alphabetical"
+        }
+      },
+      {
+        "id": "sort_soft_skills",
+        "field": "skills.soft",
+        "transformationType": "sort",
+        "parameters": {
+          "order": "alphabetical"
+        }
+      },
+      {
+        "id": "format_certifications",
+        "field": "certifications",
+        "transformationType": "format_certification",
+        "parameters": {
+          "includeDate": true,
+          "includeIssuer": true,
+          "medicalFormat": true
+        }
+      },
+      {
+        "id": "format_publications",
+        "field": "publicationsResearch",
+        "transformationType": "format_publication",
+        "parameters": {
+          "includeAuthors": true,
+          "includeJournal": true,
+          "includeDate": true
+        }
+      },
+      {
+        "id": "format_languages",
+        "field": "languages",
+        "transformationType": "format_language_proficiency",
+        "parameters": {
+          "includeProficiency": true,
+          "medicalContext": true
+        }
+      },
+      {
+        "id": "enhance_summary",
+        "field": "summary",
+        "transformationType": "ai_enhance",
+        "parameters": {
+          "maxLength": 500,
+          "style": "medical"
+        },
+        "aiPrompt": "Improve this professional summary for a healthcare professional, making it more compelling and highlighting relevant medical expertise and patient care experience"
+      }
+    ],
+    "validations": [
+      {
+        "id": "validate_full_name",
+        "field": "fullName",
+        "ruleType": "required",
+        "parameters": {},
+        "errorMessage": "Full name is required"
+      },
+      {
+        "id": "validate_email",
+        "field": "contact.email",
+        "ruleType": "format",
+        "parameters": {
+          "pattern": "email"
+        },
+        "errorMessage": "Please enter a valid email address"
+      },
+      {
+        "id": "validate_phone",
+        "field": "contact.phone",
+        "ruleType": "format",
+        "parameters": {
+          "pattern": "phone"
+        },
+        "errorMessage": "Please enter a valid phone number"
+      },
+      {
+        "id": "validate_medical_license",
+        "field": "certifications.0.credential_id",
+        "ruleType": "required",
+        "parameters": {},
+        "errorMessage": "Medical license number is required"
+      },
+      {
+        "id": "validate_license_state",
+        "field": "certifications.0.issuer",
+        "ruleType": "required",
+        "parameters": {},
+        "errorMessage": "License state is required"
+      },
+      {
+        "id": "validate_specialization",
+        "field": "title",
+        "ruleType": "required",
+        "parameters": {},
+        "errorMessage": "Medical specialization is required"
+      },
+      {
+        "id": "validate_medical_education",
+        "field": "education.0.institution",
+        "ruleType": "required",
+        "parameters": {},
+        "errorMessage": "Medical school is required"
+      },
+      {
+        "id": "validate_medical_degree",
+        "field": "education.0.degree",
+        "ruleType": "required",
+        "parameters": {},
+        "errorMessage": "Medical degree is required"
+      },
+      {
+        "id": "validate_medical_skills",
+        "field": "skills.technical",
+        "ruleType": "length",
+        "parameters": {
+          "minItems": 5,
+          "maxItems": 30
+        },
+        "errorMessage": "Please provide between 5 and 30 medical skills"
+      },
+      {
+        "id": "validate_procedures",
+        "field": "skills.industry",
+        "ruleType": "length",
+        "parameters": {
+          "minItems": 3,
+          "maxItems": 25
+        },
+        "errorMessage": "Please provide between 3 and 25 medical procedures"
+      },
+      {
+        "id": "validate_soft_skills",
+        "field": "skills.soft",
+        "ruleType": "length",
+        "parameters": {
+          "minItems": 3,
+          "maxItems": 15
+        },
+        "errorMessage": "Please provide between 3 and 15 soft skills"
+      },
+      {
+        "id": "validate_work_authorization",
+        "field": "workAuthorization",
+        "ruleType": "required",
+        "parameters": {},
+        "errorMessage": "Work authorization status is required"
+      },
+      {
+        "id": "ai_validate_medical_experience",
+        "field": "experience.0.title",
+        "ruleType": "ai_validate",
+        "parameters": {
+          "checkRelevance": true,
+          "checkCompleteness": true
+        },
+        "errorMessage": "Medical experience description could be improved",
+        "aiPrompt": "Validate that this medical experience description is relevant for a healthcare professional and includes specific medical procedures, patient care experience, and clinical achievements"
+      }
+    ],
+    "userPreferences": {
+      "preferredDateFormat": "MMM YYYY",
+      "nameFormat": "first_last",
+      "experienceOrder": "chronological",
+      "skillCategorization": "medical",
+      "languageStyle": "professional"
+    }
+  }
+}

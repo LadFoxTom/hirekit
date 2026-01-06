@@ -1,0 +1,390 @@
+{
+  "id": "basic-cv-flow",
+  "name": "Basic CV Builder Flow",
+  "description": "Complete basic CV builder flow with essential questions for quick CV creation",
+  "version": "1.0.0",
+  "isActive": true,
+  "isDefault": false,
+  "flowType": "basic",
+  "targetUrl": "/quick-cv",
+  "nodes": [
+    {
+      "id": "start",
+      "type": "start",
+      "position": { "x": 250, "y": 50 },
+      "data": {
+        "label": "Start",
+        "description": "Basic CV Builder begins here"
+      }
+    },
+    {
+      "id": "intro",
+      "type": "question",
+      "position": { "x": 250, "y": 150 },
+      "data": {
+        "label": "Welcome",
+        "question": "Welcome! Let's build your professional CV quickly and easily. Are you ready to begin?",
+        "questionType": "yes-no",
+        "required": false,
+        "variableName": "ready_to_start",
+        "options": [
+          { "id": "yes", "label": "Yes, let's start!", "value": "yes" },
+          { "id": "no", "label": "Not yet", "value": "no" }
+        ]
+      }
+    },
+    {
+      "id": "fullName",
+      "type": "question",
+      "position": { "x": 250, "y": 250 },
+      "data": {
+        "label": "Full Name",
+        "question": "What is your full name?",
+        "questionType": "text",
+        "required": true,
+        "variableName": "fullName",
+        "placeholder": "Enter your full name",
+        "helpText": "Please provide your complete name as it should appear on your CV"
+      }
+    },
+    {
+      "id": "email",
+      "type": "question",
+      "position": { "x": 250, "y": 350 },
+      "data": {
+        "label": "Email Address",
+        "question": "What is your email address?",
+        "questionType": "email",
+        "required": true,
+        "variableName": "email",
+        "placeholder": "your.email@example.com",
+        "helpText": "This will be used for contact purposes"
+      }
+    },
+    {
+      "id": "phone",
+      "type": "question",
+      "position": { "x": 250, "y": 450 },
+      "data": {
+        "label": "Phone Number",
+        "question": "What is your phone number? (Optional)",
+        "questionType": "phone",
+        "required": false,
+        "variableName": "phone",
+        "placeholder": "+1 (555) 123-4567",
+        "helpText": "Include country code if applying internationally"
+      }
+    },
+    {
+      "id": "location",
+      "type": "question",
+      "position": { "x": 250, "y": 550 },
+      "data": {
+        "label": "Location",
+        "question": "Where are you located?",
+        "questionType": "text",
+        "required": true,
+        "variableName": "location",
+        "placeholder": "City, Country",
+        "helpText": "e.g., New York, USA or London, UK"
+      }
+    },
+    {
+      "id": "professionalSummary",
+      "type": "question",
+      "position": { "x": 250, "y": 650 },
+      "data": {
+        "label": "Professional Summary",
+        "question": "Tell us about yourself in 2-3 sentences. What makes you unique?",
+        "questionType": "text",
+        "required": true,
+        "variableName": "professionalSummary",
+        "placeholder": "Experienced professional with expertise in...",
+        "helpText": "This will be the first thing employers see on your CV"
+      }
+    },
+    {
+      "id": "currentJobTitle",
+      "type": "question",
+      "position": { "x": 250, "y": 750 },
+      "data": {
+        "label": "Current Job Title",
+        "question": "What is your current job title or desired position?",
+        "questionType": "text",
+        "required": true,
+        "variableName": "currentJobTitle",
+        "placeholder": "e.g., Software Engineer, Marketing Manager",
+        "helpText": "This will be prominently displayed on your CV"
+      }
+    },
+    {
+      "id": "workExperience",
+      "type": "question",
+      "position": { "x": 250, "y": 850 },
+      "data": {
+        "label": "Work Experience",
+        "question": "Tell us about your work experience. Include company name, your role, and key achievements.",
+        "questionType": "text",
+        "required": true,
+        "variableName": "workExperience",
+        "placeholder": "Company Name - Job Title (Year-Year)\n• Key achievement 1\n• Key achievement 2",
+        "helpText": "Include your most recent and relevant positions"
+      }
+    },
+    {
+      "id": "education",
+      "type": "question",
+      "position": { "x": 250, "y": 950 },
+      "data": {
+        "label": "Education",
+        "question": "What is your educational background?",
+        "questionType": "text",
+        "required": true,
+        "variableName": "education",
+        "placeholder": "University Name - Degree (Year)\nRelevant coursework or achievements",
+        "helpText": "Include your highest degree and any relevant certifications"
+      }
+    },
+    {
+      "id": "skills",
+      "type": "question",
+      "position": { "x": 250, "y": 1050 },
+      "data": {
+        "label": "Skills",
+        "question": "What are your key skills? (Separate with commas)",
+        "questionType": "text",
+        "required": true,
+        "variableName": "skills",
+        "placeholder": "JavaScript, React, Project Management, Leadership",
+        "helpText": "Include both technical and soft skills relevant to your field"
+      }
+    },
+    {
+      "id": "additionalInfo",
+      "type": "question",
+      "position": { "x": 250, "y": 1150 },
+      "data": {
+        "label": "Additional Information",
+        "question": "Any additional information you'd like to include? (Languages, certifications, etc.)",
+        "questionType": "text",
+        "required": false,
+        "variableName": "additionalInfo",
+        "placeholder": "Languages: English (Native), Spanish (Fluent)\nCertifications: PMP, AWS Certified",
+        "helpText": "Optional: Include anything else that strengthens your profile"
+      }
+    },
+    {
+      "id": "review",
+      "type": "question",
+      "position": { "x": 250, "y": 1250 },
+      "data": {
+        "label": "Review & Confirm",
+        "question": "Please review your information. Is everything correct?",
+        "questionType": "yes-no",
+        "required": true,
+        "variableName": "review_confirmed",
+        "options": [
+          { "id": "yes", "label": "Yes, everything looks good!", "value": "yes" },
+          { "id": "no", "label": "I need to make changes", "value": "no" }
+        ]
+      }
+    },
+    {
+      "id": "complete",
+      "type": "action",
+      "position": { "x": 250, "y": 1350 },
+      "data": {
+        "label": "CV Complete",
+        "description": "Your basic CV has been created successfully!",
+        "action": {
+          "type": "set_variable",
+          "config": {
+            "variableName": "cv_complete",
+            "value": true
+          }
+        }
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "start-to-intro",
+      "source": "start",
+      "target": "intro",
+      "type": "default"
+    },
+    {
+      "id": "intro-to-fullName",
+      "source": "intro",
+      "target": "fullName",
+      "type": "default"
+    },
+    {
+      "id": "fullName-to-email",
+      "source": "fullName",
+      "target": "email",
+      "type": "default"
+    },
+    {
+      "id": "email-to-phone",
+      "source": "email",
+      "target": "phone",
+      "type": "default"
+    },
+    {
+      "id": "phone-to-location",
+      "source": "phone",
+      "target": "location",
+      "type": "default"
+    },
+    {
+      "id": "location-to-summary",
+      "source": "location",
+      "target": "professionalSummary",
+      "type": "default"
+    },
+    {
+      "id": "summary-to-jobTitle",
+      "source": "professionalSummary",
+      "target": "currentJobTitle",
+      "type": "default"
+    },
+    {
+      "id": "jobTitle-to-experience",
+      "source": "currentJobTitle",
+      "target": "workExperience",
+      "type": "default"
+    },
+    {
+      "id": "experience-to-education",
+      "source": "workExperience",
+      "target": "education",
+      "type": "default"
+    },
+    {
+      "id": "education-to-skills",
+      "source": "education",
+      "target": "skills",
+      "type": "default"
+    },
+    {
+      "id": "skills-to-additional",
+      "source": "skills",
+      "target": "additionalInfo",
+      "type": "default"
+    },
+    {
+      "id": "additional-to-review",
+      "source": "additionalInfo",
+      "target": "review",
+      "type": "default"
+    },
+    {
+      "id": "review-to-complete",
+      "source": "review",
+      "target": "complete",
+      "type": "default"
+    }
+  ],
+  "variables": [
+    {
+      "id": "ready_to_start",
+      "name": "ready_to_start",
+      "type": "string",
+      "scope": "local",
+      "description": "User's readiness to start CV building"
+    },
+    {
+      "id": "fullName",
+      "name": "fullName",
+      "type": "string",
+      "scope": "local",
+      "description": "User's full name"
+    },
+    {
+      "id": "email",
+      "name": "email",
+      "type": "string",
+      "scope": "local",
+      "description": "User's email address"
+    },
+    {
+      "id": "phone",
+      "name": "phone",
+      "type": "string",
+      "scope": "local",
+      "description": "User's phone number"
+    },
+    {
+      "id": "location",
+      "name": "location",
+      "type": "string",
+      "scope": "local",
+      "description": "User's location"
+    },
+    {
+      "id": "professionalSummary",
+      "name": "professionalSummary",
+      "type": "string",
+      "scope": "local",
+      "description": "User's professional summary"
+    },
+    {
+      "id": "currentJobTitle",
+      "name": "currentJobTitle",
+      "type": "string",
+      "scope": "local",
+      "description": "User's current or desired job title"
+    },
+    {
+      "id": "workExperience",
+      "name": "workExperience",
+      "type": "string",
+      "scope": "local",
+      "description": "User's work experience"
+    },
+    {
+      "id": "education",
+      "name": "education",
+      "type": "string",
+      "scope": "local",
+      "description": "User's education background"
+    },
+    {
+      "id": "skills",
+      "name": "skills",
+      "type": "string",
+      "scope": "local",
+      "description": "User's skills"
+    },
+    {
+      "id": "additionalInfo",
+      "name": "additionalInfo",
+      "type": "string",
+      "scope": "local",
+      "description": "Additional user information"
+    },
+    {
+      "id": "review_confirmed",
+      "name": "review_confirmed",
+      "type": "string",
+      "scope": "local",
+      "description": "User's confirmation of information review"
+    },
+    {
+      "id": "cv_complete",
+      "name": "cv_complete",
+      "type": "boolean",
+      "scope": "local",
+      "description": "CV completion status"
+    }
+  ],
+  "settings": {
+    "autoSave": true,
+    "allowBackNavigation": true,
+    "showProgress": true,
+    "timeout": 30000
+  },
+  "createdAt": "2024-01-01T00:00:00.000Z",
+  "updatedAt": "2024-01-01T00:00:00.000Z"
+}

@@ -1,0 +1,441 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  accounts      Account[]
+  sessions      Session[]
+  cvs           CV[]
+  letters       Letter[]
+  jobApplications JobApplication[]
+  jobMatches    JobMatch[]
+  cvAnalyses    CVAnalysis[]
+  agentConversations AgentConversation[]
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model CV {
+  id          String   @id @default(cuid())
+  userId      String
+  title       String
+  template    String?
+  content     Json
+  tags        String? // Searchable tags (comma-separated for SQLite)
+  category    String?
+  keywords    String? // Extracted keywords for search (comma-separated for SQLite)
+  isPublic    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  jobApplications JobApplication[]
+  jobMatches  JobMatch[]
+  analyses    CVAnalysis[]
+}
+
+model Letter {
+  id        String   @id @default(cuid())
+  userId    String
+  title     String
+  content   Json
+  type      String   // cover, reference, etc.
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  jobApplications JobApplication[]
+}
+
+model Subscription {
+  id                 String   @id @default(cuid())
+  userId             String   @unique
+  stripeCustomerId   String?  @unique
+  stripeSubscriptionId String? @unique
+  stripePriceId     String?
+  stripeCurrentPeriodEnd DateTime?
+  billingHistory    Json?   // Array of billing events (stored as JSON string)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+}
+
+// Question Configuration Models
+model QuestionConfiguration {
+  id          String   @id @default(cuid())
+  name        String   @unique // e.g., "default", "simplified", "custom_1"
+  description String?
+  isActive    Boolean  @default(true)
+  isDefault   Boolean  @default(false)
+  type        String   // "advanced", "simplified", "custom"
+  questions   Json     // Array of question objects with order, enabled status, etc.
+  flowConfig  Json?    // Flow configuration with conditions and branching
+  version     Int      @default(1)
+  createdBy   String?  // User ID who created this configuration
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Relationships
+  versions    QuestionConfigVersion[]
+  abTestsAsA  ABTest[] @relation("ABTestConfigA")
+  abTestsAsB  ABTest[] @relation("ABTestConfigB")
+  conditionalQuestions ConditionalQuestion[]
+  questionDependencies QuestionDependency[]
+  questionAnalytics QuestionAnalytics[]
+  
+  @@index([type])
+  @@index([isActive])
+  @@index([isDefault])
+}
+
+// Simple Flow Model for Chatbot Flows
+model Flow {
+  id            String   @id @default(cuid())
+  name          String
+  description   String?
+  data          Json     // The complete flow data (nodes, edges, etc.)
+  mappingConfig Json?    // Smart CV mapping configuration
+  isActive      Boolean  @default(true)
+  isDefault     Boolean  @default(false)
+  flowType      String?  // "basic", "advanced", "custom"
+  targetUrl     String?  // "/quick-cv", "/builder", etc.
+  isLive        Boolean  @default(false)
+  version       String   @default("1.0.0")
+  createdBy     String?  // User email who created this flow
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  
+  @@index([createdBy])
+  @@index([isActive])
+  @@index([flowType])
+  @@index([targetUrl])
+  @@index([isLive])
+}
+
+model QuestionConfigVersion {
+  id          String   @id @default(cuid())
+  configId    String
+  version     Int
+  questions   Json     // Snapshot of questions at this version
+  changes     Json?    // Description of changes made
+  createdBy   String?  // User ID who made the change
+  createdAt   DateTime @default(now())
+  config      QuestionConfiguration @relation(fields: [configId], references: [id], onDelete: Cascade)
+  @@unique([configId, version])
+  @@index([configId])
+  @@index([createdAt])
+}
+
+// A/B Testing Models
+model ABTest {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  configAId   String
+  configBId   String
+  trafficSplit Int     @default(50) // Percentage for config A (0-100)
+  startDate   DateTime
+  endDate     DateTime?
+  isActive    Boolean  @default(true)
+  metrics     Json?    // Test metrics and results
+  createdBy   String?  // User ID who created the test
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Relationships
+  configA     QuestionConfiguration @relation("ABTestConfigA", fields: [configAId], references: [id])
+  configB     QuestionConfiguration @relation("ABTestConfigB", fields: [configBId], references: [id])
+  participants ABTestParticipant[]
+  
+  @@index([isActive])
+  @@index([startDate])
+  @@index([endDate])
+}
+
+model ABTestParticipant {
+  id        String   @id @default(cuid())
+  testId    String
+  userId    String
+  variant   String   // "A" or "B"
+  startedAt DateTime @default(now())
+  completedAt DateTime?
+  metrics   Json?    // Individual participant metrics
+  
+  // Relationships
+  test      ABTest   @relation(fields: [testId], references: [id], onDelete: Cascade)
+  
+  @@unique([testId, userId])
+  @@index([testId])
+  @@index([userId])
+}
+
+// Conditional Questions and Logic Models
+model ConditionalQuestion {
+  id          String   @id @default(cuid())
+  configId    String
+  questionId  String
+  conditions  Json     // Array of condition objects
+  showIf      String   @default("all") // "all" or "any"
+  priority    Int      @default(0) // Order of evaluation
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Relationships
+  config      QuestionConfiguration @relation(fields: [configId], references: [id], onDelete: Cascade)
+  
+  @@index([configId])
+  @@index([questionId])
+  @@index([isActive])
+}
+
+model QuestionDependency {
+  id            String   @id @default(cuid())
+  configId      String
+  questionId    String
+  dependsOn     Json     // Array of question IDs this depends on
+  requiredAnswers Json?  // Required answers to show this question
+  skipIf        Boolean  @default(false) // Skip if conditions are met
+  isActive      Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  
+  // Relationships
+  config        QuestionConfiguration @relation(fields: [configId], references: [id], onDelete: Cascade)
+  
+  @@index([configId])
+  @@index([questionId])
+  @@index([isActive])
+}
+
+// Analytics and Performance Models
+model QuestionAnalytics {
+  id          String   @id @default(cuid())
+  configId    String
+  questionId  String
+  impressions Int      @default(0) // How many times question was shown
+  completions Int      @default(0) // How many times question was answered
+  skips       Int      @default(0) // How many times question was skipped
+  avgTime     Float?   // Average time to answer in seconds
+  date        DateTime @default(now())
+  
+  // Relationships
+  config      QuestionConfiguration @relation(fields: [configId], references: [id], onDelete: Cascade)
+  
+  @@index([configId])
+  @@index([questionId])
+  @@index([date])
+}
+
+model PerformanceMetric {
+  id        String   @id @default(cuid())
+  operation String   // e.g., "question_load", "config_save"
+  duration  Int      // Duration in milliseconds
+  userId    String?
+  timestamp DateTime @default(now())
+  
+  @@index([operation])
+  @@index([timestamp])
+}
+
+// Audit Logging
+model AuditLog {
+  id         String   @id @default(cuid())
+  entityType String   // e.g., "QuestionConfiguration", "ABTest"
+  action     String   // e.g., "create", "update", "delete"
+  userId     String?
+  changes    Json?    // What was changed
+  ipAddress  String?
+  userAgent  String?
+  timestamp  DateTime @default(now())
+  
+  @@index([entityType])
+  @@index([action])
+  @@index([timestamp])
+}
+
+// ============================================
+// AGENT SYSTEM MODELS
+// ============================================
+
+// Job Application Tracking
+model JobApplication {
+  id              String    @id @default(cuid())
+  userId          String
+  cvId            String
+  letterId        String?
+  
+  // Job details
+  jobTitle        String
+  companyName     String
+  jobUrl          String?
+  jobDescription  String?
+  location        String?
+  salary          String?
+  
+  // Application metadata
+  appliedDate     DateTime  @default(now())
+  status          String    // applied, viewed, interview_scheduled, interview_completed, offer, rejected, withdrawn, ghosted
+  lastUpdated     DateTime  @updatedAt
+  
+  // Follow-up tracking
+  followUpDate    DateTime?
+  notes           String?
+  
+  // Analytics
+  responseTime    Int?      // Days to response
+  
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  
+  // Relationships
+  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  cv              CV        @relation(fields: [cvId], references: [id], onDelete: Cascade)
+  letter          Letter?   @relation(fields: [letterId], references: [id], onDelete: SetNull)
+  
+  @@index([userId])
+  @@index([status])
+  @@index([appliedDate])
+}
+
+// Job Matching Results
+model JobMatch {
+  id              String    @id @default(cuid())
+  userId          String
+  cvId            String
+  
+  // Job details
+  jobTitle        String
+  companyName     String
+  jobUrl          String
+  jobDescription  String
+  salary          String?
+  location        String
+  remote          Boolean   @default(false)
+  postedDate      DateTime?
+  
+  // Matching metadata
+  matchScore      Int       // 0-100
+  matchReason     String
+  keywordMatches  Json      // Array of matching keywords
+  
+  // Source tracking
+  source          String    // adzuna, linkedin, etc.
+  sourceJobId     String    // Job ID from the source
+  
+  // User interaction
+  viewed          Boolean   @default(false)
+  saved           Boolean   @default(false)
+  applied         Boolean   @default(false)
+  dismissed       Boolean   @default(false)
+  
+  expiresAt       DateTime?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  
+  // Relationships
+  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  cv              CV        @relation(fields: [cvId], references: [id], onDelete: Cascade)
+  
+  @@unique([userId, sourceJobId])
+  @@index([userId, matchScore])
+  @@index([cvId])
+}
+
+// CV Analysis History
+model CVAnalysis {
+  id              String    @id @default(cuid())
+  userId          String
+  cvId            String
+  
+  // Scores
+  overallScore    Int       // 0-100
+  atsScore        Int       // 0-100
+  contentScore    Int       // 0-100
+  
+  // Analysis results
+  strengths       Json      // Array of strings
+  weaknesses      Json      // Array of strings
+  suggestions     Json      // Array of strings
+  
+  // Detailed analysis
+  analysisData    Json      // Complete breakdown
+  
+  createdAt       DateTime  @default(now())
+  
+  // Relationships
+  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  cv              CV        @relation(fields: [cvId], references: [id], onDelete: Cascade)
+  
+  @@index([userId])
+  @@index([cvId])
+}
+
+// Agent Conversation History
+model AgentConversation {
+  id              String    @id @default(cuid())
+  userId          String
+  sessionId       String    @unique
+  
+  // Conversation data
+  messages        Json      // Array of message objects
+  context         Json      // Conversation state/context
+  
+  // Metadata
+  agentType       String    // orchestrator, cv_analyzer, job_matcher, etc.
+  status          String    // active, completed, error
+  
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  
+  // Relationships
+  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@index([userId])
+  @@index([sessionId])
+} 

@@ -1,0 +1,252 @@
+{
+  "metadata": {
+    "name": "Basic CV Mapping Configuration",
+    "description": "Complete mapping configuration for basic CV builder flow",
+    "version": "1.0.0",
+    "createdAt": "2024-01-01T00:00:00.000Z",
+    "industryContext": "Universal",
+    "compatibleFlows": ["basic-cv-flow", "simple-cv-flow"]
+  },
+  "config": {
+    "name": "Basic CV Builder Mapping",
+    "description": "Smart mapping configuration for Basic CV Builder flow",
+    "industryContext": "Universal",
+    "mappings": [
+      {
+        "id": "map_full_name",
+        "sourceNodeId": "fullName",
+        "sourceVariable": "fullName",
+        "targetCvField": "fullName",
+        "targetSection": "personal",
+        "mappingType": "direct",
+        "priority": 1,
+        "confidence": 0.95,
+        "isActive": true
+      },
+      {
+        "id": "map_email",
+        "sourceNodeId": "email",
+        "sourceVariable": "email",
+        "targetCvField": "contact.email",
+        "targetSection": "contact",
+        "mappingType": "direct",
+        "priority": 1,
+        "confidence": 0.98,
+        "isActive": true
+      },
+      {
+        "id": "map_phone",
+        "sourceNodeId": "phone",
+        "sourceVariable": "phone",
+        "targetCvField": "contact.phone",
+        "targetSection": "contact",
+        "mappingType": "transformed",
+        "priority": 1,
+        "confidence": 0.95,
+        "isActive": true
+      },
+      {
+        "id": "map_location",
+        "sourceNodeId": "location",
+        "sourceVariable": "location",
+        "targetCvField": "contact.location",
+        "targetSection": "contact",
+        "mappingType": "direct",
+        "priority": 1,
+        "confidence": 0.9,
+        "isActive": true
+      },
+      {
+        "id": "map_professional_summary",
+        "sourceNodeId": "professionalSummary",
+        "sourceVariable": "professionalSummary",
+        "targetCvField": "summary",
+        "targetSection": "summary",
+        "mappingType": "transformed",
+        "priority": 1,
+        "confidence": 0.9,
+        "isActive": true
+      },
+      {
+        "id": "map_job_title",
+        "sourceNodeId": "currentJobTitle",
+        "sourceVariable": "currentJobTitle",
+        "targetCvField": "title",
+        "targetSection": "personal",
+        "mappingType": "direct",
+        "priority": 1,
+        "confidence": 0.95,
+        "isActive": true
+      },
+      {
+        "id": "map_work_experience",
+        "sourceNodeId": "workExperience",
+        "sourceVariable": "workExperience",
+        "targetCvField": "experience.0.content",
+        "targetSection": "experience",
+        "mappingType": "transformed",
+        "priority": 1,
+        "confidence": 0.85,
+        "isActive": true
+      },
+      {
+        "id": "map_education",
+        "sourceNodeId": "education",
+        "sourceVariable": "education",
+        "targetCvField": "education.0.content",
+        "targetSection": "education",
+        "mappingType": "transformed",
+        "priority": 1,
+        "confidence": 0.85,
+        "isActive": true
+      },
+      {
+        "id": "map_skills",
+        "sourceNodeId": "skills",
+        "sourceVariable": "skills",
+        "targetCvField": "skills",
+        "targetSection": "skills",
+        "mappingType": "transformed",
+        "priority": 1,
+        "confidence": 0.9,
+        "isActive": true
+      },
+      {
+        "id": "map_additional_info",
+        "sourceNodeId": "additionalInfo",
+        "sourceVariable": "additionalInfo",
+        "targetCvField": "hobbies",
+        "targetSection": "additional",
+        "mappingType": "conditional",
+        "conditions": [
+          {
+            "field": "additionalInfo",
+            "operator": "contains",
+            "value": "language"
+          }
+        ],
+        "priority": 2,
+        "confidence": 0.7,
+        "isActive": true
+      }
+    ],
+    "transformations": [
+      {
+        "id": "format_phone",
+        "field": "contact.phone",
+        "transformationType": "format_phone",
+        "parameters": {
+          "format": "international",
+          "countryCode": "US"
+        }
+      },
+      {
+        "id": "enhance_summary",
+        "field": "summary",
+        "transformationType": "ai_enhance",
+        "parameters": {
+          "maxLength": 500,
+          "style": "professional"
+        },
+        "aiPrompt": "Improve this professional summary to be more compelling and concise while maintaining the original meaning"
+      },
+      {
+        "id": "parse_work_experience",
+        "field": "experience.0.content",
+        "transformationType": "extract_keywords",
+        "parameters": {
+          "sourceField": "workExperience",
+          "category": "experience"
+        }
+      },
+      {
+        "id": "parse_education",
+        "field": "education.0.content",
+        "transformationType": "extract_keywords",
+        "parameters": {
+          "sourceField": "education",
+          "category": "education"
+        }
+      },
+      {
+        "id": "process_skills",
+        "field": "skills",
+        "transformationType": "extract_keywords",
+        "parameters": {
+          "sourceField": "skills",
+          "category": "skills"
+        }
+      },
+      {
+        "id": "remove_duplicate_skills",
+        "field": "skills",
+        "transformationType": "remove_duplicates",
+        "parameters": {
+          "caseSensitive": false
+        }
+      },
+      {
+        "id": "sort_skills",
+        "field": "skills",
+        "transformationType": "sort",
+        "parameters": {
+          "order": "alphabetical"
+        }
+      }
+    ],
+    "validations": [
+      {
+        "id": "validate_full_name",
+        "field": "fullName",
+        "ruleType": "required",
+        "parameters": {},
+        "errorMessage": "Full name is required"
+      },
+      {
+        "id": "validate_email",
+        "field": "contact.email",
+        "ruleType": "format",
+        "parameters": {
+          "pattern": "email"
+        },
+        "errorMessage": "Please enter a valid email address"
+      },
+      {
+        "id": "validate_phone",
+        "field": "contact.phone",
+        "ruleType": "format",
+        "parameters": {
+          "pattern": "phone"
+        },
+        "errorMessage": "Please enter a valid phone number"
+      },
+      {
+        "id": "validate_summary_length",
+        "field": "summary",
+        "ruleType": "length",
+        "parameters": {
+          "minLength": 50,
+          "maxLength": 1000
+        },
+        "errorMessage": "Professional summary must be between 50 and 1000 characters"
+      },
+      {
+        "id": "validate_skills_count",
+        "field": "skills",
+        "ruleType": "length",
+        "parameters": {
+          "minItems": 3,
+          "maxItems": 20
+        },
+        "errorMessage": "Please provide between 3 and 20 skills"
+      }
+    ],
+    "userPreferences": {
+      "preferredDateFormat": "MMM YYYY",
+      "nameFormat": "first_last",
+      "experienceOrder": "chronological",
+      "skillCategorization": "automatic",
+      "languageStyle": "formal"
+    }
+  }
+}

@@ -1,0 +1,279 @@
+{
+  "id": "multi-output-condition-example",
+  "name": "Multi-Output Condition Example",
+  "description": "Example flow demonstrating condition nodes with multiple output paths (A, B, C, D)",
+  "version": "1.0.0",
+  "nodes": [
+    {
+      "id": "start-1",
+      "type": "start",
+      "position": { "x": 100, "y": 100 },
+      "data": {
+        "label": "Start",
+        "description": "Flow begins here"
+      }
+    },
+    {
+      "id": "question-1",
+      "type": "question",
+      "position": { "x": 100, "y": 200 },
+      "data": {
+        "label": "Customer Rating",
+        "question": "How would you rate our service?",
+        "questionType": "multiple-choice",
+        "variableName": "service_rating",
+        "required": true,
+        "options": [
+          { "id": "opt-1", "label": "Excellent", "value": "excellent" },
+          { "id": "opt-2", "label": "Good", "value": "good" },
+          { "id": "opt-3", "label": "Average", "value": "average" },
+          { "id": "opt-4", "label": "Poor", "value": "poor" }
+        ]
+      }
+    },
+    {
+      "id": "condition-1",
+      "type": "condition",
+      "position": { "x": 100, "y": 350 },
+      "data": {
+        "label": "Route by Rating",
+        "conditionType": "multi-output",
+        "condition": {
+          "operator": "and",
+          "rules": [],
+          "outputs": [
+            {
+              "id": "output-a",
+              "label": "Excellent Service",
+              "value": "A",
+              "rules": [
+                {
+                  "id": "rule-1",
+                  "field": "service_rating",
+                  "operator": "equals",
+                  "value": "excellent"
+                }
+              ]
+            },
+            {
+              "id": "output-b",
+              "label": "Good Service",
+              "value": "B",
+              "rules": [
+                {
+                  "id": "rule-2",
+                  "field": "service_rating",
+                  "operator": "equals",
+                  "value": "good"
+                }
+              ]
+            },
+            {
+              "id": "output-c",
+              "label": "Average Service",
+              "value": "C",
+              "rules": [
+                {
+                  "id": "rule-3",
+                  "field": "service_rating",
+                  "operator": "equals",
+                  "value": "average"
+                }
+              ]
+            },
+            {
+              "id": "output-d",
+              "label": "Poor Service",
+              "value": "D",
+              "rules": [
+                {
+                  "id": "rule-4",
+                  "field": "service_rating",
+                  "operator": "equals",
+                  "value": "poor"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "response-a",
+      "type": "question",
+      "position": { "x": 300, "y": 200 },
+      "data": {
+        "label": "Excellent Response",
+        "question": "Thank you for the excellent rating! We're thrilled you had a great experience. Is there anything specific we did well that you'd like to mention?",
+        "questionType": "text",
+        "variableName": "excellent_feedback",
+        "required": false
+      }
+    },
+    {
+      "id": "response-b",
+      "type": "question",
+      "position": { "x": 300, "y": 300 },
+      "data": {
+        "label": "Good Response",
+        "question": "Thank you for the good rating! We're glad you had a positive experience. What could we do to make it excellent next time?",
+        "questionType": "text",
+        "variableName": "good_feedback",
+        "required": false
+      }
+    },
+    {
+      "id": "response-c",
+      "type": "question",
+      "position": { "x": 300, "y": 400 },
+      "data": {
+        "label": "Average Response",
+        "question": "Thank you for the average rating. We'd like to improve your experience. What specific areas would you like us to focus on?",
+        "questionType": "text",
+        "variableName": "average_feedback",
+        "required": false
+      }
+    },
+    {
+      "id": "response-d",
+      "type": "question",
+      "position": { "x": 300, "y": 500 },
+      "data": {
+        "label": "Poor Response",
+        "question": "We sincerely apologize for the poor experience. Please tell us what went wrong so we can make it right and prevent this from happening again.",
+        "questionType": "text",
+        "variableName": "poor_feedback",
+        "required": false
+      }
+    },
+    {
+      "id": "end-1",
+      "type": "end",
+      "position": { "x": 500, "y": 350 },
+      "data": {
+        "label": "End",
+        "action": "Thank you for your feedback!"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "edge-1",
+      "source": "start-1",
+      "target": "question-1",
+      "sourceHandle": null,
+      "targetHandle": null
+    },
+    {
+      "id": "edge-2",
+      "source": "question-1",
+      "target": "condition-1",
+      "sourceHandle": null,
+      "targetHandle": null
+    },
+    {
+      "id": "edge-3",
+      "source": "condition-1",
+      "target": "response-a",
+      "sourceHandle": "A",
+      "targetHandle": null
+    },
+    {
+      "id": "edge-4",
+      "source": "condition-1",
+      "target": "response-b",
+      "sourceHandle": "B",
+      "targetHandle": null
+    },
+    {
+      "id": "edge-5",
+      "source": "condition-1",
+      "target": "response-c",
+      "sourceHandle": "C",
+      "targetHandle": null
+    },
+    {
+      "id": "edge-6",
+      "source": "condition-1",
+      "target": "response-d",
+      "sourceHandle": "D",
+      "targetHandle": null
+    },
+    {
+      "id": "edge-7",
+      "source": "response-a",
+      "target": "end-1",
+      "sourceHandle": null,
+      "targetHandle": null
+    },
+    {
+      "id": "edge-8",
+      "source": "response-b",
+      "target": "end-1",
+      "sourceHandle": null,
+      "targetHandle": null
+    },
+    {
+      "id": "edge-9",
+      "source": "response-c",
+      "target": "end-1",
+      "sourceHandle": null,
+      "targetHandle": null
+    },
+    {
+      "id": "edge-10",
+      "source": "response-d",
+      "target": "end-1",
+      "sourceHandle": null,
+      "targetHandle": null
+    }
+  ],
+  "variables": [
+    {
+      "id": "var-1",
+      "name": "service_rating",
+      "type": "string",
+      "scope": "local",
+      "description": "Customer's service rating"
+    },
+    {
+      "id": "var-2",
+      "name": "excellent_feedback",
+      "type": "string",
+      "scope": "local",
+      "description": "Feedback for excellent service"
+    },
+    {
+      "id": "var-3",
+      "name": "good_feedback",
+      "type": "string",
+      "scope": "local",
+      "description": "Feedback for good service"
+    },
+    {
+      "id": "var-4",
+      "name": "average_feedback",
+      "type": "string",
+      "scope": "local",
+      "description": "Feedback for average service"
+    },
+    {
+      "id": "var-5",
+      "name": "poor_feedback",
+      "type": "string",
+      "scope": "local",
+      "description": "Feedback for poor service"
+    }
+  ],
+  "settings": {
+    "autoSave": true,
+    "autoSaveInterval": 5000,
+    "snapToGrid": true,
+    "gridSize": 20,
+    "showMinimap": true,
+    "showControls": true,
+    "theme": "light"
+  },
+  "createdAt": "2024-01-15T10:00:00Z",
+  "updatedAt": "2024-01-15T10:00:00Z"
+}

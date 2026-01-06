@@ -1,0 +1,529 @@
+{
+  "id": "default-simplified-flow",
+  "name": "Default Simplified CV Builder Flow",
+  "description": "A comprehensive simplified CV builder flow with conditional branching and smart routing",
+  "version": "2.0.0",
+  "nodes": [
+    {
+      "id": "start",
+      "type": "start",
+      "position": { "x": 250, "y": 50 },
+      "data": {
+        "label": "Start",
+        "description": "CV Builder begins here"
+      }
+    },
+    {
+      "id": "intro",
+      "type": "question",
+      "position": { "x": 250, "y": 150 },
+      "data": {
+        "label": "Welcome",
+        "question": "Welcome! Let's build your professional CV step by step. Are you ready to begin?",
+        "questionType": "yes-no",
+        "required": false,
+        "variableName": "ready_to_start",
+        "options": [
+          { "id": "yes", "label": "Yes, let's start!", "value": "yes" },
+          { "id": "no", "label": "Not yet", "value": "no" }
+        ]
+      }
+    },
+    {
+      "id": "fullName",
+      "type": "question",
+      "position": { "x": 250, "y": 250 },
+      "data": {
+        "label": "Full Name",
+        "question": "What is your full name?",
+        "questionType": "text",
+        "required": true,
+        "variableName": "fullName",
+        "placeholder": "Enter your full name",
+        "helpText": "Please provide your complete name as it should appear on your CV"
+      }
+    },
+    {
+      "id": "email",
+      "type": "question",
+      "position": { "x": 250, "y": 350 },
+      "data": {
+        "label": "Email Address",
+        "question": "What is your email address?",
+        "questionType": "email",
+        "required": true,
+        "variableName": "email",
+        "placeholder": "your.email@example.com",
+        "helpText": "This will be used for contact information on your CV"
+      }
+    },
+    {
+      "id": "phone",
+      "type": "question",
+      "position": { "x": 250, "y": 450 },
+      "data": {
+        "label": "Phone Number",
+        "question": "What is your phone number? (optional)",
+        "questionType": "phone",
+        "required": false,
+        "variableName": "phone",
+        "placeholder": "+1 (555) 123-4567",
+        "helpText": "Include your phone number for better contact options"
+      }
+    },
+    {
+      "id": "location",
+      "type": "question",
+      "position": { "x": 250, "y": 550 },
+      "data": {
+        "label": "Location",
+        "question": "Where are you located?",
+        "questionType": "text",
+        "required": true,
+        "variableName": "location",
+        "placeholder": "City, Country",
+        "helpText": "Your location helps employers understand your availability"
+      }
+    },
+    {
+      "id": "experience-years",
+      "type": "question",
+      "position": { "x": 250, "y": 650 },
+      "data": {
+        "label": "Years of Experience",
+        "question": "How many years of professional experience do you have?",
+        "questionType": "rating",
+        "required": true,
+        "variableName": "experience_years",
+        "options": [
+          { "id": "0", "label": "0 years", "value": "0" },
+          { "id": "1", "label": "1 year", "value": "1" },
+          { "id": "2", "label": "2 years", "value": "2" },
+          { "id": "3", "label": "3 years", "value": "3" },
+          { "id": "4", "label": "4 years", "value": "4" },
+          { "id": "5", "label": "5 years", "value": "5" },
+          { "id": "6", "label": "6 years", "value": "6" },
+          { "id": "7", "label": "7 years", "value": "7" },
+          { "id": "8", "label": "8 years", "value": "8" },
+          { "id": "9", "label": "9 years", "value": "9" },
+          { "id": "10", "label": "10+ years", "value": "10" }
+        ]
+      }
+    },
+    {
+      "id": "experience-level-condition",
+      "type": "condition",
+      "position": { "x": 250, "y": 750 },
+      "data": {
+        "label": "Experience Level Check",
+        "conditionType": "multi-output",
+        "condition": {
+          "operator": "and",
+          "rules": [],
+          "outputs": [
+            {
+              "id": "output-a",
+              "label": "Entry Level",
+              "value": "A",
+              "description": "0-2 years experience",
+              "rules": [
+                {
+                  "id": "rule-1",
+                  "field": "experience_years",
+                  "operator": "less_than",
+                  "value": "3"
+                }
+              ]
+            },
+            {
+              "id": "output-b",
+              "label": "Mid Level",
+              "value": "B",
+              "description": "3-7 years experience",
+              "rules": [
+                {
+                  "id": "rule-2",
+                  "field": "experience_years",
+                  "operator": "greater_than",
+                  "value": "2"
+                },
+                {
+                  "id": "rule-3",
+                  "field": "experience_years",
+                  "operator": "less_than",
+                  "value": "8"
+                }
+              ]
+            },
+            {
+              "id": "output-c",
+              "label": "Senior Level",
+              "value": "C",
+              "description": "8+ years experience",
+              "rules": [
+                {
+                  "id": "rule-4",
+                  "field": "experience_years",
+                  "operator": "greater_than",
+                  "value": "7"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "entry-level-summary",
+      "type": "question",
+      "position": { "x": 50, "y": 850 },
+      "data": {
+        "label": "Entry Level Summary",
+        "question": "Tell us about yourself and what you're looking for in your career. Focus on your education, any internships, projects, or relevant coursework.",
+        "questionType": "text",
+        "required": true,
+        "variableName": "professional_summary",
+        "placeholder": "I am a recent graduate with a passion for...",
+        "helpText": "Highlight your potential, education, and career goals",
+        "conditionTriggers": {
+          "experience-level-condition": "A"
+        }
+      }
+    },
+    {
+      "id": "mid-level-summary",
+      "type": "question",
+      "position": { "x": 250, "y": 850 },
+      "data": {
+        "label": "Mid Level Summary",
+        "question": "Write a professional summary highlighting your key achievements and expertise. What makes you stand out in your field?",
+        "questionType": "text",
+        "required": true,
+        "variableName": "professional_summary",
+        "placeholder": "Experienced professional with proven track record in...",
+        "helpText": "Focus on your achievements and growing expertise",
+        "conditionTriggers": {
+          "experience-level-condition": "B"
+        }
+      }
+    },
+    {
+      "id": "senior-level-summary",
+      "type": "question",
+      "position": { "x": 450, "y": 850 },
+      "data": {
+        "label": "Senior Level Summary",
+        "question": "Write a compelling professional summary showcasing your leadership experience, major accomplishments, and strategic impact.",
+        "questionType": "text",
+        "required": true,
+        "variableName": "professional_summary",
+        "placeholder": "Senior professional with extensive experience leading...",
+        "helpText": "Emphasize leadership, strategic impact, and major accomplishments",
+        "conditionTriggers": {
+          "experience-level-condition": "C"
+        }
+      }
+    },
+    {
+      "id": "skills",
+      "type": "question",
+      "position": { "x": 250, "y": 950 },
+      "data": {
+        "label": "Key Skills",
+        "question": "What are your key skills? List them separated by commas.",
+        "questionType": "text",
+        "required": true,
+        "variableName": "skills",
+        "placeholder": "JavaScript, React, Project Management, Communication",
+        "helpText": "Include both technical and soft skills relevant to your field"
+      }
+    },
+    {
+      "id": "education-level",
+      "type": "question",
+      "position": { "x": 250, "y": 1050 },
+      "data": {
+        "label": "Education Level",
+        "question": "What is your highest level of education?",
+        "questionType": "multiple-choice",
+        "required": true,
+        "variableName": "education_level",
+        "options": [
+          { "id": "high-school", "label": "High School", "value": "high_school" },
+          { "id": "associate", "label": "Associate Degree", "value": "associate" },
+          { "id": "bachelor", "label": "Bachelor's Degree", "value": "bachelor" },
+          { "id": "master", "label": "Master's Degree", "value": "master" },
+          { "id": "phd", "label": "PhD", "value": "phd" },
+          { "id": "other", "label": "Other", "value": "other" }
+        ]
+      }
+    },
+    {
+      "id": "education-details",
+      "type": "question",
+      "position": { "x": 250, "y": 1150 },
+      "data": {
+        "label": "Education Details",
+        "question": "Please provide details about your education (degree, institution, year, etc.)",
+        "questionType": "text",
+        "required": true,
+        "variableName": "education_details",
+        "placeholder": "Bachelor of Science in Computer Science, University of Technology, 2020",
+        "helpText": "Include degree, institution, graduation year, and any honors"
+      }
+    },
+    {
+      "id": "languages",
+      "type": "question",
+      "position": { "x": 250, "y": 1250 },
+      "data": {
+        "label": "Languages",
+        "question": "What languages do you speak? (optional)",
+        "questionType": "text",
+        "required": false,
+        "variableName": "languages",
+        "placeholder": "English (Native), Spanish (Fluent), French (Basic)",
+        "helpText": "Include proficiency levels for each language"
+      }
+    },
+    {
+      "id": "additional-info",
+      "type": "question",
+      "position": { "x": 250, "y": 1350 },
+      "data": {
+        "label": "Additional Information",
+        "question": "Is there anything else you'd like to include in your CV? (certifications, volunteer work, etc.)",
+        "questionType": "text",
+        "required": false,
+        "variableName": "additional_info",
+        "placeholder": "Certified Project Manager (PMP), Volunteer at local food bank",
+        "helpText": "Include any relevant certifications, volunteer work, or other achievements"
+      }
+    },
+    {
+      "id": "end",
+      "type": "end",
+      "position": { "x": 250, "y": 1450 },
+      "data": {
+        "label": "CV Complete",
+        "description": "Your professional CV has been generated successfully!",
+        "action": "CV Generated"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "start-to-intro",
+      "source": "start",
+      "target": "intro",
+      "label": "Begin"
+    },
+    {
+      "id": "intro-to-name",
+      "source": "intro",
+      "target": "fullName",
+      "sourceHandle": "true",
+      "targetHandle": null,
+      "label": "Ready"
+    },
+    {
+      "id": "name-to-email",
+      "source": "fullName",
+      "target": "email",
+      "label": "Next"
+    },
+    {
+      "id": "email-to-phone",
+      "source": "email",
+      "target": "phone",
+      "label": "Next"
+    },
+    {
+      "id": "phone-to-location",
+      "source": "phone",
+      "target": "location",
+      "label": "Next"
+    },
+    {
+      "id": "location-to-experience-years",
+      "source": "location",
+      "target": "experience-years",
+      "label": "Next"
+    },
+    {
+      "id": "experience-years-to-condition",
+      "source": "experience-years",
+      "target": "experience-level-condition",
+      "label": "Evaluate Experience"
+    },
+    {
+      "id": "condition-to-entry-summary",
+      "source": "experience-level-condition",
+      "target": "entry-level-summary",
+      "sourceHandle": "A",
+      "targetHandle": null,
+      "label": "Entry Level"
+    },
+    {
+      "id": "condition-to-mid-summary",
+      "source": "experience-level-condition",
+      "target": "mid-level-summary",
+      "sourceHandle": "B",
+      "targetHandle": null,
+      "label": "Mid Level"
+    },
+    {
+      "id": "condition-to-senior-summary",
+      "source": "experience-level-condition",
+      "target": "senior-level-summary",
+      "sourceHandle": "C",
+      "targetHandle": null,
+      "label": "Senior Level"
+    },
+    {
+      "id": "entry-summary-to-skills",
+      "source": "entry-level-summary",
+      "target": "skills",
+      "label": "Next"
+    },
+    {
+      "id": "mid-summary-to-skills",
+      "source": "mid-level-summary",
+      "target": "skills",
+      "label": "Next"
+    },
+    {
+      "id": "senior-summary-to-skills",
+      "source": "senior-level-summary",
+      "target": "skills",
+      "label": "Next"
+    },
+    {
+      "id": "skills-to-education-level",
+      "source": "skills",
+      "target": "education-level",
+      "label": "Next"
+    },
+    {
+      "id": "education-level-to-details",
+      "source": "education-level",
+      "target": "education-details",
+      "label": "Next"
+    },
+    {
+      "id": "education-details-to-languages",
+      "source": "education-details",
+      "target": "languages",
+      "label": "Next"
+    },
+    {
+      "id": "languages-to-additional",
+      "source": "languages",
+      "target": "additional-info",
+      "label": "Next"
+    },
+    {
+      "id": "additional-to-end",
+      "source": "additional-info",
+      "target": "end",
+      "label": "Complete"
+    }
+  ],
+  "variables": [
+    {
+      "id": "ready_to_start",
+      "name": "ready_to_start",
+      "type": "string",
+      "scope": "global",
+      "description": "User's readiness to start CV building"
+    },
+    {
+      "id": "fullName",
+      "name": "fullName",
+      "type": "string",
+      "scope": "global",
+      "description": "User's full name"
+    },
+    {
+      "id": "email",
+      "name": "email",
+      "type": "string",
+      "scope": "global",
+      "description": "User's email address"
+    },
+    {
+      "id": "phone",
+      "name": "phone",
+      "type": "string",
+      "scope": "global",
+      "description": "User's phone number"
+    },
+    {
+      "id": "location",
+      "name": "location",
+      "type": "string",
+      "scope": "global",
+      "description": "User's location"
+    },
+    {
+      "id": "experience_years",
+      "name": "experience_years",
+      "type": "string",
+      "scope": "global",
+      "description": "Years of professional experience"
+    },
+    {
+      "id": "professional_summary",
+      "name": "professional_summary",
+      "type": "string",
+      "scope": "global",
+      "description": "Professional summary based on experience level"
+    },
+    {
+      "id": "skills",
+      "name": "skills",
+      "type": "string",
+      "scope": "global",
+      "description": "User's key skills"
+    },
+    {
+      "id": "education_level",
+      "name": "education_level",
+      "type": "string",
+      "scope": "global",
+      "description": "Highest level of education"
+    },
+    {
+      "id": "education_details",
+      "name": "education_details",
+      "type": "string",
+      "scope": "global",
+      "description": "Detailed education information"
+    },
+    {
+      "id": "languages",
+      "name": "languages",
+      "type": "string",
+      "scope": "global",
+      "description": "Languages spoken"
+    },
+    {
+      "id": "additional_info",
+      "name": "additional_info",
+      "type": "string",
+      "scope": "global",
+      "description": "Additional information for CV"
+    }
+  ],
+  "settings": {
+    "autoSave": true,
+    "autoSaveInterval": 5000,
+    "snapToGrid": true,
+    "gridSize": 20,
+    "showMinimap": true,
+    "showControls": true,
+    "theme": "light"
+  },
+  "createdAt": "2024-01-01T00:00:00.000Z",
+  "updatedAt": "2024-01-01T00:00:00.000Z"
+}

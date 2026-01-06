@@ -1,0 +1,36 @@
+User-agent: *
+Allow: /
+
+# Disallow admin and private areas
+Disallow: /api/
+Disallow: /dashboard/
+Disallow: /settings/
+Disallow: /debug/
+Disallow: /clear-cache/
+Disallow: /force-refresh/
+Disallow: /test-*/
+Disallow: /print-*/
+Disallow: /preview-generator/
+
+# Allow important pages
+Allow: /builder
+Allow: /quick-cv
+Allow: /letter
+Allow: /upload-cv
+Allow: /pricing
+Allow: /templates
+Allow: /cv-guide
+Allow: /letter-guide
+Allow: /faq
+Allow: /about
+Allow: /contact
+Allow: /terms
+Allow: /privacy
+Allow: /auth/login
+Allow: /auth/signup
+
+# Sitemap location
+Sitemap: https://ladder-fox-dev.vercel.app/sitemap.xml
+
+# Crawl delay (optional - be respectful to servers)
+Crawl-delay: 1 

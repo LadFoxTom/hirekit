@@ -1,0 +1,344 @@
+{
+  "id": "multiple-choice-example-1756484565687",
+  "name": "Multiple Choice Example Flow",
+  "description": "Example flow demonstrating multiple choice question handling",
+  "version": "1.0.0",
+  "nodes": [
+    {
+      "id": "start",
+      "type": "start",
+      "position": { "x": 250, "y": 50 },
+      "data": {
+        "label": "Start",
+        "description": "Flow begins here"
+      },
+      "width": 180,
+      "height": 118
+    },
+    {
+      "id": "career_question",
+      "type": "question",
+      "position": { "x": 250, "y": 200 },
+      "data": {
+        "label": "Question",
+        "question": "What's your career stage?",
+        "questionType": "multiple-choice",
+        "options": [
+          {"id": "opt1", "label": "Student/New Graduate", "value": "student"},
+          {"id": "opt2", "label": "1-3 years experience", "value": "junior"},
+          {"id": "opt3", "label": "3-7 years experience", "value": "mid"},
+          {"id": "opt4", "label": "7+ years experience", "value": "senior"}
+        ],
+        "required": true,
+        "variableName": "career_stage"
+      },
+      "width": 200,
+      "height": 200
+    },
+    {
+      "id": "experience_condition",
+      "type": "condition",
+      "position": { "x": 250, "y": 450 },
+      "data": {
+        "label": "Condition",
+        "condition": {
+          "operator": "or",
+          "rules": [
+            {
+              "id": "rule1",
+              "field": "career_stage",
+              "operator": "in_list",
+              "value": "student,junior"
+            }
+          ]
+        }
+      },
+      "width": 200,
+      "height": 142
+    },
+    {
+      "id": "junior_response",
+      "type": "question",
+      "position": { "x": 50, "y": 650 },
+      "data": {
+        "label": "Question",
+        "question": "Great! Let's focus on your education and any internships or projects you've worked on.",
+        "questionType": "text",
+        "required": false,
+        "variableName": "junior_feedback"
+      },
+      "width": 200,
+      "height": 168
+    },
+    {
+      "id": "senior_response",
+      "type": "question",
+      "position": { "x": 450, "y": 650 },
+      "data": {
+        "label": "Question",
+        "question": "Excellent! Let's dive into your professional experience and achievements.",
+        "questionType": "text",
+        "required": false,
+        "variableName": "senior_feedback"
+      },
+      "width": 200,
+      "height": 168
+    },
+    {
+      "id": "industry_question",
+      "type": "question",
+      "position": { "x": 250, "y": 850 },
+      "data": {
+        "label": "Question",
+        "question": "What industry are you targeting?",
+        "questionType": "multiple-choice",
+        "options": [
+          {"id": "opt1", "label": "Technology", "value": "tech"},
+          {"id": "opt2", "label": "Healthcare", "value": "healthcare"},
+          {"id": "opt3", "label": "Finance", "value": "finance"},
+          {"id": "opt4", "label": "Education", "value": "education"},
+          {"id": "opt5", "label": "Other", "value": "other"}
+        ],
+        "required": true,
+        "variableName": "target_industry"
+      },
+      "width": 200,
+      "height": 200
+    },
+    {
+      "id": "tech_condition",
+      "type": "condition",
+      "position": { "x": 50, "y": 1100 },
+      "data": {
+        "label": "Condition",
+        "condition": {
+          "operator": "and",
+          "rules": [
+            {
+              "id": "rule1",
+              "field": "target_industry",
+              "operator": "equals",
+              "value": "tech"
+            }
+          ]
+        }
+      },
+      "width": 200,
+      "height": 142
+    },
+    {
+      "id": "healthcare_condition",
+      "type": "condition",
+      "position": { "x": 300, "y": 1100 },
+      "data": {
+        "label": "Condition",
+        "condition": {
+          "operator": "and",
+          "rules": [
+            {
+              "id": "rule1",
+              "field": "target_industry",
+              "operator": "equals",
+              "value": "healthcare"
+            }
+          ]
+        }
+      },
+      "width": 200,
+      "height": 142
+    },
+    {
+      "id": "general_condition",
+      "type": "condition",
+      "position": { "x": 550, "y": 1100 },
+      "data": {
+        "label": "Condition",
+        "condition": {
+          "operator": "and",
+          "rules": [
+            {
+              "id": "rule1",
+              "field": "target_industry",
+              "operator": "in_list",
+              "value": "finance,education,other"
+            }
+          ]
+        }
+      },
+      "width": 200,
+      "height": 142
+    },
+    {
+      "id": "tech_response",
+      "type": "question",
+      "position": { "x": 50, "y": 1300 },
+      "data": {
+        "label": "Question",
+        "question": "Perfect! Let's highlight your technical skills, programming languages, and any relevant projects.",
+        "questionType": "text",
+        "required": false,
+        "variableName": "tech_feedback"
+      },
+      "width": 200,
+      "height": 168
+    },
+    {
+      "id": "healthcare_response",
+      "type": "question",
+      "position": { "x": 300, "y": 1300 },
+      "data": {
+        "label": "Question",
+        "question": "Great choice! Let's focus on your medical knowledge, certifications, and patient care experience.",
+        "questionType": "text",
+        "required": false,
+        "variableName": "healthcare_feedback"
+      },
+      "width": 200,
+      "height": 168
+    },
+    {
+      "id": "general_response",
+      "type": "question",
+      "position": { "x": 550, "y": 1300 },
+      "data": {
+        "label": "Question",
+        "question": "Excellent! Let's create a comprehensive CV that highlights your skills and experience.",
+        "questionType": "text",
+        "required": false,
+        "variableName": "general_feedback"
+      },
+      "width": 200,
+      "height": 168
+    },
+    {
+      "id": "end",
+      "type": "end",
+      "position": { "x": 250, "y": 1500 },
+      "data": {
+        "label": "End",
+        "action": "CV Builder completed"
+      },
+      "width": 180,
+      "height": 125
+    }
+  ],
+  "edges": [
+    {
+      "source": "start",
+      "sourceHandle": null,
+      "target": "career_question",
+      "targetHandle": null,
+      "id": "edge1"
+    },
+    {
+      "source": "career_question",
+      "sourceHandle": null,
+      "target": "experience_condition",
+      "targetHandle": null,
+      "id": "edge2"
+    },
+    {
+      "source": "experience_condition",
+      "sourceHandle": "true",
+      "target": "junior_response",
+      "targetHandle": null,
+      "id": "edge3"
+    },
+    {
+      "source": "experience_condition",
+      "sourceHandle": "false",
+      "target": "senior_response",
+      "targetHandle": null,
+      "id": "edge4"
+    },
+    {
+      "source": "junior_response",
+      "sourceHandle": null,
+      "target": "industry_question",
+      "targetHandle": null,
+      "id": "edge5"
+    },
+    {
+      "source": "senior_response",
+      "sourceHandle": null,
+      "target": "industry_question",
+      "targetHandle": null,
+      "id": "edge6"
+    },
+    {
+      "source": "industry_question",
+      "sourceHandle": null,
+      "target": "tech_condition",
+      "targetHandle": null,
+      "id": "edge7"
+    },
+    {
+      "source": "industry_question",
+      "sourceHandle": null,
+      "target": "healthcare_condition",
+      "targetHandle": null,
+      "id": "edge8"
+    },
+    {
+      "source": "industry_question",
+      "sourceHandle": null,
+      "target": "general_condition",
+      "targetHandle": null,
+      "id": "edge9"
+    },
+    {
+      "source": "tech_condition",
+      "sourceHandle": "true",
+      "target": "tech_response",
+      "targetHandle": null,
+      "id": "edge10"
+    },
+    {
+      "source": "healthcare_condition",
+      "sourceHandle": "true",
+      "target": "healthcare_response",
+      "targetHandle": null,
+      "id": "edge11"
+    },
+    {
+      "source": "general_condition",
+      "sourceHandle": "true",
+      "target": "general_response",
+      "targetHandle": null,
+      "id": "edge12"
+    },
+    {
+      "source": "tech_response",
+      "sourceHandle": null,
+      "target": "end",
+      "targetHandle": null,
+      "id": "edge13"
+    },
+    {
+      "source": "healthcare_response",
+      "sourceHandle": null,
+      "target": "end",
+      "targetHandle": null,
+      "id": "edge14"
+    },
+    {
+      "source": "general_response",
+      "sourceHandle": null,
+      "target": "end",
+      "targetHandle": null,
+      "id": "edge15"
+    }
+  ],
+  "variables": [],
+  "settings": {
+    "autoSave": true,
+    "autoSaveInterval": 30000,
+    "snapToGrid": true,
+    "gridSize": 20,
+    "showMinimap": true,
+    "showControls": true,
+    "theme": "light"
+  },
+  "createdAt": "2025-01-29T16:22:45.687Z",
+  "updatedAt": "2025-01-29T20:45:17.032Z"
+}

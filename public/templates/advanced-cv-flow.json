@@ -1,0 +1,634 @@
+{
+  "id": "advanced-cv-flow",
+  "name": "Advanced CV Builder Flow",
+  "description": "Comprehensive advanced CV builder flow with detailed questions, conditional branching, and optimization features",
+  "version": "1.0.0",
+  "isActive": true,
+  "isDefault": false,
+  "flowType": "advanced",
+  "targetUrl": "/builder",
+  "nodes": [
+    {
+      "id": "start",
+      "type": "start",
+      "position": { "x": 250, "y": 50 },
+      "data": {
+        "label": "Start",
+        "description": "Advanced CV Builder begins here"
+      }
+    },
+    {
+      "id": "intro",
+      "type": "question",
+      "position": { "x": 250, "y": 150 },
+      "data": {
+        "label": "Welcome",
+        "question": "Welcome to the Advanced CV Builder! This comprehensive tool will help you create a professional CV with detailed sections and smart optimization. Are you ready to begin?",
+        "questionType": "yes-no",
+        "required": false,
+        "variableName": "ready_to_start",
+        "options": [
+          { "id": "yes", "label": "Yes, let's create an amazing CV!", "value": "yes" },
+          { "id": "no", "label": "I need more information first", "value": "no" }
+        ]
+      }
+    },
+    {
+      "id": "cvType",
+      "type": "question",
+      "position": { "x": 250, "y": 250 },
+      "data": {
+        "label": "CV Type",
+        "question": "What type of CV would you like to create?",
+        "questionType": "multiple-choice",
+        "required": true,
+        "variableName": "cvType",
+        "options": [
+          { "id": "professional", "label": "Professional/Corporate", "value": "professional" },
+          { "id": "creative", "label": "Creative/Design", "value": "creative" },
+          { "id": "academic", "label": "Academic/Research", "value": "academic" },
+          { "id": "technical", "label": "Technical/IT", "value": "technical" },
+          { "id": "executive", "label": "Executive/Leadership", "value": "executive" }
+        ]
+      }
+    },
+    {
+      "id": "fullName",
+      "type": "question",
+      "position": { "x": 250, "y": 350 },
+      "data": {
+        "label": "Full Name",
+        "question": "What is your full name?",
+        "questionType": "text",
+        "required": true,
+        "variableName": "fullName",
+        "placeholder": "Enter your full name",
+        "helpText": "Please provide your complete name as it should appear on your CV"
+      }
+    },
+    {
+      "id": "contactInfo",
+      "type": "question",
+      "position": { "x": 250, "y": 450 },
+      "data": {
+        "label": "Contact Information",
+        "question": "Please provide your contact details:",
+        "questionType": "text",
+        "required": true,
+        "variableName": "contactInfo",
+        "placeholder": "Email: your.email@example.com\nPhone: +1 (555) 123-4567\nLinkedIn: linkedin.com/in/yourprofile\nWebsite: yourwebsite.com",
+        "helpText": "Include all relevant contact information"
+      }
+    },
+    {
+      "id": "location",
+      "type": "question",
+      "position": { "x": 250, "y": 550 },
+      "data": {
+        "label": "Location",
+        "question": "Where are you located?",
+        "questionType": "text",
+        "required": true,
+        "variableName": "location",
+        "placeholder": "City, State/Country",
+        "helpText": "Include your current location and willingness to relocate if applicable"
+      }
+    },
+    {
+      "id": "professionalSummary",
+      "type": "question",
+      "position": { "x": 250, "y": 650 },
+      "data": {
+        "label": "Professional Summary",
+        "question": "Write a compelling professional summary (2-4 sentences). Highlight your key strengths, experience, and what makes you unique:",
+        "questionType": "text",
+        "required": true,
+        "variableName": "professionalSummary",
+        "placeholder": "Experienced [Your Field] professional with [X] years of expertise in [Key Areas]. Proven track record of [Key Achievements]. Passionate about [Relevant Interests] and committed to [Professional Goals].",
+        "helpText": "This is the first thing employers will read - make it impactful!"
+      }
+    },
+    {
+      "id": "targetPosition",
+      "type": "question",
+      "position": { "x": 250, "y": 750 },
+      "data": {
+        "label": "Target Position",
+        "question": "What position are you targeting?",
+        "questionType": "text",
+        "required": true,
+        "variableName": "targetPosition",
+        "placeholder": "e.g., Senior Software Engineer, Marketing Director, Research Scientist",
+        "helpText": "Be specific about the role you're seeking"
+      }
+    },
+    {
+      "id": "experienceLevel",
+      "type": "question",
+      "position": { "x": 250, "y": 850 },
+      "data": {
+        "label": "Experience Level",
+        "question": "What is your experience level?",
+        "questionType": "multiple-choice",
+        "required": true,
+        "variableName": "experienceLevel",
+        "options": [
+          { "id": "entry", "label": "Entry Level (0-2 years)", "value": "entry" },
+          { "id": "mid", "label": "Mid Level (3-7 years)", "value": "mid" },
+          { "id": "senior", "label": "Senior Level (8-15 years)", "value": "senior" },
+          { "id": "executive", "label": "Executive Level (15+ years)", "value": "executive" }
+        ]
+      }
+    },
+    {
+      "id": "workExperience",
+      "type": "question",
+      "position": { "x": 250, "y": 950 },
+      "data": {
+        "label": "Work Experience",
+        "question": "Detail your work experience. For each position, include:\n• Company name and location\n• Your job title\n• Employment dates (Month/Year - Month/Year)\n• Key responsibilities and achievements\n• Quantifiable results where possible",
+        "questionType": "text",
+        "required": true,
+        "variableName": "workExperience",
+        "placeholder": "Senior Software Engineer - TechCorp Inc. (Jan 2020 - Present)\n• Led development of customer-facing web applications\n• Increased system performance by 40% through optimization\n• Mentored 3 junior developers\n\nSoftware Developer - StartupXYZ (Jun 2018 - Dec 2019)\n• Built RESTful APIs serving 10,000+ daily users\n• Collaborated with cross-functional teams in agile environment",
+        "helpText": "Start with your most recent position and work backwards. Include quantifiable achievements."
+      }
+    },
+    {
+      "id": "education",
+      "type": "question",
+      "position": { "x": 250, "y": 1050 },
+      "data": {
+        "label": "Education",
+        "question": "Provide your educational background:",
+        "questionType": "text",
+        "required": true,
+        "variableName": "education",
+        "placeholder": "Master of Science in Computer Science - University of Technology (2016-2018)\n• GPA: 3.8/4.0\n• Relevant Coursework: Machine Learning, Data Structures, Algorithms\n• Thesis: 'Advanced Neural Network Architectures'\n\nBachelor of Science in Mathematics - State University (2012-2016)\n• Magna Cum Laude\n• Dean's List: 6 semesters",
+        "helpText": "Include degrees, institutions, graduation years, GPA (if strong), and relevant coursework"
+      }
+    },
+    {
+      "id": "skills",
+      "type": "question",
+      "position": { "x": 250, "y": 1150 },
+      "data": {
+        "label": "Skills",
+        "question": "List your key skills, organized by category:",
+        "questionType": "text",
+        "required": true,
+        "variableName": "skills",
+        "placeholder": "Technical Skills:\n• Programming: JavaScript, Python, Java, C++\n• Frameworks: React, Node.js, Django, Spring\n• Tools: Git, Docker, AWS, Jenkins\n\nSoft Skills:\n• Leadership, Team Management, Problem Solving\n• Communication, Project Management, Agile Methodologies",
+        "helpText": "Organize skills by category and include proficiency levels where relevant"
+      }
+    },
+    {
+      "id": "certifications",
+      "type": "question",
+      "position": { "x": 250, "y": 1250 },
+      "data": {
+        "label": "Certifications",
+        "question": "List any relevant certifications, licenses, or professional qualifications:",
+        "questionType": "text",
+        "required": false,
+        "variableName": "certifications",
+        "placeholder": "AWS Certified Solutions Architect (2023)\nPMP - Project Management Professional (2022)\nGoogle Analytics Certified (2021)",
+        "helpText": "Include certification name, issuing organization, and date obtained"
+      }
+    },
+    {
+      "id": "projects",
+      "type": "question",
+      "position": { "x": 250, "y": 1350 },
+      "data": {
+        "label": "Key Projects",
+        "question": "Describe 2-3 key projects that showcase your skills and achievements:",
+        "questionType": "text",
+        "required": false,
+        "variableName": "projects",
+        "placeholder": "E-commerce Platform Redesign (2023)\n• Led full-stack development of customer-facing e-commerce platform\n• Increased conversion rates by 25% through UX improvements\n• Technologies: React, Node.js, PostgreSQL, AWS\n• Team size: 5 developers",
+        "helpText": "Include project name, your role, technologies used, and measurable outcomes"
+      }
+    },
+    {
+      "id": "languages",
+      "type": "question",
+      "position": { "x": 250, "y": 1450 },
+      "data": {
+        "label": "Languages",
+        "question": "What languages do you speak? Include proficiency levels:",
+        "questionType": "text",
+        "required": false,
+        "variableName": "languages",
+        "placeholder": "English (Native)\nSpanish (Fluent)\nFrench (Conversational)\nGerman (Basic)",
+        "helpText": "Include proficiency levels: Native, Fluent, Conversational, Basic"
+      }
+    },
+    {
+      "id": "achievements",
+      "type": "question",
+      "position": { "x": 250, "y": 1550 },
+      "data": {
+        "label": "Achievements & Awards",
+        "question": "List any notable achievements, awards, or recognition:",
+        "questionType": "text",
+        "required": false,
+        "variableName": "achievements",
+        "placeholder": "Employee of the Year 2023 - TechCorp Inc.\nBest Innovation Award - Industry Conference 2022\nPublished 3 research papers in peer-reviewed journals",
+        "helpText": "Include professional achievements, awards, publications, or recognition"
+      }
+    },
+    {
+      "id": "interests",
+      "type": "question",
+      "position": { "x": 250, "y": 1650 },
+      "data": {
+        "label": "Professional Interests",
+        "question": "What are your professional interests or areas of focus?",
+        "questionType": "text",
+        "required": false,
+        "variableName": "interests",
+        "placeholder": "Artificial Intelligence, Sustainable Technology, Open Source Development, Mentoring",
+        "helpText": "Include professional interests that align with your career goals"
+      }
+    },
+    {
+      "id": "optimization",
+      "type": "condition",
+      "position": { "x": 250, "y": 1750 },
+      "data": {
+        "label": "CV Optimization",
+        "conditionType": "multi-output",
+        "condition": {
+          "rules": [
+            {
+              "field": "experienceLevel",
+              "operator": "in_list",
+              "value": ["senior", "executive"]
+            }
+          ],
+          "outputs": [
+            {
+              "id": "optimize",
+              "label": "Optimize for ATS",
+              "value": "optimize"
+            },
+            {
+              "id": "standard",
+              "label": "Standard Format",
+              "value": "standard"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "atsOptimization",
+      "type": "question",
+      "position": { "x": 100, "y": 1850 },
+      "data": {
+        "label": "ATS Optimization",
+        "question": "Would you like to optimize your CV for Applicant Tracking Systems (ATS)?",
+        "questionType": "yes-no",
+        "required": true,
+        "variableName": "atsOptimization",
+        "options": [
+          { "id": "yes", "label": "Yes, optimize for ATS", "value": "yes" },
+          { "id": "no", "label": "No, keep standard format", "value": "no" }
+        ]
+      }
+    },
+    {
+      "id": "keywords",
+      "type": "question",
+      "position": { "x": 100, "y": 1950 },
+      "data": {
+        "label": "Industry Keywords",
+        "question": "What industry-specific keywords should we emphasize in your CV?",
+        "questionType": "text",
+        "required": false,
+        "variableName": "keywords",
+        "placeholder": "Machine Learning, Cloud Computing, Agile, DevOps, Data Analytics",
+        "helpText": "Include keywords from job descriptions you're targeting"
+      }
+    },
+    {
+      "id": "review",
+      "type": "question",
+      "position": { "x": 250, "y": 1850 },
+      "data": {
+        "label": "Review & Confirm",
+        "question": "Please review all your information. Is everything accurate and complete?",
+        "questionType": "yes-no",
+        "required": true,
+        "variableName": "review_confirmed",
+        "options": [
+          { "id": "yes", "label": "Yes, everything looks perfect!", "value": "yes" },
+          { "id": "no", "label": "I need to make changes", "value": "no" }
+        ]
+      }
+    },
+    {
+      "id": "complete",
+      "type": "action",
+      "position": { "x": 250, "y": 1950 },
+      "data": {
+        "label": "Advanced CV Complete",
+        "description": "Your comprehensive CV has been created successfully!",
+        "action": {
+          "type": "set_variable",
+          "config": {
+            "variableName": "cv_complete",
+            "value": true
+          }
+        }
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "start-to-intro",
+      "source": "start",
+      "target": "intro",
+      "type": "default"
+    },
+    {
+      "id": "intro-to-cvType",
+      "source": "intro",
+      "target": "cvType",
+      "type": "default"
+    },
+    {
+      "id": "cvType-to-fullName",
+      "source": "cvType",
+      "target": "fullName",
+      "type": "default"
+    },
+    {
+      "id": "fullName-to-contact",
+      "source": "fullName",
+      "target": "contactInfo",
+      "type": "default"
+    },
+    {
+      "id": "contact-to-location",
+      "source": "contactInfo",
+      "target": "location",
+      "type": "default"
+    },
+    {
+      "id": "location-to-summary",
+      "source": "location",
+      "target": "professionalSummary",
+      "type": "default"
+    },
+    {
+      "id": "summary-to-position",
+      "source": "professionalSummary",
+      "target": "targetPosition",
+      "type": "default"
+    },
+    {
+      "id": "position-to-experience",
+      "source": "targetPosition",
+      "target": "experienceLevel",
+      "type": "default"
+    },
+    {
+      "id": "experience-to-work",
+      "source": "experienceLevel",
+      "target": "workExperience",
+      "type": "default"
+    },
+    {
+      "id": "work-to-education",
+      "source": "workExperience",
+      "target": "education",
+      "type": "default"
+    },
+    {
+      "id": "education-to-skills",
+      "source": "education",
+      "target": "skills",
+      "type": "default"
+    },
+    {
+      "id": "skills-to-certifications",
+      "source": "skills",
+      "target": "certifications",
+      "type": "default"
+    },
+    {
+      "id": "certifications-to-projects",
+      "source": "certifications",
+      "target": "projects",
+      "type": "default"
+    },
+    {
+      "id": "projects-to-languages",
+      "source": "projects",
+      "target": "languages",
+      "type": "default"
+    },
+    {
+      "id": "languages-to-achievements",
+      "source": "languages",
+      "target": "achievements",
+      "type": "default"
+    },
+    {
+      "id": "achievements-to-interests",
+      "source": "achievements",
+      "target": "interests",
+      "type": "default"
+    },
+    {
+      "id": "interests-to-optimization",
+      "source": "interests",
+      "target": "optimization",
+      "type": "default"
+    },
+    {
+      "id": "optimization-to-ats",
+      "source": "optimization",
+      "target": "atsOptimization",
+      "type": "default",
+      "sourceHandle": "optimize"
+    },
+    {
+      "id": "optimization-to-review",
+      "source": "optimization",
+      "target": "review",
+      "type": "default",
+      "sourceHandle": "standard"
+    },
+    {
+      "id": "ats-to-keywords",
+      "source": "atsOptimization",
+      "target": "keywords",
+      "type": "default"
+    },
+    {
+      "id": "keywords-to-review",
+      "source": "keywords",
+      "target": "review",
+      "type": "default"
+    },
+    {
+      "id": "review-to-complete",
+      "source": "review",
+      "target": "complete",
+      "type": "default"
+    }
+  ],
+  "variables": [
+    {
+      "id": "ready_to_start",
+      "name": "ready_to_start",
+      "type": "string",
+      "scope": "local",
+      "description": "User's readiness to start CV building"
+    },
+    {
+      "id": "cvType",
+      "name": "cvType",
+      "type": "string",
+      "scope": "local",
+      "description": "Type of CV being created"
+    },
+    {
+      "id": "fullName",
+      "name": "fullName",
+      "type": "string",
+      "scope": "local",
+      "description": "User's full name"
+    },
+    {
+      "id": "contactInfo",
+      "name": "contactInfo",
+      "type": "string",
+      "scope": "local",
+      "description": "User's contact information"
+    },
+    {
+      "id": "location",
+      "name": "location",
+      "type": "string",
+      "scope": "local",
+      "description": "User's location"
+    },
+    {
+      "id": "professionalSummary",
+      "name": "professionalSummary",
+      "type": "string",
+      "scope": "local",
+      "description": "User's professional summary"
+    },
+    {
+      "id": "targetPosition",
+      "name": "targetPosition",
+      "type": "string",
+      "scope": "local",
+      "description": "User's target position"
+    },
+    {
+      "id": "experienceLevel",
+      "name": "experienceLevel",
+      "type": "string",
+      "scope": "local",
+      "description": "User's experience level"
+    },
+    {
+      "id": "workExperience",
+      "name": "workExperience",
+      "type": "string",
+      "scope": "local",
+      "description": "User's work experience"
+    },
+    {
+      "id": "education",
+      "name": "education",
+      "type": "string",
+      "scope": "local",
+      "description": "User's education background"
+    },
+    {
+      "id": "skills",
+      "name": "skills",
+      "type": "string",
+      "scope": "local",
+      "description": "User's skills"
+    },
+    {
+      "id": "certifications",
+      "name": "certifications",
+      "type": "string",
+      "scope": "local",
+      "description": "User's certifications"
+    },
+    {
+      "id": "projects",
+      "name": "projects",
+      "type": "string",
+      "scope": "local",
+      "description": "User's key projects"
+    },
+    {
+      "id": "languages",
+      "name": "languages",
+      "type": "string",
+      "scope": "local",
+      "description": "User's languages"
+    },
+    {
+      "id": "achievements",
+      "name": "achievements",
+      "type": "string",
+      "scope": "local",
+      "description": "User's achievements and awards"
+    },
+    {
+      "id": "interests",
+      "name": "interests",
+      "type": "string",
+      "scope": "local",
+      "description": "User's professional interests"
+    },
+    {
+      "id": "atsOptimization",
+      "name": "atsOptimization",
+      "type": "string",
+      "scope": "local",
+      "description": "ATS optimization preference"
+    },
+    {
+      "id": "keywords",
+      "name": "keywords",
+      "type": "string",
+      "scope": "local",
+      "description": "Industry keywords for optimization"
+    },
+    {
+      "id": "review_confirmed",
+      "name": "review_confirmed",
+      "type": "string",
+      "scope": "local",
+      "description": "User's confirmation of information review"
+    },
+    {
+      "id": "cv_complete",
+      "name": "cv_complete",
+      "type": "boolean",
+      "scope": "local",
+      "description": "CV completion status"
+    }
+  ],
+  "settings": {
+    "autoSave": true,
+    "allowBackNavigation": true,
+    "showProgress": true,
+    "timeout": 45000
+  },
+  "createdAt": "2024-01-01T00:00:00.000Z",
+  "updatedAt": "2024-01-01T00:00:00.000Z"
+}

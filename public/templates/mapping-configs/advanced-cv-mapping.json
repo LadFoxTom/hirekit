@@ -1,0 +1,436 @@
+{
+  "metadata": {
+    "name": "Advanced CV Mapping Configuration",
+    "description": "Comprehensive mapping configuration for advanced CV builder with conditional logic",
+    "version": "1.0.0",
+    "createdAt": "2024-01-01T00:00:00.000Z",
+    "industryContext": "Technology",
+    "compatibleFlows": ["advanced-cv-flow", "tech-cv-flow"]
+  },
+  "config": {
+    "name": "Advanced CV Builder Mapping",
+    "description": "Smart mapping configuration for Advanced CV Builder flow with conditional logic",
+    "industryContext": "Technology",
+    "mappings": [
+      {
+        "id": "map_personal_info",
+        "sourceNodeId": "personalInfo",
+        "sourceVariable": "fullName",
+        "targetCvField": "fullName",
+        "targetSection": "personal",
+        "mappingType": "direct",
+        "priority": 1,
+        "confidence": 0.95,
+        "isActive": true
+      },
+      {
+        "id": "map_contact_info",
+        "sourceNodeId": "contactInfo",
+        "sourceVariable": "email",
+        "targetCvField": "contact.email",
+        "targetSection": "contact",
+        "mappingType": "direct",
+        "priority": 1,
+        "confidence": 0.98,
+        "isActive": true
+      },
+      {
+        "id": "map_career_stage",
+        "sourceNodeId": "careerStage",
+        "sourceVariable": "careerStage",
+        "targetCvField": "careerStage",
+        "targetSection": "personal",
+        "mappingType": "direct",
+        "priority": 1,
+        "confidence": 0.9,
+        "isActive": true
+      },
+      {
+        "id": "map_industry_sector",
+        "sourceNodeId": "industrySector",
+        "sourceVariable": "industrySector",
+        "targetCvField": "industrySector",
+        "targetSection": "personal",
+        "mappingType": "direct",
+        "priority": 1,
+        "confidence": 0.9,
+        "isActive": true
+      },
+      {
+        "id": "map_experience_by_level",
+        "sourceNodeId": "experienceQuestion",
+        "sourceVariable": "experience",
+        "targetCvField": "experience.0.title",
+        "targetSection": "experience",
+        "mappingType": "conditional",
+        "conditions": [
+          {
+            "field": "careerStage",
+            "operator": "equals",
+            "value": "experienced"
+          }
+        ],
+        "priority": 1,
+        "confidence": 0.9,
+        "isActive": true
+      },
+      {
+        "id": "map_junior_experience",
+        "sourceNodeId": "juniorExperience",
+        "sourceVariable": "experience",
+        "targetCvField": "experience.0.title",
+        "targetSection": "experience",
+        "mappingType": "conditional",
+        "conditions": [
+          {
+            "field": "careerStage",
+            "operator": "equals",
+            "value": "recent_graduate"
+          }
+        ],
+        "priority": 1,
+        "confidence": 0.85,
+        "isActive": true
+      },
+      {
+        "id": "map_technical_skills",
+        "sourceNodeId": "technicalSkills",
+        "sourceVariable": "technicalSkills",
+        "targetCvField": "skills.technical",
+        "targetSection": "skills",
+        "mappingType": "aggregated",
+        "priority": 1,
+        "confidence": 0.9,
+        "isActive": true
+      },
+      {
+        "id": "map_soft_skills",
+        "sourceNodeId": "softSkills",
+        "sourceVariable": "softSkills",
+        "targetCvField": "skills.soft",
+        "targetSection": "skills",
+        "mappingType": "aggregated",
+        "priority": 1,
+        "confidence": 0.85,
+        "isActive": true
+      },
+      {
+        "id": "map_tools_technologies",
+        "sourceNodeId": "toolsTechnologies",
+        "sourceVariable": "tools",
+        "targetCvField": "skills.tools",
+        "targetSection": "skills",
+        "mappingType": "aggregated",
+        "priority": 1,
+        "confidence": 0.9,
+        "isActive": true
+      },
+      {
+        "id": "map_projects",
+        "sourceNodeId": "projects",
+        "sourceVariable": "projects",
+        "targetCvField": "projects",
+        "targetSection": "projects",
+        "mappingType": "transformed",
+        "priority": 1,
+        "confidence": 0.8,
+        "isActive": true
+      },
+      {
+        "id": "map_certifications",
+        "sourceNodeId": "certifications",
+        "sourceVariable": "certifications",
+        "targetCvField": "certifications",
+        "targetSection": "certifications",
+        "mappingType": "transformed",
+        "priority": 1,
+        "confidence": 0.85,
+        "isActive": true
+      },
+      {
+        "id": "map_languages",
+        "sourceNodeId": "languages",
+        "sourceVariable": "languages",
+        "targetCvField": "languages",
+        "targetSection": "languages",
+        "mappingType": "transformed",
+        "priority": 1,
+        "confidence": 0.8,
+        "isActive": true
+      },
+      {
+        "id": "map_education",
+        "sourceNodeId": "education",
+        "sourceVariable": "education",
+        "targetCvField": "education.0.degree",
+        "targetSection": "education",
+        "mappingType": "transformed",
+        "priority": 1,
+        "confidence": 0.9,
+        "isActive": true
+      },
+      {
+        "id": "map_social_links",
+        "sourceNodeId": "socialLinks",
+        "sourceVariable": "linkedin",
+        "targetCvField": "social.linkedin",
+        "targetSection": "social",
+        "mappingType": "direct",
+        "priority": 1,
+        "confidence": 0.95,
+        "isActive": true
+      },
+      {
+        "id": "map_github",
+        "sourceNodeId": "socialLinks",
+        "sourceVariable": "github",
+        "targetCvField": "social.github",
+        "targetSection": "social",
+        "mappingType": "direct",
+        "priority": 1,
+        "confidence": 0.95,
+        "isActive": true
+      }
+    ],
+    "transformations": [
+      {
+        "id": "format_phone",
+        "field": "contact.phone",
+        "transformationType": "format_phone",
+        "parameters": {
+          "format": "international",
+          "countryCode": "US"
+        }
+      },
+      {
+        "id": "normalize_urls",
+        "field": "social.linkedin",
+        "transformationType": "normalize_url",
+        "parameters": {
+          "addProtocol": true,
+          "removeTrailingSlash": true
+        }
+      },
+      {
+        "id": "normalize_github",
+        "field": "social.github",
+        "transformationType": "normalize_url",
+        "parameters": {
+          "addProtocol": true,
+          "removeTrailingSlash": true
+        }
+      },
+      {
+        "id": "process_technical_skills",
+        "field": "skills.technical",
+        "transformationType": "extract_keywords",
+        "parameters": {
+          "sourceField": "technicalSkills",
+          "category": "technical"
+        }
+      },
+      {
+        "id": "process_soft_skills",
+        "field": "skills.soft",
+        "transformationType": "extract_keywords",
+        "parameters": {
+          "sourceField": "softSkills",
+          "category": "soft"
+        }
+      },
+      {
+        "id": "process_tools",
+        "field": "skills.tools",
+        "transformationType": "extract_keywords",
+        "parameters": {
+          "sourceField": "tools",
+          "category": "tools"
+        }
+      },
+      {
+        "id": "remove_duplicate_technical_skills",
+        "field": "skills.technical",
+        "transformationType": "remove_duplicates",
+        "parameters": {
+          "caseSensitive": false
+        }
+      },
+      {
+        "id": "remove_duplicate_soft_skills",
+        "field": "skills.soft",
+        "transformationType": "remove_duplicates",
+        "parameters": {
+          "caseSensitive": false
+        }
+      },
+      {
+        "id": "remove_duplicate_tools",
+        "field": "skills.tools",
+        "transformationType": "remove_duplicates",
+        "parameters": {
+          "caseSensitive": false
+        }
+      },
+      {
+        "id": "sort_technical_skills",
+        "field": "skills.technical",
+        "transformationType": "sort",
+        "parameters": {
+          "order": "alphabetical"
+        }
+      },
+      {
+        "id": "sort_soft_skills",
+        "field": "skills.soft",
+        "transformationType": "sort",
+        "parameters": {
+          "order": "alphabetical"
+        }
+      },
+      {
+        "id": "sort_tools",
+        "field": "skills.tools",
+        "transformationType": "sort",
+        "parameters": {
+          "order": "alphabetical"
+        }
+      },
+      {
+        "id": "format_projects",
+        "field": "projects",
+        "transformationType": "format_project",
+        "parameters": {
+          "includeTechnologies": true,
+          "includeAchievements": true
+        }
+      },
+      {
+        "id": "format_certifications",
+        "field": "certifications",
+        "transformationType": "format_certification",
+        "parameters": {
+          "includeDate": true,
+          "includeIssuer": true
+        }
+      },
+      {
+        "id": "format_languages",
+        "field": "languages",
+        "transformationType": "format_language_proficiency",
+        "parameters": {
+          "includeProficiency": true
+        }
+      },
+      {
+        "id": "enhance_summary",
+        "field": "summary",
+        "transformationType": "ai_enhance",
+        "parameters": {
+          "maxLength": 500,
+          "style": "technical"
+        },
+        "aiPrompt": "Improve this professional summary for a technical role, making it more compelling and highlighting relevant technical expertise"
+      }
+    ],
+    "validations": [
+      {
+        "id": "validate_full_name",
+        "field": "fullName",
+        "ruleType": "required",
+        "parameters": {},
+        "errorMessage": "Full name is required"
+      },
+      {
+        "id": "validate_email",
+        "field": "contact.email",
+        "ruleType": "format",
+        "parameters": {
+          "pattern": "email"
+        },
+        "errorMessage": "Please enter a valid email address"
+      },
+      {
+        "id": "validate_phone",
+        "field": "contact.phone",
+        "ruleType": "format",
+        "parameters": {
+          "pattern": "phone"
+        },
+        "errorMessage": "Please enter a valid phone number"
+      },
+      {
+        "id": "validate_career_stage",
+        "field": "careerStage",
+        "ruleType": "required",
+        "parameters": {},
+        "errorMessage": "Career stage is required"
+      },
+      {
+        "id": "validate_technical_skills",
+        "field": "skills.technical",
+        "ruleType": "length",
+        "parameters": {
+          "minItems": 5,
+          "maxItems": 25
+        },
+        "errorMessage": "Please provide between 5 and 25 technical skills"
+      },
+      {
+        "id": "validate_soft_skills",
+        "field": "skills.soft",
+        "ruleType": "length",
+        "parameters": {
+          "minItems": 3,
+          "maxItems": 15
+        },
+        "errorMessage": "Please provide between 3 and 15 soft skills"
+      },
+      {
+        "id": "validate_tools",
+        "field": "skills.tools",
+        "ruleType": "length",
+        "parameters": {
+          "minItems": 3,
+          "maxItems": 20
+        },
+        "errorMessage": "Please provide between 3 and 20 tools/technologies"
+      },
+      {
+        "id": "validate_linkedin_url",
+        "field": "social.linkedin",
+        "ruleType": "format",
+        "parameters": {
+          "pattern": "url"
+        },
+        "errorMessage": "Please enter a valid LinkedIn URL"
+      },
+      {
+        "id": "validate_github_url",
+        "field": "social.github",
+        "ruleType": "format",
+        "parameters": {
+          "pattern": "url"
+        },
+        "errorMessage": "Please enter a valid GitHub URL"
+      },
+      {
+        "id": "ai_validate_experience",
+        "field": "experience.0.title",
+        "ruleType": "ai_validate",
+        "parameters": {
+          "checkRelevance": true,
+          "checkCompleteness": true
+        },
+        "errorMessage": "Experience description could be improved",
+        "aiPrompt": "Validate that this experience description is relevant for a technical role and includes specific technologies and achievements"
+      }
+    ],
+    "userPreferences": {
+      "preferredDateFormat": "MMM YYYY",
+      "nameFormat": "first_last",
+      "experienceOrder": "relevance",
+      "skillCategorization": "automatic",
+      "languageStyle": "technical"
+    }
+  }
+}

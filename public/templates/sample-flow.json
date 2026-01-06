@@ -1,0 +1,322 @@
+{
+  "id": "sample-cv-flow",
+  "name": "Sample CV Builder Flow",
+  "description": "A comprehensive sample flow demonstrating advanced CV building features with conditional branching",
+  "version": "2.0.0",
+  "nodes": [
+    {
+      "id": "start",
+      "type": "start",
+      "position": { "x": 250, "y": 50 },
+      "data": {
+        "label": "Start",
+        "description": "CV Builder begins here"
+      }
+    },
+    {
+      "id": "personal-info",
+      "type": "question",
+      "position": { "x": 250, "y": 150 },
+      "data": {
+        "label": "Personal Information",
+        "question": "What is your full name?",
+        "questionType": "text",
+        "required": true,
+        "variableName": "fullName",
+        "placeholder": "Enter your full name",
+        "helpText": "Please provide your complete name as it should appear on your CV"
+      }
+    },
+    {
+      "id": "professional-title",
+      "type": "question",
+      "position": { "x": 250, "y": 250 },
+      "data": {
+        "label": "Professional Title",
+        "question": "What is your professional title or headline?",
+        "questionType": "text",
+        "required": true,
+        "variableName": "professionalTitle",
+        "placeholder": "e.g., Senior Software Engineer",
+        "helpText": "A brief professional title that summarizes your expertise"
+      }
+    },
+    {
+      "id": "experience-level",
+      "type": "question",
+      "position": { "x": 250, "y": 350 },
+      "data": {
+        "label": "Experience Level",
+        "question": "How many years of experience do you have?",
+        "questionType": "multiple-choice",
+        "options": [
+          { "id": "opt-1", "label": "0-2 years", "value": "junior" },
+          { "id": "opt-2", "label": "3-5 years", "value": "mid" },
+          { "id": "opt-3", "label": "6-10 years", "value": "senior" },
+          { "id": "opt-4", "label": "10+ years", "value": "expert" }
+        ],
+        "required": true,
+        "variableName": "experienceLevel"
+      }
+    },
+    {
+      "id": "experience-condition",
+      "type": "condition",
+      "position": { "x": 250, "y": 450 },
+      "data": {
+        "label": "Experience Routing",
+        "conditionType": "multi-output",
+        "condition": {
+          "operator": "and",
+          "rules": [],
+          "outputs": [
+            {
+              "id": "output-junior",
+              "label": "Junior Level",
+              "value": "A",
+              "description": "0-2 years experience",
+              "rules": [
+                {
+                  "id": "rule-junior",
+                  "field": "experienceLevel",
+                  "operator": "equals",
+                  "value": "junior"
+                }
+              ]
+            },
+            {
+              "id": "output-mid",
+              "label": "Mid Level",
+              "value": "B",
+              "description": "3-5 years experience",
+              "rules": [
+                {
+                  "id": "rule-mid",
+                  "field": "experienceLevel",
+                  "operator": "equals",
+                  "value": "mid"
+                }
+              ]
+            },
+            {
+              "id": "output-senior",
+              "label": "Senior Level",
+              "value": "C",
+              "description": "6+ years experience",
+              "rules": [
+                {
+                  "id": "rule-senior",
+                  "field": "experienceLevel",
+                  "operator": "in_list",
+                  "value": "senior,expert"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "junior-skills",
+      "type": "question",
+      "position": { "x": 100, "y": 550 },
+      "data": {
+        "label": "Junior Skills Focus",
+        "question": "What technical skills are you learning or have basic knowledge of?",
+        "questionType": "text",
+        "required": true,
+        "variableName": "skills",
+        "placeholder": "HTML, CSS, JavaScript, React basics, Git",
+        "helpText": "Focus on foundational skills and what you're currently learning",
+        "conditionTriggers": {
+          "experience-condition": "A"
+        }
+      }
+    },
+    {
+      "id": "mid-skills",
+      "type": "question",
+      "position": { "x": 250, "y": 550 },
+      "data": {
+        "label": "Mid-Level Skills",
+        "question": "What are your core technical skills and areas of expertise?",
+        "questionType": "text",
+        "required": true,
+        "variableName": "skills",
+        "placeholder": "JavaScript, React, Node.js, Python, SQL, AWS",
+        "helpText": "List your strongest technical skills and tools you use regularly",
+        "conditionTriggers": {
+          "experience-condition": "B"
+        }
+      }
+    },
+    {
+      "id": "senior-skills",
+      "type": "question",
+      "position": { "x": 400, "y": 550 },
+      "data": {
+        "label": "Senior Skills & Leadership",
+        "question": "What are your technical skills and leadership/mentoring experience?",
+        "questionType": "text",
+        "required": true,
+        "variableName": "skills",
+        "placeholder": "Full-stack development, Architecture design, Team leadership, Mentoring, DevOps",
+        "helpText": "Include both technical expertise and leadership/mentoring experience",
+        "conditionTriggers": {
+          "experience-condition": "C"
+        }
+      }
+    },
+    {
+      "id": "education",
+      "type": "question",
+      "position": { "x": 250, "y": 550 },
+      "data": {
+        "label": "Education",
+        "question": "What is your highest level of education?",
+        "questionType": "multiple-choice",
+        "options": [
+          { "id": "opt-1", "label": "High School", "value": "high_school" },
+          { "id": "opt-2", "label": "Bachelor's Degree", "value": "bachelors" },
+          { "id": "opt-3", "label": "Master's Degree", "value": "masters" },
+          { "id": "opt-4", "label": "PhD", "value": "phd" },
+          { "id": "opt-5", "label": "Other", "value": "other" }
+        ],
+        "required": true,
+        "variableName": "education"
+      }
+    },
+    {
+      "id": "end",
+      "type": "end",
+      "position": { "x": 250, "y": 650 },
+      "data": {
+        "label": "End",
+        "description": "CV Builder completed",
+        "action": "CV Generated"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "start-to-personal",
+      "source": "start",
+      "target": "personal-info",
+      "label": "Begin"
+    },
+    {
+      "id": "personal-to-title",
+      "source": "personal-info",
+      "target": "professional-title",
+      "label": "Next"
+    },
+    {
+      "id": "title-to-experience",
+      "source": "professional-title",
+      "target": "experience-level",
+      "label": "Next"
+    },
+    {
+      "id": "experience-to-condition",
+      "source": "experience-level",
+      "target": "experience-condition",
+      "label": "Route by Experience"
+    },
+    {
+      "id": "condition-to-junior-skills",
+      "source": "experience-condition",
+      "target": "junior-skills",
+      "sourceHandle": "A",
+      "targetHandle": null,
+      "label": "Junior Path"
+    },
+    {
+      "id": "condition-to-mid-skills",
+      "source": "experience-condition",
+      "target": "mid-skills",
+      "sourceHandle": "B",
+      "targetHandle": null,
+      "label": "Mid Level Path"
+    },
+    {
+      "id": "condition-to-senior-skills",
+      "source": "experience-condition",
+      "target": "senior-skills",
+      "sourceHandle": "C",
+      "targetHandle": null,
+      "label": "Senior Path"
+    },
+    {
+      "id": "junior-skills-to-education",
+      "source": "junior-skills",
+      "target": "education",
+      "label": "Next"
+    },
+    {
+      "id": "mid-skills-to-education",
+      "source": "mid-skills",
+      "target": "education",
+      "label": "Next"
+    },
+    {
+      "id": "senior-skills-to-education",
+      "source": "senior-skills",
+      "target": "education",
+      "label": "Next"
+    },
+    {
+      "id": "education-to-end",
+      "source": "education",
+      "target": "end",
+      "label": "Complete"
+    }
+  ],
+  "variables": [
+    {
+      "id": "fullName",
+      "name": "fullName",
+      "type": "string",
+      "scope": "global",
+      "description": "User's full name"
+    },
+    {
+      "id": "professionalTitle",
+      "name": "professionalTitle",
+      "type": "string",
+      "scope": "global",
+      "description": "Professional title or headline"
+    },
+    {
+      "id": "experienceLevel",
+      "name": "experienceLevel",
+      "type": "string",
+      "scope": "global",
+      "description": "Experience level category"
+    },
+    {
+      "id": "skills",
+      "name": "skills",
+      "type": "string",
+      "scope": "global",
+      "description": "Key skills list (varies by experience level)"
+    },
+    {
+      "id": "education",
+      "name": "education",
+      "type": "string",
+      "scope": "global",
+      "description": "Education level"
+    }
+  ],
+  "settings": {
+    "autoSave": true,
+    "autoSaveInterval": 5000,
+    "snapToGrid": true,
+    "gridSize": 20,
+    "showMinimap": true,
+    "showControls": true,
+    "theme": "light"
+  },
+  "createdAt": "2024-01-01T00:00:00.000Z",
+  "updatedAt": "2024-01-01T00:00:00.000Z"
+}

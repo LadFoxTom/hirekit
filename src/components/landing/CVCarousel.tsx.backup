@@ -1,0 +1,975 @@
+'use client';
+
+import React, { useState, useEffect, useRef } from 'react';
+import { FaChevronLeft, FaChevronRight, FaBriefcase, FaGraduationCap, FaCode, FaLanguage, FaCertificate, FaProjectDiagram, FaHeart, FaEnvelope, FaPhone, FaMapMarkerAlt, FaLinkedin, FaGithub, FaGlobe } from 'react-icons/fa';
+
+interface CVDummyData {
+  id: string;
+  name: string;
+  title: string;
+  email: string;
+  phone: string;
+  location: string;
+  linkedin: string;
+  github: string;
+  website: string;
+  photoUrl: string;
+  summary: string;
+  experience: Array<{
+    title: string;
+    company: string;
+    period: string;
+    description: string[];
+  }>;
+  education: Array<{
+    degree: string;
+    institution: string;
+    period: string;
+    gpa?: string;
+  }>;
+  skills: string[];
+  languages: string[];
+  certifications: string[];
+  projects: Array<{
+    name: string;
+    description: string;
+    tech: string[];
+  }>;
+  interests: string[];
+  template: string;
+  colors: {
+    primary: string;
+    secondary: string;
+    accent: string;
+  };
+}
+
+const cvTemplates: CVDummyData[] = [
+  {
+    id: 'modern-tech',
+    name: 'Alex Chen',
+    title: 'Senior Full-Stack Developer',
+    email: 'alex.chen@email.com',
+    phone: '+1 (555) 123-4567',
+    location: 'San Francisco, CA',
+    linkedin: 'linkedin.com/in/alexchen',
+    github: 'github.com/alexchen',
+    website: 'alexchen.dev',
+    photoUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face',
+    summary: 'Passionate full-stack developer with 6+ years of experience building scalable web applications. Expert in React, Node.js, and cloud technologies with a track record of delivering high-impact solutions.',
+    experience: [
+      {
+        title: 'Senior Full-Stack Developer',
+        company: 'TechCorp Solutions',
+        period: '2021 - Present',
+        description: [
+          'Led development of microservices architecture serving 2M+ users',
+          'Reduced application load time by 40% through performance optimization',
+          'Mentored 5 junior developers and established coding standards'
+        ]
+      },
+      {
+        title: 'Full-Stack Developer',
+        company: 'StartupXYZ',
+        period: '2019 - 2021',
+        description: [
+          'Built responsive web applications using React and Node.js',
+          'Implemented CI/CD pipelines reducing deployment time by 60%',
+          'Collaborated with design team to create intuitive user interfaces'
+        ]
+      }
+    ],
+    education: [
+      {
+        degree: 'Bachelor of Computer Science',
+        institution: 'Stanford University',
+        period: '2015 - 2019',
+        gpa: '3.8/4.0'
+      }
+    ],
+    skills: ['React', 'Node.js', 'TypeScript', 'AWS', 'Docker', 'MongoDB', 'GraphQL', 'Python'],
+    languages: ['English (Native)', 'Mandarin (Fluent)', 'Spanish (Conversational)'],
+    certifications: ['AWS Certified Solutions Architect', 'Google Cloud Professional Developer'],
+    projects: [
+      {
+        name: 'E-commerce Platform',
+        description: 'Built a full-stack e-commerce solution with real-time inventory management',
+        tech: ['React', 'Node.js', 'MongoDB', 'Stripe API']
+      }
+    ],
+    interests: ['Open Source', 'Photography', 'Rock Climbing', 'Cooking'],
+    template: 'modern',
+    colors: {
+      primary: '#2563eb',
+      secondary: '#1e40af',
+      accent: '#3b82f6'
+    }
+  },
+  {
+    id: 'creative-designer',
+    name: 'Maya Rodriguez',
+    title: 'Creative Director & UX Designer',
+    email: 'maya.rodriguez@email.com',
+    phone: '+1 (555) 234-5678',
+    location: 'New York, NY',
+    linkedin: 'linkedin.com/in/mayarodriguez',
+    github: 'github.com/mayarodriguez',
+    website: 'mayarodriguez.design',
+    photoUrl: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face',
+    summary: 'Award-winning creative director with 8+ years of experience in brand strategy and user experience design. Passionate about creating meaningful digital experiences that drive business growth.',
+    experience: [
+      {
+        title: 'Creative Director',
+        company: 'Design Studio Pro',
+        period: '2020 - Present',
+        description: [
+          'Led creative direction for Fortune 500 clients including Apple and Nike',
+          'Increased client satisfaction scores by 35% through innovative design solutions',
+          'Managed a team of 12 designers and developers'
+        ]
+      },
+      {
+        title: 'Senior UX Designer',
+        company: 'Digital Innovations Inc.',
+        period: '2018 - 2020',
+        description: [
+          'Designed user interfaces for mobile and web applications',
+          'Conducted user research and usability testing sessions',
+          'Collaborated with product managers to define user requirements'
+        ]
+      }
+    ],
+    education: [
+      {
+        degree: 'Master of Fine Arts in Design',
+        institution: 'Rhode Island School of Design',
+        period: '2016 - 2018'
+      }
+    ],
+    skills: ['Figma', 'Adobe Creative Suite', 'Sketch', 'Principle', 'User Research', 'Prototyping', 'Brand Strategy'],
+    languages: ['English (Native)', 'Spanish (Fluent)', 'French (Conversational)'],
+    certifications: ['Google UX Design Certificate', 'Adobe Certified Expert'],
+    projects: [
+      {
+        name: 'Brand Identity System',
+        description: 'Developed comprehensive brand identity for tech startup',
+        tech: ['Figma', 'Adobe Illustrator', 'After Effects']
+      }
+    ],
+    interests: ['Art Exhibitions', 'Travel', 'Photography', 'Yoga'],
+    template: 'creative',
+    colors: {
+      primary: '#8b5cf6',
+      secondary: '#7c3aed',
+      accent: '#a855f7'
+    }
+  },
+  {
+    id: 'executive-finance',
+    name: 'David Thompson',
+    title: 'Chief Financial Officer',
+    email: 'david.thompson@email.com',
+    phone: '+1 (555) 345-6789',
+    location: 'Chicago, IL',
+    linkedin: 'linkedin.com/in/davidthompson',
+    github: '',
+    website: 'davidthompson.cfo',
+    photoUrl: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face',
+    summary: 'Strategic financial executive with 15+ years of experience in corporate finance, M&A, and operational excellence. Proven track record of driving growth and profitability in Fortune 500 companies.',
+    experience: [
+      {
+        title: 'Chief Financial Officer',
+        company: 'Global Manufacturing Corp',
+        period: '2019 - Present',
+        description: [
+          'Led financial strategy for $2B revenue company with 5,000+ employees',
+          'Executed $500M acquisition and integration of competitor',
+          'Improved EBITDA margins by 12% through operational efficiency initiatives'
+        ]
+      },
+      {
+        title: 'VP of Finance',
+        company: 'Tech Solutions Ltd',
+        period: '2015 - 2019',
+        description: [
+          'Managed financial planning and analysis for $500M business unit',
+          'Implemented new financial systems reducing reporting time by 50%',
+          'Led due diligence for multiple acquisition opportunities'
+        ]
+      }
+    ],
+    education: [
+      {
+        degree: 'Master of Business Administration',
+        institution: 'Wharton School, University of Pennsylvania',
+        period: '2010 - 2012'
+      },
+      {
+        degree: 'Bachelor of Accounting',
+        institution: 'University of Chicago',
+        period: '2005 - 2009',
+        gpa: '3.9/4.0'
+      }
+    ],
+    skills: ['Financial Modeling', 'M&A', 'Strategic Planning', 'Risk Management', 'SAP', 'Oracle', 'Leadership'],
+    languages: ['English (Native)', 'German (Fluent)'],
+    certifications: ['CPA', 'CFA', 'Six Sigma Black Belt'],
+    projects: [
+      {
+        name: 'Digital Transformation Initiative',
+        description: 'Led company-wide digital transformation reducing costs by $50M annually',
+        tech: ['SAP', 'Oracle', 'Tableau', 'Power BI']
+      }
+    ],
+    interests: ['Golf', 'Wine Tasting', 'Classical Music', 'Charity Work'],
+    template: 'executive',
+    colors: {
+      primary: '#1f2937',
+      secondary: '#111827',
+      accent: '#374151'
+    }
+  },
+  {
+    id: 'marketing-manager',
+    name: 'Sarah Johnson',
+    title: 'Digital Marketing Manager',
+    email: 'sarah.johnson@email.com',
+    phone: '+1 (555) 456-7890',
+    location: 'Austin, TX',
+    linkedin: 'linkedin.com/in/sarahjohnson',
+    github: 'github.com/sarahjohnson',
+    website: 'sarahjohnson.marketing',
+    photoUrl: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face',
+    summary: 'Results-driven digital marketing professional with 7+ years of experience in growth marketing, content strategy, and brand development. Expert in data-driven campaigns that deliver measurable ROI.',
+    experience: [
+      {
+        title: 'Digital Marketing Manager',
+        company: 'Growth Marketing Agency',
+        period: '2021 - Present',
+        description: [
+          'Increased client revenue by 150% through strategic digital campaigns',
+          'Managed $2M annual marketing budget across multiple channels',
+          'Built and led a team of 8 marketing specialists'
+        ]
+      },
+      {
+        title: 'Senior Marketing Specialist',
+        company: 'E-commerce Solutions',
+        period: '2019 - 2021',
+        description: [
+          'Developed and executed multi-channel marketing strategies',
+          'Improved conversion rates by 45% through A/B testing',
+          'Managed social media presence with 500K+ followers'
+        ]
+      }
+    ],
+    education: [
+      {
+        degree: 'Master of Marketing',
+        institution: 'University of Texas at Austin',
+        period: '2017 - 2019'
+      }
+    ],
+    skills: ['Google Analytics', 'Facebook Ads', 'SEO/SEM', 'Content Marketing', 'Email Marketing', 'HubSpot', 'Salesforce'],
+    languages: ['English (Native)', 'Portuguese (Fluent)'],
+    certifications: ['Google Ads Certified', 'HubSpot Content Marketing Certified', 'Facebook Blueprint Certified'],
+    projects: [
+      {
+        name: 'Viral Campaign Launch',
+        description: 'Created viral marketing campaign reaching 10M+ impressions',
+        tech: ['Facebook Ads', 'Instagram', 'TikTok', 'Google Analytics']
+      }
+    ],
+    interests: ['Travel', 'Photography', 'Cooking', 'Fitness'],
+    template: 'modern',
+    colors: {
+      primary: '#dc2626',
+      secondary: '#b91c1c',
+      accent: '#ef4444'
+    }
+  },
+  {
+    id: 'data-scientist',
+    name: 'James Park',
+    title: 'Senior Data Scientist',
+    email: 'james.park@email.com',
+    phone: '+1 (555) 567-8901',
+    location: 'Seattle, WA',
+    linkedin: 'linkedin.com/in/jamespark',
+    github: 'github.com/jamespark',
+    website: 'jamespark.ai',
+    photoUrl: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face',
+    summary: 'Machine learning engineer and data scientist with 5+ years of experience in building predictive models and AI solutions. Passionate about using data to solve complex business problems.',
+    experience: [
+      {
+        title: 'Senior Data Scientist',
+        company: 'AI Innovations Lab',
+        period: '2022 - Present',
+        description: [
+          'Developed ML models that improved business predictions by 30%',
+          'Led team of 4 data scientists on recommendation system project',
+          'Implemented MLOps pipeline reducing model deployment time by 70%'
+        ]
+      },
+      {
+        title: 'Data Scientist',
+        company: 'Tech Startup Inc.',
+        period: '2020 - 2022',
+        description: [
+          'Built customer churn prediction model with 85% accuracy',
+          'Analyzed large datasets using Python and SQL',
+          'Created interactive dashboards for business stakeholders'
+        ]
+      }
+    ],
+    education: [
+      {
+        degree: 'PhD in Computer Science',
+        institution: 'University of Washington',
+        period: '2016 - 2020'
+      }
+    ],
+    skills: ['Python', 'R', 'TensorFlow', 'PyTorch', 'SQL', 'AWS', 'Docker', 'Kubernetes', 'Tableau'],
+    languages: ['English (Native)', 'Korean (Fluent)', 'Japanese (Conversational)'],
+    certifications: ['AWS Machine Learning Specialty', 'Google Cloud ML Engineer'],
+    projects: [
+      {
+        name: 'Real-time Fraud Detection',
+        description: 'Built ML system detecting fraudulent transactions in real-time',
+        tech: ['Python', 'TensorFlow', 'Apache Kafka', 'Redis']
+      }
+    ],
+    interests: ['Machine Learning Research', 'Chess', 'Hiking', 'Coffee Roasting'],
+    template: 'modern',
+    colors: {
+      primary: '#059669',
+      secondary: '#047857',
+      accent: '#10b981'
+    }
+  },
+  {
+    id: 'product-manager',
+    name: 'Lisa Chen',
+    title: 'Senior Product Manager',
+    email: 'lisa.chen@email.com',
+    phone: '+1 (555) 678-9012',
+    location: 'San Jose, CA',
+    linkedin: 'linkedin.com/in/lisachen',
+    github: 'github.com/lisachen',
+    website: 'lisachen.product',
+    photoUrl: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=150&h=150&fit=crop&crop=face',
+    summary: 'Strategic product manager with 8+ years of experience in B2B SaaS products. Expert in user research, product strategy, and cross-functional team leadership.',
+    experience: [
+      {
+        title: 'Senior Product Manager',
+        company: 'SaaS Solutions Inc.',
+        period: '2021 - Present',
+        description: [
+          'Led product strategy for $50M ARR product line',
+          'Increased user engagement by 60% through feature optimization',
+          'Managed product roadmap and coordinated with engineering teams'
+        ]
+      },
+      {
+        title: 'Product Manager',
+        company: 'Tech Startup Co.',
+        period: '2019 - 2021',
+        description: [
+          'Launched 3 major product features from concept to market',
+          'Conducted user interviews and usability testing sessions',
+          'Collaborated with design and engineering teams on product development'
+        ]
+      }
+    ],
+    education: [
+      {
+        degree: 'Master of Business Administration',
+        institution: 'UC Berkeley Haas School of Business',
+        period: '2017 - 2019'
+      }
+    ],
+    skills: ['Product Strategy', 'User Research', 'Agile', 'Jira', 'Figma', 'Analytics', 'A/B Testing'],
+    languages: ['English (Native)', 'Mandarin (Fluent)'],
+    certifications: ['Certified Scrum Product Owner', 'Google Analytics Certified'],
+    projects: [
+      {
+        name: 'Mobile App Launch',
+        description: 'Led successful launch of mobile app with 1M+ downloads',
+        tech: ['Figma', 'Jira', 'Mixpanel', 'Amplitude']
+      }
+    ],
+    interests: ['Product Design', 'Travel', 'Yoga', 'Reading'],
+    template: 'creative',
+    colors: {
+      primary: '#7c3aed',
+      secondary: '#6d28d9',
+      accent: '#8b5cf6'
+    }
+  },
+  {
+    id: 'sales-director',
+    name: 'Michael Rodriguez',
+    title: 'Sales Director',
+    email: 'michael.rodriguez@email.com',
+    phone: '+1 (555) 789-0123',
+    location: 'Miami, FL',
+    linkedin: 'linkedin.com/in/michaelrodriguez',
+    github: '',
+    website: 'michaelrodriguez.sales',
+    photoUrl: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&h=150&fit=crop&crop=face',
+    summary: 'Results-oriented sales leader with 12+ years of experience in B2B sales and team management. Proven track record of exceeding revenue targets and building high-performing sales teams.',
+    experience: [
+      {
+        title: 'Sales Director',
+        company: 'Enterprise Solutions Corp',
+        period: '2020 - Present',
+        description: [
+          'Led sales team of 15 professionals achieving $25M annual revenue',
+          'Developed and executed sales strategies for enterprise clients',
+          'Increased average deal size by 40% through consultative selling'
+        ]
+      },
+      {
+        title: 'Regional Sales Manager',
+        company: 'Software Solutions Ltd',
+        period: '2017 - 2020',
+        description: [
+          'Managed sales operations across 5 states',
+          'Exceeded quarterly targets by 25% for 8 consecutive quarters',
+          'Built strong relationships with key enterprise accounts'
+        ]
+      }
+    ],
+    education: [
+      {
+        degree: 'Bachelor of Business Administration',
+        institution: 'University of Miami',
+        period: '2008 - 2012'
+      }
+    ],
+    skills: ['Sales Strategy', 'CRM Management', 'Negotiation', 'Team Leadership', 'Salesforce', 'HubSpot'],
+    languages: ['English (Native)', 'Spanish (Fluent)', 'Portuguese (Conversational)'],
+    certifications: ['Salesforce Certified Administrator', 'HubSpot Sales Certified'],
+    projects: [
+      {
+        name: 'Enterprise Client Acquisition',
+        description: 'Led acquisition of Fortune 500 client worth $5M annually',
+        tech: ['Salesforce', 'HubSpot', 'LinkedIn Sales Navigator']
+      }
+    ],
+    interests: ['Golf', 'Sailing', 'Wine Tasting', 'Charity Events'],
+    template: 'executive',
+    colors: {
+      primary: '#1e40af',
+      secondary: '#1e3a8a',
+      accent: '#3b82f6'
+    }
+  },
+  {
+    id: 'hr-manager',
+    name: 'Jennifer Kim',
+    title: 'Human Resources Manager',
+    email: 'jennifer.kim@email.com',
+    phone: '+1 (555) 890-1234',
+    location: 'Denver, CO',
+    linkedin: 'linkedin.com/in/jenniferkim',
+    github: '',
+    website: 'jenniferkim.hr',
+    photoUrl: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face',
+    summary: 'Strategic HR professional with 10+ years of experience in talent acquisition, employee relations, and organizational development. Passionate about creating inclusive workplace cultures.',
+    experience: [
+      {
+        title: 'Human Resources Manager',
+        company: 'Growing Tech Company',
+        period: '2021 - Present',
+        description: [
+          'Led HR operations for 500+ employee technology company',
+          'Reduced employee turnover by 30% through engagement initiatives',
+          'Implemented diversity and inclusion programs across organization'
+        ]
+      },
+      {
+        title: 'Senior HR Business Partner',
+        company: 'Global Corporation',
+        period: '2018 - 2021',
+        description: [
+          'Supported multiple business units with HR strategy and execution',
+          'Managed complex employee relations issues and investigations',
+          'Developed and delivered training programs for managers'
+        ]
+      }
+    ],
+    education: [
+      {
+        degree: 'Master of Human Resources',
+        institution: 'University of Colorado',
+        period: '2016 - 2018'
+      }
+    ],
+    skills: ['Talent Acquisition', 'Employee Relations', 'Performance Management', 'HRIS', 'Workday', 'BambooHR'],
+    languages: ['English (Native)', 'Korean (Fluent)'],
+    certifications: ['SHRM-CP', 'PHR', 'Diversity & Inclusion Certificate'],
+    projects: [
+      {
+        name: 'Employee Engagement Program',
+        description: 'Designed and implemented company-wide engagement program',
+        tech: ['Workday', 'BambooHR', 'Culture Amp', 'Slack']
+      }
+    ],
+    interests: ['Hiking', 'Photography', 'Volunteering', 'Cooking'],
+    template: 'modern',
+    colors: {
+      primary: '#dc2626',
+      secondary: '#b91c1c',
+      accent: '#f87171'
+    }
+  },
+  {
+    id: 'consultant',
+    name: 'Robert Taylor',
+    title: 'Management Consultant',
+    email: 'robert.taylor@email.com',
+    phone: '+1 (555) 901-2345',
+    location: 'Boston, MA',
+    linkedin: 'linkedin.com/in/roberttaylor',
+    github: '',
+    website: 'roberttaylor.consulting',
+    photoUrl: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face',
+    summary: 'Senior management consultant with 15+ years of experience in strategy, operations, and digital transformation. Expert in helping organizations optimize performance and drive growth.',
+    experience: [
+      {
+        title: 'Senior Management Consultant',
+        company: 'McKinsey & Company',
+        period: '2018 - Present',
+        description: [
+          'Led strategic consulting engagements for Fortune 500 clients',
+          'Developed digital transformation strategies saving clients $100M+',
+          'Mentored junior consultants and managed project teams'
+        ]
+      },
+      {
+        title: 'Management Consultant',
+        company: 'Deloitte Consulting',
+        period: '2012 - 2018',
+        description: [
+          'Delivered operational improvement projects across various industries',
+          'Conducted market analysis and competitive intelligence studies',
+          'Presented findings and recommendations to C-level executives'
+        ]
+      }
+    ],
+    education: [
+      {
+        degree: 'Master of Business Administration',
+        institution: 'Harvard Business School',
+        period: '2010 - 2012'
+      }
+    ],
+    skills: ['Strategic Planning', 'Operations Management', 'Digital Transformation', 'Data Analysis', 'Project Management'],
+    languages: ['English (Native)', 'French (Fluent)', 'German (Conversational)'],
+    certifications: ['PMP', 'Six Sigma Black Belt', 'Certified Management Consultant'],
+    projects: [
+      {
+        name: 'Digital Transformation Initiative',
+        description: 'Led digital transformation for manufacturing company',
+        tech: ['Tableau', 'Power BI', 'SAP', 'Oracle']
+      }
+    ],
+    interests: ['Sailing', 'Classical Music', 'Wine Collecting', 'Charity Work'],
+    template: 'executive',
+    colors: {
+      primary: '#1f2937',
+      secondary: '#111827',
+      accent: '#4b5563'
+    }
+  },
+  {
+    id: 'nurse-manager',
+    name: 'Amanda Wilson',
+    title: 'Nurse Manager',
+    email: 'amanda.wilson@email.com',
+    phone: '+1 (555) 012-3456',
+    location: 'Portland, OR',
+    linkedin: 'linkedin.com/in/amandawilson',
+    github: '',
+    website: 'amandawilson.nursing',
+    photoUrl: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=150&h=150&fit=crop&crop=face',
+    summary: 'Compassionate healthcare leader with 12+ years of nursing experience and 5+ years in management. Dedicated to improving patient care outcomes and leading high-performing healthcare teams.',
+    experience: [
+      {
+        title: 'Nurse Manager',
+        company: 'Regional Medical Center',
+        period: '2020 - Present',
+        description: [
+          'Managed 25+ nursing staff across multiple units',
+          'Improved patient satisfaction scores by 25%',
+          'Implemented evidence-based practice protocols'
+        ]
+      },
+      {
+        title: 'Senior Registered Nurse',
+        company: 'City General Hospital',
+        period: '2015 - 2020',
+        description: [
+          'Provided direct patient care in critical care unit',
+          'Mentored new graduate nurses and nursing students',
+          'Participated in quality improvement initiatives'
+        ]
+      }
+    ],
+    education: [
+      {
+        degree: 'Master of Science in Nursing',
+        institution: 'Oregon Health & Science University',
+        period: '2018 - 2020'
+      },
+      {
+        degree: 'Bachelor of Science in Nursing',
+        institution: 'University of Oregon',
+        period: '2008 - 2012'
+      }
+    ],
+    skills: ['Patient Care', 'Team Leadership', 'Quality Improvement', 'Electronic Health Records', 'CPR Certified'],
+    languages: ['English (Native)', 'Spanish (Conversational)'],
+    certifications: ['RN License', 'CCRN', 'Nurse Manager Certification'],
+    projects: [
+      {
+        name: 'Patient Safety Initiative',
+        description: 'Led initiative reducing hospital-acquired infections by 40%',
+        tech: ['Epic EHR', 'Quality Improvement Tools']
+      }
+    ],
+    interests: ['Hiking', 'Photography', 'Volunteering', 'Reading'],
+    template: 'modern',
+    colors: {
+      primary: '#059669',
+      secondary: '#047857',
+      accent: '#34d399'
+    }
+  }
+];
+
+const CVCarousel: React.FC = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Auto-rotation every 5 seconds
+  useEffect(() => {
+    if (isAutoPlaying) {
+      intervalRef.current = setInterval(() => {
+        setCurrentIndex((prevIndex) => (prevIndex + 1) % cvTemplates.length);
+      }, 5000);
+    } else {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    }
+
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
+  }, [isAutoPlaying]);
+
+  const goToPrevious = () => {
+    setIsAutoPlaying(false);
+    setCurrentIndex((prevIndex) =>
+      prevIndex === 0 ? cvTemplates.length - 1 : prevIndex - 1
+    );
+  };
+
+  const goToNext = () => {
+    setIsAutoPlaying(false);
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % cvTemplates.length);
+  };
+
+  const goToSlide = (index: number) => {
+    setIsAutoPlaying(false);
+    setCurrentIndex(index);
+  };
+
+  const renderCV = (cv: CVDummyData) => {
+    return (
+      <div className="w-full h-full bg-white rounded-2xl shadow-2xl overflow-hidden border border-gray-100" style={{ maxHeight: '900px' }}>
+        {/* Document-like padding and background */}
+        <div className="bg-gray-50 p-6 border-b border-gray-200">
+          <div className="bg-white rounded-xl shadow-lg overflow-hidden">
+            {/* Header */}
+            <div className="bg-gradient-to-r p-6 lg:p-8" style={{ background: `linear-gradient(135deg, ${cv.colors.primary}, ${cv.colors.secondary})` }}>
+              <div className="flex flex-col lg:flex-row items-center space-y-4 lg:space-y-0 lg:space-x-6">
+                <div className="w-24 h-24 lg:w-28 lg:h-28 rounded-full overflow-hidden border-4 border-white shadow-xl">
+                  <img
+                    src={cv.photoUrl}
+                    alt={cv.name}
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      e.currentTarget.src = 'https://via.placeholder.com/150x150/cccccc/666666?text=Photo';
+                    }}
+                  />
+                </div>
+                <div className="text-white text-center lg:text-left">
+                  <h1 className="text-2xl lg:text-3xl font-bold mb-2 tracking-tight">{cv.name}</h1>
+                  <h2 className="text-lg lg:text-xl font-semibold mb-4 opacity-90">{cv.title}</h2>
+                  <div className="flex flex-col lg:flex-row lg:flex-wrap gap-3 lg:gap-6 text-sm">
+                    <div className="flex items-center justify-center lg:justify-start">
+                      <FaEnvelope className="mr-2 text-sm" />
+                      <span className="truncate">{cv.email}</span>
+                    </div>
+                    <div className="flex items-center justify-center lg:justify-start">
+                      <FaPhone className="mr-2 text-sm" />
+                      {cv.phone}
+                    </div>
+                    <div className="flex items-center justify-center lg:justify-start">
+                      <FaMapMarkerAlt className="mr-2 text-sm" />
+                      {cv.location}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Content */}
+            <div className="p-6 lg:p-8 space-y-6 lg:space-y-8 max-h-96 lg:max-h-none overflow-y-auto">
+              {/* Summary */}
+              <div>
+                <h3 className="text-lg font-bold mb-3 flex items-center text-gray-800" style={{ color: cv.colors.primary }}>
+                  <FaBriefcase className="mr-3 text-lg" />
+                  Professional Summary
+                </h3>
+                <p className="text-gray-700 leading-relaxed text-sm lg:text-base font-medium">{cv.summary}</p>
+              </div>
+
+              {/* Experience */}
+              <div>
+                <h3 className="text-lg font-bold mb-4 flex items-center text-gray-800" style={{ color: cv.colors.primary }}>
+                  <FaBriefcase className="mr-3 text-lg" />
+                  Experience
+                </h3>
+                <div className="space-y-5">
+                  {cv.experience.map((exp, index) => (
+                    <div key={index} className="border-l-4 pl-5 pb-4" style={{ borderColor: cv.colors.accent }}>
+                      <div className="flex justify-between items-start mb-1">
+                        <h4 className="font-bold text-gray-900 text-base">{exp.title}</h4>
+                        <span className="text-sm text-gray-500 font-medium">{exp.period}</span>
+                      </div>
+                      <p className="font-semibold text-gray-700 mb-2">{exp.company}</p>
+                      <ul className="text-sm text-gray-600 space-y-1">
+                        {exp.description.map((desc, i) => (
+                          <li key={i} className="flex items-start">
+                            <span className="w-1.5 h-1.5 rounded-full bg-gray-400 mt-2 mr-2 flex-shrink-0"></span>
+                            <span className="leading-relaxed">{desc}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Education */}
+              <div>
+                <h3 className="text-lg font-bold mb-4 flex items-center text-gray-800" style={{ color: cv.colors.primary }}>
+                  <FaGraduationCap className="mr-3 text-lg" />
+                  Education
+                </h3>
+                <div className="space-y-4">
+                  {cv.education.map((edu, index) => (
+                    <div key={index} className="flex justify-between items-start">
+                      <div>
+                        <h4 className="font-bold text-gray-900 text-base">{edu.degree}</h4>
+                        <p className="text-gray-700 font-medium">{edu.institution}</p>
+                        {edu.gpa && <p className="text-sm text-gray-500 font-medium">GPA: {edu.gpa}</p>}
+                      </div>
+                      <span className="text-sm text-gray-500 font-medium">{edu.period}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+              {/* Skills */}
+              <div>
+                <h3 className="text-lg font-bold mb-4 flex items-center text-gray-800" style={{ color: cv.colors.primary }}>
+                  <FaCode className="mr-3 text-lg" />
+                  Skills
+                </h3>
+                <div className="flex flex-wrap gap-2">
+                  {cv.skills.map((skill, index) => (
+                    <span
+                      key={index}
+                      className="px-3 py-1 rounded-full text-sm font-semibold text-white shadow-sm"
+                      style={{ backgroundColor: cv.colors.accent }}
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Languages */}
+              {cv.languages.length > 0 && (
+                <div>
+                  <h3 className="text-lg font-bold mb-4 flex items-center text-gray-800" style={{ color: cv.colors.primary }}>
+                    <FaLanguage className="mr-3 text-lg" />
+                    Languages
+                  </h3>
+                  <div className="flex flex-wrap gap-2">
+                    {cv.languages.map((lang, index) => (
+                      <span key={index} className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-medium">
+                        {lang}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Certifications */}
+              {cv.certifications.length > 0 && (
+                <div>
+                  <h3 className="text-lg font-bold mb-4 flex items-center text-gray-800" style={{ color: cv.colors.primary }}>
+                    <FaCertificate className="mr-3 text-lg" />
+                    Certifications
+                  </h3>
+                  <ul className="space-y-2">
+                    {cv.certifications.map((cert, index) => (
+                      <li key={index} className="text-gray-700 flex items-start">
+                        <span className="w-1.5 h-1.5 rounded-full bg-gray-400 mt-2 mr-2 flex-shrink-0"></span>
+                        <span className="leading-relaxed">{cert}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {/* Projects */}
+              {cv.projects.length > 0 && (
+                <div>
+                  <h3 className="text-lg font-bold mb-4 flex items-center text-gray-800" style={{ color: cv.colors.primary }}>
+                    <FaProjectDiagram className="mr-3 text-lg" />
+                    Projects
+                  </h3>
+                  <div className="space-y-4">
+                    {cv.projects.map((project, index) => (
+                      <div key={index} className="border-l-4 pl-5" style={{ borderColor: cv.colors.accent }}>
+                        <h4 className="font-bold text-gray-900 text-base mb-1">{project.name}</h4>
+                        <p className="text-gray-700 text-sm mb-2 leading-relaxed">{project.description}</p>
+                        <div className="flex flex-wrap gap-1">
+                          {project.tech.map((tech, i) => (
+                            <span key={i} className="px-2 py-1 bg-gray-100 text-gray-600 rounded text-xs font-medium">
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Interests */}
+              {cv.interests.length > 0 && (
+                <div>
+                  <h3 className="text-lg font-bold mb-4 flex items-center text-gray-800" style={{ color: cv.colors.primary }}>
+                    <FaHeart className="mr-3 text-lg" />
+                    Interests
+                  </h3>
+                  <div className="flex flex-wrap gap-2">
+                    {cv.interests.map((interest, index) => (
+                      <span key={index} className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-medium">
+                        {interest}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  return (
+    <div className="relative w-full max-w-4xl mx-auto">
+      {/* Background gradient that matches site theme */}
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 rounded-3xl transform -rotate-1 scale-105 opacity-60"></div>
+
+      {/* Main carousel container with 3D effects */}
+      <div className="relative overflow-hidden rounded-2xl shadow-2xl transform perspective-1000 bg-white/90 backdrop-blur-sm">
+        <div
+          className="flex transition-transform duration-700 ease-in-out"
+          style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+        >
+          {cvTemplates.map((cv, index) => (
+            <div key={cv.id} className="w-full flex-shrink-0">
+              <div className="transform hover:scale-105 transition-all duration-500 ease-out hover:rotate-1 hover:shadow-3xl">
+                {renderCV(cv)}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Floating animation overlay */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-4 right-4 w-3 h-3 bg-blue-400 rounded-full opacity-60 animate-pulse"></div>
+          <div className="absolute bottom-8 left-6 w-2 h-2 bg-purple-400 rounded-full opacity-40 animate-pulse" style={{ animationDelay: '1s' }}></div>
+          <div className="absolute top-1/2 left-4 w-1 h-1 bg-indigo-400 rounded-full opacity-50 animate-pulse" style={{ animationDelay: '2s' }}></div>
+        </div>
+      </div>
+
+      {/* Navigation arrows with enhanced styling */}
+      <button
+        onClick={goToPrevious}
+        className="absolute left-4 lg:left-6 top-1/2 -translate-y-1/2 bg-white/95 hover:bg-white text-gray-800 rounded-full p-3 lg:p-4 shadow-xl transition-all duration-300 hover:scale-110 z-20 border border-gray-200 hover:border-gray-300 backdrop-blur-sm"
+        aria-label="Previous CV"
+      >
+        <FaChevronLeft className="w-5 h-5 lg:w-6 lg:h-6" />
+      </button>
+
+      <button
+        onClick={goToNext}
+        className="absolute right-4 lg:right-6 top-1/2 -translate-y-1/2 bg-white/95 hover:bg-white text-gray-800 rounded-full p-3 lg:p-4 shadow-xl transition-all duration-300 hover:scale-110 z-20 border border-gray-200 hover:border-gray-300 backdrop-blur-sm"
+        aria-label="Next CV"
+      >
+        <FaChevronRight className="w-5 h-5 lg:w-6 lg:h-6" />
+      </button>
+
+      {/* Enhanced dots indicator */}
+      <div className="flex justify-center space-x-3 mt-6 lg:mt-8 overflow-x-auto pb-2">
+        {cvTemplates.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => goToSlide(index)}
+            className={`w-3 h-3 lg:w-4 lg:h-4 rounded-full transition-all duration-300 flex-shrink-0 shadow-sm ${
+              index === currentIndex
+                ? 'bg-gradient-to-r from-blue-600 to-purple-600 scale-125 shadow-lg'
+                : 'bg-gray-300 hover:bg-gray-400 hover:scale-110'
+            }`}
+            aria-label={`Go to CV ${index + 1}`}
+          />
+        ))}
+      </div>
+
+      {/* Enhanced auto-play indicator */}
+      <div className="flex justify-center mt-6">
+        <button
+          onClick={() => setIsAutoPlaying(!isAutoPlaying)}
+          className={`px-6 py-3 rounded-full text-sm font-semibold transition-all duration-300 shadow-lg hover:shadow-xl ${
+            isAutoPlaying
+              ? 'bg-gradient-to-r from-green-500 to-emerald-500 text-white hover:from-green-600 hover:to-emerald-600'
+              : 'bg-gradient-to-r from-gray-100 to-gray-200 text-gray-700 hover:from-gray-200 hover:to-gray-300'
+          }`}
+        >
+          <div className="flex items-center space-x-2">
+            <div className={`w-2 h-2 rounded-full ${isAutoPlaying ? 'bg-white animate-pulse' : 'bg-gray-500'}`}></div>
+            <span>{isAutoPlaying ? 'Auto-playing' : 'Paused'}</span>
+          </div>
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default CVCarousel;
