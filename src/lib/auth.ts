@@ -77,15 +77,14 @@ export const authOptions = {
     })
   ],
   session: {
-    strategy: 'database' as SessionStrategy,
+    strategy: 'jwt' as SessionStrategy, // Use JWT for credentials compatibility
     maxAge: 30 * 24 * 60 * 60, // 30 days
   },
   callbacks: {
     async signIn({ user, account, profile }: any) {
       if (!user?.email) return false;
       
-      // Allow account linking - PrismaAdapter will handle it
-      // But we need to ensure existing users can link OAuth accounts
+      // For OAuth providers, use PrismaAdapter to create account
       if (account?.provider === 'google') {
         const existingUser = await prisma.user.findUnique({
           where: { email: user.email },
@@ -99,7 +98,7 @@ export const authOptions = {
           );
           
           if (!hasGoogleAccount && account.providerAccountId) {
-            // Link Google account to existing user BEFORE PrismaAdapter tries to create new user
+            // Link Google account to existing user
             try {
               await prisma.account.create({
                 data: {
@@ -121,35 +120,52 @@ export const authOptions = {
               console.log('Account linking:', error);
             }
           }
+        } else {
+          // Create user if doesn't exist (for OAuth)
+          await prisma.user.create({
+            data: {
+              email: user.email,
+              name: user.name || null,
+              image: user.image || null,
+            }
+          });
         }
       }
       
-      // Always return true - let PrismaAdapter handle the rest
+      // For credentials, user already exists in database
       return true;
     },
-    async session({ session, user }: any) {
-      // With database sessions, user is passed directly
-      if (session?.user) {
-        if (user) {
-          // User from database
-          session.user.id = user.id;
-          session.user.email = user.email || null;
-          session.user.name = user.name || null;
-          session.user.image = user.image || null;
-        } else {
-          // Fallback: try to get user from database using email
-          if (session.user.email) {
-            const dbUser = await prisma.user.findUnique({
-              where: { email: session.user.email }
-            });
-            if (dbUser) {
-              session.user.id = dbUser.id;
-              session.user.email = dbUser.email || null;
-              session.user.name = dbUser.name || null;
-              session.user.image = dbUser.image || null;
-            }
-          }
+    async jwt({ token, user, account }: any) {
+      // Initial sign in - user object is available
+      if (user) {
+        token.id = user.id;
+        token.email = user.email;
+        token.name = user.name;
+        token.image = user.image;
+      }
+      
+      // For OAuth, fetch user from database to get full user data
+      if (account?.provider === 'google' && token.email) {
+        const dbUser = await prisma.user.findUnique({
+          where: { email: token.email }
+        });
+        if (dbUser) {
+          token.id = dbUser.id;
+          token.email = dbUser.email;
+          token.name = dbUser.name;
+          token.image = dbUser.image;
         }
+      }
+      
+      return token;
+    },
+    async session({ session, token }: any) {
+      // With JWT sessions, token contains the user data
+      if (session?.user && token) {
+        session.user.id = token.id as string;
+        session.user.email = token.email as string;
+        session.user.name = token.name as string;
+        session.user.image = token.image as string;
       }
       return session;
     },

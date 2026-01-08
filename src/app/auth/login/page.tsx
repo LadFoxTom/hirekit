@@ -59,10 +59,11 @@ export default function LoginPage() {
 
       if (result?.ok) {
         toast.success('Login successful!')
-        // Use full page reload to ensure session is properly initialized
+        // Wait a moment for JWT session to be set, then redirect
         setTimeout(() => {
-          window.location.href = '/'
-        }, 500)
+          router.push('/')
+          router.refresh() // Refresh to update session state
+        }, 300)
       } else {
         setIsLoading(false)
       }
