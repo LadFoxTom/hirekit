@@ -83,6 +83,16 @@ export const metadata: Metadata = {
   },
   category: 'business',
   classification: 'CV Builder, Resume Builder, Career Tools',
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/icon-192.png', sizes: '192x192', type: 'image/png' },
+      { url: '/icon-512.png', sizes: '512x512', type: 'image/png' },
+    ],
+    apple: [
+      { url: '/apple-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
+  },
   other: {
     'msapplication-TileColor': '#2563eb',
     'theme-color': '#2563eb',
@@ -97,7 +107,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="icon" href="/favicon.ico" />
         <meta name="theme-color" content="#2563eb" />
       </head>
       <body className={inter.className}>
