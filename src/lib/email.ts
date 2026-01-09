@@ -14,7 +14,8 @@ export const sendPasswordResetEmail = async (email: string, resetToken: string, 
   }
 
   const appUrl = process.env.NEXT_PUBLIC_APP_URL || process.env.NEXTAUTH_URL || 'https://www.ladderfox.com';
-  const resetUrl = `${appUrl}/auth/reset-password?token=${resetToken}`;
+  // URL encode the token to ensure it's properly handled in the email link
+  const resetUrl = `${appUrl}/auth/reset-password?token=${encodeURIComponent(resetToken)}`;
   
   // Use noreply@ladderfox.com if EMAIL_FROM is set and domain is verified
   // Otherwise fall back to onboarding@resend.dev

@@ -22,14 +22,62 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Find the verification token
-    const verificationToken = await prisma.verificationToken.findUnique({
+    // Log token for debugging (first and last few chars only for security)
+    console.log('Reset password attempt:', {
+      tokenLength: token.length,
+      tokenPrefix: token.substring(0, 8),
+      tokenSuffix: token.substring(token.length - 8),
+    });
+
+    // Try to find the verification token (handle both encoded and non-encoded)
+    let verificationToken = await prisma.verificationToken.findUnique({
       where: { token },
     });
 
+    // If not found, try URL decoding (in case token was encoded in the URL)
     if (!verificationToken) {
+      try {
+        const decodedToken = decodeURIComponent(token);
+        if (decodedToken !== token) {
+          console.log('Token appears to be URL encoded, trying decoded version');
+          verificationToken = await prisma.verificationToken.findUnique({
+            where: { token: decodedToken },
+          });
+        }
+      } catch (e) {
+        // decodeURIComponent can throw if token is malformed, ignore
+        console.log('Could not decode token:', e);
+      }
+    }
+
+    if (!verificationToken) {
+      // Log recent tokens for debugging
+      const recentTokens = await prisma.verificationToken.findMany({
+        where: {
+          expires: {
+            gte: new Date(), // Only non-expired tokens
+          },
+        },
+        orderBy: {
+          expires: 'desc',
+        },
+        take: 5,
+      });
+      
+      console.error('Token not found in database:', {
+        searchedTokenLength: token.length,
+        searchedTokenPrefix: token.substring(0, 10),
+        recentTokensCount: recentTokens.length,
+        recentTokenExamples: recentTokens.slice(0, 2).map(t => ({
+          identifier: t.identifier,
+          tokenLength: t.token.length,
+          tokenPrefix: t.token.substring(0, 10),
+          expires: t.expires,
+        })),
+      });
+      
       return NextResponse.json(
-        { error: 'Invalid or expired reset token' },
+        { error: 'Invalid or expired reset token. Please request a new password reset.' },
         { status: 400 }
       );
     }
@@ -67,9 +115,9 @@ export async function POST(request: NextRequest) {
       data: { password: hashedPassword },
     });
 
-    // Delete the used token
+    // Delete the used token (use the actual token that was found)
     await prisma.verificationToken.delete({
-      where: { token },
+      where: { token: verificationToken.token },
     });
 
     return NextResponse.json({

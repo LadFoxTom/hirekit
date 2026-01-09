@@ -8,7 +8,9 @@ import { FiLock, FiArrowLeft, FiCheck, FiAlertCircle } from 'react-icons/fi';
 export default function ResetPasswordPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const token = searchParams.get('token');
+  // Get token and ensure it's properly decoded
+  const rawToken = searchParams.get('token');
+  const token = rawToken ? decodeURIComponent(rawToken) : null;
 
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -19,6 +21,13 @@ export default function ResetPasswordPage() {
   useEffect(() => {
     if (!token) {
       setError('Invalid or missing reset token. Please request a new password reset.');
+    } else {
+      // Log token for debugging (first few chars only)
+      console.log('Reset password page - Token received:', {
+        hasToken: !!token,
+        tokenLength: token.length,
+        tokenPrefix: token.substring(0, 10),
+      });
     }
   }, [token]);
 
@@ -49,6 +58,11 @@ export default function ResetPasswordPage() {
     setIsLoading(true);
 
     try {
+      console.log('Submitting password reset:', {
+        tokenLength: token.length,
+        tokenPrefix: token.substring(0, 10),
+      });
+
       const res = await fetch('/api/auth/reset-password', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -58,6 +72,7 @@ export default function ResetPasswordPage() {
       const data = await res.json();
 
       if (!res.ok) {
+        console.error('Password reset failed:', data);
         throw new Error(data.error || 'Failed to reset password');
       }
 
