@@ -24,6 +24,22 @@ export async function POST(request: NextRequest) {
     // Generate a test token
     const testToken = 'test-token-' + Date.now();
 
+    // Check if Resend is configured
+    const hasApiKey = !!process.env.RESEND_API_KEY;
+    const apiKeyPrefix = process.env.RESEND_API_KEY?.substring(0, 3) || 'not set';
+    
+    if (!hasApiKey) {
+      return NextResponse.json({
+        success: false,
+        message: 'RESEND_API_KEY environment variable is not set',
+        config: {
+          hasApiKey: false,
+          hasFrom: !!process.env.EMAIL_FROM,
+          from: process.env.EMAIL_FROM || 'onboarding@resend.dev',
+        },
+      }, { status: 500 });
+    }
+
     // Try to send email
     const emailSent = await sendPasswordResetEmail(email, testToken);
 
@@ -32,18 +48,22 @@ export async function POST(request: NextRequest) {
         success: true,
         message: 'Test email sent successfully. Check your inbox and spam folder.',
         config: {
-          hasApiKey: !!process.env.RESEND_API_KEY,
+          hasApiKey: true,
+          apiKeyPrefix: `${apiKeyPrefix}...`,
           from: process.env.EMAIL_FROM || 'onboarding@resend.dev',
         },
       });
     } else {
       return NextResponse.json({
         success: false,
-        message: 'Failed to send test email. Check server logs for details.',
+        message: 'Failed to send test email. Check Vercel function logs for detailed error information.',
         config: {
-          hasApiKey: !!process.env.RESEND_API_KEY,
+          hasApiKey: true,
+          apiKeyPrefix: `${apiKeyPrefix}...`,
           hasFrom: !!process.env.EMAIL_FROM,
+          from: process.env.EMAIL_FROM || 'onboarding@resend.dev',
         },
+        instructions: 'Check Vercel deployment logs for detailed Resend API error messages',
       }, { status: 500 });
     }
   } catch (error: any) {

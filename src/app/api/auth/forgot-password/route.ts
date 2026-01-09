@@ -49,16 +49,23 @@ export async function POST(request: NextRequest) {
       },
     });
 
+    // Log configuration before sending
+    console.log('Password reset request - Configuration:', {
+      hasResendKey: !!process.env.RESEND_API_KEY,
+      fromEmail: process.env.EMAIL_FROM || 'onboarding@resend.dev',
+      userEmail: email,
+    });
+
     // Send password reset email
     const emailSent = await sendPasswordResetEmail(email, resetToken);
 
     if (!emailSent) {
-      console.error('Failed to send password reset email to:', email);
-      console.error('Check Vercel logs for email configuration errors');
+      console.error('❌ Failed to send password reset email to:', email);
+      console.error('Check Vercel function logs above for detailed Resend API error');
       // Still return success to prevent email enumeration
       // But log the error for debugging
     } else {
-      console.log('Password reset email sent successfully to:', email);
+      console.log('✅ Password reset email sent successfully to:', email);
     }
 
     return NextResponse.json({

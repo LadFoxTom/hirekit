@@ -70,12 +70,22 @@ export const sendPasswordResetEmail = async (email: string, resetToken: string) 
     });
 
     if (error) {
-      console.error('Resend API error:', error);
+      console.error('Resend API error:', {
+        message: error.message,
+        name: error.name,
+        statusCode: error.statusCode,
+        error: JSON.stringify(error, null, 2),
+      });
+      return false;
+    }
+
+    if (!data) {
+      console.error('Resend returned no data and no error - unexpected response');
       return false;
     }
 
     console.log('Password reset email sent successfully via Resend:', {
-      id: data?.id,
+      id: data.id,
       to: email,
       from: fromEmail,
     });
@@ -83,7 +93,10 @@ export const sendPasswordResetEmail = async (email: string, resetToken: string) 
   } catch (error: any) {
     console.error('Error sending password reset email via Resend:', {
       error: error.message,
+      stack: error.stack,
+      name: error.name,
       to: email,
+      fullError: JSON.stringify(error, Object.getOwnPropertyNames(error), 2),
     });
     return false;
   }
