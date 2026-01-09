@@ -3,6 +3,7 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { useAuth } from '@/context/AuthContext';
 import { useRouter } from 'next/navigation';
+import { useLocale } from '@/context/LocaleContext';
 import { CVData, CV_TEMPLATES } from '@/types/cv';
 import dynamic from 'next/dynamic';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -64,12 +65,12 @@ interface LetterData {
   signature?: string;
 }
 
-// Suggestion prompts
-const SUGGESTIONS = [
-  { icon: FiFileText, text: "Create a professional CV", prompt: "Help me create a professional CV" },
-  { icon: FiEdit3, text: "Update my resume", prompt: "I want to update my existing resume" },
-  { icon: FiBriefcase, text: "Find matching jobs", prompt: "Find jobs that match my skills" },
-  { icon: FiMail, text: "Write a cover letter", prompt: "Write a cover letter for a job application" },
+// Suggestion prompts - will be made dynamic based on language
+const getSuggestions = (t: (key: string) => string) => [
+  { icon: FiFileText, text: t('landing.main.suggestions.create_cv'), prompt: t('landing.main.suggestions.prompt.create_cv') },
+  { icon: FiEdit3, text: t('landing.main.suggestions.update_resume'), prompt: t('landing.main.suggestions.prompt.update_resume') },
+  { icon: FiBriefcase, text: t('landing.main.suggestions.find_jobs'), prompt: t('landing.main.suggestions.prompt.find_jobs') },
+  { icon: FiMail, text: t('landing.main.suggestions.write_letter'), prompt: t('landing.main.suggestions.prompt.write_letter') },
 ];
 
 // Saved CV type
@@ -763,6 +764,10 @@ function InlineEditor({
 export default function HomePage() {
   const { isAuthenticated, user } = useAuth();
   const router = useRouter();
+  const { t } = useLocale();
+  
+  // Get dynamic suggestions based on language
+  const SUGGESTIONS = getSuggestions(t);
   
   // UI State
   const [isConversationActive, setIsConversationActive] = useState(false);
@@ -1957,7 +1962,7 @@ export default function HomePage() {
                 {/* Quick Actions */}
                 <div>
                   <h3 className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-3 px-2">
-                    Quick Actions
+                    {t('landing.main.quick_actions')}
                   </h3>
                   <button 
                     onClick={() => router.push('/dashboard')}
@@ -2034,7 +2039,7 @@ export default function HomePage() {
                   transition={{ delay: 0.1 }}
                   className="text-4xl sm:text-5xl font-bold mb-4 bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent"
                 >
-                  Your AI Career Partner
+                  {t('landing.main.title')}
                 </motion.h1>
                 <motion.p 
                   initial={{ opacity: 0, y: 20 }}
@@ -2042,7 +2047,7 @@ export default function HomePage() {
                   transition={{ delay: 0.2 }}
                   className="text-gray-400 text-lg"
                 >
-                  Create stunning CVs, craft perfect cover letters, and find your dream job—all through conversation.
+                  {t('landing.main.subtitle')}
                 </motion.p>
               </div>
 
@@ -2072,10 +2077,10 @@ export default function HomePage() {
                       onKeyDown={handleKeyDown}
                       placeholder={
                         isUploading 
-                          ? "Processing file..." 
+                          ? t('landing.main.prompt.placeholder.uploading')
                           : attachedFile 
-                          ? "Describe what you'd like to do with this file..." 
-                          : "What would you like to create today?"
+                          ? t('landing.main.prompt.placeholder.with_file')
+                          : t('landing.main.prompt.placeholder')
                       }
                       rows={1}
                       className="flex-1 bg-transparent px-4 sm:px-6 pr-20 sm:pr-24 text-base sm:text-lg resize-none focus:outline-none placeholder-gray-500 [&::-webkit-scrollbar]:hidden"
@@ -2133,12 +2138,12 @@ export default function HomePage() {
                         </div>
                         <div className="flex-1 min-w-0">
                           <p className="text-sm text-white truncate">{attachedFile.name}</p>
-                          <p className="text-xs text-gray-500">Ready to analyze</p>
+                          <p className="text-xs text-gray-500">{t('landing.main.file.ready')}</p>
                         </div>
                         <button
                           onClick={handleRemoveAttachment}
                           className="p-1.5 text-gray-500 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
-                          title="Remove attachment"
+                          title={t('landing.main.file.remove')}
                         >
                           <FiX size={16} />
                         </button>
