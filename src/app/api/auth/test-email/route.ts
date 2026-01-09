@@ -75,8 +75,8 @@ export async function POST(request: NextRequest) {
         config: {
           hasApiKey: true,
           apiKeyPrefix: `${apiKeyPrefix}...`,
-          hasFrom: !!process.env.EMAIL_FROM,
-          from: process.env.EMAIL_FROM || 'onboarding@resend.dev',
+          from: 'onboarding@resend.dev',
+          note: 'Resend free tier: Can only send to your own email address. To send to others, verify a domain.',
         },
       }, { status: 500 });
     }

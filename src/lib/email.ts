@@ -16,10 +16,10 @@ export const sendPasswordResetEmail = async (email: string, resetToken: string, 
   const appUrl = process.env.NEXT_PUBLIC_APP_URL || process.env.NEXTAUTH_URL || 'https://www.ladderfox.com';
   const resetUrl = `${appUrl}/auth/reset-password?token=${resetToken}`;
   
-  // Use onboarding@resend.dev by default (works immediately without domain verification)
-  // If you've verified ladderfox.com in Resend, you can set EMAIL_FROM=noreply@ladderfox.com
-  // For now, always use onboarding@resend.dev to ensure emails work
-  const requestedFrom = process.env.EMAIL_FROM || 'onboarding@resend.dev';
+  // IMPORTANT: Resend free tier restrictions:
+  // - Can only send to your own email address (the one you signed up with)
+  // - Must use onboarding@resend.dev as from address (or verify a domain)
+  // Always use onboarding@resend.dev for now (works without domain verification)
   const useFromEmail = 'onboarding@resend.dev'; // Always use this until domain is verified
 
   console.log('Attempting to send password reset email via Resend:', {
