@@ -8,7 +8,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { 
   FiChevronDown, FiChevronLeft, FiHelpCircle, FiMail, FiMessageCircle,
   FiGrid, FiSettings, FiLogOut, FiCreditCard, FiUser, FiFileText,
-  FiShield, FiSmartphone, FiGlobe, FiDownload, FiEdit3, FiZap
+  FiShield, FiSmartphone, FiGlobe, FiDownload, FiEdit3, FiZap,
+  FiFolder, FiBriefcase
 } from 'react-icons/fi';
 
 // FAQ data
@@ -123,30 +124,44 @@ export default function FAQPage() {
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: 8, scale: 0.96 }}
                       transition={{ duration: 0.15 }}
-                      className="absolute right-0 top-full mt-2 w-56 bg-[#1a1a1a] border border-white/10 rounded-xl shadow-2xl overflow-hidden z-50"
+                      className="absolute right-0 top-full mt-2 w-64 bg-[#1a1a1a] border border-white/10 rounded-xl shadow-2xl shadow-black/40 overflow-hidden z-[100]"
                     >
+                      {/* User Info */}
                       <div className="px-4 py-3 border-b border-white/5">
                         <p className="font-medium text-sm">{user?.name || 'User'}</p>
                         <p className="text-xs text-gray-500 truncate">{user?.email}</p>
                       </div>
+                      
+                      {/* Menu Items */}
                       <div className="py-2">
-                        <button onClick={() => router.push('/dashboard')} className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-300 hover:bg-white/5 hover:text-white transition-colors">
-                          <FiGrid size={16} />
-                          Dashboard
+                        <button onClick={() => { setIsUserMenuOpen(false); router.push('/dashboard'); }} className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-300 hover:bg-white/5 hover:text-white transition-colors">
+                          <FiGrid size={16} /> Dashboard
                         </button>
-                        <button onClick={() => router.push('/settings')} className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-300 hover:bg-white/5 hover:text-white transition-colors">
-                          <FiSettings size={16} />
-                          Settings
+                        <button onClick={() => { setIsUserMenuOpen(false); router.push('/dashboard?tab=cvs'); }} className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-300 hover:bg-white/5 hover:text-white transition-colors">
+                          <FiFolder size={16} /> My CVs
                         </button>
-                        <button onClick={() => router.push('/pricing')} className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-300 hover:bg-white/5 hover:text-white transition-colors">
-                          <FiCreditCard size={16} />
-                          Subscription
+                        <button onClick={() => { setIsUserMenuOpen(false); router.push('/applications'); }} className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-300 hover:bg-white/5 hover:text-white transition-colors">
+                          <FiBriefcase size={16} /> Job Applications
                         </button>
                       </div>
-                      <div className="py-2 border-t border-white/5">
-                        <button onClick={() => signOut({ callbackUrl: '/' })} className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-red-400 hover:bg-red-500/10 transition-colors">
-                          <FiLogOut size={16} />
-                          Sign out
+                      
+                      <div className="border-t border-white/5 py-2">
+                        <button onClick={() => { setIsUserMenuOpen(false); router.push('/pricing'); }} className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-300 hover:bg-white/5 hover:text-white transition-colors">
+                          <FiCreditCard size={16} />
+                          <span className="flex-1 text-left">Subscription</span>
+                          <span className="px-2 py-0.5 bg-gradient-to-r from-blue-500 to-purple-500 text-white text-[10px] font-medium rounded-full">Pro</span>
+                        </button>
+                        <button onClick={() => { setIsUserMenuOpen(false); router.push('/settings'); }} className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-300 hover:bg-white/5 hover:text-white transition-colors">
+                          <FiSettings size={16} /> Settings
+                        </button>
+                        <button onClick={() => { setIsUserMenuOpen(false); router.push('/faq'); }} className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-300 hover:bg-white/5 hover:text-white transition-colors">
+                          <FiHelpCircle size={16} /> Help & Support
+                        </button>
+                      </div>
+                      
+                      <div className="border-t border-white/5 py-2">
+                        <button onClick={() => { setIsUserMenuOpen(false); signOut({ callbackUrl: '/' }); }} className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-red-400 hover:bg-red-500/10 transition-colors">
+                          <FiLogOut size={16} /> Sign out
                         </button>
                       </div>
                     </motion.div>
