@@ -18,7 +18,7 @@ import Head from 'next/head'
 
 export default function PricingPage() {
   const [selectedPlan, setSelectedPlan] = useState<string | null>(null)
-  const [billingInterval, setBillingInterval] = useState<'monthly' | 'quarterly' | 'yearly'>('yearly')
+  const [billingInterval, setBillingInterval] = useState<'monthly' | 'quarterly' | 'yearly'>('monthly')
   const [isLoading, setIsLoading] = useState(false)
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false)
   const userMenuRef = useRef<HTMLDivElement>(null)
