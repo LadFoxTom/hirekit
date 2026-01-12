@@ -70,7 +70,8 @@ interface LetterData {
 const getSuggestions = (t: (key: string) => string) => [
   { icon: FiFileText, text: t('landing.main.suggestions.create_cv'), prompt: t('landing.main.suggestions.prompt.create_cv') },
   { icon: FiEdit3, text: t('landing.main.suggestions.update_resume'), prompt: t('landing.main.suggestions.prompt.update_resume') },
-  { icon: FiBriefcase, text: t('landing.main.suggestions.find_jobs'), prompt: t('landing.main.suggestions.prompt.find_jobs') },
+  // Jobs temporarily disabled
+  // { icon: FiBriefcase, text: t('landing.main.suggestions.find_jobs'), prompt: t('landing.main.suggestions.prompt.find_jobs') },
   { icon: FiMail, text: t('landing.main.suggestions.write_letter'), prompt: t('landing.main.suggestions.prompt.write_letter') },
 ];
 
@@ -793,6 +794,7 @@ export default function HomePage() {
   const isPro = plan !== 'free';
   const isFree = !isPro;
   const subBadge = isPro ? 'Pro' : 'Free';
+  const jobsDisabled = true;
   
   // Chat State
   const [messages, setMessages] = useState<Message[]>([]);
@@ -1200,7 +1202,7 @@ export default function HomePage() {
       'letter for job', 'application letter', 'motivational letter'
     ];
     
-    // Job search keywords
+    // Job search keywords (disabled for now)
     const jobKeywords = [
       'find jobs', 'search jobs', 'job search', 'find me jobs', 'matching jobs',
       'jobs for me', 'job opportunities', 'available jobs', 'job openings',
@@ -1219,7 +1221,7 @@ export default function HomePage() {
     
     // Check for job keywords
     if (jobKeywords.some(keyword => lowerInput.includes(keyword))) {
-      return 'jobs';
+      return jobsDisabled ? 'cv' : 'jobs';
     }
     
     // If file is attached and it's likely a CV/resume, default to CV
@@ -1333,8 +1335,13 @@ export default function HomePage() {
         
         // Handle different artifact types
         if (result.artifactType === 'jobs' && result.jobs) {
-          setJobs(result.jobs);
-          setArtifactType('jobs');
+          if (!jobsDisabled) {
+            setJobs(result.jobs);
+            setArtifactType('jobs');
+          } else {
+            toast('Jobs coming soon 🚧');
+            setArtifactType('cv');
+          }
         } else if (result.artifactType === 'letter' && result.letterUpdates) {
           setLetterData(prev => ({ ...prev, ...result.letterUpdates }));
           setArtifactType('letter');
@@ -1422,8 +1429,13 @@ export default function HomePage() {
         
         // Handle different artifact types
         if (result.artifactType === 'jobs' && result.jobs) {
-          setJobs(result.jobs);
-          setArtifactType('jobs');
+          if (!jobsDisabled) {
+            setJobs(result.jobs);
+            setArtifactType('jobs');
+          } else {
+            toast('Jobs coming soon 🚧');
+            setArtifactType('cv');
+          }
         } else if (result.artifactType === 'letter' && result.letterUpdates) {
           setLetterData(prev => ({ ...prev, ...result.letterUpdates }));
           setArtifactType('letter');
@@ -1486,8 +1498,13 @@ export default function HomePage() {
         
         // Handle different artifact types
         if (result.artifactType === 'jobs' && result.jobs) {
-          setJobs(result.jobs);
-          setArtifactType('jobs');
+          if (!jobsDisabled) {
+            setJobs(result.jobs);
+            setArtifactType('jobs');
+          } else {
+            toast('Jobs coming soon 🚧');
+            setArtifactType('cv');
+          }
         } else if (result.artifactType === 'letter' && result.letterUpdates) {
           setLetterData(prev => ({ ...prev, ...result.letterUpdates }));
           setArtifactType('letter');
@@ -2999,20 +3016,17 @@ export default function HomePage() {
                       <span>Letter</span>
                     </button>
                     <button
-                      onClick={() => setArtifactType('jobs')}
-                      className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm transition-colors ${
-                        artifactType === 'jobs' 
-                          ? 'bg-white/10 text-white' 
-                          : 'text-gray-400 hover:text-white hover:bg-white/5'
-                      }`}
+                    onClick={() => {
+                      toast('Jobs coming soon 🚧');
+                    }}
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm transition-colors text-gray-500 cursor-not-allowed opacity-60"
+                    title="Jobs coming soon"
                     >
                       <FiBriefcase size={14} />
-                      <span>Jobs</span>
-                      {jobs.length > 0 && (
-                        <span className="ml-1 px-1.5 py-0.5 bg-blue-500/20 text-blue-400 text-xs rounded-full">
-                          {jobs.length}
-                        </span>
-                      )}
+                    <span>Jobs</span>
+                    <span className="ml-1 px-1.5 py-0.5 bg-amber-500/20 text-amber-400 text-xs rounded-full">
+                      Coming soon
+                    </span>
                     </button>
                   </div>
                   <div className="flex items-center gap-1">
@@ -3195,16 +3209,16 @@ export default function HomePage() {
                         initial={{ opacity: 0, x: 20 }}
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: -20 }}
-                        className="h-full"
+                        className="h-full flex items-center justify-center text-center px-6"
                       >
-                        <JobSwiper
-                          jobs={jobs}
-                          onSave={handleSaveJob}
-                          onSkip={handleSkipJob}
-                          onOpen={handleOpenJob}
-                          onApply={handleApplyJob}
-                          savedJobs={savedJobs}
-                        />
+                        <div className="space-y-3">
+                          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 text-amber-300 text-sm font-medium">
+                            <FiBriefcase size={14} /> Jobs coming soon
+                          </div>
+                          <p className="text-gray-400 text-sm max-w-md">
+                            We’re still polishing the job matching experience. It will be available soon.
+                          </p>
+                        </div>
                       </motion.div>
                     )}
                   </AnimatePresence>
