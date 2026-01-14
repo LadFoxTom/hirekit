@@ -373,7 +373,10 @@ export default function DashboardPage() {
           <div className="flex items-center gap-2">
             <div className="relative" ref={userMenuRef} style={{ overflow: 'visible', zIndex: 100 }}>
               <button 
-                onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
+                onClick={() => {
+                  console.log('[UserMenu] toggle click (dashboard)', { wasOpen: isUserMenuOpen });
+                  setIsUserMenuOpen(!isUserMenuOpen);
+                }}
                 className="flex items-center gap-2 px-3 py-2 hover:bg-white/5 rounded-lg transition-colors"
               >
                 <div className="w-8 h-8 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-full flex items-center justify-center text-sm font-medium">
