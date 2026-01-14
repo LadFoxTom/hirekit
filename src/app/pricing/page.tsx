@@ -26,15 +26,19 @@ export default function PricingPage() {
   const router = useRouter()
   const { t } = useLocale()
 
-  // Close user menu when clicking outside
+  // Close user menu when clicking outside (mouse + touch)
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
+    const handleClickOutside = (event: MouseEvent | TouchEvent) => {
       if (userMenuRef.current && !userMenuRef.current.contains(event.target as Node)) {
         setIsUserMenuOpen(false)
       }
     }
     document.addEventListener('mousedown', handleClickOutside)
-    return () => document.removeEventListener('mousedown', handleClickOutside)
+    document.addEventListener('touchstart', handleClickOutside)
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+      document.removeEventListener('touchstart', handleClickOutside)
+    }
   }, [])
 
   // Get user's currency (default to EUR)
@@ -144,7 +148,7 @@ export default function PricingPage() {
             {/* Right: Auth */}
             <div className="flex items-center gap-2">
               {isAuthenticated ? (
-                <div className="relative" ref={userMenuRef}>
+                <div className="relative" ref={userMenuRef} style={{ overflow: 'visible', zIndex: 100 }}>
                   <button 
                     onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
                     className="flex items-center gap-2 px-3 py-2 hover:bg-white/5 rounded-lg transition-colors"

@@ -83,6 +83,21 @@ export default function FAQPage() {
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const subBadge = subscription?.status === 'active' && subscription?.plan !== 'free' ? 'Pro' : 'Free';
 
+  // Close user menu when clicking outside (mouse + touch)
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent | TouchEvent) => {
+      if (userMenuRef.current && !userMenuRef.current.contains(event.target as Node)) {
+        setIsUserMenuOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('touchstart', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('touchstart', handleClickOutside);
+    };
+  }, []);
+
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-white">
       {/* Header */}
@@ -107,7 +122,7 @@ export default function FAQPage() {
           {/* Right: User Menu */}
           <div className="flex items-center gap-2">
             {isAuthenticated ? (
-              <div className="relative">
+              <div className="relative" ref={userMenuRef} style={{ overflow: 'visible', zIndex: 100 }}>
                 <button 
                   onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
                   className="flex items-center gap-2 px-3 py-2 hover:bg-white/5 rounded-lg transition-colors"
