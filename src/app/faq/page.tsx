@@ -167,33 +167,33 @@ export default function FAQPage() {
                       {/* Menu Items */}
                       <div className="py-2">
                         <button onClick={() => { setIsUserMenuOpen(false); router.push('/dashboard'); }} className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-300 hover:bg-white/5 hover:text-white transition-colors">
-                          <FiGrid size={16} /> Dashboard
+                          <FiGrid size={16} /> {t('nav.dashboard')}
                         </button>
                         <button onClick={() => { setIsUserMenuOpen(false); router.push('/dashboard?tab=cvs'); }} className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-300 hover:bg-white/5 hover:text-white transition-colors">
-                          <FiFolder size={16} /> My CVs
+                          <FiFolder size={16} /> {t('nav.my_cvs')}
                         </button>
                         <button onClick={() => { setIsUserMenuOpen(false); router.push('/applications'); }} className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-300 hover:bg-white/5 hover:text-white transition-colors">
-                          <FiBriefcase size={16} /> Job Applications
+                          <FiBriefcase size={16} /> {t('nav.job_applications')}
                         </button>
                       </div>
                       
                       <div className="border-t border-white/5 py-2">
                         <button onClick={() => { setIsUserMenuOpen(false); router.push('/pricing'); }} className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-300 hover:bg-white/5 hover:text-white transition-colors">
                           <FiCreditCard size={16} />
-                          <span className="flex-1 text-left">Subscription</span>
+                          <span className="flex-1 text-left">{t('nav.subscription')}</span>
                           <span className="px-2 py-0.5 bg-gradient-to-r from-blue-500 to-purple-500 text-white text-[10px] font-medium rounded-full">{subBadge}</span>
                         </button>
                         <button onClick={() => { setIsUserMenuOpen(false); router.push('/settings'); }} className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-300 hover:bg-white/5 hover:text-white transition-colors">
-                          <FiSettings size={16} /> Settings
+                          <FiSettings size={16} /> {t('nav.settings')}
                         </button>
                         <button onClick={() => { setIsUserMenuOpen(false); router.push('/faq'); }} className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-300 hover:bg-white/5 hover:text-white transition-colors">
-                          <FiHelpCircle size={16} /> Help & Support
+                          <FiHelpCircle size={16} /> {t('nav.help_support')}
                         </button>
                       </div>
                       
                       <div className="border-t border-white/5 py-2">
                         <button onClick={() => { setIsUserMenuOpen(false); signOut({ callbackUrl: '/' }); }} className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-red-400 hover:bg-red-500/10 transition-colors">
-                          <FiLogOut size={16} /> Sign out
+                          <FiLogOut size={16} /> {t('nav.sign_out')}
                         </button>
                       </div>
                     </motion.div>

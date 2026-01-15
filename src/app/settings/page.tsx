@@ -172,7 +172,7 @@ export default function SettingsPage() {
           <h1 className="text-2xl font-bold mb-4">Please log in</h1>
           <p className="text-gray-400 mb-4">You need to be logged in to access settings.</p>
           <button onClick={() => router.push('/auth/login')} className="px-4 py-2 bg-blue-500 rounded-lg">
-            Sign in
+            {t('nav.sign_in')}
           </button>
         </div>
       </div>
