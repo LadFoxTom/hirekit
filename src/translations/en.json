@@ -12,6 +12,13 @@
   "nav.quick_cv": "Basic CV Builder",
   "nav.subscription": "Subscription",
   "nav.settings": "Settings",
+  "nav.dashboard": "Dashboard",
+  "nav.my_cvs": "My CVs",
+  "nav.job_applications": "Job Applications",
+  "nav.help_support": "Help & Support",
+  "nav.sign_out": "Sign out",
+  "nav.sign_in": "Sign in",
+  "nav.get_started": "Get Started",
   
   "common.pricing": "Pricing",
   "common.faq": "FAQ",

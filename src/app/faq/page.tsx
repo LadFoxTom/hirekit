@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
+import { useLocale } from '@/context/LocaleContext';
 import { signOut } from 'next-auth/react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
@@ -79,6 +80,7 @@ const faqs = [
 export default function FAQPage() {
   const { isAuthenticated, user, subscription } = useAuth();
   const router = useRouter();
+  const { t } = useLocale();
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const userMenuRef = useRef<HTMLDivElement>(null);
@@ -253,21 +255,21 @@ export default function FAQPage() {
                     className="w-full flex items-center gap-3 px-3 py-2.5 hover:bg-white/5 rounded-lg transition-colors text-left"
                   >
                     <FiGrid size={14} className="text-gray-400" />
-                    <span className="text-sm">Dashboard</span>
+                    <span className="text-sm">{t('nav.dashboard')}</span>
                   </button>
                   <button
                     onClick={() => { setIsUserMenuOpen(false); router.push('/dashboard?tab=cvs'); }}
                     className="w-full flex items-center gap-3 px-3 py-2.5 hover:bg-white/5 rounded-lg transition-colors text-left"
                   >
                     <FiFolder size={14} className="text-gray-400" />
-                    <span className="text-sm">My CVs</span>
+                    <span className="text-sm">{t('nav.my_cvs')}</span>
                   </button>
                   <button
                     onClick={() => { setIsUserMenuOpen(false); router.push('/applications'); }}
                     className="w-full flex items-center gap-3 px-3 py-2.5 hover:bg-white/5 rounded-lg transition-colors text-left"
                   >
                     <FiBriefcase size={14} className="text-gray-400" />
-                    <span className="text-sm">Job Applications</span>
+                    <span className="text-sm">{t('nav.job_applications')}</span>
                   </button>
                 </div>
                 
@@ -278,7 +280,7 @@ export default function FAQPage() {
                   >
                     <div className="flex items-center gap-3">
                       <FiCreditCard size={14} className="text-gray-400" />
-                      <span className="text-sm">Subscription</span>
+                      <span className="text-sm">{t('nav.subscription')}</span>
                     </div>
                     <span className="px-2 py-0.5 bg-gradient-to-r from-blue-500 to-purple-500 text-white text-[10px] font-medium rounded-full">{subBadge}</span>
                   </button>
@@ -287,14 +289,14 @@ export default function FAQPage() {
                     className="w-full flex items-center gap-3 px-3 py-2.5 hover:bg-white/5 rounded-lg transition-colors text-left"
                   >
                     <FiSettings size={14} className="text-gray-400" />
-                    <span className="text-sm">Settings</span>
+                    <span className="text-sm">{t('nav.settings')}</span>
                   </button>
                   <button
                     onClick={() => { setIsUserMenuOpen(false); router.push('/faq'); }}
                     className="w-full flex items-center gap-3 px-3 py-2.5 hover:bg-white/5 rounded-lg transition-colors text-left"
                   >
                     <FiHelpCircle size={14} className="text-gray-400" />
-                    <span className="text-sm">Help & Support</span>
+                    <span className="text-sm">{t('nav.help_support')}</span>
                   </button>
                 </div>
                 
@@ -304,7 +306,7 @@ export default function FAQPage() {
                     className="w-full flex items-center gap-3 px-3 py-2.5 text-red-400 hover:bg-red-500/10 rounded-lg transition-colors text-left"
                   >
                     <FiLogOut size={14} />
-                    <span className="text-sm">Sign out</span>
+                    <span className="text-sm">{t('nav.sign_out')}</span>
                   </button>
                 </div>
               </div>

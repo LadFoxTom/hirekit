@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
+import { useLocale } from '@/context/LocaleContext';
 import { signOut } from 'next-auth/react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { toast, Toaster } from 'react-hot-toast';
@@ -79,6 +80,7 @@ function MenuItem({
 export default function ApplicationsPage() {
   const { isAuthenticated, user, subscription, isLoading: authLoading } = useAuth();
   const router = useRouter();
+  const { t } = useLocale();
   
   const [applications, setApplications] = useState<JobApplication[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -330,7 +332,7 @@ export default function ApplicationsPage() {
                     <div className="py-2">
                       <MenuItem 
                         icon={FiGrid} 
-                        label="Dashboard" 
+                        label={t('nav.dashboard')} 
                         onClick={() => {
                           setIsUserMenuOpen(false)
                           router.push('/dashboard')
@@ -338,7 +340,7 @@ export default function ApplicationsPage() {
                       />
                       <MenuItem 
                         icon={FiFolder} 
-                        label="My CVs" 
+                        label={t('nav.my_cvs')} 
                         onClick={() => {
                           setIsUserMenuOpen(false)
                           router.push('/dashboard?tab=cvs')
@@ -346,7 +348,7 @@ export default function ApplicationsPage() {
                       />
                       <MenuItem 
                         icon={FiBriefcase} 
-                        label="Job Applications" 
+                        label={t('nav.job_applications')} 
                         onClick={() => {
                           setIsUserMenuOpen(false)
                           router.push('/applications')
@@ -357,7 +359,7 @@ export default function ApplicationsPage() {
                     <div className="border-t border-white/5 py-2">
                       <MenuItem 
                         icon={FiCreditCard} 
-                        label="Subscription" 
+                        label={t('nav.subscription')} 
                         onClick={() => {
                           setIsUserMenuOpen(false)
                           router.push('/pricing')
@@ -366,7 +368,7 @@ export default function ApplicationsPage() {
                       />
                       <MenuItem 
                         icon={FiSettings} 
-                        label="Settings" 
+                        label={t('nav.settings')} 
                         onClick={() => {
                           setIsUserMenuOpen(false)
                           router.push('/settings')
@@ -374,7 +376,7 @@ export default function ApplicationsPage() {
                       />
                       <MenuItem 
                         icon={FiHelpCircle} 
-                        label="Help & Support" 
+                        label={t('nav.help_support')} 
                         onClick={() => {
                           setIsUserMenuOpen(false)
                           router.push('/faq')
@@ -385,7 +387,7 @@ export default function ApplicationsPage() {
                     <div className="border-t border-white/5 py-2">
                       <MenuItem 
                         icon={FiLogOut} 
-                        label="Sign out" 
+                        label={t('nav.sign_out')} 
                         onClick={() => {
                           setIsUserMenuOpen(false)
                           signOut({ callbackUrl: '/' })
@@ -436,21 +438,21 @@ export default function ApplicationsPage() {
                     className="w-full flex items-center gap-3 px-3 py-2.5 hover:bg-white/5 rounded-lg transition-colors text-left"
                   >
                     <FiGrid size={14} className="text-gray-400" />
-                    <span className="text-sm">Dashboard</span>
+                    <span className="text-sm">{t('nav.dashboard')}</span>
                   </button>
                   <button
                     onClick={() => { setIsUserMenuOpen(false); router.push('/dashboard?tab=cvs'); }}
                     className="w-full flex items-center gap-3 px-3 py-2.5 hover:bg-white/5 rounded-lg transition-colors text-left"
                   >
                     <FiFolder size={14} className="text-gray-400" />
-                    <span className="text-sm">My CVs</span>
+                    <span className="text-sm">{t('nav.my_cvs')}</span>
                   </button>
                   <button
                     onClick={() => { setIsUserMenuOpen(false); router.push('/applications'); }}
                     className="w-full flex items-center gap-3 px-3 py-2.5 hover:bg-white/5 rounded-lg transition-colors text-left"
                   >
                     <FiBriefcase size={14} className="text-gray-400" />
-                    <span className="text-sm">Job Applications</span>
+                    <span className="text-sm">{t('nav.job_applications')}</span>
                   </button>
                 </div>
                 
@@ -461,7 +463,7 @@ export default function ApplicationsPage() {
                   >
                     <div className="flex items-center gap-3">
                       <FiCreditCard size={14} className="text-gray-400" />
-                      <span className="text-sm">Subscription</span>
+                      <span className="text-sm">{t('nav.subscription')}</span>
                     </div>
                     <span className="px-2 py-0.5 bg-gradient-to-r from-blue-500 to-purple-500 text-white text-[10px] font-medium rounded-full">{subBadge}</span>
                   </button>
@@ -470,14 +472,14 @@ export default function ApplicationsPage() {
                     className="w-full flex items-center gap-3 px-3 py-2.5 hover:bg-white/5 rounded-lg transition-colors text-left"
                   >
                     <FiSettings size={14} className="text-gray-400" />
-                    <span className="text-sm">Settings</span>
+                    <span className="text-sm">{t('nav.settings')}</span>
                   </button>
                   <button
                     onClick={() => { setIsUserMenuOpen(false); router.push('/faq'); }}
                     className="w-full flex items-center gap-3 px-3 py-2.5 hover:bg-white/5 rounded-lg transition-colors text-left"
                   >
                     <FiHelpCircle size={14} className="text-gray-400" />
-                    <span className="text-sm">Help & Support</span>
+                    <span className="text-sm">{t('nav.help_support')}</span>
                   </button>
                 </div>
                 
@@ -487,7 +489,7 @@ export default function ApplicationsPage() {
                     className="w-full flex items-center gap-3 px-3 py-2.5 text-red-400 hover:bg-red-500/10 rounded-lg transition-colors text-left"
                   >
                     <FiLogOut size={14} />
-                    <span className="text-sm">Sign out</span>
+                    <span className="text-sm">{t('nav.sign_out')}</span>
                   </button>
                 </div>
               </div>

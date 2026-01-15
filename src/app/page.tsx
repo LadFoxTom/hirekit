@@ -1960,21 +1960,21 @@ export default function HomePage() {
                       
                       {/* Menu Items */}
                       <div className="py-2">
-                        <MenuItem icon={FiGrid} label="Dashboard" onClick={() => { setIsUserMenuOpen(false); router.push('/dashboard'); }} />
-                        <MenuItem icon={FiFolder} label="My CVs" onClick={() => { setIsUserMenuOpen(false); router.push('/dashboard?tab=cvs'); }} />
-                        <MenuItem icon={FiBriefcase} label="Job Applications" onClick={() => { setIsUserMenuOpen(false); router.push('/applications'); }} />
+                        <MenuItem icon={FiGrid} label={t('nav.dashboard')} onClick={() => { setIsUserMenuOpen(false); router.push('/dashboard'); }} />
+                        <MenuItem icon={FiFolder} label={t('nav.my_cvs')} onClick={() => { setIsUserMenuOpen(false); router.push('/dashboard?tab=cvs'); }} />
+                        <MenuItem icon={FiBriefcase} label={t('nav.job_applications')} onClick={() => { setIsUserMenuOpen(false); router.push('/applications'); }} />
                       </div>
                       
                       <div className="border-t border-white/5 py-2">
-                        <MenuItem icon={FiCreditCard} label="Subscription" onClick={() => { setIsUserMenuOpen(false); router.push('/pricing'); }} badge={subBadge} />
-                        <MenuItem icon={FiSettings} label="Settings" onClick={() => { setIsUserMenuOpen(false); router.push('/settings'); }} />
-                        <MenuItem icon={FiHelpCircle} label="Help & Support" onClick={() => { setIsUserMenuOpen(false); router.push('/faq'); }} />
+                        <MenuItem icon={FiCreditCard} label={t('nav.subscription')} onClick={() => { setIsUserMenuOpen(false); router.push('/pricing'); }} badge={subBadge} />
+                        <MenuItem icon={FiSettings} label={t('nav.settings')} onClick={() => { setIsUserMenuOpen(false); router.push('/settings'); }} />
+                        <MenuItem icon={FiHelpCircle} label={t('nav.help_support')} onClick={() => { setIsUserMenuOpen(false); router.push('/faq'); }} />
                       </div>
                       
                       <div className="border-t border-white/5 py-2">
                         <MenuItem 
                           icon={FiLogOut} 
-                          label="Sign out" 
+                          label={t('nav.sign_out')} 
                           onClick={() => { setIsUserMenuOpen(false); signOut({ callbackUrl: '/' }); }}
                           variant="danger"
                         />
@@ -1985,18 +1985,18 @@ export default function HomePage() {
               </div>
             ) : (
               <div className="flex items-center gap-2">
-                <button
-                  onClick={() => router.push('/auth/login')}
-                  className="px-4 py-2 text-sm text-gray-300 hover:text-white transition-colors"
-                >
-                  Sign in
-                </button>
-                <button
-                  onClick={() => router.push('/auth/signup')}
-                  className="px-4 py-2 bg-white text-black text-sm font-medium rounded-lg hover:bg-gray-100 transition-colors"
-                >
-                  Get Started
-                </button>
+                  <button
+                    onClick={() => router.push('/auth/login')}
+                    className="px-4 py-2 text-sm text-gray-300 hover:text-white transition-colors"
+                  >
+                    {t('nav.sign_in')}
+                  </button>
+                  <button
+                    onClick={() => router.push('/auth/signup')}
+                    className="px-4 py-2 bg-white text-black text-sm font-medium rounded-lg hover:bg-gray-100 transition-colors"
+                  >
+                    {t('nav.get_started')}
+                  </button>
               </div>
             )}
           </div>
@@ -2038,21 +2038,21 @@ export default function HomePage() {
                     className="w-full flex items-center gap-3 px-3 py-2.5 hover:bg-white/5 rounded-lg transition-colors text-left"
                   >
                     <FiGrid size={14} className="text-gray-400" />
-                    <span className="text-sm">Dashboard</span>
+                    <span className="text-sm">{t('nav.dashboard')}</span>
                   </button>
                   <button
                     onClick={() => { setIsUserMenuOpen(false); router.push('/dashboard?tab=cvs'); }}
                     className="w-full flex items-center gap-3 px-3 py-2.5 hover:bg-white/5 rounded-lg transition-colors text-left"
                   >
                     <FiFolder size={14} className="text-gray-400" />
-                    <span className="text-sm">My CVs</span>
+                    <span className="text-sm">{t('nav.my_cvs')}</span>
                   </button>
                   <button
                     onClick={() => { setIsUserMenuOpen(false); router.push('/applications'); }}
                     className="w-full flex items-center gap-3 px-3 py-2.5 hover:bg-white/5 rounded-lg transition-colors text-left"
                   >
                     <FiBriefcase size={14} className="text-gray-400" />
-                    <span className="text-sm">Job Applications</span>
+                    <span className="text-sm">{t('nav.job_applications')}</span>
                   </button>
                 </div>
                 
@@ -2063,7 +2063,7 @@ export default function HomePage() {
                   >
                     <div className="flex items-center gap-3">
                       <FiCreditCard size={14} className="text-gray-400" />
-                      <span className="text-sm">Subscription</span>
+                      <span className="text-sm">{t('nav.subscription')}</span>
                     </div>
                     <span className="px-2 py-0.5 bg-gradient-to-r from-blue-500 to-purple-500 text-white text-[10px] font-medium rounded-full">{subBadge}</span>
                   </button>
@@ -2072,14 +2072,14 @@ export default function HomePage() {
                     className="w-full flex items-center gap-3 px-3 py-2.5 hover:bg-white/5 rounded-lg transition-colors text-left"
                   >
                     <FiSettings size={14} className="text-gray-400" />
-                    <span className="text-sm">Settings</span>
+                    <span className="text-sm">{t('nav.settings')}</span>
                   </button>
                   <button
                     onClick={() => { setIsUserMenuOpen(false); router.push('/faq'); }}
                     className="w-full flex items-center gap-3 px-3 py-2.5 hover:bg-white/5 rounded-lg transition-colors text-left"
                   >
                     <FiHelpCircle size={14} className="text-gray-400" />
-                    <span className="text-sm">Help & Support</span>
+                    <span className="text-sm">{t('nav.help_support')}</span>
                   </button>
                 </div>
                 
@@ -2089,7 +2089,7 @@ export default function HomePage() {
                     className="w-full flex items-center gap-3 px-3 py-2.5 text-red-400 hover:bg-red-500/10 rounded-lg transition-colors text-left"
                   >
                     <FiLogOut size={14} />
-                    <span className="text-sm">Sign out</span>
+                    <span className="text-sm">{t('nav.sign_out')}</span>
                   </button>
                 </div>
               </div>
@@ -2150,7 +2150,7 @@ export default function HomePage() {
                 {/* Saved CVs */}
                 <div className="mb-6">
                   <h3 className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-3 px-2">
-                    My CVs
+                    {t('nav.my_cvs')}
                   </h3>
                   <div className="space-y-1">
                     {savedCVs.length > 0 ? (
