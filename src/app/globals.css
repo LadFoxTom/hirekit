@@ -97,6 +97,8 @@ body {
   --text-secondary: #d1d5db;
   --text-tertiary: #9ca3af;
   --text-disabled: #6b7280;
+  --text-heading: #ffffff;
+  --text-subtitle: #d1d5db;
   
   /* Borders */
   --border-subtle: rgba(255, 255, 255, 0.05);
