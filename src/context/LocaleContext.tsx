@@ -100,32 +100,53 @@ export function LocaleProvider({ children }: { children: React.ReactNode }) {
   }
 
   const t = (key: string): string => {
-    // During SSR or before hydration, always use English to prevent hydration mismatches
-    if (!isHydrated) {
-      const englishTranslation = translations.en
-      const value = getNestedValue(englishTranslation, key)
-      if (value !== undefined && typeof value === 'string') {
-        return value
-      }
+    // Always try to get translation, even before hydration (for SSR)
+    const currentTranslation = translations[language] || translations.en
+    
+    if (!currentTranslation) {
+      console.error(`[t] No translation object found for language: ${language}`)
       return key
     }
-
-    // First try to get the translation from the current language
-    const currentTranslation = translations[language]
-    const currentValue = getNestedValue(currentTranslation, key)
+    
+    // Try direct key access first (for flat JSON structure)
+    let currentValue = currentTranslation[key]
+    if (currentValue !== undefined && typeof currentValue === 'string') {
+      return currentValue
+    }
+    
+    // Fallback to nested lookup (for nested JSON structure)
+    currentValue = getNestedValue(currentTranslation, key)
     if (currentValue !== undefined && typeof currentValue === 'string') {
       return currentValue
     }
 
     // Fallback to English
     const englishTranslation = translations.en
-    const englishValue = getNestedValue(englishTranslation, key)
+    if (!englishTranslation) {
+      console.error(`[t] No English translation object found`)
+      return key
+    }
+    
+    // Try direct key access first
+    let englishValue = englishTranslation[key]
+    if (englishValue !== undefined && typeof englishValue === 'string') {
+      return englishValue
+    }
+    
+    // Fallback to nested lookup
+    englishValue = getNestedValue(englishTranslation, key)
     if (englishValue !== undefined && typeof englishValue === 'string') {
       return englishValue
     }
 
     // If still not found, return the key
-    console.warn(`Translation key not found: ${key}`)
+    console.warn(`[t] Translation key not found: ${key}`, {
+      language,
+      isHydrated,
+      hasCurrentTranslation: !!currentTranslation,
+      hasEnglishTranslation: !!englishTranslation,
+      sampleKeys: Object.keys(currentTranslation || {}).slice(0, 5)
+    })
     return key
   }
 
