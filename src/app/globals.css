@@ -105,30 +105,45 @@ body {
   
   /* Overlay */
   --overlay: rgba(0, 0, 0, 0.5);
+  
+  /* Placeholder */
+  --placeholder-color: #6b7280;
 }
 
 /* Theme Variables - Day Theme */
 :root[data-theme="day"] {
   /* Backgrounds */
   --bg-primary: #ffffff;
-  --bg-secondary: #f9fafb;
-  --bg-tertiary: #f3f4f6;
-  --bg-elevated: #e5e7eb;
+  --bg-secondary: #f8f9fa;
+  --bg-tertiary: #f1f3f5;
+  --bg-elevated: #e9ecef;
   --bg-hover: rgba(0, 0, 0, 0.05);
+  --bg-input: #ffffff;
+  --bg-card: #ffffff;
   
   /* Text */
-  --text-primary: #111827;
-  --text-secondary: #4b5563;
+  --text-primary: #1a1a1a;
+  --text-secondary: #374151;
   --text-tertiary: #6b7280;
   --text-disabled: #9ca3af;
+  --text-heading: #0f172a;
+  --text-subtitle: #475569;
   
   /* Borders */
-  --border-subtle: rgba(0, 0, 0, 0.05);
-  --border-medium: rgba(0, 0, 0, 0.10);
+  --border-subtle: rgba(0, 0, 0, 0.08);
+  --border-medium: rgba(0, 0, 0, 0.12);
   --border-strong: rgba(0, 0, 0, 0.20);
   
   /* Overlay */
   --overlay: rgba(0, 0, 0, 0.3);
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  
+  /* Placeholder */
+  --placeholder-color: #9ca3af;
 }
 
 @layer base {
@@ -152,6 +167,13 @@ body {
 
   a:hover {
     color: var(--color-ladderfox-orange);
+  }
+  
+  /* Placeholder styling */
+  input::placeholder,
+  textarea::placeholder {
+    color: var(--placeholder-color);
+    opacity: 1;
   }
 }
 

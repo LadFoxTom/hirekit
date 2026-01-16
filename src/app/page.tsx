@@ -1966,7 +1966,7 @@ export default function HomePage() {
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: 8, scale: 0.96 }}
                       transition={{ duration: 0.15 }}
-                      className="hidden lg:block absolute left-auto right-0 top-full mt-2 w-64 bg-[#1a1a1a] border border-white/10 rounded-xl shadow-2xl shadow-black/40 z-[9999]"
+                      className="hidden lg:block absolute left-auto right-0 top-full mt-2 w-72 bg-[#1a1a1a] border border-white/10 rounded-xl shadow-2xl shadow-black/40 z-[9999]"
                     >
                       {/* User Info */}
                       <div className="px-4 py-3 border-b border-white/5">
@@ -2264,7 +2264,13 @@ export default function HomePage() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.1 }}
-                  className="text-4xl sm:text-5xl font-bold mb-4 bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent"
+                  className="text-4xl sm:text-5xl font-bold mb-4"
+                  style={{
+                    background: 'var(--text-heading)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text',
+                  }}
                 >
                   {t('landing.main.title')}
                 </motion.h1>
@@ -2272,7 +2278,8 @@ export default function HomePage() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2 }}
-                  className="text-gray-400 text-lg"
+                  className="text-lg"
+                  style={{ color: 'var(--text-subtitle)' }}
                 >
                   {t('landing.main.subtitle')}
                 </motion.p>
@@ -2285,7 +2292,14 @@ export default function HomePage() {
                 transition={{ delay: 0.3 }}
                 className="w-full max-w-2xl"
               >
-                <div className="bg-[#1a1a1a] rounded-2xl border border-white/10 shadow-2xl shadow-black/20 overflow-hidden">
+                <div 
+                  className="rounded-2xl border shadow-2xl overflow-hidden"
+                  style={{
+                    backgroundColor: 'var(--bg-input)',
+                    borderColor: 'var(--border-medium)',
+                    boxShadow: 'var(--shadow-lg)',
+                  }}
+                >
                   {/* Hidden file input */}
                   <input
                     ref={fileInputRef}
@@ -2310,7 +2324,10 @@ export default function HomePage() {
                           : t('landing.main.prompt.placeholder')
                       }
                       rows={1}
-                      className="flex-1 bg-transparent px-4 sm:px-6 pr-20 sm:pr-24 text-base sm:text-lg resize-none focus:outline-none placeholder-gray-500 [&::-webkit-scrollbar]:hidden"
+                      className="flex-1 bg-transparent px-4 sm:px-6 pr-20 sm:pr-24 text-base sm:text-lg resize-none focus:outline-none [&::-webkit-scrollbar]:hidden"
+                      style={{
+                        color: 'var(--text-primary)',
+                      }}
                       style={{ 
                         height: '64px',
                         minHeight: '64px', 
@@ -2332,12 +2349,23 @@ export default function HomePage() {
                         onClick={handleAttachmentClick}
                         disabled={isUploading}
                         className={`p-2.5 flex items-center justify-center rounded-lg transition-colors ${
-                          isUploading 
-                            ? 'text-blue-400 animate-pulse' 
-                            : attachedFile
-                            ? 'text-blue-400 hover:bg-white/5'
-                            : 'text-gray-400 hover:text-white hover:bg-white/5'
+                          isUploading ? 'animate-pulse' : ''
                         }`}
+                        style={{
+                          color: isUploading ? '#60a5fa' : (attachedFile ? '#60a5fa' : 'var(--text-tertiary)'),
+                        }}
+                        onMouseEnter={(e) => {
+                          if (!isUploading && !attachedFile) {
+                            e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                            e.currentTarget.style.color = 'var(--text-secondary)';
+                          }
+                        }}
+                        onMouseLeave={(e) => {
+                          if (!isUploading && !attachedFile) {
+                            e.currentTarget.style.backgroundColor = 'transparent';
+                            e.currentTarget.style.color = 'var(--text-tertiary)';
+                          }
+                        }}
                         title="Upload CV/Resume (PDF, DOC, TXT)"
                       >
                         <FiPaperclip size={18} />
@@ -2345,11 +2373,25 @@ export default function HomePage() {
                       <button
                         onClick={() => handleSubmit()}
                         disabled={!inputValue.trim() && !attachedFile}
-                        className={`p-2.5 flex items-center justify-center rounded-lg transition-all ${
-                          inputValue.trim() || attachedFile
-                            ? 'bg-white text-black hover:bg-gray-200'
-                            : 'bg-white/10 text-gray-500'
-                        }`}
+                        className="p-2.5 flex items-center justify-center rounded-lg transition-all"
+                        style={{
+                          backgroundColor: (inputValue.trim() || attachedFile) 
+                            ? (document.documentElement.getAttribute('data-theme') === 'day' ? '#2563eb' : '#ffffff')
+                            : 'var(--bg-hover)',
+                          color: (inputValue.trim() || attachedFile)
+                            ? '#ffffff'
+                            : 'var(--text-disabled)',
+                        }}
+                        onMouseEnter={(e) => {
+                          if (inputValue.trim() || attachedFile) {
+                            e.currentTarget.style.backgroundColor = document.documentElement.getAttribute('data-theme') === 'day' ? '#1d4ed8' : '#f3f4f6';
+                          }
+                        }}
+                        onMouseLeave={(e) => {
+                          if (inputValue.trim() || attachedFile) {
+                            e.currentTarget.style.backgroundColor = document.documentElement.getAttribute('data-theme') === 'day' ? '#2563eb' : '#ffffff';
+                          }
+                        }}
                       >
                         <FiSend size={18} />
                       </button>
@@ -2359,17 +2401,34 @@ export default function HomePage() {
                   {/* Attached file indicator - separate section below */}
                   {attachedFile && (
                     <div className="px-4 pb-3 pt-0">
-                      <div className="flex items-center gap-3 px-3 py-2.5 bg-white/5 rounded-xl border border-white/10">
+                      <div 
+                        className="flex items-center gap-3 px-3 py-2.5 rounded-xl border"
+                        style={{
+                          backgroundColor: 'var(--bg-tertiary)',
+                          borderColor: 'var(--border-medium)',
+                        }}
+                      >
                         <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-red-500 to-orange-500 flex items-center justify-center flex-shrink-0">
                           <FiFileText size={16} className="text-white" />
                         </div>
                         <div className="flex-1 min-w-0">
-                          <p className="text-sm text-white truncate">{attachedFile.name}</p>
-                          <p className="text-xs text-gray-500">{t('landing.main.file.ready')}</p>
+                          <p className="text-sm truncate" style={{ color: 'var(--text-primary)' }}>{attachedFile.name}</p>
+                          <p className="text-xs" style={{ color: 'var(--text-tertiary)' }}>{t('landing.main.file.ready')}</p>
                         </div>
                         <button
                           onClick={handleRemoveAttachment}
-                          className="p-1.5 text-gray-500 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
+                          className="p-1.5 rounded-lg transition-colors"
+                          style={{
+                            color: 'var(--text-tertiary)',
+                          }}
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.color = 'var(--text-primary)';
+                            e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.color = 'var(--text-tertiary)';
+                            e.currentTarget.style.backgroundColor = 'transparent';
+                          }}
                           title={t('landing.main.file.remove')}
                         >
                           <FiX size={16} />
@@ -2388,7 +2447,20 @@ export default function HomePage() {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.4 + idx * 0.05 }}
                       onClick={() => handleSuggestionClick(suggestion.prompt)}
-                      className="flex items-center gap-2 px-4 py-2.5 bg-white/5 hover:bg-white/10 border border-white/5 rounded-xl text-sm text-gray-300 hover:text-white transition-all"
+                      className="flex items-center gap-2 px-4 py-2.5 border rounded-xl text-sm transition-all"
+                      style={{
+                        backgroundColor: 'var(--bg-tertiary)',
+                        borderColor: 'var(--border-medium)',
+                        color: 'var(--text-secondary)',
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.backgroundColor = 'var(--bg-elevated)';
+                        e.currentTarget.style.color = 'var(--text-primary)';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.backgroundColor = 'var(--bg-tertiary)';
+                        e.currentTarget.style.color = 'var(--text-secondary)';
+                      }}
                     >
                       <suggestion.icon size={14} />
                       {suggestion.text}
