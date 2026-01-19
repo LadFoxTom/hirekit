@@ -165,44 +165,97 @@ export default function FAQPage() {
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: 8, scale: 0.96 }}
                       transition={{ duration: 0.15 }}
-                      className="hidden lg:block absolute left-auto right-0 top-full mt-2 w-72 bg-[#1a1a1a] border border-white/10 rounded-xl shadow-2xl shadow-black/40 z-[9999]"
+                      className="hidden lg:block absolute left-auto right-0 top-full mt-2 w-72 bg-[#1a1a1a] border border-white/10 rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.3)] z-[9999]"
                     >
                       {/* User Info */}
-                      <div className="px-4 py-3 border-b border-white/5">
-                        <p className="font-medium text-sm">{user?.name || 'User'}</p>
-                        <p className="text-xs text-gray-500 truncate">{user?.email}</p>
+                      <div className="px-4 py-3 border-b border-white/10">
+                        <p className="font-semibold text-base text-white leading-tight mb-1">{user?.name || 'User'}</p>
+                        <p className="text-xs text-gray-400 truncate leading-relaxed" style={{ opacity: 0.7 }}>{user?.email}</p>
                       </div>
                       
-                      {/* Menu Items */}
-                      <div className="py-2">
-                        <button onClick={() => { setIsUserMenuOpen(false); router.push('/dashboard'); }} className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-300 hover:bg-white/5 hover:text-white transition-colors">
-                          <FiGrid size={16} /> {t('nav.dashboard')}
+                      {/* Navigation Items */}
+                      <div className="py-1.5">
+                        <button 
+                          onClick={() => { setIsUserMenuOpen(false); router.push('/dashboard'); }} 
+                          className={`w-full flex items-center min-h-[44px] px-4 py-3 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white transition-all duration-150 ${router.pathname === '/dashboard' ? 'bg-white/5 border-l-3 border-blue-500' : ''}`}
+                          style={router.pathname === '/dashboard' ? { borderLeftWidth: '3px' } : undefined}
+                          aria-current={router.pathname === '/dashboard' ? 'page' : undefined}
+                        >
+                          <div className="w-6 h-6 flex items-center justify-center flex-shrink-0">
+                            <FiGrid size={20} />
+                          </div>
+                          <span className="flex-1 text-left ml-3">{t('nav.dashboard')}</span>
                         </button>
-                        <button onClick={() => { setIsUserMenuOpen(false); router.push('/dashboard?tab=cvs'); }} className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-300 hover:bg-white/5 hover:text-white transition-colors">
-                          <FiFolder size={16} /> {t('nav.my_cvs')}
+                        <button 
+                          onClick={() => { setIsUserMenuOpen(false); router.push('/dashboard?tab=cvs'); }} 
+                          className="w-full flex items-center min-h-[44px] px-4 py-3 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white transition-all duration-150"
+                        >
+                          <div className="w-6 h-6 flex items-center justify-center flex-shrink-0">
+                            <FiFolder size={20} />
+                          </div>
+                          <span className="flex-1 text-left ml-3">{t('nav.my_cvs')}</span>
                         </button>
-                        <button onClick={() => { setIsUserMenuOpen(false); toast('Job Applications coming soon 🚧'); }} className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-300 hover:bg-white/5 hover:text-white transition-colors">
-                          <FiBriefcase size={16} /> {t('nav.job_applications_coming_soon')}
+                        <button 
+                          onClick={() => { setIsUserMenuOpen(false); toast(t('toast.job_applications_coming_soon')); }} 
+                          disabled
+                          aria-disabled="true"
+                          className="w-full flex items-center min-h-[44px] px-4 py-3 text-sm font-medium text-gray-400 opacity-50 cursor-not-allowed"
+                        >
+                          <div className="w-6 h-6 flex items-center justify-center flex-shrink-0">
+                            <FiBriefcase size={20} className="opacity-50" />
+                          </div>
+                          <span className="flex-1 text-left ml-3">{t('nav.job_applications')}</span>
                         </button>
                       </div>
                       
-                      <div className="border-t border-white/5 py-2">
-                        <button onClick={() => { setIsUserMenuOpen(false); router.push('/pricing'); }} className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-300 hover:bg-white/5 hover:text-white transition-colors">
-                          <FiCreditCard size={16} />
-                          <span className="flex-1 text-left">{t('nav.subscription')}</span>
-                          <span className="px-2 py-0.5 bg-gradient-to-r from-blue-500 to-purple-500 text-white text-[10px] font-medium rounded-full">{subBadge}</span>
+                      {/* Account Items */}
+                      <div className="border-t border-white/10 py-1.5">
+                        <button 
+                          onClick={() => { setIsUserMenuOpen(false); router.push('/pricing'); }} 
+                          className={`w-full flex items-center min-h-[44px] px-4 py-3 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white transition-all duration-150 ${router.pathname === '/pricing' ? 'bg-white/5 border-l-3 border-blue-500' : ''}`}
+                          style={router.pathname === '/pricing' ? { borderLeftWidth: '3px' } : undefined}
+                          aria-current={router.pathname === '/pricing' ? 'page' : undefined}
+                        >
+                          <div className="w-6 h-6 flex items-center justify-center flex-shrink-0">
+                            <FiCreditCard size={20} />
+                          </div>
+                          <span className="flex-1 text-left ml-3">{t('nav.subscription')}</span>
+                          <span className="ml-auto px-2.5 py-1 bg-gray-700/50 text-gray-300 text-xs font-medium rounded-full flex-shrink-0">{subBadge}</span>
                         </button>
-                        <button onClick={() => { setIsUserMenuOpen(false); router.push('/settings'); }} className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-300 hover:bg-white/5 hover:text-white transition-colors">
-                          <FiSettings size={16} /> {t('nav.settings')}
+                        <button 
+                          onClick={() => { setIsUserMenuOpen(false); router.push('/settings'); }} 
+                          className={`w-full flex items-center min-h-[44px] px-4 py-3 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white transition-all duration-150 ${router.pathname === '/settings' ? 'bg-white/5 border-l-3 border-blue-500' : ''}`}
+                          style={router.pathname === '/settings' ? { borderLeftWidth: '3px' } : undefined}
+                          aria-current={router.pathname === '/settings' ? 'page' : undefined}
+                        >
+                          <div className="w-6 h-6 flex items-center justify-center flex-shrink-0">
+                            <FiSettings size={20} />
+                          </div>
+                          <span className="flex-1 text-left ml-3">{t('nav.settings')}</span>
                         </button>
-                        <button onClick={() => { setIsUserMenuOpen(false); router.push('/faq'); }} className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-300 hover:bg-white/5 hover:text-white transition-colors">
-                          <FiHelpCircle size={16} /> {t('nav.help_support')}
+                        <button 
+                          onClick={() => { setIsUserMenuOpen(false); router.push('/faq'); }} 
+                          className={`w-full flex items-center min-h-[44px] px-4 py-3 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white transition-all duration-150 ${router.pathname === '/faq' ? 'bg-white/5 border-l-3 border-blue-500' : ''}`}
+                          style={router.pathname === '/faq' ? { borderLeftWidth: '3px' } : undefined}
+                          aria-current={router.pathname === '/faq' ? 'page' : undefined}
+                        >
+                          <div className="w-6 h-6 flex items-center justify-center flex-shrink-0">
+                            <FiHelpCircle size={20} />
+                          </div>
+                          <span className="flex-1 text-left ml-3">{t('nav.help_support')}</span>
                         </button>
                       </div>
                       
-                      <div className="border-t border-white/5 py-2">
-                        <button onClick={() => { setIsUserMenuOpen(false); signOut({ callbackUrl: '/' }); }} className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-red-400 hover:bg-red-500/10 transition-colors">
-                          <FiLogOut size={16} /> {t('nav.sign_out')}
+                      {/* Action Items */}
+                      <div className="border-t border-white/10 py-1.5">
+                        <button 
+                          onClick={() => { setIsUserMenuOpen(false); signOut({ callbackUrl: '/' }); }} 
+                          className="w-full flex items-center min-h-[44px] px-4 py-3 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white transition-all duration-150"
+                        >
+                          <div className="w-6 h-6 flex items-center justify-center flex-shrink-0">
+                            <FiLogOut size={20} />
+                          </div>
+                          <span className="flex-1 text-left ml-3">{t('nav.sign_out')}</span>
                         </button>
                       </div>
                     </motion.div>

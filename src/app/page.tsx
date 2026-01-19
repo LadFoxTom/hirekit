@@ -1966,33 +1966,64 @@ export default function HomePage() {
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: 8, scale: 0.96 }}
                       transition={{ duration: 0.15 }}
-                      className="hidden lg:block absolute left-auto right-0 top-full mt-2 w-72 bg-[#1a1a1a] border border-white/10 rounded-xl shadow-2xl shadow-black/40 z-[9999]"
+                      className="hidden lg:block absolute left-auto right-0 top-full mt-2 w-72 bg-[#1a1a1a] border border-white/10 rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.3)] z-[9999]"
                     >
                       {/* User Info */}
-                      <div className="px-4 py-3 border-b border-white/5">
-                        <p className="font-medium text-sm">{user?.name || 'User'}</p>
-                        <p className="text-xs text-gray-500 truncate">{user?.email || 'user@example.com'}</p>
+                      <div className="px-4 py-3 border-b border-white/10">
+                        <p className="font-semibold text-base text-white leading-tight mb-1">{user?.name || 'User'}</p>
+                        <p className="text-xs text-gray-400 truncate leading-relaxed" style={{ opacity: 0.7 }}>{user?.email || 'user@example.com'}</p>
                       </div>
                       
-                      {/* Menu Items */}
-                      <div className="py-2">
-                        <MenuItem icon={FiGrid} label={t('nav.dashboard')} onClick={() => { setIsUserMenuOpen(false); router.push('/dashboard'); }} />
-                        <MenuItem icon={FiFolder} label={t('nav.my_cvs')} onClick={() => { setIsUserMenuOpen(false); router.push('/dashboard?tab=cvs'); }} />
-                        <MenuItem icon={FiBriefcase} label={t('nav.job_applications_coming_soon')} onClick={() => { setIsUserMenuOpen(false); toast(t('toast.job_applications_coming_soon')); }} />
+                      {/* Navigation Items */}
+                      <div className="py-1.5">
+                        <MenuItem 
+                          icon={FiGrid} 
+                          label={t('nav.dashboard')} 
+                          onClick={() => { setIsUserMenuOpen(false); router.push('/dashboard'); }}
+                          isActive={router.pathname === '/dashboard'}
+                        />
+                        <MenuItem 
+                          icon={FiFolder} 
+                          label={t('nav.my_cvs')} 
+                          onClick={() => { setIsUserMenuOpen(false); router.push('/dashboard?tab=cvs'); }}
+                        />
+                        <MenuItem 
+                          icon={FiBriefcase} 
+                          label={t('nav.job_applications')} 
+                          onClick={() => { setIsUserMenuOpen(false); toast(t('toast.job_applications_coming_soon')); }}
+                          disabled={true}
+                        />
                       </div>
                       
-                      <div className="border-t border-white/5 py-2">
-                        <MenuItem icon={FiCreditCard} label={t('nav.subscription')} onClick={() => { setIsUserMenuOpen(false); router.push('/pricing'); }} badge={subBadge} />
-                        <MenuItem icon={FiSettings} label={t('nav.settings')} onClick={() => { setIsUserMenuOpen(false); router.push('/settings'); }} />
-                        <MenuItem icon={FiHelpCircle} label={t('nav.help_support')} onClick={() => { setIsUserMenuOpen(false); router.push('/faq'); }} />
+                      {/* Account Items */}
+                      <div className="border-t border-white/10 py-1.5">
+                        <MenuItem 
+                          icon={FiCreditCard} 
+                          label={t('nav.subscription')} 
+                          onClick={() => { setIsUserMenuOpen(false); router.push('/pricing'); }} 
+                          badge={subBadge}
+                          isActive={router.pathname === '/pricing'}
+                        />
+                        <MenuItem 
+                          icon={FiSettings} 
+                          label={t('nav.settings')} 
+                          onClick={() => { setIsUserMenuOpen(false); router.push('/settings'); }}
+                          isActive={router.pathname === '/settings'}
+                        />
+                        <MenuItem 
+                          icon={FiHelpCircle} 
+                          label={t('nav.help_support')} 
+                          onClick={() => { setIsUserMenuOpen(false); router.push('/faq'); }}
+                          isActive={router.pathname === '/faq'}
+                        />
                       </div>
                       
-                      <div className="border-t border-white/5 py-2">
+                      {/* Action Items */}
+                      <div className="border-t border-white/10 py-1.5">
                         <MenuItem 
                           icon={FiLogOut} 
                           label={t('nav.sign_out')} 
                           onClick={() => { setIsUserMenuOpen(false); signOut({ callbackUrl: '/' }); }}
-                          variant="danger"
                         />
                       </div>
                     </motion.div>
@@ -2042,70 +2073,94 @@ export default function HomePage() {
             >
               <div className="p-4 space-y-4">
                 {/* User Info */}
-                <div className="px-4 py-3 border-b border-white/5 mb-4">
-                  <p className="font-medium text-sm">{user?.name || 'User'}</p>
-                  <p className="text-xs text-gray-500 truncate">{user?.email || 'user@example.com'}</p>
+                <div className="px-4 py-3 border-b border-white/10 mb-4">
+                  <p className="font-semibold text-base text-white leading-tight mb-1">{user?.name || 'User'}</p>
+                  <p className="text-xs text-gray-400 truncate leading-relaxed" style={{ opacity: 0.7 }}>{user?.email || 'user@example.com'}</p>
                 </div>
                 
-                {/* Menu Items */}
+                {/* Navigation Items */}
                 <div className="space-y-1">
                   <button
                     onClick={() => { setIsUserMenuOpen(false); router.push('/dashboard'); }}
-                    className="w-full flex items-center gap-3 px-3 py-2.5 hover:bg-white/5 rounded-lg transition-colors text-left"
+                    className={`w-full flex items-center min-h-[44px] px-4 py-3 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white transition-all duration-150 rounded-lg ${router.pathname === '/dashboard' ? 'bg-white/5 border-l-3 border-blue-500' : ''}`}
+                    style={router.pathname === '/dashboard' ? { borderLeftWidth: '3px' } : undefined}
+                    aria-current={router.pathname === '/dashboard' ? 'page' : undefined}
                   >
-                    <FiGrid size={14} className="text-gray-400" />
-                    <span className="text-sm">{t('nav.dashboard')}</span>
+                    <div className="w-6 h-6 flex items-center justify-center flex-shrink-0">
+                      <FiGrid size={20} />
+                    </div>
+                    <span className="flex-1 text-left ml-3">{t('nav.dashboard')}</span>
                   </button>
                   <button
                     onClick={() => { setIsUserMenuOpen(false); router.push('/dashboard?tab=cvs'); }}
-                    className="w-full flex items-center gap-3 px-3 py-2.5 hover:bg-white/5 rounded-lg transition-colors text-left"
+                    className="w-full flex items-center min-h-[44px] px-4 py-3 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white transition-all duration-150 rounded-lg"
                   >
-                    <FiFolder size={14} className="text-gray-400" />
-                    <span className="text-sm">{t('nav.my_cvs')}</span>
+                    <div className="w-6 h-6 flex items-center justify-center flex-shrink-0">
+                      <FiFolder size={20} />
+                    </div>
+                    <span className="flex-1 text-left ml-3">{t('nav.my_cvs')}</span>
                   </button>
                   <button
-                    onClick={() => { setIsUserMenuOpen(false); toast('Job Applications coming soon 🚧'); }}
-                    className="w-full flex items-center gap-3 px-3 py-2.5 hover:bg-white/5 rounded-lg transition-colors text-left"
+                    onClick={() => { setIsUserMenuOpen(false); toast(t('toast.job_applications_coming_soon')); }}
+                    disabled
+                    aria-disabled="true"
+                    className="w-full flex items-center min-h-[44px] px-4 py-3 text-sm font-medium text-gray-400 opacity-50 cursor-not-allowed rounded-lg"
                   >
-                    <FiBriefcase size={14} className="text-gray-400" />
-                    <span className="text-sm">{t('nav.job_applications_coming_soon')}</span>
+                    <div className="w-6 h-6 flex items-center justify-center flex-shrink-0">
+                      <FiBriefcase size={20} className="opacity-50" />
+                    </div>
+                    <span className="flex-1 text-left ml-3">{t('nav.job_applications')}</span>
                   </button>
                 </div>
                 
-                <div className="border-t border-white/5 pt-2 mt-2 space-y-1">
+                {/* Account Items */}
+                <div className="border-t border-white/10 pt-1.5 mt-1.5 space-y-1">
                   <button
                     onClick={() => { setIsUserMenuOpen(false); router.push('/pricing'); }}
-                    className="w-full flex items-center justify-between px-3 py-2.5 hover:bg-white/5 rounded-lg transition-colors text-left"
+                    className={`w-full flex items-center min-h-[44px] px-4 py-3 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white transition-all duration-150 rounded-lg ${router.pathname === '/pricing' ? 'bg-white/5 border-l-3 border-blue-500' : ''}`}
+                    style={router.pathname === '/pricing' ? { borderLeftWidth: '3px' } : undefined}
+                    aria-current={router.pathname === '/pricing' ? 'page' : undefined}
                   >
-                    <div className="flex items-center gap-3">
-                      <FiCreditCard size={14} className="text-gray-400" />
-                      <span className="text-sm">{t('nav.subscription')}</span>
+                    <div className="w-6 h-6 flex items-center justify-center flex-shrink-0">
+                      <FiCreditCard size={20} />
                     </div>
-                    <span className="px-2 py-0.5 bg-gradient-to-r from-blue-500 to-purple-500 text-white text-[10px] font-medium rounded-full">{subBadge}</span>
+                    <span className="flex-1 text-left ml-3">{t('nav.subscription')}</span>
+                    <span className="ml-auto px-2.5 py-1 bg-gray-700/50 text-gray-300 text-xs font-medium rounded-full flex-shrink-0">{subBadge}</span>
                   </button>
                   <button
                     onClick={() => { setIsUserMenuOpen(false); router.push('/settings'); }}
-                    className="w-full flex items-center gap-3 px-3 py-2.5 hover:bg-white/5 rounded-lg transition-colors text-left"
+                    className={`w-full flex items-center min-h-[44px] px-4 py-3 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white transition-all duration-150 rounded-lg ${router.pathname === '/settings' ? 'bg-white/5 border-l-3 border-blue-500' : ''}`}
+                    style={router.pathname === '/settings' ? { borderLeftWidth: '3px' } : undefined}
+                    aria-current={router.pathname === '/settings' ? 'page' : undefined}
                   >
-                    <FiSettings size={14} className="text-gray-400" />
-                    <span className="text-sm">{t('nav.settings')}</span>
+                    <div className="w-6 h-6 flex items-center justify-center flex-shrink-0">
+                      <FiSettings size={20} />
+                    </div>
+                    <span className="flex-1 text-left ml-3">{t('nav.settings')}</span>
                   </button>
                   <button
                     onClick={() => { setIsUserMenuOpen(false); router.push('/faq'); }}
-                    className="w-full flex items-center gap-3 px-3 py-2.5 hover:bg-white/5 rounded-lg transition-colors text-left"
+                    className={`w-full flex items-center min-h-[44px] px-4 py-3 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white transition-all duration-150 rounded-lg ${router.pathname === '/faq' ? 'bg-white/5 border-l-3 border-blue-500' : ''}`}
+                    style={router.pathname === '/faq' ? { borderLeftWidth: '3px' } : undefined}
+                    aria-current={router.pathname === '/faq' ? 'page' : undefined}
                   >
-                    <FiHelpCircle size={14} className="text-gray-400" />
-                    <span className="text-sm">{t('nav.help_support')}</span>
+                    <div className="w-6 h-6 flex items-center justify-center flex-shrink-0">
+                      <FiHelpCircle size={20} />
+                    </div>
+                    <span className="flex-1 text-left ml-3">{t('nav.help_support')}</span>
                   </button>
                 </div>
                 
-                <div className="border-t border-white/5 pt-2 mt-2">
+                {/* Action Items */}
+                <div className="border-t border-white/10 pt-1.5 mt-1.5">
                   <button
                     onClick={() => { setIsUserMenuOpen(false); signOut({ callbackUrl: '/' }); }}
-                    className="w-full flex items-center gap-3 px-3 py-2.5 text-red-400 hover:bg-red-500/10 rounded-lg transition-colors text-left"
+                    className="w-full flex items-center min-h-[44px] px-4 py-3 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white transition-all duration-150 rounded-lg"
                   >
-                    <FiLogOut size={14} />
-                    <span className="text-sm">{t('nav.sign_out')}</span>
+                    <div className="w-6 h-6 flex items-center justify-center flex-shrink-0">
+                      <FiLogOut size={20} />
+                    </div>
+                    <span className="flex-1 text-left ml-3">{t('nav.sign_out')}</span>
                   </button>
                 </div>
               </div>
@@ -3586,7 +3641,9 @@ function MenuItem({
   onClick, 
   badge,
   external,
-  variant = 'default'
+  variant = 'default',
+  disabled = false,
+  isActive = false
 }: { 
   icon: React.ComponentType<{ size?: number; className?: string }>;
   label: string; 
@@ -3594,24 +3651,54 @@ function MenuItem({
   badge?: string;
   external?: boolean;
   variant?: 'default' | 'danger';
+  disabled?: boolean;
+  isActive?: boolean;
 }) {
   return (
     <button
-      onClick={onClick}
-      className={`w-full flex items-center gap-3 px-4 py-2.5 text-sm transition-colors ${
-        variant === 'danger' 
-          ? 'text-red-400 hover:bg-red-500/10' 
-          : 'text-gray-300 hover:bg-white/5 hover:text-white'
-      }`}
+      onClick={disabled ? undefined : onClick}
+      disabled={disabled}
+      aria-disabled={disabled}
+      aria-current={isActive ? 'page' : undefined}
+      className={`
+        w-full flex items-center min-h-[44px] px-4 py-3
+        text-sm font-medium transition-all duration-150
+        relative
+        ${disabled 
+          ? 'opacity-50 cursor-not-allowed' 
+          : 'cursor-pointer'
+        }
+        ${isActive 
+          ? 'bg-white/5 border-l-3 border-blue-500' 
+          : ''
+        }
+        ${variant === 'danger' 
+          ? disabled
+            ? 'text-gray-400'
+            : 'text-gray-300 hover:bg-white/8 hover:text-white'
+          : disabled
+            ? 'text-gray-400'
+            : 'text-gray-300 hover:bg-white/5 hover:text-white'
+        }
+      `}
+      style={isActive ? { borderLeftWidth: '3px' } : undefined}
     >
-      <Icon size={16} className="flex-shrink-0" />
-      <span className="flex-1 text-left">{label}</span>
+      {/* Icon container - fixed width for alignment */}
+      <div className="w-6 h-6 flex items-center justify-center flex-shrink-0">
+        <Icon size={20} className={disabled ? 'opacity-50' : ''} />
+      </div>
+      
+      {/* Label - flex-grow to fill space */}
+      <span className="flex-1 text-left ml-3">{label}</span>
+      
+      {/* Badge - right-aligned */}
       {badge && (
-        <span className="px-2 py-0.5 bg-gradient-to-r from-blue-500 to-purple-500 text-white text-[10px] font-medium rounded-full">
+        <span className="ml-auto px-2.5 py-1 bg-gray-700/50 text-gray-300 text-xs font-medium rounded-full flex-shrink-0">
           {badge}
         </span>
       )}
-      {external && <FiExternalLink size={12} className="text-gray-500" />}
+      
+      {external && <FiExternalLink size={14} className="ml-2 text-gray-500 flex-shrink-0" />}
     </button>
   );
 }
