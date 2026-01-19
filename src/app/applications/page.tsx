@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
 import { useLocale } from '@/context/LocaleContext';
 import { signOut } from 'next-auth/react';
@@ -112,6 +112,7 @@ function MenuItem({
 export default function ApplicationsPage() {
   const { isAuthenticated, user, subscription, isLoading: authLoading } = useAuth();
   const router = useRouter();
+  const pathname = usePathname();
   const { t } = useLocale();
   
   const [applications, setApplications] = useState<JobApplication[]>([]);
@@ -364,7 +365,7 @@ export default function ApplicationsPage() {
                           setIsUserMenuOpen(false)
                           router.push('/dashboard')
                         }}
-                        isActive={router.pathname === '/dashboard'}
+                        isActive={pathname === '/dashboard'}
                       />
                       <MenuItem 
                         icon={FiFolder} 
@@ -381,7 +382,7 @@ export default function ApplicationsPage() {
                           setIsUserMenuOpen(false)
                           router.push('/applications')
                         }}
-                        isActive={router.pathname === '/applications'}
+                        isActive={pathname === '/applications'}
                       />
                     </div>
                     
@@ -395,7 +396,7 @@ export default function ApplicationsPage() {
                           router.push('/pricing')
                         }} 
                         badge={subBadge}
-                        isActive={router.pathname === '/pricing'}
+                        isActive={pathname === '/pricing'}
                       />
                       <MenuItem 
                         icon={FiSettings} 
@@ -404,7 +405,7 @@ export default function ApplicationsPage() {
                           setIsUserMenuOpen(false)
                           router.push('/settings')
                         }}
-                        isActive={router.pathname === '/settings'}
+                        isActive={pathname === '/settings'}
                       />
                       <MenuItem 
                         icon={FiHelpCircle} 
@@ -413,7 +414,7 @@ export default function ApplicationsPage() {
                           setIsUserMenuOpen(false)
                           router.push('/faq')
                         }}
-                        isActive={router.pathname === '/faq'}
+                        isActive={pathname === '/faq'}
                       />
                     </div>
                     

@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
 import { useLocale } from '@/context/LocaleContext';
 import { signOut } from 'next-auth/react';
@@ -88,6 +88,7 @@ const getFaqs = (t: (key: string) => string): FAQItem[] => [
 export default function FAQPage() {
   const { isAuthenticated, user, subscription } = useAuth();
   const router = useRouter();
+  const pathname = usePathname();
   const { t } = useLocale();
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
@@ -177,9 +178,9 @@ export default function FAQPage() {
                       <div className="py-1.5">
                         <button 
                           onClick={() => { setIsUserMenuOpen(false); router.push('/dashboard'); }} 
-                          className={`w-full flex items-center min-h-[44px] px-4 py-3 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white transition-all duration-150 ${router.pathname === '/dashboard' ? 'bg-white/5 border-l-3 border-blue-500' : ''}`}
-                          style={router.pathname === '/dashboard' ? { borderLeftWidth: '3px' } : undefined}
-                          aria-current={router.pathname === '/dashboard' ? 'page' : undefined}
+                          className={`w-full flex items-center min-h-[44px] px-4 py-3 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white transition-all duration-150 ${pathname === '/dashboard' ? 'bg-white/5 border-l-3 border-blue-500' : ''}`}
+                          style={pathname === '/dashboard' ? { borderLeftWidth: '3px' } : undefined}
+                          aria-current={pathname === '/dashboard' ? 'page' : undefined}
                         >
                           <div className="w-6 h-6 flex items-center justify-center flex-shrink-0">
                             <FiGrid size={20} />
@@ -212,9 +213,9 @@ export default function FAQPage() {
                       <div className="border-t border-white/10 py-1.5">
                         <button 
                           onClick={() => { setIsUserMenuOpen(false); router.push('/pricing'); }} 
-                          className={`w-full flex items-center min-h-[44px] px-4 py-3 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white transition-all duration-150 ${router.pathname === '/pricing' ? 'bg-white/5 border-l-3 border-blue-500' : ''}`}
-                          style={router.pathname === '/pricing' ? { borderLeftWidth: '3px' } : undefined}
-                          aria-current={router.pathname === '/pricing' ? 'page' : undefined}
+                          className={`w-full flex items-center min-h-[44px] px-4 py-3 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white transition-all duration-150 ${pathname === '/pricing' ? 'bg-white/5 border-l-3 border-blue-500' : ''}`}
+                          style={pathname === '/pricing' ? { borderLeftWidth: '3px' } : undefined}
+                          aria-current={pathname === '/pricing' ? 'page' : undefined}
                         >
                           <div className="w-6 h-6 flex items-center justify-center flex-shrink-0">
                             <FiCreditCard size={20} />
@@ -224,9 +225,9 @@ export default function FAQPage() {
                         </button>
                         <button 
                           onClick={() => { setIsUserMenuOpen(false); router.push('/settings'); }} 
-                          className={`w-full flex items-center min-h-[44px] px-4 py-3 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white transition-all duration-150 ${router.pathname === '/settings' ? 'bg-white/5 border-l-3 border-blue-500' : ''}`}
-                          style={router.pathname === '/settings' ? { borderLeftWidth: '3px' } : undefined}
-                          aria-current={router.pathname === '/settings' ? 'page' : undefined}
+                          className={`w-full flex items-center min-h-[44px] px-4 py-3 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white transition-all duration-150 ${pathname === '/settings' ? 'bg-white/5 border-l-3 border-blue-500' : ''}`}
+                          style={pathname === '/settings' ? { borderLeftWidth: '3px' } : undefined}
+                          aria-current={pathname === '/settings' ? 'page' : undefined}
                         >
                           <div className="w-6 h-6 flex items-center justify-center flex-shrink-0">
                             <FiSettings size={20} />
@@ -235,9 +236,9 @@ export default function FAQPage() {
                         </button>
                         <button 
                           onClick={() => { setIsUserMenuOpen(false); router.push('/faq'); }} 
-                          className={`w-full flex items-center min-h-[44px] px-4 py-3 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white transition-all duration-150 ${router.pathname === '/faq' ? 'bg-white/5 border-l-3 border-blue-500' : ''}`}
-                          style={router.pathname === '/faq' ? { borderLeftWidth: '3px' } : undefined}
-                          aria-current={router.pathname === '/faq' ? 'page' : undefined}
+                          className={`w-full flex items-center min-h-[44px] px-4 py-3 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white transition-all duration-150 ${pathname === '/faq' ? 'bg-white/5 border-l-3 border-blue-500' : ''}`}
+                          style={pathname === '/faq' ? { borderLeftWidth: '3px' } : undefined}
+                          aria-current={pathname === '/faq' ? 'page' : undefined}
                         >
                           <div className="w-6 h-6 flex items-center justify-center flex-shrink-0">
                             <FiHelpCircle size={20} />

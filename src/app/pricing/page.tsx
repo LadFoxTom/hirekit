@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState, useRef, useEffect } from 'react'
-import { useRouter } from 'next/navigation'
+import { useRouter, usePathname } from 'next/navigation'
 import Link from 'next/link'
 import { useAuth } from '@/context/AuthContext'
 import { useLocale } from '@/context/LocaleContext'
@@ -25,6 +25,7 @@ export default function PricingPage() {
   const dropdownRef = useRef<HTMLDivElement>(null)
   const { isAuthenticated, user, subscription } = useAuth()
   const router = useRouter()
+  const pathname = usePathname()
   const { t } = useLocale()
 
   // Close user menu when clicking outside (mouse + touch)
@@ -71,9 +72,9 @@ export default function PricingPage() {
       <div className="py-1.5">
         <button 
           onClick={() => { setIsUserMenuOpen(false); router.push('/dashboard'); }} 
-          className={`w-full flex items-center min-h-[44px] px-4 py-3 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white transition-all duration-150 ${router.pathname === '/dashboard' ? 'bg-white/5 border-l-3 border-blue-500' : ''}`}
-          style={router.pathname === '/dashboard' ? { borderLeftWidth: '3px' } : undefined}
-          aria-current={router.pathname === '/dashboard' ? 'page' : undefined}
+          className={`w-full flex items-center min-h-[44px] px-4 py-3 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white transition-all duration-150 ${pathname === '/dashboard' ? 'bg-white/5 border-l-3 border-blue-500' : ''}`}
+          style={pathname === '/dashboard' ? { borderLeftWidth: '3px' } : undefined}
+          aria-current={pathname === '/dashboard' ? 'page' : undefined}
         >
           <div className="w-6 h-6 flex items-center justify-center flex-shrink-0">
             <FiGrid size={20} />
@@ -106,9 +107,9 @@ export default function PricingPage() {
       <div className="border-t border-white/10 py-1.5">
         <button 
           onClick={() => { setIsUserMenuOpen(false); router.push('/pricing'); }} 
-          className={`w-full flex items-center min-h-[44px] px-4 py-3 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white transition-all duration-150 ${router.pathname === '/pricing' ? 'bg-white/5 border-l-3 border-blue-500' : ''}`}
-          style={router.pathname === '/pricing' ? { borderLeftWidth: '3px' } : undefined}
-          aria-current={router.pathname === '/pricing' ? 'page' : undefined}
+          className={`w-full flex items-center min-h-[44px] px-4 py-3 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white transition-all duration-150 ${pathname === '/pricing' ? 'bg-white/5 border-l-3 border-blue-500' : ''}`}
+          style={pathname === '/pricing' ? { borderLeftWidth: '3px' } : undefined}
+          aria-current={pathname === '/pricing' ? 'page' : undefined}
         >
           <div className="w-6 h-6 flex items-center justify-center flex-shrink-0">
             <FiCreditCard size={20} />
@@ -118,9 +119,9 @@ export default function PricingPage() {
         </button>
         <button 
           onClick={() => { setIsUserMenuOpen(false); router.push('/settings'); }} 
-          className={`w-full flex items-center min-h-[44px] px-4 py-3 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white transition-all duration-150 ${router.pathname === '/settings' ? 'bg-white/5 border-l-3 border-blue-500' : ''}`}
-          style={router.pathname === '/settings' ? { borderLeftWidth: '3px' } : undefined}
-          aria-current={router.pathname === '/settings' ? 'page' : undefined}
+          className={`w-full flex items-center min-h-[44px] px-4 py-3 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white transition-all duration-150 ${pathname === '/settings' ? 'bg-white/5 border-l-3 border-blue-500' : ''}`}
+          style={pathname === '/settings' ? { borderLeftWidth: '3px' } : undefined}
+          aria-current={pathname === '/settings' ? 'page' : undefined}
         >
           <div className="w-6 h-6 flex items-center justify-center flex-shrink-0">
             <FiSettings size={20} />
@@ -129,9 +130,9 @@ export default function PricingPage() {
         </button>
         <button 
           onClick={() => { setIsUserMenuOpen(false); router.push('/faq'); }} 
-          className={`w-full flex items-center min-h-[44px] px-4 py-3 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white transition-all duration-150 ${router.pathname === '/faq' ? 'bg-white/5 border-l-3 border-blue-500' : ''}`}
-          style={router.pathname === '/faq' ? { borderLeftWidth: '3px' } : undefined}
-          aria-current={router.pathname === '/faq' ? 'page' : undefined}
+          className={`w-full flex items-center min-h-[44px] px-4 py-3 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white transition-all duration-150 ${pathname === '/faq' ? 'bg-white/5 border-l-3 border-blue-500' : ''}`}
+          style={pathname === '/faq' ? { borderLeftWidth: '3px' } : undefined}
+          aria-current={pathname === '/faq' ? 'page' : undefined}
         >
           <div className="w-6 h-6 flex items-center justify-center flex-shrink-0">
             <FiHelpCircle size={20} />

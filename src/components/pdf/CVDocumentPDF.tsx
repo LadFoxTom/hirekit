@@ -1619,6 +1619,7 @@ export const CVDocumentPDF: React.FC<CVDocumentPDFProps> = ({ data, processedPho
                     height: photoSize + (data.layout?.photoBorderWidth ?? 0) * 2,
                     overflow: 'hidden',
                   }}>
+                    {/* eslint-disable-next-line jsx-a11y/alt-text */}
                     <Image
                       src={photoUrl}
                       style={{
@@ -1789,6 +1790,7 @@ export const CVDocumentPDF: React.FC<CVDocumentPDFProps> = ({ data, processedPho
                   height: photoSize + (data.layout?.photoBorderWidth ?? 0) * 2,
                   overflow: 'hidden',
                 }}>
+                  {/* eslint-disable-next-line jsx-a11y/alt-text */}
                   <Image
                     src={photoUrl}
                     style={{

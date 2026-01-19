@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef, useCallback } from 'react'
 import { useAuth } from '@/context/AuthContext'
-import { useRouter } from 'next/navigation'
+import { useRouter, usePathname } from 'next/navigation'
 import { useLocale } from '@/context/LocaleContext'
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -134,6 +134,7 @@ function MenuItem({
 export default function DashboardPage() {
   const { isAuthenticated, user, subscription } = useAuth()
   const router = useRouter()
+  const pathname = usePathname()
   const { t } = useLocale()
   const [savedCVs, setSavedCVs] = useState<SavedCV[]>([])
   const [savedLetters, setSavedLetters] = useState<SavedLetter[]>([])
@@ -486,7 +487,7 @@ export default function DashboardPage() {
                           setIsUserMenuOpen(false)
                           router.push('/dashboard')
                         }}
-                        isActive={router.pathname === '/dashboard'}
+                        isActive={pathname === '/dashboard'}
                       />
                       <MenuItem 
                         icon={FiFolder} 
@@ -517,7 +518,7 @@ export default function DashboardPage() {
                           router.push('/pricing')
                         }} 
                         badge={subBadge}
-                        isActive={router.pathname === '/pricing'}
+                        isActive={pathname === '/pricing'}
                       />
                       <MenuItem 
                         icon={FiSettings} 
@@ -526,7 +527,7 @@ export default function DashboardPage() {
                           setIsUserMenuOpen(false)
                           router.push('/settings')
                         }}
-                        isActive={router.pathname === '/settings'}
+                        isActive={pathname === '/settings'}
                       />
                       <MenuItem 
                         icon={FiHelpCircle} 
@@ -535,7 +536,7 @@ export default function DashboardPage() {
                           setIsUserMenuOpen(false)
                           router.push('/faq')
                         }}
-                        isActive={router.pathname === '/faq'}
+                        isActive={pathname === '/faq'}
                       />
                     </div>
                     
