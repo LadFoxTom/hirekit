@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { FaPaperPlane, FaSpinner, FaForward, FaMagic, FaChartBar, FaEdit, FaEye, FaDownload } from 'react-icons/fa';
+import { FaPaperPlane, FaSpinner, FaForward, FaMagic, FaChartBar, FaEdit, FaEye, FaDownload, FaCheckCircle } from 'react-icons/fa';
 import { useLocale } from '@/context/LocaleContext';
 import { CV_QUESTIONS, isBasicPhaseComplete } from '@/types/questions';
 
@@ -12,6 +12,7 @@ interface EnhancedCVChatInterfaceProps {
   onEditCV: () => void;
   onPreviewCV: () => void;
   onDownloadCV: () => void;
+  onATSCheck?: () => void;
   isLoading: boolean;
   isAIAnalyzing: boolean;
   cvData: any;
@@ -31,6 +32,7 @@ const EnhancedCVChatInterface: React.FC<EnhancedCVChatInterfaceProps> = ({
   onEditCV,
   onPreviewCV,
   onDownloadCV,
+  onATSCheck,
   isLoading,
   isAIAnalyzing,
   cvData,
@@ -105,6 +107,13 @@ const EnhancedCVChatInterface: React.FC<EnhancedCVChatInterfaceProps> = ({
 
   // Quick actions for CV optimization
   const quickActions = [
+    {
+      label: "ATS Check",
+      action: onATSCheck || (() => {}),
+      icon: FaCheckCircle,
+      color: "bg-indigo-600 hover:bg-indigo-700",
+      description: "ATS/CV compatibility assessment"
+    },
     {
       label: "Generate Optimized CV",
       action: onGenerateOptimized,

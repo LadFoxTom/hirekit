@@ -15,7 +15,7 @@ import {
   FiClock, FiStar, FiPlus, FiMenu, FiX, FiLogOut, FiCreditCard,
   FiGrid, FiFolder, FiHelpCircle, FiExternalLink, FiAward, FiLock,
   FiTrash2, FiChevronRight, FiMail, FiImage, FiUpload,
-  FiZoomIn, FiZoomOut, FiList
+  FiZoomIn, FiZoomOut, FiList, FiCheckCircle
 } from 'react-icons/fi';
 import { signOut } from 'next-auth/react';
 import { toast, Toaster } from 'react-hot-toast';
@@ -26,6 +26,7 @@ import { CVTemplate } from '@/components/pdf/CVDocumentPDF';
 import { sanitizeCVDataForAPI as sanitizeForAPI } from '@/utils/cvDataSanitizer';
 import { ThemeSwitcher } from '@/components/ThemeSwitcher';
 import { LanguageSelector } from '@/components/LanguageSelector';
+import ATSChecker from '@/components/ATSChecker';
 
 // Dynamically import PDF preview viewer (React-PDF based for guaranteed preview=export consistency)
 const PDFPreviewViewer = dynamic(
@@ -812,7 +813,7 @@ export default function HomePage() {
       }
     }
   }, []);
-  const [activeView, setActiveView] = useState<'chat' | 'editor' | 'photos' | 'templates'>('chat');
+  const [activeView, setActiveView] = useState<'chat' | 'editor' | 'photos' | 'templates' | 'ats-checker'>('chat');
   const [photos, setPhotos] = useState<string[]>([]); // Array of photo URLs
   const [selectedPhotoIndex, setSelectedPhotoIndex] = useState<number | null>(null);
   const userMenuRef = useRef<HTMLDivElement>(null);
@@ -2955,6 +2956,29 @@ export default function HomePage() {
                     <FiGrid size={14} className="text-teal-400" />
                     Templates
                   </button>
+                  <button
+                    onClick={() => setActiveView('ats-checker')}
+                    className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm transition-colors"
+                    style={{
+                      backgroundColor: activeView === 'ats-checker' ? 'var(--bg-hover)' : 'transparent',
+                      color: activeView === 'ats-checker' ? 'var(--text-primary)' : 'var(--text-tertiary)',
+                    }}
+                    onMouseEnter={(e) => {
+                      if (activeView !== 'ats-checker') {
+                        e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                        e.currentTarget.style.color = 'var(--text-primary)';
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (activeView !== 'ats-checker') {
+                        e.currentTarget.style.backgroundColor = 'transparent';
+                        e.currentTarget.style.color = 'var(--text-tertiary)';
+                      }
+                    }}
+                  >
+                    <FiCheckCircle size={14} className="text-indigo-400" />
+                    ATS Check
+                  </button>
                 </div>
                 
                 {activeView === 'photos' ? (
@@ -3770,6 +3794,40 @@ export default function HomePage() {
                           debouncedLetterToast();
                         }}
                       />
+                    </div>
+                  </div>
+                ) : activeView === 'ats-checker' ? (
+                  /* ============ ATS CHECKER VIEW ============ */
+                  <div className="flex-1 overflow-hidden flex flex-col">
+                    {/* ATS Checker Header */}
+                    <div className="px-4 py-3" style={{ borderBottom: '1px solid var(--border-subtle)' }}>
+                      <div className="flex items-center justify-between">
+                        <h2 className="text-sm font-medium flex items-center gap-2" style={{ color: 'var(--text-primary)' }}>
+                          <FiCheckCircle size={16} className="text-indigo-400" />
+                          ATS / CV Checker
+                        </h2>
+                        <button
+                          onClick={() => setActiveView('chat')}
+                          className="p-2 rounded-lg transition-colors"
+                          style={{ color: 'var(--text-tertiary)' }}
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.color = 'var(--text-primary)';
+                            e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.color = 'var(--text-tertiary)';
+                            e.currentTarget.style.backgroundColor = 'transparent';
+                          }}
+                          title="Back to chat"
+                        >
+                          <FiX size={16} />
+                        </button>
+                      </div>
+                    </div>
+                    
+                    {/* ATS Checker Content */}
+                    <div className="flex-1 overflow-y-auto">
+                      <ATSChecker cvData={cvData} />
                     </div>
                   </div>
                 ) : null}
