@@ -98,24 +98,43 @@ function MenuItem({
           ? 'opacity-50 cursor-not-allowed' 
           : 'cursor-pointer'
         }
-        ${isActive 
-          ? 'bg-white/5 border-l-3 border-blue-500' 
-          : ''
-        }
-        ${variant === 'danger' 
-          ? disabled
-            ? 'text-gray-400'
-            : 'text-gray-300 hover:bg-white/8 hover:text-white'
-          : disabled
-            ? 'text-gray-400'
-            : 'text-gray-300 hover:bg-white/5 hover:text-white'
-        }
       `}
-      style={isActive ? { borderLeftWidth: '3px' } : undefined}
+      style={{
+        ...(isActive ? { 
+          borderLeftWidth: '3px',
+          borderLeftColor: '#3b82f6',
+          backgroundColor: 'var(--bg-hover)',
+        } : {}),
+        color: disabled 
+          ? 'var(--text-disabled)'
+          : variant === 'danger'
+            ? 'var(--text-primary)'
+            : 'var(--text-primary)',
+      }}
+      onMouseEnter={(e) => {
+        if (!disabled && !isActive) {
+          e.currentTarget.style.backgroundColor = variant === 'danger' ? 'rgba(239, 68, 68, 0.1)' : 'var(--bg-hover)';
+        }
+      }}
+      onMouseLeave={(e) => {
+        if (!disabled && !isActive) {
+          e.currentTarget.style.backgroundColor = 'transparent';
+        }
+      }}
     >
       {/* Icon container - fixed width for alignment */}
       <div className="w-5 h-5 flex items-center justify-center flex-shrink-0">
-        <Icon size={18} className={disabled ? 'opacity-50' : ''} />
+        <Icon 
+          size={18} 
+          className={disabled ? 'opacity-50' : ''}
+          style={{ 
+            color: disabled 
+              ? 'var(--text-disabled)'
+              : variant === 'danger'
+                ? 'var(--text-primary)'
+                : 'var(--text-primary)'
+          }}
+        />
       </div>
       
       {/* Label - flex-grow to fill space with overflow handling */}
