@@ -108,18 +108,18 @@ export function LanguageSelector() {
               backgroundColor: 'var(--bg-elevated)',
               border: '1px solid var(--border-medium)',
               boxShadow: 'var(--shadow-lg)',
-              minWidth: '180px',
+              width: 'auto',
+              minWidth: '44px',
             }}
           >
-            <div className="py-1.5">
+            <div className="py-1.5 px-1.5">
               {availableLanguages.map((lang) => (
                 <button
                   key={lang.code}
                   onClick={() => handleLanguageChange(lang.code)}
-                  className="w-full flex items-center gap-3 px-3 py-2.5 text-sm transition-colors text-left"
+                  className="w-full flex items-center justify-center p-2 transition-colors rounded-lg"
                   style={{
                     backgroundColor: language === lang.code ? 'var(--bg-hover)' : 'transparent',
-                    color: 'var(--text-primary)',
                   }}
                   onMouseEnter={(e) => {
                     if (language !== lang.code) {
@@ -131,11 +131,13 @@ export function LanguageSelector() {
                       e.currentTarget.style.backgroundColor = 'transparent';
                     }
                   }}
+                  title={lang.name}
                 >
-                  <FlagIcon code={lang.code} className="w-5 h-5" />
-                  <span className="flex-1">{lang.name}</span>
+                  <div style={{ width: '20px', height: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <FlagIcon code={lang.code} className="w-5 h-5" />
+                  </div>
                   {language === lang.code && (
-                    <span style={{ color: '#3b82f6' }}>✓</span>
+                    <span className="ml-1.5" style={{ color: '#3b82f6', fontSize: '12px' }}>✓</span>
                   )}
                 </button>
               ))}
