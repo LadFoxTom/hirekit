@@ -7,6 +7,8 @@ import { useLocale } from '@/context/LocaleContext';
 import { signOut } from 'next-auth/react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { toast, Toaster } from 'react-hot-toast';
+import { ThemeSwitcher } from '@/components/ThemeSwitcher';
+import { LanguageSelector } from '@/components/LanguageSelector';
 import {
   FiChevronDown, FiChevronLeft, FiBriefcase, FiPlus, FiExternalLink,
   FiCalendar, FiMapPin, FiDollarSign, FiClock, FiEdit2, FiTrash2,
@@ -113,13 +115,14 @@ export default function ApplicationsPage() {
   const { isAuthenticated, user, subscription, isLoading: authLoading } = useAuth();
   const router = useRouter();
   const pathname = usePathname();
-  const { t } = useLocale();
+  const { t, language, setLanguage, availableLanguages } = useLocale();
   
   const [applications, setApplications] = useState<JobApplication[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [filter, setFilter] = useState<ApplicationStatus | 'all'>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+  const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [showAddModal, setShowAddModal] = useState(false);
   const userMenuRef = useRef<HTMLDivElement>(null);
@@ -323,8 +326,10 @@ export default function ApplicationsPage() {
             </a>
           </div>
 
-          {/* User Menu */}
+          {/* Language, Theme & User Menu */}
           <div className="flex items-center gap-2">
+            <LanguageSelector onMobileMenuOpen={() => setIsLanguageMenuOpen(true)} />
+            <ThemeSwitcher />
             <div className="relative" ref={userMenuRef} style={{ overflow: 'visible', zIndex: 100 }}>
               <button 
                 onClick={() => {
@@ -518,6 +523,22 @@ export default function ApplicationsPage() {
                   </button>
                 </div>
                 
+                {/* Theme & Language */}
+                <div className="border-t border-white/5 pt-2 mt-2">
+                  <div className="px-3 py-2">
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="text-xs font-medium uppercase tracking-wider text-gray-500">Language</span>
+                      <LanguageSelector />
+                    </div>
+                  </div>
+                  <div className="px-3 py-2">
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="text-xs font-medium uppercase tracking-wider text-gray-500">Theme</span>
+                      <ThemeSwitcher />
+                    </div>
+                  </div>
+                </div>
+                
                 <div className="border-t border-white/5 pt-2 mt-2">
                   <button
                     onClick={() => { setIsUserMenuOpen(false); signOut({ callbackUrl: '/' }); }}
@@ -526,6 +547,116 @@ export default function ApplicationsPage() {
                     <FiLogOut size={14} />
                     <span className="text-sm">{t('nav.sign_out')}</span>
                   </button>
+                </div>
+              </div>
+            </motion.aside>
+          </>
+        )}
+      </AnimatePresence>
+
+      {/* Language Menu (Mobile) */}
+      <AnimatePresence>
+        {isLanguageMenuOpen && (
+          <>
+            {/* Mobile Overlay */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsLanguageMenuOpen(false)}
+              className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+            />
+            
+            {/* Language Menu - Slide in from right */}
+            <motion.aside
+              initial={{ x: 280 }}
+              animate={{ x: 0 }}
+              exit={{ x: 280 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+              className="fixed top-14 right-0 bottom-0 w-[80px] z-40 overflow-y-auto lg:hidden"
+              style={{ 
+                backgroundColor: 'var(--bg-secondary)',
+                borderLeft: '1px solid var(--border-subtle)',
+              }}
+            >
+              <div className="p-2 space-y-2">
+                {/* Close button */}
+                <div className="flex justify-end mb-2">
+                  <button
+                    onClick={() => setIsLanguageMenuOpen(false)}
+                    className="p-2 flex items-center justify-center rounded-lg transition-colors"
+                    style={{ color: 'var(--text-tertiary)' }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.color = 'var(--text-primary)';
+                      e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.color = 'var(--text-tertiary)';
+                      e.currentTarget.style.backgroundColor = 'transparent';
+                    }}
+                    aria-label="Close language menu"
+                  >
+                    <FiX size={16} />
+                  </button>
+                </div>
+                
+                {/* Language Options */}
+                <div className="space-y-1">
+                  {availableLanguages.map((lang) => {
+                    const flagMap: Record<string, string> = {
+                      'en': '/flags/gb.svg',
+                      'nl': '/flags/nl.svg',
+                      'fr': '/flags/fr.svg',
+                      'es': '/flags/es.svg',
+                      'de': '/flags/de.svg'
+                    };
+                    const flagSrc = flagMap[lang.code] || '';
+                    
+                    return (
+                      <button
+                        key={lang.code}
+                        onClick={() => {
+                          setLanguage(lang.code as any);
+                          setIsLanguageMenuOpen(false);
+                        }}
+                        className="w-full flex items-center justify-center p-2 transition-colors rounded-lg"
+                        style={{
+                          backgroundColor: language === lang.code ? 'var(--bg-hover)' : 'transparent',
+                        }}
+                        onMouseEnter={(e) => {
+                          if (language !== lang.code) {
+                            e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                          }
+                        }}
+                        onMouseLeave={(e) => {
+                          if (language !== lang.code) {
+                            e.currentTarget.style.backgroundColor = 'transparent';
+                          }
+                        }}
+                        title={lang.name}
+                      >
+                        {flagSrc ? (
+                          <img 
+                            src={flagSrc} 
+                            alt={`${lang.code.toUpperCase()} flag`}
+                            className="rounded object-cover"
+                            style={{ 
+                              width: '20px',
+                              height: '20px',
+                              minWidth: '20px',
+                              minHeight: '20px',
+                              maxWidth: '20px',
+                              maxHeight: '20px',
+                              display: 'block',
+                              flexShrink: 0
+                            }}
+                          />
+                        ) : (
+                          <span style={{ fontSize: '20px' }}>🏳️</span>
+                        )}
+                      </button>
+                    );
+                  })}
                 </div>
               </div>
             </motion.aside>
