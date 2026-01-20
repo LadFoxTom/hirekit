@@ -72,15 +72,15 @@ const ATSChecker: React.FC<ATSCheckerProps> = ({ cvData, onClose }) => {
   }, [cvData]);
 
   const getScoreColor = (score: number) => {
-    if (score >= 80) return 'text-green-400';
-    if (score >= 60) return 'text-yellow-400';
-    return 'text-red-400';
+    if (score >= 80) return 'text-green-500';
+    if (score >= 60) return 'text-yellow-500';
+    return 'text-red-500';
   };
 
   const getScoreBgColor = (score: number) => {
-    if (score >= 80) return 'bg-green-500/20 border-green-500/30';
-    if (score >= 60) return 'bg-yellow-500/20 border-yellow-500/30';
-    return 'bg-red-500/20 border-red-500/30';
+    if (score >= 80) return 'bg-green-500/10 border-green-500/20';
+    if (score >= 60) return 'bg-yellow-500/10 border-yellow-500/20';
+    return 'bg-red-500/10 border-red-500/20';
   };
 
   const getScoreLabel = (score: number) => {
@@ -110,7 +110,7 @@ const ATSChecker: React.FC<ATSCheckerProps> = ({ cvData, onClose }) => {
       <div className="p-4 space-y-4">
         <div className="bg-red-500/10 border border-red-500/30 rounded-xl p-4">
           <div className="flex items-center gap-2 mb-2">
-            <FiXCircle className="text-red-400" size={18} />
+            <FiXCircle className="text-red-500" size={18} />
             <h3 className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>
               Assessment Error
             </h3>
@@ -157,7 +157,7 @@ const ATSChecker: React.FC<ATSCheckerProps> = ({ cvData, onClose }) => {
       <div className="flex items-center justify-between mb-4">
         <div>
           <h2 className="text-lg font-semibold flex items-center gap-2" style={{ color: 'var(--text-primary)' }}>
-            <FiCheckCircle className="text-indigo-400" size={20} />
+            <FiCheckCircle className="text-indigo-500" size={20} />
             ATS Assessment
           </h2>
           <p className="text-xs mt-1" style={{ color: 'var(--text-tertiary)' }}>
@@ -243,9 +243,9 @@ const ATSChecker: React.FC<ATSCheckerProps> = ({ cvData, onClose }) => {
 
       {/* Detailed Scores */}
       {assessment.details && (
-        <div className="bg-[#1a1a1a] border border-white/5 rounded-xl p-4 space-y-3">
+        <div className="rounded-xl p-4 space-y-3" style={{ backgroundColor: 'var(--bg-tertiary)', border: '1px solid var(--border-subtle)' }}>
           <h3 className="text-sm font-medium flex items-center gap-2" style={{ color: 'var(--text-primary)' }}>
-            <FiInfo size={14} className="text-blue-400" />
+            <FiInfo size={14} className="text-blue-500" />
             Detailed Metrics
           </h3>
           <div className="grid grid-cols-2 gap-2">
@@ -345,16 +345,16 @@ const ATSChecker: React.FC<ATSCheckerProps> = ({ cvData, onClose }) => {
 
       {/* Strengths */}
       {assessment.strengths && assessment.strengths.length > 0 && (
-        <div className="bg-[#1a1a1a] border border-white/5 rounded-xl p-4 space-y-3">
+        <div className="rounded-xl p-4 space-y-3" style={{ backgroundColor: 'var(--bg-tertiary)', border: '1px solid var(--border-subtle)' }}>
           <h3 className="text-sm font-medium flex items-center gap-2" style={{ color: 'var(--text-primary)' }}>
-            <FiCheckCircle size={14} className="text-green-400" />
+            <FiCheckCircle size={14} className="text-green-500" />
             Strengths
           </h3>
           <ul className="space-y-2">
             {assessment.strengths.map((strength, index) => (
               <li key={index} className="flex items-start gap-2">
-                <span className="text-green-400 mt-0.5">•</span>
-                <span className="text-xs flex-1" style={{ color: 'var(--text-secondary)' }}>
+                <span className="text-green-500 flex-shrink-0 mt-0.5" style={{ lineHeight: '1.2' }}>•</span>
+                <span className="text-xs flex-1" style={{ color: 'var(--text-secondary)', lineHeight: '1.5' }}>
                   {strength}
                 </span>
               </li>
@@ -365,16 +365,16 @@ const ATSChecker: React.FC<ATSCheckerProps> = ({ cvData, onClose }) => {
 
       {/* Weaknesses */}
       {assessment.weaknesses && assessment.weaknesses.length > 0 && (
-        <div className="bg-[#1a1a1a] border border-white/5 rounded-xl p-4 space-y-3">
+        <div className="rounded-xl p-4 space-y-3" style={{ backgroundColor: 'var(--bg-tertiary)', border: '1px solid var(--border-subtle)' }}>
           <h3 className="text-sm font-medium flex items-center gap-2" style={{ color: 'var(--text-primary)' }}>
-            <FiAlertCircle size={14} className="text-yellow-400" />
+            <FiAlertCircle size={14} className="text-yellow-500" />
             Areas for Improvement
           </h3>
           <ul className="space-y-2">
             {assessment.weaknesses.map((weakness, index) => (
               <li key={index} className="flex items-start gap-2">
-                <span className="text-yellow-400 mt-0.5">•</span>
-                <span className="text-xs flex-1" style={{ color: 'var(--text-secondary)' }}>
+                <span className="text-yellow-500 flex-shrink-0 mt-0.5" style={{ lineHeight: '1.2' }}>•</span>
+                <span className="text-xs flex-1" style={{ color: 'var(--text-secondary)', lineHeight: '1.5' }}>
                   {weakness}
                 </span>
               </li>
@@ -385,16 +385,16 @@ const ATSChecker: React.FC<ATSCheckerProps> = ({ cvData, onClose }) => {
 
       {/* Suggestions */}
       {assessment.suggestions && assessment.suggestions.length > 0 && (
-        <div className="bg-[#1a1a1a] border border-white/5 rounded-xl p-4 space-y-3">
+        <div className="rounded-xl p-4 space-y-3" style={{ backgroundColor: 'var(--bg-tertiary)', border: '1px solid var(--border-subtle)' }}>
           <h3 className="text-sm font-medium flex items-center gap-2" style={{ color: 'var(--text-primary)' }}>
-            <FiInfo size={14} className="text-blue-400" />
+            <FiInfo size={14} className="text-blue-500" />
             Actionable Suggestions
           </h3>
           <ul className="space-y-2">
             {assessment.suggestions.map((suggestion, index) => (
               <li key={index} className="flex items-start gap-2">
-                <span className="text-blue-400 mt-0.5">{index + 1}.</span>
-                <span className="text-xs flex-1" style={{ color: 'var(--text-secondary)' }}>
+                <span className="text-blue-500 flex-shrink-0 mt-0.5" style={{ lineHeight: '1.2' }}>{index + 1}.</span>
+                <span className="text-xs flex-1" style={{ color: 'var(--text-secondary)', lineHeight: '1.5' }}>
                   {suggestion}
                 </span>
               </li>
@@ -407,14 +407,14 @@ const ATSChecker: React.FC<ATSCheckerProps> = ({ cvData, onClose }) => {
       {assessment.explanation?.keyFindings && assessment.explanation.keyFindings.length > 0 && (
         <div className="bg-gradient-to-r from-indigo-500/10 to-blue-500/10 border border-indigo-500/20 rounded-xl p-4 space-y-3">
           <h3 className="text-sm font-medium flex items-center gap-2" style={{ color: 'var(--text-primary)' }}>
-            <FiInfo size={14} className="text-indigo-400" />
+            <FiInfo size={14} className="text-indigo-500" />
             Key Findings
           </h3>
           <ul className="space-y-2">
             {assessment.explanation.keyFindings.map((finding, index) => (
               <li key={index} className="flex items-start gap-2">
-                <span className="text-indigo-400 mt-0.5">•</span>
-                <span className="text-xs flex-1" style={{ color: 'var(--text-secondary)' }}>
+                <span className="text-indigo-500 flex-shrink-0 mt-0.5" style={{ lineHeight: '1.2' }}>•</span>
+                <span className="text-xs flex-1" style={{ color: 'var(--text-secondary)', lineHeight: '1.5' }}>
                   {finding}
                 </span>
               </li>
