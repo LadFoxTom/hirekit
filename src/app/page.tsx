@@ -4283,17 +4283,19 @@ function MenuItem({
       }}
     >
       {/* Icon container - fixed width for alignment */}
-      <div className="w-5 h-5 flex items-center justify-center flex-shrink-0">
+      <div 
+        className="w-5 h-5 flex items-center justify-center flex-shrink-0"
+        style={{ 
+          color: disabled 
+            ? 'var(--text-disabled)'
+            : variant === 'danger'
+              ? 'var(--text-primary)'
+              : 'var(--text-primary)'
+        }}
+      >
         <Icon 
           size={18} 
           className={disabled ? 'opacity-50' : ''}
-          style={{ 
-            color: disabled 
-              ? 'var(--text-disabled)'
-              : variant === 'danger'
-                ? 'var(--text-primary)'
-                : 'var(--text-primary)'
-          }}
         />
       </div>
       
