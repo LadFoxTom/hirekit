@@ -867,7 +867,6 @@ export default function SettingsPage() {
                             backgroundColor: 'var(--bg-input)',
                             border: '1px solid var(--border-subtle)',
                             color: 'var(--text-primary)',
-                            placeholderColor: 'var(--placeholder-color)'
                           }}
                           onFocus={(e) => {
                             e.currentTarget.style.borderColor = '#3b82f6';
@@ -889,7 +888,6 @@ export default function SettingsPage() {
                             backgroundColor: 'var(--bg-input)',
                             border: '1px solid var(--border-subtle)',
                             color: 'var(--text-primary)',
-                            placeholderColor: 'var(--placeholder-color)'
                           }}
                           onFocus={(e) => {
                             e.currentTarget.style.borderColor = '#3b82f6';
@@ -930,7 +928,6 @@ export default function SettingsPage() {
                             backgroundColor: 'var(--bg-input)',
                             border: '1px solid var(--border-subtle)',
                             color: 'var(--text-primary)',
-                            placeholderColor: 'var(--placeholder-color)'
                           }}
                           onFocus={(e) => {
                             e.currentTarget.style.borderColor = '#3b82f6';
@@ -952,7 +949,6 @@ export default function SettingsPage() {
                             backgroundColor: 'var(--bg-input)',
                             border: '1px solid var(--border-subtle)',
                             color: 'var(--text-primary)',
-                            placeholderColor: 'var(--placeholder-color)'
                           }}
                           onFocus={(e) => {
                             e.currentTarget.style.borderColor = '#3b82f6';
@@ -975,8 +971,7 @@ export default function SettingsPage() {
                         style={{
                           backgroundColor: 'var(--bg-input)',
                           border: '1px solid var(--border-subtle)',
-                          color: 'var(--text-primary)',
-                          placeholderColor: 'var(--placeholder-color)'
+                          color: 'var(--text-primary)'
                         }}
                         onFocus={(e) => {
                           e.currentTarget.style.borderColor = '#3b82f6';
@@ -998,8 +993,7 @@ export default function SettingsPage() {
                         style={{
                           backgroundColor: 'var(--bg-input)',
                           border: '1px solid var(--border-subtle)',
-                          color: 'var(--text-primary)',
-                          placeholderColor: 'var(--placeholder-color)'
+                          color: 'var(--text-primary)'
                         }}
                         onFocus={(e) => {
                           e.currentTarget.style.borderColor = '#3b82f6';
@@ -1023,7 +1017,6 @@ export default function SettingsPage() {
                             backgroundColor: 'var(--bg-input)',
                             border: '1px solid var(--border-subtle)',
                             color: 'var(--text-primary)',
-                            placeholderColor: 'var(--placeholder-color)'
                           }}
                           onFocus={(e) => {
                             e.currentTarget.style.borderColor = '#3b82f6';
@@ -1045,7 +1038,6 @@ export default function SettingsPage() {
                             backgroundColor: 'var(--bg-input)',
                             border: '1px solid var(--border-subtle)',
                             color: 'var(--text-primary)',
-                            placeholderColor: 'var(--placeholder-color)'
                           }}
                           onFocus={(e) => {
                             e.currentTarget.style.borderColor = '#3b82f6';
@@ -1070,7 +1062,6 @@ export default function SettingsPage() {
                             backgroundColor: 'var(--bg-input)',
                             border: '1px solid var(--border-subtle)',
                             color: 'var(--text-primary)',
-                            placeholderColor: 'var(--placeholder-color)'
                           }}
                           onFocus={(e) => {
                             e.currentTarget.style.borderColor = '#3b82f6';
@@ -1092,7 +1083,6 @@ export default function SettingsPage() {
                             backgroundColor: 'var(--bg-input)',
                             border: '1px solid var(--border-subtle)',
                             color: 'var(--text-primary)',
-                            placeholderColor: 'var(--placeholder-color)'
                           }}
                           onFocus={(e) => {
                             e.currentTarget.style.borderColor = '#3b82f6';
@@ -1114,7 +1104,6 @@ export default function SettingsPage() {
                             backgroundColor: 'var(--bg-input)',
                             border: '1px solid var(--border-subtle)',
                             color: 'var(--text-primary)',
-                            placeholderColor: 'var(--placeholder-color)'
                           }}
                           onFocus={(e) => {
                             e.currentTarget.style.borderColor = '#3b82f6';
