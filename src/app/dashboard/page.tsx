@@ -432,8 +432,8 @@ export default function DashboardPage() {
       <Toaster position="top-center" toastOptions={{ style: { background: 'var(--bg-tertiary)', color: 'var(--text-primary)' } }} />
       
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 h-14 backdrop-blur-xl z-50" style={{ backgroundColor: 'var(--bg-primary)', borderBottom: '1px solid var(--border-subtle)', opacity: 0.95 }}>
-        <div className="h-full max-w-screen-2xl mx-auto px-4 flex items-center justify-between relative">
+      <header className="fixed top-0 left-0 right-0 h-14 backdrop-blur-xl border-b z-50" style={{ overflow: 'visible', backgroundColor: 'var(--bg-primary)', borderColor: 'var(--border-subtle)', opacity: 0.95 }}>
+        <div className="h-full max-w-screen-2xl mx-auto px-4 flex items-center justify-between" style={{ overflow: 'visible' }}>
           <div className="flex items-center gap-4">
             <button
               onClick={() => router.push('/')}

@@ -1882,7 +1882,7 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen text-white" style={{ maxWidth: '100vw', overflowX: 'hidden', width: '100%', backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)' }}>
-      <Toaster position="top-center" toastOptions={{ style: { background: '#1a1a1a', color: '#fff' } }} />
+      <Toaster position="top-center" toastOptions={{ style: { background: 'var(--bg-tertiary)', color: 'var(--text-primary)' } }} />
       
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 h-14 backdrop-blur-xl border-b z-50" style={{ overflow: 'visible', backgroundColor: 'var(--bg-primary)', borderColor: 'var(--border-subtle)', opacity: 0.95 }}>
