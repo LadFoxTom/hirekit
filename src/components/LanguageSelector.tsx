@@ -24,10 +24,14 @@ const FlagIcon: React.FC<{ code: string; className?: string }> = ({ code, classN
     <img 
       src={flagSrc} 
       alt={`${code.toUpperCase()} flag`}
-      className={`${className} rounded object-cover`}
+      className="rounded object-cover"
       style={{ 
         width: '20px',
         height: '20px',
+        minWidth: '20px',
+        minHeight: '20px',
+        maxWidth: '20px',
+        maxHeight: '20px',
         display: 'block',
         flexShrink: 0
       }}
@@ -69,8 +73,19 @@ export function LanguageSelector() {
           backgroundColor: 'transparent',
         }}
       >
-        <div style={{ width: '20px', height: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <FlagIcon code="en" className="w-5 h-5" />
+        <div style={{ 
+          width: '20px', 
+          height: '20px', 
+          minWidth: '20px',
+          minHeight: '20px',
+          maxWidth: '20px',
+          maxHeight: '20px',
+          display: 'flex', 
+          alignItems: 'center', 
+          justifyContent: 'center',
+          overflow: 'hidden'
+        }}>
+          <FlagIcon code="en" />
         </div>
       </button>
     )
@@ -91,8 +106,19 @@ export function LanguageSelector() {
         title={currentLanguage?.name || 'Language'}
         aria-label="Select language"
       >
-        <div style={{ width: '20px', height: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <FlagIcon code={language} className="w-5 h-5" />
+        <div style={{ 
+          width: '20px', 
+          height: '20px', 
+          minWidth: '20px',
+          minHeight: '20px',
+          maxWidth: '20px',
+          maxHeight: '20px',
+          display: 'flex', 
+          alignItems: 'center', 
+          justifyContent: 'center',
+          overflow: 'hidden'
+        }}>
+          <FlagIcon code={language} />
         </div>
       </button>
 
@@ -133,8 +159,19 @@ export function LanguageSelector() {
                   }}
                   title={lang.name}
                 >
-                  <div style={{ width: '20px', height: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <FlagIcon code={lang.code} className="w-5 h-5" />
+                  <div style={{ 
+                    width: '20px', 
+                    height: '20px', 
+                    minWidth: '20px',
+                    minHeight: '20px',
+                    maxWidth: '20px',
+                    maxHeight: '20px',
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    justifyContent: 'center',
+                    overflow: 'hidden'
+                  }}>
+                    <FlagIcon code={lang.code} />
                   </div>
                   {language === lang.code && (
                     <span className="ml-1.5" style={{ color: '#3b82f6', fontSize: '12px' }}>✓</span>
