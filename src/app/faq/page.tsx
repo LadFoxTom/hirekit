@@ -230,7 +230,7 @@ export default function FAQPage() {
       
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 h-14 backdrop-blur-xl border-b z-50" style={{ overflow: 'visible', backgroundColor: 'var(--bg-primary)', borderColor: 'var(--border-subtle)', opacity: 0.95 }}>
-        <div className="h-full max-w-screen-xl mx-auto px-4 flex items-center justify-between" style={{ overflow: 'visible' }}>
+        <div className="h-full max-w-screen-2xl mx-auto px-4 flex items-center justify-between" style={{ overflow: 'visible' }}>
           {/* Left: Back & Logo */}
           <div className="flex items-center gap-4">
             <button
@@ -817,7 +817,7 @@ export default function FAQPage() {
         </div>
 
         {/* Contact Section */}
-        <div className="max-w-3xl mx-auto px-4 pb-20">
+        <div className="max-w-6xl mx-auto px-4 pb-20">
           <div className="rounded-2xl p-8 text-center" style={{ background: 'linear-gradient(to bottom right, rgba(59, 130, 246, 0.1), rgba(168, 85, 247, 0.1))', border: '1px solid var(--border-medium)' }}>
             <h2 className="text-2xl font-bold mb-3" style={{ color: 'var(--text-heading)' }}>Still have questions?</h2>
             <p className="mb-6" style={{ color: 'var(--text-secondary)' }}>
