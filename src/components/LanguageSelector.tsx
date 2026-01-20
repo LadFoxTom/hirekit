@@ -25,7 +25,12 @@ const FlagIcon: React.FC<{ code: string; className?: string }> = ({ code, classN
       src={flagSrc} 
       alt={`${code.toUpperCase()} flag`}
       className={`${className} rounded object-cover`}
-      style={{ aspectRatio: '1 / 1' }}
+      style={{ 
+        width: '20px',
+        height: '20px',
+        display: 'block',
+        flexShrink: 0
+      }}
     />
   )
 }
@@ -64,7 +69,9 @@ export function LanguageSelector() {
           backgroundColor: 'transparent',
         }}
       >
-        <FlagIcon code="en" className="w-5 h-5" />
+        <div style={{ width: '20px', height: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <FlagIcon code="en" className="w-5 h-5" />
+        </div>
       </button>
     )
   }
@@ -84,7 +91,9 @@ export function LanguageSelector() {
         title={currentLanguage?.name || 'Language'}
         aria-label="Select language"
       >
-        <FlagIcon code={language} className="w-5 h-5" />
+        <div style={{ width: '20px', height: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <FlagIcon code={language} className="w-5 h-5" />
+        </div>
       </button>
 
       <AnimatePresence>
