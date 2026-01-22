@@ -160,8 +160,8 @@
   "chat.ai_thinking": "AI denkt na...",
   "chat.continue_conversation": "Ga door met het gesprek...",
   "chat.new_conversation": "Nieuw gesprek",
-  "chat.questions_remaining_guest": "{{count}} vraag{{count, plural, =1 {} other {en}}} over",
-  "chat.questions_remaining_free": "{{count}} vraag{{count, plural, =1 {} other {en}}} over",
+  "chat.questions_remaining_guest": "{count} vragen over",
+  "chat.questions_remaining_free": "{count} vragen over",
   
   "toast.jobs_coming_soon": "Banen komen binnenkort 🚧",
   "toast.job_applications_coming_soon": "Sollicitaties komen binnenkort 🚧",

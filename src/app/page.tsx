@@ -3663,10 +3663,21 @@ export default function HomePage() {
                         border: `1px solid ${questionRemaining <= 1 ? 'rgba(239, 68, 68, 0.3)' : 'var(--border-subtle)'}`
                       }}>
                         <span style={{ color: 'var(--text-secondary)' }}>
-                          {isAuthenticated 
-                            ? t('chat.questions_remaining_free', { count: questionRemaining })
-                            : t('chat.questions_remaining_guest', { count: questionRemaining })
-                          }
+                          {(() => {
+                            const baseText = isAuthenticated 
+                              ? t('chat.questions_remaining_free')
+                              : t('chat.questions_remaining_guest');
+                            const withCount = baseText.replace('{count}', questionRemaining.toString());
+                            // Handle pluralization for Dutch
+                            if (language === 'nl') {
+                              return withCount.replace('vragen', questionRemaining === 1 ? 'vraag' : 'vragen');
+                            }
+                            // Handle pluralization for English
+                            if (language === 'en') {
+                              return withCount.replace('questions', questionRemaining === 1 ? 'question' : 'questions');
+                            }
+                            return withCount;
+                          })()}
                         </span>
                         {questionRemaining <= 1 && (
                           <button

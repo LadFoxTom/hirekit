@@ -927,7 +927,10 @@ export default function PricingPage() {
                     {billingInterval === 'monthly' ? (
                       <div className="mt-1 space-y-0.5">
                         <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
-                          {t('pricing.trial_info', { trialPrice: currencySymbol + STRIPE_PLANS.basic.priceTrial, monthlyPrice: currencySymbol + STRIPE_PLANS.basic.priceMonthly, days: STRIPE_PLANS.basic.trialDays })}
+                          {t('pricing.trial_info')
+                            .replace('{trialPrice}', currencySymbol + STRIPE_PLANS.basic.priceTrial)
+                            .replace('{monthlyPrice}', currencySymbol + STRIPE_PLANS.basic.priceMonthly)
+                            .replace('{days}', STRIPE_PLANS.basic.trialDays.toString())}
                         </p>
                         <p className="text-xs" style={{ color: 'var(--text-tertiary)' }}>
                           {t('pricing.trial_auto_renew')}

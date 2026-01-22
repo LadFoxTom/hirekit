@@ -760,8 +760,8 @@
   "chat.ai_thinking": "AI is thinking...",
   "chat.continue_conversation": "Continue the conversation...",
   "chat.new_conversation": "New conversation",
-  "chat.questions_remaining_guest": "{{count}} question{{count, plural, =1 {} other {s}}} remaining",
-  "chat.questions_remaining_free": "{{count}} question{{count, plural, =1 {} other {s}}} remaining",
+  "chat.questions_remaining_guest": "{count} questions remaining",
+  "chat.questions_remaining_free": "{count} questions remaining",
   
   "toast.jobs_coming_soon": "Jobs coming soon 🚧",
   "toast.job_applications_coming_soon": "Job Applications coming soon 🚧",
