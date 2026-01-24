@@ -963,6 +963,9 @@
   "cv_editor.status_saved": "Saved",
   "cv_editor.unsaved_changes": "⚠️ You have unsaved changes",
   "cv_editor.save_continue": "Save & Continue",
+  "cv_editor.leave_prompt": "You have unsaved changes in your CV or letter. Do you want to save before leaving?",
+  "cv_editor.leave_without_saving": "Leave without saving",
+  "cv_editor.leave_cancel": "Stay",
   
   "letter_builder.cv_section.title": "Select Your CV",
   "letter_builder.cv_section.description": "Choose a CV to provide context for your motivational letter. This helps the AI generate more personalized and relevant content.",

@@ -938,12 +938,66 @@ export default function HomePage() {
           
           toast.success(t('toast.cv_loaded'));
           isLoadingFromLocalStorage.current = false;
+          setTimeout(() => {
+            markAsSaved();
+          }, 0);
         } catch (err) {
           console.error('Error loading CV from localStorage:', err);
           // Clear invalid data
           localStorage.removeItem('cvData');
           localStorage.removeItem('saved_cv_id');
           isLoadingFromLocalStorage.current = false;
+        }
+      } else {
+        const draftData = localStorage.getItem('cv_builder_draft');
+        if (draftData) {
+          isLoadingFromLocalStorage.current = true;
+          try {
+            const draft = JSON.parse(draftData);
+            const draftCv = draft?.cvData || {};
+            const draftLetter = draft?.letterData || {};
+            const draftPhotos = Array.isArray(draft?.photos) ? draft.photos : [];
+            const draftSelectedIndex = typeof draft?.selectedPhotoIndex === 'number' ? draft.selectedPhotoIndex : null;
+            
+            setCvData(prev => ({ ...prev, ...draftCv }));
+            setLetterData(prev => ({ ...prev, ...draftLetter }));
+            
+            if (draftPhotos.length > 0) {
+              setPhotos(draftPhotos);
+              if (draftCv.photoUrl) {
+                const photoIndex = draftPhotos.findIndex((photo: string) => photo === draftCv.photoUrl);
+                if (photoIndex !== -1) {
+                  setSelectedPhotoIndex(photoIndex);
+                } else {
+                  setSelectedPhotoIndex(0);
+                  setCvData(prev => ({ ...prev, photoUrl: draftPhotos[0] }));
+                }
+              } else {
+                setSelectedPhotoIndex(draftSelectedIndex ?? 0);
+                if (!draftCv.photoUrl && draftPhotos[0]) {
+                  setCvData(prev => ({ ...prev, photoUrl: draftPhotos[0] }));
+                }
+              }
+            } else if (draftCv.photoUrl) {
+              setPhotos([draftCv.photoUrl]);
+              setSelectedPhotoIndex(0);
+            } else {
+              setPhotos([]);
+              setSelectedPhotoIndex(draftSelectedIndex);
+            }
+            
+            isDraftLoadedRef.current = true;
+            setHasUnsavedChanges(true);
+            setIsConversationActive(true);
+            setArtifactType('cv');
+            toast.success(t('toast.cv_loaded'));
+          } catch (err) {
+            console.error('Error loading CV draft from localStorage:', err);
+            localStorage.removeItem('cv_builder_draft');
+            localStorage.removeItem('cv_builder_draft_updated_at');
+          } finally {
+            isLoadingFromLocalStorage.current = false;
+          }
         }
       }
     }
@@ -1043,6 +1097,15 @@ export default function HomePage() {
     closing: 'Thank you for considering my application. I look forward to the opportunity to discuss how I can contribute to your team.',
     signature: cvData.fullName || '',
   });
+
+  // Unsaved changes + leave guard
+  const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
+  const [showLeavePrompt, setShowLeavePrompt] = useState(false);
+  const [isSavingBeforeLeave, setIsSavingBeforeLeave] = useState(false);
+  const pendingLeaveAction = useRef<(() => void) | null>(null);
+  const initialSnapshotRef = useRef<string | null>(null);
+  const lastSavedSnapshotRef = useRef<string | null>(null);
+  const isDraftLoadedRef = useRef(false);
   
   // Job State
   const [jobs, setJobs] = useState<JobMatch[]>([]);
@@ -1056,10 +1119,88 @@ export default function HomePage() {
     content: string;
   } | null>(null);
 
+  const getDraftSnapshot = useCallback(() => {
+    return JSON.stringify({
+      cvData,
+      letterData,
+      photos,
+      selectedPhotoIndex,
+    });
+  }, [cvData, letterData, photos, selectedPhotoIndex]);
+
+  const persistDraft = useCallback(() => {
+    if (typeof window === 'undefined') return;
+    const draft = {
+      cvData,
+      letterData,
+      photos,
+      selectedPhotoIndex,
+    };
+    localStorage.setItem('cv_builder_draft', JSON.stringify(draft));
+    localStorage.setItem('cv_builder_draft_updated_at', new Date().toISOString());
+  }, [cvData, letterData, photos, selectedPhotoIndex]);
+
+  const clearDraft = useCallback(() => {
+    if (typeof window === 'undefined') return;
+    localStorage.removeItem('cv_builder_draft');
+    localStorage.removeItem('cv_builder_draft_updated_at');
+  }, []);
+
+  const markAsSaved = useCallback(() => {
+    lastSavedSnapshotRef.current = getDraftSnapshot();
+    setHasUnsavedChanges(false);
+    isDraftLoadedRef.current = false;
+  }, [getDraftSnapshot]);
+
+  const requestNavigation = useCallback((action: () => void) => {
+    if (hasUnsavedChanges) {
+      pendingLeaveAction.current = action;
+      setShowLeavePrompt(true);
+      return;
+    }
+    action();
+  }, [hasUnsavedChanges]);
+
+  const guardedRouterPush = useCallback((href: string) => {
+    requestNavigation(() => router.push(href));
+  }, [requestNavigation, router]);
+
+  const guardedSignOut = useCallback(() => {
+    requestNavigation(() => signOut({ callbackUrl: '/' }));
+  }, [requestNavigation]);
+
+
   // Auto-scroll chat
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
+
+  // Track unsaved changes
+  useEffect(() => {
+    if (isLoadingFromLocalStorage.current) return;
+    const snapshot = getDraftSnapshot();
+    if (initialSnapshotRef.current === null) {
+      initialSnapshotRef.current = snapshot;
+      setHasUnsavedChanges(false);
+      return;
+    }
+    const baseline = lastSavedSnapshotRef.current ?? initialSnapshotRef.current;
+    const isDirty = baseline ? snapshot !== baseline : false;
+    setHasUnsavedChanges(isDraftLoadedRef.current ? true : isDirty);
+  }, [getDraftSnapshot]);
+
+  // Warn on page unload if there are unsaved changes
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const handleBeforeUnload = (event: BeforeUnloadEvent) => {
+      if (!hasUnsavedChanges) return;
+      persistDraft();
+      event.preventDefault();
+      event.returnValue = '';
+    };
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    return () => window.removeEventListener('beforeunload', handleBeforeUnload);
+  }, [hasUnsavedChanges, persistDraft]);
 
   // Close user menu when clicking outside (works for both mouse and touch)
   useEffect(() => {
@@ -1207,6 +1348,10 @@ export default function HomePage() {
         setIsConversationActive(true);
         setArtifactType('cv');
         toast.success('CV loaded!');
+        clearDraft();
+        setTimeout(() => {
+          markAsSaved();
+        }, 0);
       }
     } catch (err) {
       toast.error(t('toast.cv_load_failed'));
@@ -1215,10 +1360,10 @@ export default function HomePage() {
   };
 
   // Save current CV
-  const handleSaveCV = async () => {
+  const handleSaveCV = async (): Promise<boolean> => {
     if (!isAuthenticated) {
       toast.error(t('toast.please_sign_in'));
-      return;
+      return false;
     }
     
     try {
@@ -1244,6 +1389,8 @@ export default function HomePage() {
       if (data.cv?.id) {
         setCurrentCVId(data.cv.id);
         toast.success(t('toast.cv_saved'));
+        markAsSaved();
+        clearDraft();
         // Refresh saved CVs list
         const cvsRes = await fetch('/api/cv');
         const cvsData = await cvsRes.json();
@@ -1255,10 +1402,38 @@ export default function HomePage() {
           })));
         }
       }
+      return true;
     } catch (err) {
       toast.error(t('toast.cv_save_failed'));
+      return false;
     }
   };
+
+  const handleLeaveWithoutSaving = useCallback(() => {
+    setShowLeavePrompt(false);
+    clearDraft();
+    pendingLeaveAction.current?.();
+    pendingLeaveAction.current = null;
+  }, [clearDraft]);
+
+  const handleLeaveCancel = useCallback(() => {
+    setShowLeavePrompt(false);
+    pendingLeaveAction.current = null;
+  }, []);
+
+  const handleLeaveSave = useCallback(async () => {
+    setIsSavingBeforeLeave(true);
+    persistDraft();
+    let savedOk = true;
+    if (isAuthenticated) {
+      savedOk = await handleSaveCV();
+    }
+    setIsSavingBeforeLeave(false);
+    if (!savedOk) return;
+    setShowLeavePrompt(false);
+    pendingLeaveAction.current?.();
+    pendingLeaveAction.current = null;
+  }, [handleSaveCV, isAuthenticated, persistDraft]);
 
   // Auto-resize textarea
   const handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -1344,11 +1519,11 @@ export default function HomePage() {
         toast.error(t('toast.question_limit_guest_reached'));
         // Optionally redirect to login
         setTimeout(() => {
-          router.push('/auth/login');
+          guardedRouterPush('/auth/login');
         }, 2000);
       } else {
         toast.error(t('toast.question_limit_free_reached'));
-        router.push('/pricing');
+        guardedRouterPush('/pricing');
       }
       return;
     }
@@ -1365,7 +1540,7 @@ export default function HomePage() {
           setQuestionRemaining(data.remaining);
           if (data.limitReached) {
             toast.error(t('toast.question_limit_free_reached'));
-            router.push('/pricing');
+            guardedRouterPush('/pricing');
             return;
           }
         }
@@ -1718,7 +1893,7 @@ export default function HomePage() {
     // Block download for free accounts (not just non-pro)
     if (!isAuthenticated || isFree) {
       toast.error(t('toast.download_free_account'));
-      router.push('/pricing');
+      guardedRouterPush('/pricing');
       return;
     }
     try {
@@ -1965,7 +2140,17 @@ export default function HomePage() {
             >
               <FiMenu size={20} />
             </button>
-            <a href="/" className="flex items-center gap-2" style={{ color: 'inherit' }} onMouseEnter={(e) => { e.currentTarget.style.color = 'inherit'; }} onMouseLeave={(e) => { e.currentTarget.style.color = 'inherit'; }}>
+            <a
+              href="/"
+              className="flex items-center gap-2"
+              style={{ color: 'inherit' }}
+              onClick={(e) => {
+                e.preventDefault();
+                guardedRouterPush('/');
+              }}
+              onMouseEnter={(e) => { e.currentTarget.style.color = 'inherit'; }}
+              onMouseLeave={(e) => { e.currentTarget.style.color = 'inherit'; }}
+            >
               <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center font-bold text-sm text-white">
                 LF
               </div>
@@ -2091,13 +2276,13 @@ export default function HomePage() {
                         <MenuItem 
                           icon={FiGrid} 
                           label={t('nav.dashboard')} 
-                          onClick={() => { setIsUserMenuOpen(false); router.push('/dashboard'); }}
+                          onClick={() => { setIsUserMenuOpen(false); guardedRouterPush('/dashboard'); }}
                           isActive={pathname === '/dashboard'}
                         />
                         <MenuItem 
                           icon={FiFolder} 
                           label={t('nav.my_cvs')} 
-                          onClick={() => { setIsUserMenuOpen(false); router.push('/dashboard?tab=cvs'); }}
+                          onClick={() => { setIsUserMenuOpen(false); guardedRouterPush('/dashboard?tab=cvs'); }}
                         />
                         <MenuItem 
                           icon={FiBriefcase} 
@@ -2118,20 +2303,20 @@ export default function HomePage() {
                         <MenuItem 
                           icon={FiCreditCard} 
                           label={t('nav.subscription')} 
-                          onClick={() => { setIsUserMenuOpen(false); router.push('/pricing'); }} 
+                          onClick={() => { setIsUserMenuOpen(false); guardedRouterPush('/pricing'); }} 
                           badge={subBadge}
                           isActive={pathname === '/pricing'}
                         />
                         <MenuItem 
                           icon={FiSettings} 
                           label={t('nav.settings')} 
-                          onClick={() => { setIsUserMenuOpen(false); router.push('/settings'); }}
+                          onClick={() => { setIsUserMenuOpen(false); guardedRouterPush('/settings'); }}
                           isActive={pathname === '/settings'}
                         />
                         <MenuItem 
                           icon={FiHelpCircle} 
                           label={t('nav.help_support_short')} 
-                          onClick={() => { setIsUserMenuOpen(false); router.push('/faq'); }}
+                          onClick={() => { setIsUserMenuOpen(false); guardedRouterPush('/faq'); }}
                           isActive={pathname === '/faq'}
                         />
                       </div>
@@ -2141,7 +2326,7 @@ export default function HomePage() {
                         <MenuItem 
                           icon={FiLogOut} 
                           label={t('nav.sign_out')} 
-                          onClick={() => { setIsUserMenuOpen(false); signOut({ callbackUrl: '/' }); }}
+                          onClick={() => { setIsUserMenuOpen(false); guardedSignOut(); }}
                         />
                       </div>
                     </motion.div>
@@ -2151,13 +2336,13 @@ export default function HomePage() {
             ) : (
               <div className="flex items-center gap-2">
                   <button
-                    onClick={() => router.push('/auth/login')}
+                    onClick={() => guardedRouterPush('/auth/login')}
                     className="px-4 py-2 text-sm text-gray-300 hover:text-white transition-colors"
                   >
                     {t('nav.sign_in')}
                   </button>
                   <button
-                    onClick={() => router.push('/auth/signup')}
+                    onClick={() => guardedRouterPush('/auth/signup')}
                     className="px-4 py-2 bg-white text-black text-sm font-medium rounded-lg hover:bg-gray-100 transition-colors"
                   >
                     {t('nav.get_started')}
@@ -2203,7 +2388,7 @@ export default function HomePage() {
                 {/* Navigation Items */}
                 <div className="space-y-1">
                   <button
-                    onClick={() => { setIsUserMenuOpen(false); router.push('/dashboard'); }}
+                    onClick={() => { setIsUserMenuOpen(false); guardedRouterPush('/dashboard'); }}
                     className="w-full flex items-center min-h-[44px] px-4 py-3 text-sm font-medium transition-all duration-150 rounded-lg"
                     style={{
                       ...(pathname === '/dashboard' ? { 
@@ -2231,7 +2416,7 @@ export default function HomePage() {
                     <span className="flex-1 text-left ml-3">{t('nav.dashboard')}</span>
                   </button>
                   <button
-                    onClick={() => { setIsUserMenuOpen(false); router.push('/dashboard?tab=cvs'); }}
+                    onClick={() => { setIsUserMenuOpen(false); guardedRouterPush('/dashboard?tab=cvs'); }}
                     className="w-full flex items-center min-h-[44px] px-4 py-3 text-sm font-medium transition-all duration-150 rounded-lg"
                     style={{ color: 'var(--text-primary)' }}
                     onMouseEnter={(e) => {
@@ -2263,7 +2448,7 @@ export default function HomePage() {
                 {/* Account Items */}
                 <div className="pt-1.5 mt-1.5 space-y-1" style={{ borderTop: '1px solid var(--border-subtle)' }}>
                   <button
-                    onClick={() => { setIsUserMenuOpen(false); router.push('/pricing'); }}
+                    onClick={() => { setIsUserMenuOpen(false); guardedRouterPush('/pricing'); }}
                     className="w-full flex items-center min-h-[44px] px-4 py-3 text-sm font-medium transition-all duration-150 rounded-lg"
                     style={{
                       ...(pathname === '/pricing' ? { 
@@ -2292,7 +2477,7 @@ export default function HomePage() {
                     <span className="ml-auto px-2.5 py-1 text-xs font-medium rounded-full flex-shrink-0" style={{ backgroundColor: 'var(--bg-tertiary)', color: 'var(--text-secondary)' }}>{subBadge}</span>
                   </button>
                   <button
-                    onClick={() => { setIsUserMenuOpen(false); router.push('/settings'); }}
+                    onClick={() => { setIsUserMenuOpen(false); guardedRouterPush('/settings'); }}
                     className="w-full flex items-center min-h-[44px] px-4 py-3 text-sm font-medium transition-all duration-150 rounded-lg"
                     style={{
                       ...(pathname === '/settings' ? { 
@@ -2320,7 +2505,7 @@ export default function HomePage() {
                     <span className="flex-1 text-left ml-3">{t('nav.settings')}</span>
                   </button>
                   <button
-                    onClick={() => { setIsUserMenuOpen(false); router.push('/faq'); }}
+                    onClick={() => { setIsUserMenuOpen(false); guardedRouterPush('/faq'); }}
                     className="w-full flex items-center min-h-[44px] px-4 py-3 text-sm font-medium transition-all duration-150 rounded-lg"
                     style={{
                       ...(pathname === '/faq' ? { 
@@ -2368,7 +2553,7 @@ export default function HomePage() {
                 {/* Action Items */}
                 <div className="pt-1.5 mt-1.5" style={{ borderTop: '1px solid var(--border-subtle)' }}>
                   <button
-                    onClick={() => { setIsUserMenuOpen(false); signOut({ callbackUrl: '/' }); }}
+                    onClick={() => { setIsUserMenuOpen(false); guardedSignOut(); }}
                     className="w-full flex items-center min-h-[44px] px-4 py-3 text-sm font-medium transition-all duration-150 rounded-lg"
                     style={{ color: 'var(--text-primary)' }}
                     onMouseEnter={(e) => {
@@ -2386,6 +2571,84 @@ export default function HomePage() {
                 </div>
               </div>
             </motion.aside>
+          </>
+        )}
+      </AnimatePresence>
+
+      {/* Unsaved Changes Prompt */}
+      <AnimatePresence>
+        {showLeavePrompt && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-50"
+              style={{ backgroundColor: 'var(--overlay)' }}
+              onClick={handleLeaveCancel}
+            />
+            <motion.div
+              initial={{ opacity: 0, y: 16, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 16, scale: 0.98 }}
+              transition={{ duration: 0.15 }}
+              className="fixed inset-0 z-50 flex items-center justify-center px-4"
+            >
+              <div
+                className="w-full max-w-md rounded-2xl p-6"
+                style={{ backgroundColor: 'var(--bg-elevated)', border: '1px solid var(--border-medium)', boxShadow: 'var(--shadow-lg)' }}
+              >
+                <h3 className="text-lg font-semibold mb-2" style={{ color: 'var(--text-primary)' }}>
+                  {t('cv_editor.unsaved_changes')}
+                </h3>
+                <p className="text-sm mb-5" style={{ color: 'var(--text-secondary)' }}>
+                  {t('cv_editor.leave_prompt')}
+                </p>
+                <div className="flex items-center gap-2 justify-end">
+                  <button
+                    onClick={handleLeaveCancel}
+                    className="px-3 py-2 text-sm rounded-lg transition-colors"
+                    style={{ color: 'var(--text-tertiary)' }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.color = 'var(--text-primary)';
+                      e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.color = 'var(--text-tertiary)';
+                      e.currentTarget.style.backgroundColor = 'transparent';
+                    }}
+                  >
+                    {t('cv_editor.leave_cancel')}
+                  </button>
+                  <button
+                    onClick={handleLeaveWithoutSaving}
+                    className="px-3 py-2 text-sm rounded-lg transition-colors"
+                    style={{ color: 'var(--text-secondary)' }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.color = 'var(--text-primary)';
+                      e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.color = 'var(--text-secondary)';
+                      e.currentTarget.style.backgroundColor = 'transparent';
+                    }}
+                  >
+                    {t('cv_editor.leave_without_saving')}
+                  </button>
+                  <button
+                    onClick={handleLeaveSave}
+                    disabled={isSavingBeforeLeave}
+                    className="px-4 py-2 text-sm font-medium rounded-lg transition-colors disabled:opacity-50"
+                    style={{
+                      backgroundColor: 'var(--color-ladderfox-blue)',
+                      color: '#ffffff'
+                    }}
+                  >
+                    {isSavingBeforeLeave ? t('pricing.processing') : t('cv_editor.save_continue')}
+                  </button>
+                </div>
+              </div>
+            </motion.div>
           </>
         )}
       </AnimatePresence>
@@ -2623,7 +2886,7 @@ export default function HomePage() {
                     {t('landing.main.quick_actions')}
                   </h3>
                   <button 
-                    onClick={() => router.push('/dashboard')}
+                    onClick={() => guardedRouterPush('/dashboard')}
                     className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors text-left"
                     style={{ color: 'var(--text-primary)' }}
                     onMouseEnter={(e) => {
@@ -3683,9 +3946,9 @@ export default function HomePage() {
                           <button
                             onClick={() => {
                               if (!isAuthenticated) {
-                                router.push('/auth/login');
+                                guardedRouterPush('/auth/login');
                               } else {
-                                router.push('/pricing');
+                                guardedRouterPush('/pricing');
                               }
                             }}
                             className="ml-2 px-2 py-0.5 rounded text-xs font-medium transition-colors"
@@ -4102,8 +4365,7 @@ export default function HomePage() {
                           onClick={() => {
                             if (isFree) {
                               toast.error(t('toast.download_free_account'));
-                              router.push('/pricing');
-                              router.push('/pricing');
+                              guardedRouterPush('/pricing');
                               return;
                             }
                             handleDownload();
@@ -4130,7 +4392,7 @@ export default function HomePage() {
                           onClick={() => {
                             if (isFree) {
                               toast.error(t('toast.copy_letter_pro_feature'));
-                              router.push('/pricing');
+                              guardedRouterPush('/pricing');
                               return;
                             }
                             navigator.clipboard.writeText(
@@ -4155,8 +4417,7 @@ export default function HomePage() {
                           onClick={() => {
                             if (isFree) {
                               toast.error(t('toast.download_free_account'));
-                              router.push('/pricing');
-                              router.push('/pricing');
+                              guardedRouterPush('/pricing');
                               return;
                             }
                             const content = `${letterData.opening}\n\n${letterData.body}\n\n${letterData.closing}\n\n${letterData.signature}`;

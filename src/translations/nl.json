@@ -1457,5 +1457,10 @@
       "version": "Versie",
       "compliant": "Naleving van"
     }
-  }
+  },
+  "cv_editor.unsaved_changes": "⚠️ Je hebt niet-opgeslagen wijzigingen",
+  "cv_editor.save_continue": "Opslaan & Doorgaan",
+  "cv_editor.leave_prompt": "Je hebt niet-opgeslagen wijzigingen in je CV of brief. Wil je opslaan voordat je vertrekt?",
+  "cv_editor.leave_without_saving": "Doorgaan zonder opslaan",
+  "cv_editor.leave_cancel": "Blijven"
 }
