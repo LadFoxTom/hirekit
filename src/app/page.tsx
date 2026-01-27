@@ -27,6 +27,7 @@ import { sanitizeCVDataForAPI as sanitizeForAPI } from '@/utils/cvDataSanitizer'
 import { ThemeSwitcher } from '@/components/ThemeSwitcher';
 import { LanguageSelector } from '@/components/LanguageSelector';
 import ATSChecker from '@/components/ATSChecker';
+import { hotjarStateChange } from '@/components/Hotjar';
 
 // Dynamically import PDF preview viewer (React-PDF based for guaranteed preview=export consistency)
 const PDFPreviewViewer = dynamic(
@@ -859,6 +860,7 @@ export default function HomePage() {
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const chatEndRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const sendButtonRef = useRef<HTMLButtonElement>(null);
   const isManualSelectionRef = useRef(false);
   const isLoadingFromLocalStorage = useRef(false);
 
@@ -1003,6 +1005,17 @@ export default function HomePage() {
     }
   }, [t]); // Include t for consistency
 
+  // Track Hotjar state changes for SPA navigation
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      if (isConversationActive) {
+        hotjarStateChange('/chat-interface');
+      } else {
+        hotjarStateChange('/');
+      }
+    }
+  }, [isConversationActive]);
+
   // Initialize photos array from existing photoUrl (only if not loading from localStorage)
   useEffect(() => {
     if (!isLoadingFromLocalStorage.current && cvData.photoUrl && photos.length === 0 && selectedPhotoIndex === null) {
@@ -1118,6 +1131,20 @@ export default function HomePage() {
     name: string;
     content: string;
   } | null>(null);
+
+  // Update send button icon color when inputValue or theme changes
+  useEffect(() => {
+    if (sendButtonRef.current) {
+      const hasText = inputValue.trim() || attachedFile;
+      const isDay = document.documentElement.getAttribute('data-theme') === 'day';
+      const iconSpan = sendButtonRef.current.querySelector('span');
+      if (iconSpan) {
+        iconSpan.style.color = hasText && !isProcessing && !isUploading
+          ? (isDay ? '#ffffff' : '#000000')
+          : 'var(--text-disabled)';
+      }
+    }
+  }, [inputValue, attachedFile, isProcessing, isUploading]);
 
   const getDraftSnapshot = useCallback(() => {
     return JSON.stringify({
@@ -4022,6 +4049,7 @@ export default function HomePage() {
                             <FiPaperclip size={14} />
                           </button>
                           <button
+                            ref={sendButtonRef}
                             onClick={() => handleSubmit()}
                             disabled={(!inputValue.trim() && !attachedFile) || isProcessing || isUploading}
                             className="p-2 flex items-center justify-center rounded-lg transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
@@ -4029,36 +4057,72 @@ export default function HomePage() {
                               backgroundColor: (inputValue.trim() || attachedFile) && !isProcessing && !isUploading
                                 ? (document.documentElement.getAttribute('data-theme') === 'day' ? '#2563eb' : '#ffffff')
                                 : 'var(--bg-hover)',
-                              color: (inputValue.trim() || attachedFile) && !isProcessing && !isUploading
-                                ? (document.documentElement.getAttribute('data-theme') === 'day' ? '#ffffff' : '#000000')
-                                : 'var(--text-disabled)',
                             }}
                             onMouseEnter={(e) => {
                               if ((inputValue.trim() || attachedFile) && !isProcessing && !isUploading) {
-                                e.currentTarget.style.backgroundColor = document.documentElement.getAttribute('data-theme') === 'day' ? '#1d4ed8' : '#f3f4f6';
+                                const isDay = document.documentElement.getAttribute('data-theme') === 'day';
+                                e.currentTarget.style.backgroundColor = isDay ? '#1d4ed8' : '#f3f4f6';
+                                const icon = e.currentTarget.querySelector('svg');
+                                if (icon) {
+                                  icon.style.color = isDay ? '#ffffff' : '#000000';
+                                  icon.style.fill = 'none';
+                                }
                               }
                             }}
                             onMouseLeave={(e) => {
                               if ((inputValue.trim() || attachedFile) && !isProcessing && !isUploading) {
-                                e.currentTarget.style.backgroundColor = document.documentElement.getAttribute('data-theme') === 'day' ? '#2563eb' : '#ffffff';
+                                const isDay = document.documentElement.getAttribute('data-theme') === 'day';
+                                e.currentTarget.style.backgroundColor = isDay ? '#2563eb' : '#ffffff';
+                                const icon = e.currentTarget.querySelector('svg');
+                                if (icon) {
+                                  icon.style.color = isDay ? '#ffffff' : '#000000';
+                                  icon.style.fill = 'none';
+                                }
                               }
                             }}
                             onFocus={(e) => {
                               if ((inputValue.trim() || attachedFile) && !isProcessing && !isUploading) {
                                 const isDay = document.documentElement.getAttribute('data-theme') === 'day';
                                 e.currentTarget.style.backgroundColor = isDay ? '#2563eb' : '#ffffff';
-                                e.currentTarget.style.color = isDay ? '#ffffff' : '#000000';
+                                const icon = e.currentTarget.querySelector('svg');
+                                if (icon) {
+                                  icon.style.color = isDay ? '#ffffff' : '#000000';
+                                  icon.style.fill = 'none';
+                                }
                               }
                             }}
                             onBlur={(e) => {
                               if ((inputValue.trim() || attachedFile) && !isProcessing && !isUploading) {
                                 const isDay = document.documentElement.getAttribute('data-theme') === 'day';
                                 e.currentTarget.style.backgroundColor = isDay ? '#2563eb' : '#ffffff';
-                                e.currentTarget.style.color = isDay ? '#ffffff' : '#000000';
+                                const icon = e.currentTarget.querySelector('svg');
+                                if (icon) {
+                                  icon.style.color = isDay ? '#ffffff' : '#000000';
+                                  icon.style.fill = 'none';
+                                }
                               }
                             }}
                           >
-                            <FiSend size={16} style={{ color: 'inherit' }} />
+                            <span
+                              style={{
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                color: (inputValue.trim() || attachedFile) && !isProcessing && !isUploading
+                                  ? (document.documentElement.getAttribute('data-theme') === 'day' ? '#ffffff' : '#000000')
+                                  : 'var(--text-disabled)',
+                              }}
+                            >
+                              <FiSend 
+                                size={16} 
+                                style={{ 
+                                  color: 'inherit',
+                                  fill: 'none',
+                                  stroke: 'currentColor',
+                                  strokeWidth: 2,
+                                }} 
+                              />
+                            </span>
                           </button>
                         </div>
                       </div>
