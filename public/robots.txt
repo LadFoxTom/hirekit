@@ -30,7 +30,7 @@ Allow: /auth/login
 Allow: /auth/signup
 
 # Sitemap location
-Sitemap: https://ladder-fox-dev.vercel.app/sitemap.xml
+Sitemap: https://www.ladderfox.com/sitemap.xml
 
 # Crawl delay (optional - be respectful to servers)
 Crawl-delay: 1 
