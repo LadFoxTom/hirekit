@@ -168,6 +168,8 @@ export function LanguageSelector({ onMobileMenuOpen }: LanguageSelectorProps = {
               boxShadow: 'var(--shadow-lg)',
               width: '220px',
               minWidth: '220px',
+              maxHeight: '320px',
+              overflowY: 'auto',
             }}
           >
             <div className="py-1.5 px-1.5">
