@@ -7082,6 +7082,1140 @@ export const PROFESSIONS: Profession[] = [
         ]
       }
     }
+  },
+  // Education: School Counselor
+  {
+    id: 'school-counselor',
+    category: 'education',
+    translations: {
+      en: {
+        name: 'School Counselor',
+        slug: 'school-counselor',
+        description: 'School counselors provide academic, career, and personal guidance to students. They help students navigate challenges, develop social skills, and plan for their future education and career paths.',
+        tips: [
+          'Highlight your counseling degree and certifications',
+          'Emphasize experience with student support and crisis intervention',
+          'Showcase knowledge of career planning and academic guidance',
+          'Include experience with diverse student populations',
+          'Demonstrate strong communication and empathy skills'
+        ],
+        skills: [
+          'Individual and group counseling',
+          'Academic and career planning',
+          'Crisis intervention and prevention',
+          'Student assessment and evaluation',
+          'Parent and teacher consultation',
+          'Program development and implementation',
+          'Mental health support and referrals'
+        ],
+        whyGood: [
+          'Clear structure highlighting counseling qualifications',
+          'Emphasizes student support and positive outcomes',
+          'Shows progression of counseling experience',
+          'Demonstrates commitment to student wellbeing',
+          'ATS-friendly format with counseling keywords'
+        ]
+      },
+      nl: {
+        name: 'Schoolcounselor',
+        slug: 'schoolcounselor',
+        description: 'Schoolcounselors bieden academische, carrière- en persoonlijke begeleiding aan studenten. Ze helpen studenten bij het navigeren door uitdagingen, ontwikkelen van sociale vaardigheden en plannen voor hun toekomstige opleiding en carrièrepaden.',
+        tips: [
+          'Benadruk je counseling diploma en certificeringen',
+          'Leg nadruk op ervaring met studentenondersteuning en crisisinterventie',
+          'Toon kennis van loopbaanplanning en academische begeleiding',
+          'Vermeld ervaring met diverse studentenpopulaties',
+          'Demonstreer sterke communicatie- en empathievaardigheden'
+        ],
+        skills: [
+          'Individuele en groepsbegeleiding',
+          'Academische en loopbaanplanning',
+          'Crisisinterventie en preventie',
+          'Studentbeoordeling en evaluatie',
+          'Ouder- en leraarsconsultatie',
+          'Programmaontwikkeling en implementatie',
+          'Geestelijke gezondheidsondersteuning en doorverwijzingen'
+        ],
+        whyGood: [
+          'Duidelijke structuur die counseling kwalificaties benadrukt',
+          'Legt nadruk op studentenondersteuning en positieve resultaten',
+          'Toont progressie van counseling ervaring',
+          'Demonstreert toewijding aan studentenwelzijn',
+          'ATS-vriendelijk formaat met counseling trefwoorden'
+        ]
+      },
+      fr: {
+        name: 'Conseiller d\'orientation',
+        slug: 'conseiller-orientation',
+        description: 'Les conseillers d\'orientation fournissent des conseils académiques, professionnels et personnels aux étudiants. Ils aident les étudiants à naviguer dans les défis, à développer des compétences sociales et à planifier leur future éducation et leurs parcours professionnels.',
+        tips: [
+          'Mettez en avant votre diplôme en conseil et certifications',
+          'Soulignez l\'expérience avec le soutien aux étudiants et l\'intervention en cas de crise',
+          'Présentez la connaissance de la planification de carrière et de l\'orientation académique',
+          'Incluez l\'expérience avec des populations étudiantes diverses',
+          'Démontrez de solides compétences en communication et empathie'
+        ],
+        skills: [
+          'Conseil individuel et de groupe',
+          'Planification académique et de carrière',
+          'Intervention et prévention de crise',
+          'Évaluation et notation des étudiants',
+          'Consultation avec les parents et les enseignants',
+          'Développement et mise en œuvre de programmes',
+          'Soutien en santé mentale et références'
+        ],
+        whyGood: [
+          'Structure claire mettant en évidence les qualifications en conseil',
+          'Met l\'accent sur le soutien aux étudiants et les résultats positifs',
+          'Montre la progression de l\'expérience en conseil',
+          'Démontre l\'engagement envers le bien-être des étudiants',
+          'Format compatible ATS avec mots-clés de conseil'
+        ]
+      },
+      es: {
+        name: 'Consejero Escolar',
+        slug: 'consejero-escolar',
+        description: 'Los consejeros escolares brindan orientación académica, profesional y personal a los estudiantes. Ayudan a los estudiantes a navegar desafíos, desarrollar habilidades sociales y planificar su futura educación y trayectorias profesionales.',
+        tips: [
+          'Destaca tu título en consejería y certificaciones',
+          'Enfatiza experiencia con apoyo estudiantil e intervención en crisis',
+          'Muestra conocimiento de planificación de carrera y orientación académica',
+          'Incluye experiencia con poblaciones estudiantiles diversas',
+          'Demuestra fuertes habilidades de comunicación y empatía'
+        ],
+        skills: [
+          'Consejería individual y grupal',
+          'Planificación académica y de carrera',
+          'Intervención y prevención de crisis',
+          'Evaluación y calificación de estudiantes',
+          'Consultoría con padres y maestros',
+          'Desarrollo e implementación de programas',
+          'Apoyo en salud mental y referencias'
+        ],
+        whyGood: [
+          'Estructura clara que destaca calificaciones en consejería',
+          'Enfatiza apoyo estudiantil y resultados positivos',
+          'Muestra progresión de experiencia en consejería',
+          'Demuestra compromiso con el bienestar estudiantil',
+          'Formato compatible con ATS con palabras clave de consejería'
+        ]
+      },
+      de: {
+        name: 'Schulberater',
+        slug: 'schulberater',
+        description: 'Schulberater bieten akademische, berufliche und persönliche Beratung für Schüler. Sie helfen Schülern, Herausforderungen zu bewältigen, soziale Fähigkeiten zu entwickeln und ihre zukünftige Ausbildung und Karrierewege zu planen.',
+        tips: [
+          'Heben Sie Ihren Beratungsabschluss und Zertifizierungen hervor',
+          'Betonen Sie Erfahrung mit Schülerunterstützung und Krisenintervention',
+          'Zeigen Sie Kenntnisse in Karriereplanung und akademischer Beratung',
+          'Fügen Sie Erfahrung mit vielfältigen Schülerpopulationen hinzu',
+          'Demonstrieren Sie starke Kommunikations- und Empathiefähigkeiten'
+        ],
+        skills: [
+          'Einzel- und Gruppenberatung',
+          'Akademische und Karriereplanung',
+          'Krisenintervention und Prävention',
+          'Schülerbewertung und -evaluierung',
+          'Beratung mit Eltern und Lehrern',
+          'Programmentwicklung und -umsetzung',
+          'Unterstützung der psychischen Gesundheit und Überweisungen'
+        ],
+        whyGood: [
+          'Klare Struktur, die Beratungsqualifikationen hervorhebt',
+          'Betont Schülerunterstützung und positive Ergebnisse',
+          'Zeigt Fortschritt der Beratungserfahrung',
+          'Demonstriert Engagement für das Wohlbefinden der Schüler',
+          'ATS-freundliches Format mit Beratungsschlüsselwörtern'
+        ]
+      },
+      it: {
+        name: 'Consulente Scolastico',
+        slug: 'consulente-scolastico',
+        description: 'I consulenti scolastici forniscono orientamento accademico, professionale e personale agli studenti. Aiutano gli studenti a navigare le sfide, sviluppare abilità sociali e pianificare la loro futura istruzione e percorsi di carriera.',
+        tips: [
+          'Evidenzia il tuo diploma in consulenza e certificazioni',
+          'Enfatizza l\'esperienza con il supporto agli studenti e l\'intervento in caso di crisi',
+          'Mostra conoscenza della pianificazione della carriera e orientamento accademico',
+          'Includi esperienza con popolazioni studentesche diverse',
+          'Dimostra forti capacità di comunicazione ed empatia'
+        ],
+        skills: [
+          'Consulenza individuale e di gruppo',
+          'Pianificazione accademica e di carriera',
+          'Intervento e prevenzione delle crisi',
+          'Valutazione e valutazione degli studenti',
+          'Consultazione con genitori e insegnanti',
+          'Sviluppo e implementazione di programmi',
+          'Supporto alla salute mentale e riferimenti'
+        ],
+        whyGood: [
+          'Struttura chiara che evidenzia le qualifiche di consulenza',
+          'Enfatizza il supporto agli studenti e risultati positivi',
+          'Mostra la progressione dell\'esperienza di consulenza',
+          'Dimostra impegno per il benessere degli studenti',
+          'Formato compatibile con ATS con parole chiave di consulenza'
+        ]
+      },
+      pl: {
+        name: 'Doradca Szkolny',
+        slug: 'doradca-szkolny',
+        description: 'Doradcy szkolni zapewniają wsparcie akademickie, zawodowe i osobiste uczniom. Pomagają uczniom radzić sobie z wyzwaniami, rozwijać umiejętności społeczne i planować swoją przyszłą edukację i ścieżki kariery.',
+        tips: [
+          'Podkreśl swoje wykształcenie w zakresie doradztwa i certyfikaty',
+          'Podkreśl doświadczenie w zakresie wsparcia uczniów i interwencji kryzysowej',
+          'Pokaż znajomość planowania kariery i doradztwa akademickiego',
+          'Uwzględnij doświadczenie z różnorodnymi populacjami uczniów',
+          'Wykazuj silne umiejętności komunikacyjne i empatię'
+        ],
+        skills: [
+          'Poradnictwo indywidualne i grupowe',
+          'Planowanie akademickie i zawodowe',
+          'Interwencja i zapobieganie kryzysom',
+          'Ocena i ewaluacja uczniów',
+          'Konsultacje z rodzicami i nauczycielami',
+          'Rozwój i wdrażanie programów',
+          'Wsparcie zdrowia psychicznego i skierowania'
+        ],
+        whyGood: [
+          'Jasna struktura podkreślająca kwalifikacje w zakresie doradztwa',
+          'Kładzie nacisk na wsparcie uczniów i pozytywne wyniki',
+          'Pokazuje postęp doświadczenia w doradztwie',
+          'Wykazuje zaangażowanie w dobrostan uczniów',
+          'Format przyjazny dla ATS z kluczowymi słowami doradztwa'
+        ]
+      },
+      ro: {
+        name: 'Consilier Școlar',
+        slug: 'consilier-scolar',
+        description: 'Consilierii școlari oferă îndrumare academică, profesională și personală elevilor. Ei ajută elevii să navigheze prin provocări, să dezvolte abilități sociale și să planifice educația și căile de carieră viitoare.',
+        tips: [
+          'Evidențiază diploma ta în consiliere și certificările',
+          'Subliniază experiența cu sprijinul elevilor și intervenția în criză',
+          'Prezintă cunoștințe despre planificarea carierei și orientarea academică',
+          'Include experiența cu populații diverse de elevi',
+          'Demonstrează abilități puternice de comunicare și empatie'
+        ],
+        skills: [
+          'Consiliere individuală și de grup',
+          'Planificare academică și de carieră',
+          'Intervenție și prevenire a crizelor',
+          'Evaluare și notare a elevilor',
+          'Consultare cu părinții și profesorii',
+          'Dezvoltare și implementare de programe',
+          'Suport pentru sănătatea mintală și referințe'
+        ],
+        whyGood: [
+          'Structură clară care evidențiază calificările în consiliere',
+          'Subliniază sprijinul elevilor și rezultatele pozitive',
+          'Arată progresia experienței în consiliere',
+          'Demonstrează angajamentul față de bunăstarea elevilor',
+          'Format compatibil cu ATS cu cuvinte cheie de consiliere'
+        ]
+      },
+      hu: {
+        name: 'Iskolai Tanácsadó',
+        slug: 'iskolai-tanacsado',
+        description: 'Az iskolai tanácsadók akadémiai, karrier- és személyes irányítást nyújtanak a diákoknak. Segítik a diákokat a kihívások kezelésében, társas készségek fejlesztésében és jövőbeli oktatásuk és karrierútjuk tervezésében.',
+        tips: [
+          'Hangsúlyozza tanácsadói diplomáját és tanúsítványait',
+          'Kiemeli a diákok támogatásával és válságkezeléssel kapcsolatos tapasztalatait',
+          'Mutassa be a karriertervezés és akadémiai irányítás ismeretét',
+          'Tartalmazza a különböző diákpopulációkkal való tapasztalatokat',
+          'Mutassa be az erős kommunikációs és empátiás készségeket'
+        ],
+        skills: [
+          'Egyéni és csoportos tanácsadás',
+          'Akadémiai és karriertervezés',
+          'Válságkezelés és megelőzés',
+          'Diákértékelés és értékelés',
+          'Szülői és tanári konzultáció',
+          'Programfejlesztés és megvalósítás',
+          'Mentális egészség támogatás és továbbítás'
+        ],
+        whyGood: [
+          'Világos struktúra, amely kiemeli a tanácsadói képzettségeket',
+          'Hangsúlyozza a diákok támogatását és a pozitív eredményeket',
+          'Mutatja a tanácsadási tapasztalat fejlődését',
+          'Bebizonyítja a diákok jólétére való elkötelezettséget',
+          'ATS-barát formátum tanácsadási kulcsszavakkal'
+        ]
+      },
+      el: {
+        name: 'Σχολικός Σύμβουλος',
+        slug: 'scholikos-symvoulos',
+        description: 'Οι σχολικοί σύμβουλοι παρέχουν ακαδημαϊκή, επαγγελματική και προσωπική καθοδήγηση στους μαθητές. Βοηθούν τους μαθητές να αντιμετωπίσουν προκλήσεις, να αναπτύξουν κοινωνικές δεξιότητες και να σχεδιάσουν τη μελλοντική τους εκπαίδευση και επαγγελματικές διαδρομές.',
+        tips: [
+          'Επισημάνετε το πτυχίο συμβουλευτικής και τις πιστοποιήσεις σας',
+          'Τονίστε την εμπειρία με υποστήριξη μαθητών και παρέμβαση σε κρίσεις',
+          'Δείξτε γνώση σχεδιασμού καριέρας και ακαδημαϊκής καθοδήγησης',
+          'Συμπεριλάβετε εμπειρία με διαφορετικούς πληθυσμούς μαθητών',
+          'Αποδείξτε ισχυρές δεξιότητες επικοινωνίας και ενσυναίσθησης'
+        ],
+        skills: [
+          'Ατομική και ομαδική συμβουλευτική',
+          'Ακαδημαϊκός και επαγγελματικός σχεδιασμός',
+          'Παρέμβαση και πρόληψη κρίσεων',
+          'Αξιολόγηση και αξιολόγηση μαθητών',
+          'Συμβουλευτική με γονείς και εκπαιδευτικούς',
+          'Ανάπτυξη και υλοποίηση προγραμμάτων',
+          'Υποστήριξη ψυχικής υγείας και παραπομπές'
+        ],
+        whyGood: [
+          'Σαφής δομή που επισημαίνει τις προσόντα συμβουλευτικής',
+          'Τονίζει την υποστήριξη μαθητών και τα θετικά αποτελέσματα',
+          'Δείχνει την πρόοδο της εμπειρίας συμβουλευτικής',
+          'Αποδεικνύει δέσμευση για την ευημερία των μαθητών',
+          'Μορφή συμβατή με ATS με λέξεις-κλειδιά συμβουλευτικής'
+        ]
+      },
+      cs: {
+        name: 'Školní Poradce',
+        slug: 'skolni-poradce',
+        description: 'Školní poradci poskytují akademické, kariérní a osobní poradenství studentům. Pomáhají studentům zvládat výzvy, rozvíjet sociální dovednosti a plánovat jejich budoucí vzdělávání a kariérní cesty.',
+        tips: [
+          'Zdůrazněte svůj diplom v poradenství a certifikace',
+          'Zdůrazněte zkušenosti s podporou studentů a krizovou intervencí',
+          'Ukažte znalosti kariérního plánování a akademického poradenství',
+          'Zahrňte zkušenosti s různorodými studentskými populacemi',
+          'Prokažte silné komunikační dovednosti a empatii'
+        ],
+        skills: [
+          'Individuální a skupinové poradenství',
+          'Akademické a kariérní plánování',
+          'Krizová intervence a prevence',
+          'Hodnocení a evaluace studentů',
+          'Konzultace s rodiči a učiteli',
+          'Vývoj a implementace programů',
+          'Podpora duševního zdraví a doporučení'
+        ],
+        whyGood: [
+          'Jasná struktura zdůrazňující kvalifikace v poradenství',
+          'Zdůrazňuje podporu studentů a pozitivní výsledky',
+          'Ukazuje pokrok zkušeností v poradenství',
+          'Prokazuje závazek k blahu studentů',
+          'Formát kompatibilní s ATS s klíčovými slovy poradenství'
+        ]
+      },
+      pt: {
+        name: 'Conselheiro Escolar',
+        slug: 'conselheiro-escolar',
+        description: 'Conselheiros escolares fornecem orientação acadêmica, profissional e pessoal aos estudantes. Eles ajudam os estudantes a navegar desafios, desenvolver habilidades sociais e planejar sua futura educação e trajetórias profissionais.',
+        tips: [
+          'Destaque seu diploma em aconselhamento e certificações',
+          'Enfatize experiência com apoio estudantil e intervenção em crises',
+          'Mostre conhecimento de planejamento de carreira e orientação acadêmica',
+          'Inclua experiência com populações estudantis diversas',
+          'Demonstre fortes habilidades de comunicação e empatia'
+        ],
+        skills: [
+          'Aconselhamento individual e em grupo',
+          'Planejamento acadêmico e de carreira',
+          'Intervenção e prevenção de crises',
+          'Avaliação e avaliação de estudantes',
+          'Consultoria com pais e professores',
+          'Desenvolvimento e implementação de programas',
+          'Apoio à saúde mental e referências'
+        ],
+        whyGood: [
+          'Estrutura clara destacando qualificações em aconselhamento',
+          'Enfatiza apoio estudantil e resultados positivos',
+          'Mostra progressão de experiência em aconselhamento',
+          'Demonstra compromisso com o bem-estar estudantil',
+          'Formato compatível com ATS com palavras-chave de aconselhamento'
+        ]
+      },
+      sv: {
+        name: 'Skolkurator',
+        slug: 'skolkurator',
+        description: 'Skolkuratorer ger akademisk, karriär- och personlig vägledning till elever. De hjälper elever att navigera utmaningar, utveckla sociala färdigheter och planera för sin framtida utbildning och karriärvägar.',
+        tips: [
+          'Framhäv ditt kuratorsexamen och certifieringar',
+          'Betona erfarenhet med elevstöd och krisintervention',
+          'Visa kunskap om karriärplanering och akademisk vägledning',
+          'Inkludera erfarenhet med olika elevpopulationer',
+          'Visa starka kommunikations- och empatifärdigheter'
+        ],
+        skills: [
+          'Individuell och gruppkurator',
+          'Akademisk och karriärplanering',
+          'Krisintervention och prevention',
+          'Elevbedömning och utvärdering',
+          'Konsultation med föräldrar och lärare',
+          'Programutveckling och implementering',
+          'Stöd för mental hälsa och remisser'
+        ],
+        whyGood: [
+          'Tydlig struktur som framhäver kuratorskvalifikationer',
+          'Betonar elevstöd och positiva resultat',
+          'Visar progression av kuratorserfarenhet',
+          'Visar engagemang för elevens välbefinnande',
+          'ATS-vänligt format med kuratorsnyckelord'
+        ]
+      },
+      bg: {
+        name: 'Училищен Съветник',
+        slug: 'uchilishten-savetnik',
+        description: 'Училищните съветници предоставят академично, кариерно и лично ръководство на учениците. Те помагат на учениците да се справят с предизвикателствата, да развият социални умения и да планират бъдещото си образование и кариерни пътища.',
+        tips: [
+          'Подчертайте дипломата си по консултиране и сертификатите',
+          'Акцентирайте върху опита с подкрепа на учениците и интервенция при кризи',
+          'Покажете познания за планиране на кариера и академично ръководство',
+          'Включете опит с различни ученически популации',
+          'Демонстрирайте силни комуникативни умения и емпатия'
+        ],
+        skills: [
+          'Индивидуално и групово консултиране',
+          'Академично и кариерно планиране',
+          'Интервенция и превенция на кризи',
+          'Оценка и оценяване на ученици',
+          'Консултация с родители и учители',
+          'Разработване и изпълнение на програми',
+          'Подкрепа за психично здраве и препращания'
+        ],
+        whyGood: [
+          'Ясна структура, която подчертава квалификациите по консултиране',
+          'Акцентира върху подкрепата на учениците и положителните резултати',
+          'Показва прогресия на опита в консултирането',
+          'Демонстрира ангажираност към благосъстоянието на учениците',
+          'Формат, съвместим с ATS с ключови думи за консултиране'
+        ]
+      },
+      da: {
+        name: 'Skolevejleder',
+        slug: 'skolevejleder',
+        description: 'Skolevejledere giver akademisk, karriere- og personlig vejledning til elever. De hjælper elever med at navigere udfordringer, udvikle sociale færdigheder og planlægge deres fremtidige uddannelse og karriereveje.',
+        tips: [
+          'Fremhæv din vejledningsgrad og certificeringer',
+          'Fremhæv erfaring med elevstøtte og kris intervention',
+          'Vis viden om karriereplanlægning og akademisk vejledning',
+          'Inkluder erfaring med forskellige elevpopulationer',
+          'Demonstrer stærke kommunikations- og empatifærdigheder'
+        ],
+        skills: [
+          'Individuel og gruppev ejledning',
+          'Akademisk og karriereplanlægning',
+          'Kris intervention og forebyggelse',
+          'Elevvurdering og evaluering',
+          'Konsultation med forældre og lærere',
+          'Programudvikling og implementering',
+          'Støtte til mental sundhed og henvisninger'
+        ],
+        whyGood: [
+          'Tydelig struktur, der fremhæver vejledningskvalifikationer',
+          'Fremhæver elevstøtte og positive resultater',
+          'Vis progression af vejledningserfaring',
+          'Demonstrer engagement i elevens velvære',
+          'ATS-venligt format med vejledningsnøgleord'
+        ]
+      },
+      fi: {
+        name: 'Koulun Ohjaaja',
+        slug: 'koulun-ohjaaja',
+        description: 'Koulun ohjaajat tarjoavat akateemista, uran ja henkilökohtaista ohjausta oppilaille. He auttavat oppilaita navigoimaan haasteiden läpi, kehittämään sosiaalisia taitoja ja suunnittelemaan tulevaa koulutustaan ja urapolkujaan.',
+        tips: [
+          'Korosta ohjauskoulutustasi ja sertifikaatteja',
+          'Korosta kokemusta oppilasavusta ja kriisivälittämisestä',
+          'Näytä tietoa ura suunnittelusta ja akateemisesta ohjauksesta',
+          'Sisällytä kokemus erilaisista oppilasväestöistä',
+          'Näytä vahvat viestintä- ja empatiataidot'
+        ],
+        skills: [
+          'Yksilöllinen ja ryhmäohjaus',
+          'Akateeminen ja ura suunnittelu',
+          'Kriisivälitys ja ennaltaehkäisy',
+          'Oppilasarviointi ja arviointi',
+          'Konsultointi vanhempien ja opettajien kanssa',
+          'Ohjelman kehittäminen ja toteutus',
+          'Mielenterveyden tuki ja lähetykset'
+        ],
+        whyGood: [
+          'Selkeä rakenne, joka korostaa ohjauskoulutuksia',
+          'Korostaa oppilasapua ja positiivisia tuloksia',
+          'Näyttää ohjauskokemuksen kehityksen',
+          'Näyttää sitoutumisen oppilaiden hyvinvointiin',
+          'ATS-yhteensopiva muoto ohjausavainsanoilla'
+        ]
+      },
+      sk: {
+        name: 'Školský Poradca',
+        slug: 'skolsky-poradca',
+        description: 'Školskí poradcovia poskytujú akademické, kariérne a osobné poradenstvo študentom. Pomáhajú študentom zvládnuť výzvy, rozvíjať sociálne zručnosti a plánovať ich budúce vzdelávanie a kariérne cesty.',
+        tips: [
+          'Zdôraznite svoj diplom v poradenstve a certifikáty',
+          'Zdôraznite skúsenosti s podporou študentov a krízovou intervenciou',
+          'Ukážte znalosti kariérneho plánovania a akademického poradenstva',
+          'Zahrňte skúsenosti s rôznorodými študentskými populáciami',
+          'Preukážte silné komunikačné zručnosti a empatiu'
+        ],
+        skills: [
+          'Individuálne a skupinové poradenstvo',
+          'Akademické a kariérne plánovanie',
+          'Krízová intervencia a prevencia',
+          'Hodnotenie a evaluácia študentov',
+          'Konzultácie s rodičmi a učiteľmi',
+          'Vývoj a implementácia programov',
+          'Podpora duševného zdravia a odporúčania'
+        ],
+        whyGood: [
+          'Jasná štruktúra zdôrazňujúca kvalifikácie v poradenstve',
+          'Zdôrazňuje podporu študentov a pozitívne výsledky',
+          'Ukazuje pokrok skúseností v poradenstve',
+          'Preukazuje záväzok k blahu študentov',
+          'Formát kompatibilný s ATS s kľúčovými slovami poradenstva'
+        ]
+      },
+      no: {
+        name: 'Skoleveileder',
+        slug: 'skoleveileder',
+        description: 'Skoleveiledere gir akademisk, karriere- og personlig veiledning til elever. De hjelper elever med å navigere utfordringer, utvikle sosiale ferdigheter og planlegge sin fremtidige utdanning og karriereveier.',
+        tips: [
+          'Fremhev din veiledningsgrad og sertifiseringer',
+          'Fremhev erfaring med elevstøtte og krisintervensjon',
+          'Vis kunnskap om karriereplanlegging og akademisk veiledning',
+          'Inkluder erfaring med ulike elevpopulasjoner',
+          'Vis sterke kommunikasjons- og empatiferdigheter'
+        ],
+        skills: [
+          'Individuell og gruppeveiledning',
+          'Akademisk og karriereplanlegging',
+          'Krisintervensjon og forebygging',
+          'Elevvurdering og evaluering',
+          'Konsultasjon med foreldre og lærere',
+          'Programutvikling og implementering',
+          'Støtte til mental helse og henvisninger'
+        ],
+        whyGood: [
+          'Tydelig struktur som fremhever veiledningskvalifikasjoner',
+          'Fremhever elevstøtte og positive resultater',
+          'Vis progresjon av veiledningserfaring',
+          'Vis engasjement for elevens velvære',
+          'ATS-vennlig format med veiledningsnøkkelord'
+        ]
+      },
+      hr: {
+        name: 'Školski Savjetnik',
+        slug: 'skolski-savjetnik',
+        description: 'Školski savjetnici pružaju akademsko, karijerno i osobno usmjeravanje studentima. Pomažu studentima u navigaciji izazovima, razvoju socijalnih vještina i planiranju budućeg obrazovanja i karijernih putova.',
+        tips: [
+          'Istaknite svoju diplomu iz savjetovanja i certifikate',
+          'Naglasite iskustvo s podrškom studentima i intervencijom u krizi',
+          'Pokažite znanje o planiranju karijere i akademskom usmjeravanju',
+          'Uključite iskustvo s različitim studentskim populacijama',
+          'Pokažite jake komunikacijske vještine i empatiju'
+        ],
+        skills: [
+          'Individuarno i grupno savjetovanje',
+          'Akademsko i karijerno planiranje',
+          'Intervencija i prevencija kriza',
+          'Procjena i evaluacija studenata',
+          'Konzultacije s roditeljima i nastavnicima',
+          'Razvoj i implementacija programa',
+          'Podrška mentalnom zdravlju i preporuke'
+        ],
+        whyGood: [
+          'Jasna struktura koja ističe kvalifikacije u savjetovanju',
+          'Naglašava podršku studentima i pozitivne rezultate',
+          'Pokazuje napredak iskustva u savjetovanju',
+          'Pokazuje predanost dobrobiti studenata',
+          'Format kompatibilan s ATS s ključnim riječima savjetovanja'
+        ]
+      },
+      sr: {
+        name: 'Школски Саветник',
+        slug: 'skolski-savetnik',
+        description: 'Школски саветници пружају академско, каријерно и лично усмеравање студентима. Помажу студентима у навигацији изазовима, развоју социјалних вештина и планирању будућег образовања и каријерних путева.',
+        tips: [
+          'Истакните своју диплому из саветовања и сертификате',
+          'Нагласите искуство са подршком студентима и интервенцијом у кризи',
+          'Покажите знање о планирању каријере и академском усмеравању',
+          'Укључите искуство са различитим студентским популацијама',
+          'Покажите јаке комуникационе вештине и емпатију'
+        ],
+        skills: [
+          'Индивидуално и групно саветовање',
+          'Академско и каријерно планирање',
+          'Интервенција и превенција криза',
+          'Процена и евалуација студената',
+          'Консултације са родитељима и наставницима',
+          'Развој и имплементација програма',
+          'Подршка менталном здрављу и препоруке'
+        ],
+        whyGood: [
+          'Јасна структура која истиче квалификације у саветовању',
+          'Наглашава подршку студентима и позитивне резултате',
+          'Показује напредак искуства у саветовању',
+          'Показује посвећеност добробити студената',
+          'Формат компатибилан са ATS са кључним речима саветовања'
+        ]
+      }
+    }
+  },
+  // Business: Financial Analyst
+  {
+    id: 'financial-analyst',
+    category: 'business',
+    translations: {
+      en: {
+        name: 'Financial Analyst',
+        slug: 'financial-analyst',
+        description: 'Financial analysts evaluate investment opportunities, analyze financial data, and provide recommendations to help businesses and individuals make informed financial decisions.',
+        tips: [
+          'Highlight your finance or accounting degree',
+          'Emphasize analytical skills and financial modeling experience',
+          'Showcase proficiency with financial software and tools',
+          'Include certifications like CFA or CPA',
+          'Demonstrate quantitative analysis capabilities'
+        ],
+        skills: [
+          'Financial modeling and analysis',
+          'Investment research and evaluation',
+          'Risk assessment and management',
+          'Excel and financial software proficiency',
+          'Financial reporting and forecasting',
+          'Market research and trend analysis',
+          'Presentation and communication skills'
+        ],
+        whyGood: [
+          'Clear structure highlighting analytical expertise',
+          'Emphasizes quantitative skills and achievements',
+          'Shows progression of financial analysis experience',
+          'Demonstrates commitment to professional development',
+          'ATS-friendly format with finance keywords'
+        ]
+      },
+      nl: {
+        name: 'Financieel Analist',
+        slug: 'financieel-analist',
+        description: 'Financieel analisten evalueren investeringsmogelijkheden, analyseren financiële gegevens en geven aanbevelingen om bedrijven en individuen te helpen weloverwogen financiële beslissingen te nemen.',
+        tips: [
+          'Benadruk je financiële of accountancy diploma',
+          'Leg nadruk op analytische vaardigheden en financiële modelleringservaring',
+          'Toon vaardigheid met financiële software en tools',
+          'Vermeld certificeringen zoals CFA of CPA',
+          'Demonstreer kwantitatieve analysevaardigheden'
+        ],
+        skills: [
+          'Financiële modellering en analyse',
+          'Investeringsonderzoek en evaluatie',
+          'Risicobeoordeling en -beheer',
+          'Excel en financiële softwarevaardigheid',
+          'Financiële rapportage en prognoses',
+          'Marktonderzoek en trendanalyse',
+          'Presentatie- en communicatievaardigheden'
+        ],
+        whyGood: [
+          'Duidelijke structuur die analytische expertise benadrukt',
+          'Legt nadruk op kwantitatieve vaardigheden en prestaties',
+          'Toont progressie van financiële analyse-ervaring',
+          'Demonstreert toewijding aan professionele ontwikkeling',
+          'ATS-vriendelijk formaat met financiële trefwoorden'
+        ]
+      },
+      fr: {
+        name: 'Analyste Financier',
+        slug: 'analyste-financier',
+        description: 'Les analystes financiers évaluent les opportunités d\'investissement, analysent les données financières et fournissent des recommandations pour aider les entreprises et les particuliers à prendre des décisions financières éclairées.',
+        tips: [
+          'Mettez en avant votre diplôme en finance ou comptabilité',
+          'Soulignez les compétences analytiques et l\'expérience en modélisation financière',
+          'Présentez la maîtrise des logiciels et outils financiers',
+          'Incluez des certifications comme CFA ou CPA',
+          'Démontrez les capacités d\'analyse quantitative'
+        ],
+        skills: [
+          'Modélisation et analyse financière',
+          'Recherche et évaluation d\'investissements',
+          'Évaluation et gestion des risques',
+          'Maîtrise d\'Excel et des logiciels financiers',
+          'Rapports financiers et prévisions',
+          'Recherche de marché et analyse de tendances',
+          'Compétences en présentation et communication'
+        ],
+        whyGood: [
+          'Structure claire mettant en évidence l\'expertise analytique',
+          'Met l\'accent sur les compétences quantitatives et les réalisations',
+          'Montre la progression de l\'expérience en analyse financière',
+          'Démontre l\'engagement envers le développement professionnel',
+          'Format compatible ATS avec mots-clés financiers'
+        ]
+      },
+      es: {
+        name: 'Analista Financiero',
+        slug: 'analista-financiero',
+        description: 'Los analistas financieros evalúan oportunidades de inversión, analizan datos financieros y brindan recomendaciones para ayudar a empresas e individuos a tomar decisiones financieras informadas.',
+        tips: [
+          'Destaca tu título en finanzas o contabilidad',
+          'Enfatiza habilidades analíticas y experiencia en modelado financiero',
+          'Muestra competencia con software y herramientas financieras',
+          'Incluye certificaciones como CFA o CPA',
+          'Demuestra capacidades de análisis cuantitativo'
+        ],
+        skills: [
+          'Modelado y análisis financiero',
+          'Investigación y evaluación de inversiones',
+          'Evaluación y gestión de riesgos',
+          'Competencia en Excel y software financiero',
+          'Informes financieros y pronósticos',
+          'Investigación de mercado y análisis de tendencias',
+          'Habilidades de presentación y comunicación'
+        ],
+        whyGood: [
+          'Estructura clara que destaca experiencia analítica',
+          'Enfatiza habilidades cuantitativas y logros',
+          'Muestra progresión de experiencia en análisis financiero',
+          'Demuestra compromiso con el desarrollo profesional',
+          'Formato compatible con ATS con palabras clave financieras'
+        ]
+      },
+      de: {
+        name: 'Finanzanalyst',
+        slug: 'finanzanalyst',
+        description: 'Finanzanalysten bewerten Anlagemöglichkeiten, analysieren Finanzdaten und geben Empfehlungen, um Unternehmen und Privatpersonen bei fundierten Finanzentscheidungen zu helfen.',
+        tips: [
+          'Heben Sie Ihren Abschluss in Finanzen oder Rechnungswesen hervor',
+          'Betonen Sie analytische Fähigkeiten und Erfahrung in der Finanzmodellierung',
+          'Zeigen Sie Kompetenz mit Finanzsoftware und -tools',
+          'Fügen Sie Zertifizierungen wie CFA oder CPA hinzu',
+          'Demonstrieren Sie quantitative Analysefähigkeiten'
+        ],
+        skills: [
+          'Finanzmodellierung und -analyse',
+          'Anlageforschung und -bewertung',
+          'Risikobewertung und -management',
+          'Excel- und Finanzsoftwarekompetenz',
+          'Finanzberichterstattung und Prognosen',
+          'Marktforschung und Trendanalyse',
+          'Präsentations- und Kommunikationsfähigkeiten'
+        ],
+        whyGood: [
+          'Klare Struktur, die analytische Expertise hervorhebt',
+          'Betont quantitative Fähigkeiten und Leistungen',
+          'Zeigt Fortschritt der Finanzanalyseerfahrung',
+          'Demonstriert Engagement für berufliche Entwicklung',
+          'ATS-freundliches Format mit Finanzschlüsselwörtern'
+        ]
+      },
+      it: {
+        name: 'Analista Finanziario',
+        slug: 'analista-finanziario',
+        description: 'Gli analisti finanziari valutano opportunità di investimento, analizzano dati finanziari e forniscono raccomandazioni per aiutare aziende e individui a prendere decisioni finanziarie informate.',
+        tips: [
+          'Evidenzia la tua laurea in finanza o contabilità',
+          'Enfatizza le capacità analitiche e l\'esperienza nella modellazione finanziaria',
+          'Mostra competenza con software e strumenti finanziari',
+          'Includi certificazioni come CFA o CPA',
+          'Dimostra capacità di analisi quantitativa'
+        ],
+        skills: [
+          'Modellazione e analisi finanziaria',
+          'Ricerca e valutazione degli investimenti',
+          'Valutazione e gestione del rischio',
+          'Competenza in Excel e software finanziario',
+          'Reporting finanziario e previsioni',
+          'Ricerca di mercato e analisi delle tendenze',
+          'Capacità di presentazione e comunicazione'
+        ],
+        whyGood: [
+          'Struttura chiara che evidenzia l\'esperienza analitica',
+          'Enfatizza le capacità quantitative e i risultati',
+          'Mostra la progressione dell\'esperienza nell\'analisi finanziaria',
+          'Dimostra impegno per lo sviluppo professionale',
+          'Formato compatibile con ATS con parole chiave finanziarie'
+        ]
+      },
+      pl: {
+        name: 'Analityk Finansowy',
+        slug: 'analityk-finansowy',
+        description: 'Analitycy finansowi oceniają możliwości inwestycyjne, analizują dane finansowe i udzielają rekomendacji, aby pomóc firmom i osobom prywatnym w podejmowaniu świadomych decyzji finansowych.',
+        tips: [
+          'Podkreśl swoje wykształcenie w zakresie finansów lub rachunkowości',
+          'Podkreśl umiejętności analityczne i doświadczenie w modelowaniu finansowym',
+          'Pokaż biegłość w oprogramowaniu i narzędziach finansowych',
+          'Uwzględnij certyfikaty takie jak CFA lub CPA',
+          'Wykazuj umiejętności analizy ilościowej'
+        ],
+        skills: [
+          'Modelowanie i analiza finansowa',
+          'Badania i ocena inwestycji',
+          'Ocena i zarządzanie ryzykiem',
+          'Biegłość w Excelu i oprogramowaniu finansowym',
+          'Sprawozdawczość finansowa i prognozowanie',
+          'Badania rynku i analiza trendów',
+          'Umiejętności prezentacji i komunikacji'
+        ],
+        whyGood: [
+          'Jasna struktura podkreślająca wiedzę analityczną',
+          'Kładzie nacisk na umiejętności ilościowe i osiągnięcia',
+          'Pokazuje postęp doświadczenia w analizie finansowej',
+          'Wykazuje zaangażowanie w rozwój zawodowy',
+          'Format przyjazny dla ATS z kluczowymi słowami finansowymi'
+        ]
+      },
+      ro: {
+        name: 'Analist Financiar',
+        slug: 'analist-financiar',
+        description: 'Analiștii financiari evaluează oportunitățile de investiții, analizează datele financiare și oferă recomandări pentru a ajuta companiile și persoanele fizice să ia decizii financiare informate.',
+        tips: [
+          'Evidențiază diploma ta în finanțe sau contabilitate',
+          'Subliniază abilitățile analitice și experiența în modelarea financiară',
+          'Prezintă competența cu software-ul și instrumentele financiare',
+          'Includă certificări precum CFA sau CPA',
+          'Demonstrează capacități de analiză cantitativă'
+        ],
+        skills: [
+          'Modelare și analiză financiară',
+          'Cercetare și evaluare a investițiilor',
+          'Evaluare și managementul riscurilor',
+          'Competență în Excel și software financiar',
+          'Raportare financiară și prognoză',
+          'Cercetare de piață și analiză a tendințelor',
+          'Abilități de prezentare și comunicare'
+        ],
+        whyGood: [
+          'Structură clară care evidențiază expertiza analitică',
+          'Subliniază abilitățile cantitative și realizările',
+          'Arată progresia experienței în analiza financiară',
+          'Demonstrează angajamentul față de dezvoltarea profesională',
+          'Format compatibil cu ATS cu cuvinte cheie financiare'
+        ]
+      },
+      hu: {
+        name: 'Pénzügyi Elemző',
+        slug: 'penzugyi-elemzo',
+        description: 'A pénzügyi elemzők értékelik a befektetési lehetőségeket, elemzik a pénzügyi adatokat és ajánlásokat nyújtanak, hogy segítsenek a vállalatoknak és magánszemélyeknek tájékozott pénzügyi döntéseket hozni.',
+        tips: [
+          'Hangsúlyozza pénzügyi vagy számviteli diplomáját',
+          'Kiemeli az elemző készségeket és pénzügyi modellezési tapasztalatokat',
+          'Mutassa be a pénzügyi szoftverekkel és eszközökkel való jártasságot',
+          'Tartalmazza a CFA vagy CPA tanúsítványokat',
+          'Mutassa be a kvantitatív elemzési képességeket'
+        ],
+        skills: [
+          'Pénzügyi modellezés és elemzés',
+          'Befektetési kutatás és értékelés',
+          'Kockázatértékelés és -kezelés',
+          'Excel és pénzügyi szoftver jártasság',
+          'Pénzügyi jelentéskészítés és előrejelzés',
+          'Piackutatás és trendelemzés',
+          'Prezentációs és kommunikációs készségek'
+        ],
+        whyGood: [
+          'Világos struktúra, amely kiemeli az elemző szakértelmet',
+          'Hangsúlyozza a kvantitatív készségeket és eredményeket',
+          'Mutatja a pénzügyi elemzési tapasztalat fejlődését',
+          'Bebizonyítja a szakmai fejlesztésre való elkötelezettséget',
+          'ATS-barát formátum pénzügyi kulcsszavakkal'
+        ]
+      },
+      el: {
+        name: 'Χρηματοοικονομικός Αναλυτής',
+        slug: 'chrimatooikonomikos-analytis',
+        description: 'Οι χρηματοοικονομικοί αναλυτές αξιολογούν επενδυτικές ευκαιρίες, αναλύουν οικονομικά δεδομένα και παρέχουν συστάσεις για να βοηθήσουν επιχειρήσεις και άτομα να λάβουν ενημερωμένες οικονομικές αποφάσεις.',
+        tips: [
+          'Επισημάνετε το πτυχίο χρηματοοικονομικών ή λογιστικής σας',
+          'Τονίστε τις αναλυτικές δεξιότητες και την εμπειρία χρηματοοικονομικής μοντελοποίησης',
+          'Δείξτε επάρκεια με χρηματοοικονομικό λογισμικό και εργαλεία',
+          'Συμπεριλάβετε πιστοποιήσεις όπως CFA ή CPA',
+          'Αποδείξτε δυνατότητες ποσοτικής ανάλυσης'
+        ],
+        skills: [
+          'Χρηματοοικονομική μοντελοποίηση και ανάλυση',
+          'Επενδυτική έρευνα και αξιολόγηση',
+          'Αξιολόγηση και διαχείριση κινδύνου',
+          'Επάρκεια Excel και χρηματοοικονομικού λογισμικού',
+          'Χρηματοοικονομική αναφορά και πρόβλεψη',
+          'Ερευνα αγοράς και ανάλυση τάσεων',
+          'Δεξιότητες παρουσίασης και επικοινωνίας'
+        ],
+        whyGood: [
+          'Σαφής δομή που επισημαίνει την αναλυτική εμπειρογνωμοσύνη',
+          'Τονίζει τις ποσοτικές δεξιότητες και τα επιτεύγματα',
+          'Δείχνει την πρόοδο της εμπειρίας χρηματοοικονομικής ανάλυσης',
+          'Αποδεικνύει δέσμευση στην επαγγελματική ανάπτυξη',
+          'Μορφή συμβατή με ATS με χρηματοοικονομικές λέξεις-κλειδιά'
+        ]
+      },
+      cs: {
+        name: 'Finanční Analytik',
+        slug: 'financni-analytik',
+        description: 'Finanční analytici hodnotí investiční příležitosti, analyzují finanční data a poskytují doporučení, aby pomohli firmám a jednotlivcům činit informovaná finanční rozhodnutí.',
+        tips: [
+          'Zdůrazněte svůj titul v oboru financí nebo účetnictví',
+          'Zdůrazněte analytické dovednosti a zkušenosti s finančním modelováním',
+          'Ukažte znalost finančního softwaru a nástrojů',
+          'Zahrňte certifikace jako CFA nebo CPA',
+          'Prokažte schopnosti kvantitativní analýzy'
+        ],
+        skills: [
+          'Finanční modelování a analýza',
+          'Investiční výzkum a hodnocení',
+          'Hodnocení a řízení rizik',
+          'Znalost Excelu a finančního softwaru',
+          'Finanční reporting a prognózy',
+          'Výzkum trhu a analýza trendů',
+          'Prezentační a komunikační dovednosti'
+        ],
+        whyGood: [
+          'Jasná struktura zdůrazňující analytickou odbornost',
+          'Zdůrazňuje kvantitativní dovednosti a úspěchy',
+          'Ukazuje pokrok zkušeností s finanční analýzou',
+          'Prokazuje závazek k profesnímu rozvoji',
+          'Formát kompatibilní s ATS s finančními klíčovými slovy'
+        ]
+      },
+      pt: {
+        name: 'Analista Financeiro',
+        slug: 'analista-financeiro',
+        description: 'Analistas financeiros avaliam oportunidades de investimento, analisam dados financeiros e fornecem recomendações para ajudar empresas e indivíduos a tomar decisões financeiras informadas.',
+        tips: [
+          'Destaque seu diploma em finanças ou contabilidade',
+          'Enfatize habilidades analíticas e experiência em modelagem financeira',
+          'Mostre proficiência com software e ferramentas financeiras',
+          'Inclua certificações como CFA ou CPA',
+          'Demonstre capacidades de análise quantitativa'
+        ],
+        skills: [
+          'Modelagem e análise financeira',
+          'Pesquisa e avaliação de investimentos',
+          'Avaliação e gestão de riscos',
+          'Proficiência em Excel e software financeiro',
+          'Relatórios financeiros e previsões',
+          'Pesquisa de mercado e análise de tendências',
+          'Habilidades de apresentação e comunicação'
+        ],
+        whyGood: [
+          'Estrutura clara destacando expertise analítica',
+          'Enfatiza habilidades quantitativas e conquistas',
+          'Mostra progressão de experiência em análise financeira',
+          'Demonstra compromisso com desenvolvimento profissional',
+          'Formato compatível com ATS com palavras-chave financeiras'
+        ]
+      },
+      sv: {
+        name: 'Finansiell Analytiker',
+        slug: 'finansiell-analytiker',
+        description: 'Finansiella analytiker utvärderar investeringsmöjligheter, analyserar finansiella data och ger rekommendationer för att hjälpa företag och individer att fatta informerade finansiella beslut.',
+        tips: [
+          'Framhäv din examen i finans eller redovisning',
+          'Betona analytiska färdigheter och erfarenhet av finansiell modellering',
+          'Visa kompetens med finansiell programvara och verktyg',
+          'Inkludera certifieringar som CFA eller CPA',
+          'Visa kvantitativa analysförmågor'
+        ],
+        skills: [
+          'Finansiell modellering och analys',
+          'Investeringsforskning och utvärdering',
+          'Riskanalys och riskhantering',
+          'Kompetens i Excel och finansiell programvara',
+          'Finansiell rapportering och prognoser',
+          'Marknadsforskning och trendanalys',
+          'Prezentations- och kommunikationsfärdigheter'
+        ],
+        whyGood: [
+          'Tydlig struktur som framhäver analytisk expertis',
+          'Betonar kvantitativa färdigheter och prestationer',
+          'Visar progression av erfarenhet inom finansiell analys',
+          'Visar engagemang för professionell utveckling',
+          'ATS-vänligt format med finansiella nyckelord'
+        ]
+      },
+      bg: {
+        name: 'Финансов Аналитик',
+        slug: 'finansov-analitik',
+        description: 'Финансовите аналитици оценяват инвестиционни възможности, анализират финансови данни и предоставят препоръки, за да помогнат на предприятия и физически лица да вземат информирани финансови решения.',
+        tips: [
+          'Подчертайте дипломата си по финанси или счетоводство',
+          'Акцентирайте върху аналитичните умения и опита с финансово моделиране',
+          'Покажете компетентност с финансов софтуер и инструменти',
+          'Включете сертификати като CFA или CPA',
+          'Демонстрирайте способности за количествен анализ'
+        ],
+        skills: [
+          'Финансово моделиране и анализ',
+          'Инвестиционно проучване и оценка',
+          'Оценка и управление на риска',
+          'Компетентност в Excel и финансов софтуер',
+          'Финансова отчетност и прогнози',
+          'Пазарно проучване и анализ на тенденции',
+          'Умения за представяне и комуникация'
+        ],
+        whyGood: [
+          'Ясна структура, която подчертава аналитичната експертиза',
+          'Акцентира върху количествените умения и постижения',
+          'Показва прогресия на опита с финансов анализ',
+          'Демонстрира ангажираност към професионално развитие',
+          'Формат, съвместим с ATS с финансови ключови думи'
+        ]
+      },
+      da: {
+        name: 'Finansiel Analytiker',
+        slug: 'finansiel-analytiker',
+        description: 'Finansielle analytikere vurderer investeringsmuligheder, analyserer finansielle data og giver anbefalinger for at hjælpe virksomheder og enkeltpersoner med at træffe informerede finansielle beslutninger.',
+        tips: [
+          'Fremhæv din grad i finans eller regnskab',
+          'Fremhæv analytiske færdigheder og erfaring med finansiel modellering',
+          'Vis kompetence med finansiel software og værktøjer',
+          'Inkluder certificeringer som CFA eller CPA',
+          'Demonstrer kvantitative analyseevner'
+        ],
+        skills: [
+          'Finansiel modellering og analyse',
+          'Investeringsforskning og evaluering',
+          'Risikovurdering og -styring',
+          'Kompetence i Excel og finansiel software',
+          'Finansiel rapportering og prognoser',
+          'Markedsundersøgelse og trendanalyse',
+          'Præsentations- og kommunikationsfærdigheder'
+        ],
+        whyGood: [
+          'Tydelig struktur, der fremhæver analytisk ekspertise',
+          'Fremhæver kvantitative færdigheder og præstationer',
+          'Vis progression af erfaring med finansiel analyse',
+          'Demonstrer engagement i professionel udvikling',
+          'ATS-venligt format med finansielle nøgleord'
+        ]
+      },
+      fi: {
+        name: 'Rahoitusanalyytikko',
+        slug: 'rahoitusanalyytikko',
+        description: 'Rahoitusanalyytikot arvioivat sijoitusmahdollisuuksia, analysoivat talousdataa ja antavat suosituksia auttaakseen yrityksiä ja yksityishenkilöitä tekemään tietoon perustuvia talouspäätöksiä.',
+        tips: [
+          'Korosta talous- tai kirjanpitotutkintoa',
+          'Korosta analyyttisiä taitoja ja talousmallinnuksen kokemusta',
+          'Näytä pätevyys talousohjelmistoissa ja -työkaluissa',
+          'Sisällytä sertifikaatit kuten CFA tai CPA',
+          'Näytä kvantitatiiviset analysointikyvyt'
+        ],
+        skills: [
+          'Talousmallinnus ja -analyysi',
+          'Sijoitus tutkimus ja arviointi',
+          'Riskinarviointi ja -hallinta',
+          'Pätevyys Excelissä ja talousohjelmistoissa',
+          'Talousraportointi ja ennusteet',
+          'Markkinatutkimus ja trendianalyysi',
+          'Esiintymis- ja viestintätaidot'
+        ],
+        whyGood: [
+          'Selkeä rakenne, joka korostaa analyyttistä asiantuntemusta',
+          'Korostaa kvantitatiivisia taitoja ja saavutuksia',
+          'Näyttää talousanalyysin kokemuksen kehityksen',
+          'Näyttää sitoutumisen ammatilliseen kehitykseen',
+          'ATS-yhteensopiva muoto talousavainsanoilla'
+        ]
+      },
+      sk: {
+        name: 'Finančný Analytik',
+        slug: 'financny-analytik',
+        description: 'Finanční analytici hodnotia investičné príležitosti, analyzujú finančné údaje a poskytujú odporúčania, aby pomohli firmám a jednotlivcom robiť informované finančné rozhodnutia.',
+        tips: [
+          'Zdôraznite svoj titul v oblasti financií alebo účtovníctva',
+          'Zdôraznite analytické zručnosti a skúsenosti s finančným modelovaním',
+          'Ukážte znalosť finančného softvéru a nástrojov',
+          'Zahrňte certifikácie ako CFA alebo CPA',
+          'Preukážte schopnosti kvantitatívnej analýzy'
+        ],
+        skills: [
+          'Finančné modelovanie a analýza',
+          'Investičný výskum a hodnotenie',
+          'Hodnotenie a riadenie rizík',
+          'Znalosť Excelu a finančného softvéru',
+          'Finančné reportovanie a prognózy',
+          'Výskum trhu a analýza trendov',
+          'Prezentačné a komunikačné zručnosti'
+        ],
+        whyGood: [
+          'Jasná štruktúra zdôrazňujúca analytickú odbornosť',
+          'Zdôrazňuje kvantitatívne zručnosti a úspechy',
+          'Ukazuje pokrok skúseností s finančnou analýzou',
+          'Preukazuje záväzok k profesionálnemu rozvoju',
+          'Formát kompatibilný s ATS s finančnými kľúčovými slovami'
+        ]
+      },
+      no: {
+        name: 'Finansiell Analytiker',
+        slug: 'finansiell-analytiker',
+        description: 'Finansielle analytikere vurderer investeringsmuligheter, analyserer finansielle data og gir anbefalinger for å hjelpe bedrifter og enkeltpersoner med å ta informerte finansielle beslutninger.',
+        tips: [
+          'Fremhev din grad i finans eller regnskap',
+          'Fremhev analytiske ferdigheter og erfaring med finansiel modellering',
+          'Vis kompetanse med finansiel programvare og verktøy',
+          'Inkluder sertifiseringer som CFA eller CPA',
+          'Vis kvantitative analyseevner'
+        ],
+        skills: [
+          'Finansiell modellering og analyse',
+          'Investeringsforskning og evaluering',
+          'Risikovurdering og -styring',
+          'Kompetanse i Excel og finansiel programvare',
+          'Finansiell rapportering og prognoser',
+          'Markedsundersøkelse og trendanalyse',
+          'Presentasjons- og kommunikasjonsferdigheter'
+        ],
+        whyGood: [
+          'Tydelig struktur som fremhever analytisk ekspertise',
+          'Fremhever kvantitative ferdigheter og prestasjoner',
+          'Vis progresjon av erfaring med finansiel analyse',
+          'Vis engasjement for profesjonell utvikling',
+          'ATS-vennlig format med finansielle nøkkelord'
+        ]
+      },
+      hr: {
+        name: 'Financijski Analitičar',
+        slug: 'financijski-analiticar',
+        description: 'Financijski analitičari procjenjuju investicijske prilike, analiziraju financijske podatke i pružaju preporuke kako bi pomogli poduzećima i pojedincima donositi informirane financijske odluke.',
+        tips: [
+          'Istaknite svoju diplomu iz financija ili računovodstva',
+          'Naglasite analitičke vještine i iskustvo u financijskom modeliranju',
+          'Pokažite kompetenciju s financijskim softverom i alatima',
+          'Uključite certifikate kao što su CFA ili CPA',
+          'Pokažite sposobnosti kvantitativne analize'
+        ],
+        skills: [
+          'Financijsko modeliranje i analiza',
+          'Istraživanje i procjena ulaganja',
+          'Procjena i upravljanje rizicima',
+          'Kompetencija u Excelu i financijskom softveru',
+          'Financijsko izvještavanje i prognoze',
+          'Istraživanje tržišta i analiza trendova',
+          'Prezentacijske i komunikacijske vještine'
+        ],
+        whyGood: [
+          'Jasna struktura koja ističe analitičku stručnost',
+          'Naglašava kvantitativne vještine i postignuća',
+          'Pokazuje napredak iskustva u financijskoj analizi',
+          'Pokazuje predanost profesionalnom razvoju',
+          'Format kompatibilan s ATS s financijskim ključnim riječima'
+        ]
+      },
+      sr: {
+        name: 'Финансијски Аналитичар',
+        slug: 'finansijski-analiticar',
+        description: 'Финансијски аналитичари процењују инвестиционе прилике, анализирају финансијске податке и пружају препоруке како би помогли предузећима и појединцима да доносе информисане финансијске одлуке.',
+        tips: [
+          'Истакните своју диплому из финансија или рачуноводства',
+          'Нагласите аналитичке вештине и искуство у финансијском моделовању',
+          'Покажите компетенцију са финансијским софтвером и алатима',
+          'Укључите сертификате као што су CFA или CPA',
+          'Покажите способности квантитативне анализе'
+        ],
+        skills: [
+          'Финансијско моделовање и анализа',
+          'Истраживање и процена улагања',
+          'Процена и управљање ризицима',
+          'Компетенција у Excel-у и финансијском софтверу',
+          'Финансијско извештавање и прогнозе',
+          'Истраживање тржишта и анализа трендова',
+          'Презентационе и комуникационе вештине'
+        ],
+        whyGood: [
+          'Јасна структура која истиче аналитичку стручност',
+          'Наглашава квантитативне вештине и достигнућа',
+          'Показује напредак искуства у финансијској анализи',
+          'Показује посвећеност професионалном развоју',
+          'Формат компатибилан са ATS са финансијским кључним речима'
+        ]
+      }
+    }
   }
   // Note: More professions can be added here with full translations
 ]
