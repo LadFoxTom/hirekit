@@ -9600,7 +9600,34 @@ export const PROFESSIONS: Profession[] = [
           'ATS-friendly format with administrative keywords'
         ]
       },
-      nl: { name: 'Officemanager', slug: 'officemanager', description: '', tips: [], skills: [], whyGood: [] },
+      nl: {
+        name: 'Officemanager',
+        slug: 'officemanager',
+        description: 'Officemanagers beheren administratieve operaties, leiden kantoorpersoneel, coördineren faciliteiten en zorgen voor efficiënte dagelijkse operaties. Ze beheren budgetten, voorraden en ondersteunen bedrijfsoperaties.',
+        tips: [
+          'Benadruk je kantoorbeheer en organisatorische vaardigheden',
+          'Leg nadruk op ervaring met budgetbeheer en kostenbeheersing',
+          'Toon personeelscoördinatie en teamondersteuning',
+          'Vermeld vaardigheid met kantoorsoftware en systemen',
+          'Demonstreer probleemoplossende en multitasking vaardigheden'
+        ],
+        skills: [
+          'Kantooradministratie en -operaties',
+          'Budgetbeheer en kostenbeheersing',
+          'Personeelscoördinatie en toezicht',
+          'Microsoft Office Suite',
+          'Leveranciers- en faciliteitenbeheer',
+          'Evenementenplanning en -coördinatie',
+          'Communicatie en organisatie'
+        ],
+        whyGood: [
+          'Duidelijke structuur die kantoorbeheer expertise benadrukt',
+          'Legt nadruk op organisatorische en coördinatievaardigheden',
+          'Toont operationele efficiëntie prestaties',
+          'Demonstreert budget- en resourcebeheer',
+          'ATS-vriendelijk formaat met administratieve trefwoorden'
+        ]
+      },
       fr: { name: 'Responsable de Bureau', slug: 'responsable-bureau', description: '', tips: [], skills: [], whyGood: [] },
       es: { name: 'Gerente de Oficina', slug: 'gerente-oficina', description: '', tips: [], skills: [], whyGood: [] },
       de: { name: 'Büroleiter', slug: 'buroleiter', description: '', tips: [], skills: [], whyGood: [] },
@@ -9654,7 +9681,34 @@ export const PROFESSIONS: Profession[] = [
           'ATS-friendly format with administrative keywords'
         ]
       },
-      nl: { name: 'Directiesecretaresse', slug: 'directiesecretaresse', description: '', tips: [], skills: [], whyGood: [] },
+      nl: {
+        name: 'Directiesecretaresse',
+        slug: 'directiesecretaresse',
+        description: 'Directiesecretaresses bieden hoogwaardige administratieve ondersteuning aan directeuren en senior management. Ze beheren agenda\'s, coördineren vergaderingen, behandelen correspondentie en ondersteunen strategische initiatieven.',
+        tips: [
+          'Benadruk je directieondersteuning en coördinatie-ervaring',
+          'Leg nadruk op discretie en vertrouwelijkheid',
+          'Toon agendabeheer en reiscoördinatie',
+          'Vermeld vaardigheid met geavanceerde kantoorsoftware',
+          'Demonstreer communicatie- en organisatie excellentie'
+        ],
+        skills: [
+          'Directieondersteuning en assistentie',
+          'Agenda- en vergaderingsbeheer',
+          'Reiscoördinatie en logistiek',
+          'Geavanceerd Microsoft Office',
+          'Documentvoorbereiding en -bewerking',
+          'Vertrouwelijkheid en discretie',
+          'Communicatie en probleemoplossing'
+        ],
+        whyGood: [
+          'Duidelijke structuur die directieondersteuning expertise benadrukt',
+          'Legt nadruk op organisatorische en coördinatievaardigheden',
+          'Toont discretie en professionaliteit',
+          'Demonstreert multitasking en efficiëntie',
+          'ATS-vriendelijk formaat met administratieve trefwoorden'
+        ]
+      },
       fr: { name: 'Assistant de Direction', slug: 'assistant-direction', description: '', tips: [], skills: [], whyGood: [] },
       es: { name: 'Asistente Ejecutivo', slug: 'asistente-ejecutivo', description: '', tips: [], skills: [], whyGood: [] },
       de: { name: 'Assistent der Geschäftsleitung', slug: 'assistent-geschaftsleitung', description: '', tips: [], skills: [], whyGood: [] },
@@ -9708,7 +9762,34 @@ export const PROFESSIONS: Profession[] = [
           'ATS-friendly format with hospitality keywords'
         ]
       },
-      nl: { name: 'Hotelmanager', slug: 'hotelmanager', description: '', tips: [], skills: [], whyGood: [] },
+      nl: {
+        name: 'Hotelmanager',
+        slug: 'hotelmanager',
+        description: 'Hotelmanagers beheren alle hoteloperaties, inclusief gastenservices, personeelsbeheer, budgettering en faciliteitenonderhoud. Ze zorgen voor uitzonderlijke gastenervaringen en winstgevende operaties.',
+        tips: [
+          'Benadruk je ervaring in hospitality management',
+          'Leg nadruk op gastentevredenheidsscores en reviews',
+          'Toon personeelstraining en teamontwikkeling',
+          'Vermeld omzetmanagement en budgetteringsvaardigheden',
+          'Demonstreer crisismanagement en probleemoplossende vaardigheden'
+        ],
+        skills: [
+          'Hoteloperaties en -beheer',
+          'Gastenservices en tevredenheid',
+          'Personeelswerving en -training',
+          'Omzet- en budgetbeheer',
+          'Property management systemen',
+          'Evenementencoördinatie',
+          'Klantenservice excellentie'
+        ],
+        whyGood: [
+          'Duidelijke structuur die hospitality management expertise benadrukt',
+          'Legt nadruk op gastentevredenheid en service excellentie',
+          'Toont operationele efficiëntie en winstgevendheid',
+          'Demonstreert leiderschap en teamontwikkeling',
+          'ATS-vriendelijk formaat met hospitality trefwoorden'
+        ]
+      },
       fr: { name: 'Directeur d\'Hôtel', slug: 'directeur-hotel', description: '', tips: [], skills: [], whyGood: [] },
       es: { name: 'Gerente de Hotel', slug: 'gerente-hotel', description: '', tips: [], skills: [], whyGood: [] },
       de: { name: 'Hotelmanager', slug: 'hotelmanager', description: '', tips: [], skills: [], whyGood: [] },
@@ -9762,7 +9843,34 @@ export const PROFESSIONS: Profession[] = [
           'ATS-friendly format with hospitality keywords'
         ]
       },
-      nl: { name: 'Restaurantmanager', slug: 'restaurantmanager', description: '', tips: [], skills: [], whyGood: [] },
+      nl: {
+        name: 'Restaurantmanager',
+        slug: 'restaurantmanager',
+        description: 'Restaurantmanagers beheren restaurantoperaties, leiden personeel, zorgen voor voedselkwaliteit en veiligheid, en leveren uitzonderlijke dinerervaringen. Ze beheren voorraad, budgettering en klantentevredenheid.',
+        tips: [
+          'Benadruk je restaurantmanagement en leiderschapservaring',
+          'Leg nadruk op klantentevredenheid en service excellentie',
+          'Toon personeelstraining en teamontwikkeling',
+          'Vermeld kennis van voedselveiligheid en gezondheidsregelgeving',
+          'Demonstreer voorraad- en kostenbeheervaardigheden'
+        ],
+        skills: [
+          'Restaurantoperaties en -beheer',
+          'Personeelswerving en -training',
+          'Voedselveiligheid en gezondheidsregelgeving',
+          'Voorraad- en kostenbeheer',
+          'Klantenservice excellentie',
+          'Kassasystemen en restaurantsoftware',
+          'Menusamenstelling en coördinatie'
+        ],
+        whyGood: [
+          'Duidelijke structuur die restaurantmanagement expertise benadrukt',
+          'Legt nadruk op klantentevredenheid en servicekwaliteit',
+          'Toont operationele efficiëntie en winstgevendheid',
+          'Demonstreert teamleiderschap en ontwikkeling',
+          'ATS-vriendelijk formaat met hospitality trefwoorden'
+        ]
+      },
       fr: { name: 'Directeur de Restaurant', slug: 'directeur-restaurant', description: '', tips: [], skills: [], whyGood: [] },
       es: { name: 'Gerente de Restaurante', slug: 'gerente-restaurante', description: '', tips: [], skills: [], whyGood: [] },
       de: { name: 'Restaurantleiter', slug: 'restaurantleiter', description: '', tips: [], skills: [], whyGood: [] },
@@ -9816,7 +9924,34 @@ export const PROFESSIONS: Profession[] = [
           'ATS-friendly format with legal keywords'
         ]
       },
-      nl: { name: 'Paralegal', slug: 'paralegal', description: '', tips: [], skills: [], whyGood: [] },
+      nl: {
+        name: 'Paralegal',
+        slug: 'paralegal',
+        description: 'Paralegals assisteren advocaten bij juridisch onderzoek, documentvoorbereiding, zaakbeheer en cliëntcommunicatie. Ze bieden cruciale ondersteuning bij juridische procedures en administratieve taken.',
+        tips: [
+          'Benadruk je paralegal certificering en opleiding',
+          'Leg nadruk op juridisch onderzoek en schrijfvaardigheden',
+          'Toon ervaring met juridische software en databases',
+          'Vermeld zaakbeheer en organisatorische vaardigheden',
+          'Demonstreer aandacht voor detail en vertrouwelijkheid'
+        ],
+        skills: [
+          'Juridisch onderzoek en analyse',
+          'Documentvoorbereiding en archivering',
+          'Zaakbeheer en organisatie',
+          'Juridische software en databases',
+          'Cliëntcommunicatie en ondersteuning',
+          'Gerechtelijke procedures en regelgeving',
+          'Vertrouwelijkheid en ethiek'
+        ],
+        whyGood: [
+          'Duidelijke structuur die paralegal expertise benadrukt',
+          'Legt nadruk op juridisch onderzoek en schrijfvaardigheden',
+          'Toont zaakbeheerervaring',
+          'Demonstreert aandacht voor detail en nauwkeurigheid',
+          'ATS-vriendelijk formaat met juridische trefwoorden'
+        ]
+      },
       fr: { name: 'Assistant Juridique', slug: 'assistant-juridique', description: '', tips: [], skills: [], whyGood: [] },
       es: { name: 'Asistente Legal', slug: 'asistente-legal', description: '', tips: [], skills: [], whyGood: [] },
       de: { name: 'Rechtsassistent', slug: 'rechtsassistent', description: '', tips: [], skills: [], whyGood: [] },
@@ -9870,7 +10005,34 @@ export const PROFESSIONS: Profession[] = [
           'ATS-friendly format with legal administrative keywords'
         ]
       },
-      nl: { name: 'Juridisch Assistent', slug: 'juridisch-assistent', description: '', tips: [], skills: [], whyGood: [] },
+      nl: {
+        name: 'Juridisch Assistent',
+        slug: 'juridisch-assistent',
+        description: 'Juridisch assistenten bieden administratieve ondersteuning aan advocaten en juridische teams. Ze beheren agenda\'s, bereiden documenten voor, organiseren dossiers en assisteren bij cliëntcommunicatie en zaakcoördinatie.',
+        tips: [
+          'Benadruk je juridische administratieve ervaring',
+          'Leg nadruk op organisatorische en tijdmanagementvaardigheden',
+          'Toon vaardigheid met juridische software en databases',
+          'Vermeld documentbeheer en archiveringsexpertise',
+          'Demonstreer aandacht voor detail en vertrouwelijkheid'
+        ],
+        skills: [
+          'Juridische administratieve ondersteuning',
+          'Documentvoorbereiding en -beheer',
+          'Agenda- en afsprakenbeheer',
+          'Juridische software en databases',
+          'Cliëntcommunicatie en ondersteuning',
+          'Archivering en dossierbeheer',
+          'Vertrouwelijkheid en professionaliteit'
+        ],
+        whyGood: [
+          'Duidelijke structuur die juridische administratieve expertise benadrukt',
+          'Legt nadruk op organisatorische en ondersteuningsvaardigheden',
+          'Toont documentbeheervaardigheid',
+          'Demonstreert aandacht voor detail en betrouwbaarheid',
+          'ATS-vriendelijk formaat met juridische administratieve trefwoorden'
+        ]
+      },
       fr: { name: 'Secrétaire Juridique', slug: 'secretaire-juridique', description: '', tips: [], skills: [], whyGood: [] },
       es: { name: 'Asistente Administrativo Legal', slug: 'asistente-administrativo-legal', description: '', tips: [], skills: [], whyGood: [] },
       de: { name: 'Rechtsfachangestellter', slug: 'rechtsfachangestellter', description: '', tips: [], skills: [], whyGood: [] },
