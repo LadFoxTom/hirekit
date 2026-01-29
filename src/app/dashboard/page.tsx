@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef, useCallback } from 'react'
 import { useAuth } from '@/context/AuthContext'
 import { useRouter, usePathname } from 'next/navigation'
 import { useLocale } from '@/context/LocaleContext'
+import { URL_SEGMENTS, type Language } from '@/data/professions'
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
 import { 
@@ -546,6 +547,24 @@ export default function DashboardPage() {
                         }} 
                       />
                       <MenuItem 
+                        icon={FiEye} 
+                        label={t('nav.cv_examples')} 
+                        onClick={() => {
+                          setIsUserMenuOpen(false)
+                          const segments = URL_SEGMENTS[language as Language] || URL_SEGMENTS.en
+                          router.push(`/${segments.examples}/${segments.cv}`)
+                        }}
+                      />
+                      <MenuItem 
+                        icon={FiEye} 
+                        label={t('nav.letter_examples')} 
+                        onClick={() => {
+                          setIsUserMenuOpen(false)
+                          const segments = URL_SEGMENTS[language as Language] || URL_SEGMENTS.en
+                          router.push(`/${segments.examples}/${segments.letter}`)
+                        }}
+                      />
+                      <MenuItem 
                         icon={FiBriefcase} 
                         label={t('nav.job_applications_short')} 
                         onClick={() => {
@@ -678,6 +697,42 @@ export default function DashboardPage() {
                   >
                     <FiFolder size={14} style={{ color: 'var(--text-tertiary)' }} />
                     <span className="text-sm">{t('nav.my_cvs')}</span>
+                  </button>
+                  <button
+                    onClick={() => { 
+                      setIsUserMenuOpen(false); 
+                      const segments = URL_SEGMENTS[language as Language] || URL_SEGMENTS.en;
+                      router.push(`/${segments.examples}/${segments.cv}`); 
+                    }}
+                    className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors text-left"
+                    style={{ color: 'var(--text-primary)' }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = 'transparent';
+                    }}
+                  >
+                    <FiEye size={14} style={{ color: 'var(--text-tertiary)' }} />
+                    <span className="text-sm">{t('nav.cv_examples')}</span>
+                  </button>
+                  <button
+                    onClick={() => { 
+                      setIsUserMenuOpen(false); 
+                      const segments = URL_SEGMENTS[language as Language] || URL_SEGMENTS.en;
+                      router.push(`/${segments.examples}/${segments.letter}`); 
+                    }}
+                    className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors text-left"
+                    style={{ color: 'var(--text-primary)' }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = 'transparent';
+                    }}
+                  >
+                    <FiEye size={14} style={{ color: 'var(--text-tertiary)' }} />
+                    <span className="text-sm">{t('nav.letter_examples')}</span>
                   </button>
                   <button
                     onClick={() => { setIsUserMenuOpen(false); toast(t('toast.job_applications_coming_soon')); }}

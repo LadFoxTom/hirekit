@@ -6,7 +6,6 @@ import { useSession, signOut } from 'next-auth/react'
 import { useAuth } from '@/context/AuthContext'
 import { useLocale } from '@/context/LocaleContext'
 import LanguageSwitcher from '@/components/LanguageSwitcher'
-import { URL_SEGMENTS, type Language } from '@/data/professions'
 import { FaBars, FaTimes, FaUser, FaSignOutAlt, FaChevronDown, FaCreditCard, FaCog } from 'react-icons/fa'
 
 export default function Navbar() {
@@ -41,9 +40,6 @@ export default function Navbar() {
   }
 
   const navigation = useMemo(() => {
-    // Get URL segments based on current language
-    const segments = URL_SEGMENTS[language as Language] || URL_SEGMENTS.en
-    
     return [
       { 
         name: t('nav.tools_menu'), 
@@ -51,14 +47,6 @@ export default function Navbar() {
         dropdown: [
           { name: t('nav.builder'), href: '/' },
           { name: t('nav.motivational_letter_builder'), href: '/', onClick: () => localStorage.setItem('preferredArtifactType', 'letter') }
-        ]
-      },
-      { 
-        name: t('nav.examples') || 'Examples', 
-        href: '#',
-        dropdown: [
-          { name: t('nav.cv_examples') || 'CV Examples', href: `/${segments.examples}/${segments.cv}` },
-          { name: t('nav.letter_examples') || 'Letter Examples', href: `/${segments.examples}/${segments.letter}` }
         ]
       },
       { name: t('common.pricing'), href: '/pricing' },
