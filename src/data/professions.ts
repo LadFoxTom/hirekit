@@ -4814,6 +4814,1140 @@ export const PROFESSIONS: Profession[] = [
         ]
       }
     }
+  },
+  // Healthcare: Doctor
+  {
+    id: 'doctor',
+    category: 'healthcare',
+    translations: {
+      en: {
+        name: 'Doctor',
+        slug: 'doctor',
+        description: 'Doctors diagnose and treat medical conditions, provide preventive care, and guide patients through health challenges. They work in hospitals, clinics, private practices, and specialized medical facilities.',
+        tips: [
+          'Highlight your medical education and board certifications',
+          'Emphasize clinical experience and patient outcomes',
+          'Showcase specialized training and areas of expertise',
+          'Include research publications and medical achievements',
+          'Demonstrate commitment to continuing medical education'
+        ],
+        skills: [
+          'Medical diagnosis and treatment planning',
+          'Patient consultation and examination',
+          'Surgical procedures (if applicable)',
+          'Medical record documentation',
+          'Interdisciplinary team collaboration',
+          'Medical research and evidence-based practice',
+          'Patient communication and empathy'
+        ],
+        whyGood: [
+          'Clear structure highlighting medical qualifications',
+          'Emphasizes clinical expertise and patient care',
+          'Shows progression of medical training and specialization',
+          'Demonstrates commitment to medical excellence',
+          'ATS-friendly format with medical keywords'
+        ]
+      },
+      nl: {
+        name: 'Arts',
+        slug: 'arts',
+        description: 'Artsen diagnosticeren en behandelen medische aandoeningen, bieden preventieve zorg en begeleiden patiënten bij gezondheidsuitdagingen. Ze werken in ziekenhuizen, klinieken, privépraktijken en gespecialiseerde medische faciliteiten.',
+        tips: [
+          'Benadruk je medische opleiding en certificeringen',
+          'Leg nadruk op klinische ervaring en patiëntresultaten',
+          'Toon gespecialiseerde training en expertisegebieden',
+          'Vermeld onderzoekspublicaties en medische prestaties',
+          'Demonstreer toewijding aan voortgezette medische opleiding'
+        ],
+        skills: [
+          'Medische diagnose en behandelplanning',
+          'Patiëntconsultatie en onderzoek',
+          'Chirurgische procedures (indien van toepassing)',
+          'Medische dossiers documentatie',
+          'Interdisciplinaire team samenwerking',
+          'Medisch onderzoek en evidence-based praktijk',
+          'Patiëntcommunicatie en empathie'
+        ],
+        whyGood: [
+          'Duidelijke structuur die medische kwalificaties benadrukt',
+          'Legt nadruk op klinische expertise en patiëntenzorg',
+          'Toont progressie van medische training en specialisatie',
+          'Demonstreert toewijding aan medische excellentie',
+          'ATS-vriendelijk formaat met medische trefwoorden'
+        ]
+      },
+      fr: {
+        name: 'Médecin',
+        slug: 'medecin',
+        description: 'Les médecins diagnostiquent et traitent les affections médicales, fournissent des soins préventifs et guident les patients face aux défis de santé. Ils travaillent dans les hôpitaux, cliniques, cabinets privés et établissements médicaux spécialisés.',
+        tips: [
+          'Mettez en avant votre formation médicale et certifications',
+          'Soulignez l\'expérience clinique et les résultats des patients',
+          'Montrez la formation spécialisée et domaines d\'expertise',
+          'Incluez publications de recherche et réalisations médicales',
+          'Démontrez l\'engagement envers la formation médicale continue'
+        ],
+        skills: [
+          'Diagnostic médical et planification du traitement',
+          'Consultation et examen des patients',
+          'Procédures chirurgicales (le cas échéant)',
+          'Documentation des dossiers médicaux',
+          'Collaboration d\'équipe interdisciplinaire',
+          'Recherche médicale et pratique fondée sur des preuves',
+          'Communication avec les patients et empathie'
+        ],
+        whyGood: [
+          'Structure claire mettant en évidence les qualifications médicales',
+          'Met l\'accent sur l\'expertise clinique et les soins aux patients',
+          'Montre la progression de la formation médicale et spécialisation',
+          'Démontre l\'engagement envers l\'excellence médicale',
+          'Format compatible ATS avec mots-clés médicaux'
+        ]
+      },
+      es: {
+        name: 'Médico',
+        slug: 'medico',
+        description: 'Los médicos diagnostican y tratan condiciones médicas, brindan atención preventiva y guían a los pacientes a través de desafíos de salud. Trabajan en hospitales, clínicas, consultorios privados e instalaciones médicas especializadas.',
+        tips: [
+          'Destaca tu educación médica y certificaciones',
+          'Enfatiza experiencia clínica y resultados del paciente',
+          'Muestra formación especializada y áreas de experiencia',
+          'Incluye publicaciones de investigación y logros médicos',
+          'Demuestra compromiso con la educación médica continua'
+        ],
+        skills: [
+          'Diagnóstico médico y planificación del tratamiento',
+          'Consulta y examen del paciente',
+          'Procedimientos quirúrgicos (si corresponde)',
+          'Documentación de registros médicos',
+          'Colaboración en equipo interdisciplinario',
+          'Investigación médica y práctica basada en evidencia',
+          'Comunicación con pacientes y empatía'
+        ],
+        whyGood: [
+          'Estructura clara que destaca las calificaciones médicas',
+          'Enfatiza la experiencia clínica y la atención al paciente',
+          'Muestra la progresión de la formación médica y especialización',
+          'Demuestra compromiso con la excelencia médica',
+          'Formato compatible con ATS con palabras clave médicas'
+        ]
+      },
+      de: {
+        name: 'Arzt',
+        slug: 'arzt',
+        description: 'Ärzte diagnostizieren und behandeln medizinische Erkrankungen, bieten präventive Versorgung und begleiten Patienten bei gesundheitlichen Herausforderungen. Sie arbeiten in Krankenhäusern, Kliniken, Privatpraxen und spezialisierten medizinischen Einrichtungen.',
+        tips: [
+          'Heben Sie Ihre medizinische Ausbildung und Zertifizierungen hervor',
+          'Betonen Sie klinische Erfahrung und Patientenergebnisse',
+          'Zeigen Sie spezialisierte Ausbildung und Fachgebiete',
+          'Fügen Sie Forschungsveröffentlichungen und medizinische Leistungen hinzu',
+          'Demonstrieren Sie Engagement für kontinuierliche medizinische Ausbildung'
+        ],
+        skills: [
+          'Medizinische Diagnose und Behandlungsplanung',
+          'Patientenberatung und Untersuchung',
+          'Chirurgische Eingriffe (falls zutreffend)',
+          'Medizinische Aktenführung',
+          'Interdisziplinäre Teamzusammenarbeit',
+          'Medizinische Forschung und evidenzbasierte Praxis',
+          'Patientenkommunikation und Empathie'
+        ],
+        whyGood: [
+          'Klare Struktur, die medizinische Qualifikationen hervorhebt',
+          'Betont klinische Expertise und Patientenversorgung',
+          'Zeigt Fortschritt der medizinischen Ausbildung und Spezialisierung',
+          'Demonstriert Engagement für medizinische Exzellenz',
+          'ATS-freundliches Format mit medizinischen Schlüsselwörtern'
+        ]
+      },
+      it: {
+        name: 'Medico',
+        slug: 'medico',
+        description: 'I medici diagnosticano e trattano condizioni mediche, forniscono cure preventive e guidano i pazienti attraverso le sfide sanitarie. Lavorano in ospedali, cliniche, studi privati e strutture mediche specializzate.',
+        tips: [
+          'Evidenzia la tua formazione medica e certificazioni',
+          'Enfatizza l\'esperienza clinica e i risultati dei pazienti',
+          'Mostra formazione specializzata e aree di competenza',
+          'Includi pubblicazioni di ricerca e risultati medici',
+          'Dimostra impegno per la formazione medica continua'
+        ],
+        skills: [
+          'Diagnosi medica e pianificazione del trattamento',
+          'Consultazione e esame del paziente',
+          'Procedure chirurgiche (se applicabile)',
+          'Documentazione delle cartelle cliniche',
+          'Collaborazione in team interdisciplinare',
+          'Ricerca medica e pratica basata sull\'evidenza',
+          'Comunicazione con i pazienti ed empatia'
+        ],
+        whyGood: [
+          'Struttura chiara che evidenzia le qualifiche mediche',
+          'Enfatizza l\'esperienza clinica e la cura del paziente',
+          'Mostra la progressione della formazione medica e specializzazione',
+          'Dimostra impegno per l\'eccellenza medica',
+          'Formato compatibile ATS con parole chiave mediche'
+        ]
+      },
+      pl: {
+        name: 'Lekarz',
+        slug: 'lekarz',
+        description: 'Lekarze diagnozują i leczą schorzenia medyczne, zapewniają opiekę profilaktyczną i wspierają pacjentów w wyzwaniach zdrowotnych. Pracują w szpitalach, klinikach, prywatnych praktykach i specjalistycznych placówkach medycznych.',
+        tips: [
+          'Podkreśl swoje wykształcenie medyczne i certyfikaty',
+          'Podkreśl doświadczenie kliniczne i wyniki pacjentów',
+          'Pokaż specjalistyczne szkolenia i obszary ekspertyzy',
+          'Uwzględnij publikacje badawcze i osiągnięcia medyczne',
+          'Wykazuj zaangażowanie w ciągłe kształcenie medyczne'
+        ],
+        skills: [
+          'Diagnoza medyczna i planowanie leczenia',
+          'Konsultacja i badanie pacjenta',
+          'Procedury chirurgiczne (jeśli dotyczy)',
+          'Dokumentacja kart medycznych',
+          'Współpraca w zespole interdyscyplinarnym',
+          'Badania medyczne i praktyka oparta na dowodach',
+          'Komunikacja z pacjentem i empatia'
+        ],
+        whyGood: [
+          'Jasna struktura podkreślająca kwalifikacje medyczne',
+          'Podkreśla wiedzę kliniczną i opiekę nad pacjentem',
+          'Pokazuje postęp w szkoleniu medycznym i specjalizacji',
+          'Wykazuje zaangażowanie w doskonałość medyczną',
+          'Format przyjazny dla ATS z kluczowymi słowami medycznymi'
+        ]
+      },
+      ro: {
+        name: 'Medic',
+        slug: 'medic',
+        description: 'Medicii diagnostică și tratează afecțiuni medicale, oferă îngrijire preventivă și ghidează pacienții prin provocări de sănătate. Lucrează în spitale, clinici, cabinete private și facilități medicale specializate.',
+        tips: [
+          'Evidențiază educația medicală și certificările',
+          'Subliniază experiența clinică și rezultatele pacienților',
+          'Prezintă formarea specializată și domeniile de expertiză',
+          'Include publicații de cercetare și realizări medicale',
+          'Demonstrează angajamentul față de educația medicală continuă'
+        ],
+        skills: [
+          'Diagnostic medical și planificare tratament',
+          'Consultare și examinare pacient',
+          'Proceduri chirurgicale (dacă este cazul)',
+          'Documentare fișe medicale',
+          'Colaborare echipă interdisciplinară',
+          'Cercetare medicală și practică bazată pe dovezi',
+          'Comunicare cu pacienții și empatie'
+        ],
+        whyGood: [
+          'Structură clară care evidențiază calificările medicale',
+          'Subliniază expertiza clinică și îngrijirea pacienților',
+          'Arată progresia formării medicale și specializare',
+          'Demonstrează angajamentul față de excelența medicală',
+          'Format compatibil ATS cu cuvinte cheie medicale'
+        ]
+      },
+      hu: {
+        name: 'Orvos',
+        slug: 'orvos',
+        description: 'Az orvosok diagnosztizálják és kezelik az orvosi állapotokat, megelőző ellátást nyújtanak és egészségügyi kihívások során vezetik a betegeket. Kórházakban, klinikákon, magánrendelőkben és szakorvosi létesítményekben dolgoznak.',
+        tips: [
+          'Hangsúlyozza orvosi képzését és szakmai tanúsítványait',
+          'Hangsúlyozza a klinikai tapasztalatot és a betegeredményeket',
+          'Mutassa be a szakirányú képzést és szakértelmi területeket',
+          'Tartalmazza a kutatási publikációkat és orvosi eredményeket',
+          'Mutassa be az orvosi továbbképzéshez való elkötelezettségét'
+        ],
+        skills: [
+          'Orvosi diagnosztika és kezelési tervezés',
+          'Betegkonzultáció és vizsgálat',
+          'Sebészeti eljárások (ha alkalmazandó)',
+          'Orvosi nyilvántartások dokumentálása',
+          'Interdiszciplináris csapatmunka',
+          'Orvosi kutatás és bizonyítékokon alapuló gyakorlat',
+          'Betegkommunikáció és empátia'
+        ],
+        whyGood: [
+          'Világos struktúra, amely kiemeli az orvosi képzettségeket',
+          'Hangsúlyozza a klinikai szakértelem és betegellátást',
+          'Mutatja az orvosi képzés és szpecializáció fejlődését',
+          'Bemutatja az orvosi kiválósághoz való elkötelezettséget',
+          'ATS-barát formátum orvosi kulcsszavakkal'
+        ]
+      },
+      el: {
+        name: 'Γιατρός',
+        slug: 'giatros',
+        description: 'Οι γιατροί διαγιγνώσκουν και θεραπεύουν ιατρικές παθήσεις, παρέχουν προληπτική φροντίδα και καθοδηγούν ασθενείς μέσα από προκλήσεις υγείας. Εργάζονται σε νοσοκομεία, κλινικές, ιδιωτικά ιατρεία και εξειδικευμένες ιατρικές εγκαταστάσεις.',
+        tips: [
+          'Επισημάνετε την ιατρική σας εκπαίδευση και πιστοποιήσεις',
+          'Τονίστε την κλινική εμπειρία και τα αποτελέσματα των ασθενών',
+          'Παρουσιάστε εξειδικευμένη εκπαίδευση και τομείς ειδίκευσης',
+          'Συμπεριλάβετε ερευνητικές δημοσιεύσεις και ιατρικά επιτεύγματα',
+          'Αποδείξτε δέσμευση στη συνεχή ιατρική εκπαίδευση'
+        ],
+        skills: [
+          'Ιατρική διάγνωση και σχεδιασμός θεραπείας',
+          'Συμβουλευτική και εξέταση ασθενών',
+          'Χειρουργικές διαδικασίες (εάν ισχύει)',
+          'Τεκμηρίωση ιατρικών φακέλων',
+          'Διαθεματική συνεργασία ομάδας',
+          'Ιατρική έρευνα και πρακτική βασισμένη σε αποδείξεις',
+          'Επικοινωνία με ασθενείς και ενσυναίσθηση'
+        ],
+        whyGood: [
+          'Σαφής δομή που επισημαίνει τις ιατρικές προσόντα',
+          'Τονίζει την κλινική εμπειρογνωμοσύνη και φροντίδα ασθενών',
+          'Δείχνει την πρόοδο της ιατρικής εκπαίδευσης και εξειδίκευσης',
+          'Αποδεικνύει δέσμευση στην ιατρική αριστεία',
+          'Μορφή συμβατή με ATS με ιατρικές λέξεις-κλειδιά'
+        ]
+      },
+      cs: {
+        name: 'Lékař',
+        slug: 'lekar',
+        description: 'Lékaři diagnostikují a léčí zdravotní stavy, poskytují preventivní péči a vedou pacienty při zdravotních výzvách. Pracují v nemocnicích, klinikách, soukromých ordinacích a specializovaných zdravotnických zařízeních.',
+        tips: [
+          'Zdůrazněte své lékařské vzdělání a certifikace',
+          'Zdůrazněte klinické zkušenosti a výsledky pacientů',
+          'Ukažte specializované školení a oblasti odbornosti',
+          'Zahrňte výzkumné publikace a lékařské úspěchy',
+          'Prokažte závazek k dalšímu lékařskému vzdělávání'
+        ],
+        skills: [
+          'Lékařská diagnostika a plánování léčby',
+          'Konzultace a vyšetření pacienta',
+          'Chirurgické zákroky (pokud je to možné)',
+          'Dokumentace lékařských záznamů',
+          'Mezioborová týmová spolupráce',
+          'Lékařský výzkum a praxe založená na důkazech',
+          'Komunikace s pacienty a empatie'
+        ],
+        whyGood: [
+          'Jasná struktura zdůrazňující lékařské kvalifikace',
+          'Zdůrazňuje klinickou odbornost a péči o pacienty',
+          'Ukazuje pokrok v lékařském vzdělávání a specializaci',
+          'Prokazuje závazek k lékařské excelenci',
+          'Formát kompatibilní s ATS s lékařskými klíčovými slovy'
+        ]
+      },
+      pt: {
+        name: 'Médico',
+        slug: 'medico',
+        description: 'Os médicos diagnosticam e tratam condições médicas, fornecem cuidados preventivos e orientam pacientes através de desafios de saúde. Trabalham em hospitais, clínicas, consultórios privados e instalações médicas especializadas.',
+        tips: [
+          'Destaque sua educação médica e certificações',
+          'Enfatize experiência clínica e resultados dos pacientes',
+          'Mostre treinamento especializado e áreas de expertise',
+          'Inclua publicações de pesquisa e conquistas médicas',
+          'Demonstre compromisso com educação médica contínua'
+        ],
+        skills: [
+          'Diagnóstico médico e planejamento de tratamento',
+          'Consulta e exame do paciente',
+          'Procedimentos cirúrgicos (se aplicável)',
+          'Documentação de registros médicos',
+          'Colaboração em equipe interdisciplinar',
+          'Pesquisa médica e prática baseada em evidências',
+          'Comunicação com pacientes e empatia'
+        ],
+        whyGood: [
+          'Estrutura clara destacando qualificações médicas',
+          'Enfatiza expertise clínica e cuidado ao paciente',
+          'Mostra progressão do treinamento médico e especialização',
+          'Demonstra compromisso com excelência médica',
+          'Formato compatível com ATS com palavras-chave médicas'
+        ]
+      },
+      sv: {
+        name: 'Läkare',
+        slug: 'lakare',
+        description: 'Läkare diagnostiserar och behandlar medicinska tillstånd, ger förebyggande vård och vägleder patienter genom hälsoutmaningar. De arbetar på sjukhus, kliniker, privata mottagningar och specialiserade medicinska anläggningar.',
+        tips: [
+          'Framhäva din medicinska utbildning och certifieringar',
+          'Betona klinisk erfarenhet och patientresultat',
+          'Visa specialiserad utbildning och expertområden',
+          'Inkludera forskningspublikationer och medicinska prestationer',
+          'Visa engagemang för kontinuerlig medicinsk utbildning'
+        ],
+        skills: [
+          'Medicinsk diagnostik och behandlingsplanering',
+          'Patientkonsultation och undersökning',
+          'Kirurgiska ingrepp (om tillämpligt)',
+          'Dokumentation av medicinska journaler',
+          'Tvärvetenskapligt teamarbete',
+          'Medicinsk forskning och evidensbaserad praxis',
+          'Patientkommunikation och empati'
+        ],
+        whyGood: [
+          'Tydlig struktur som framhäver medicinska kvalifikationer',
+          'Betonar klinisk expertis och patientvård',
+          'Visar progression av medicinsk utbildning och specialisering',
+          'Visar engagemang för medicinsk excellens',
+          'ATS-vänligt format med medicinska nyckelord'
+        ]
+      },
+      bg: {
+        name: 'Лекар',
+        slug: 'lekar',
+        description: 'Лекарите диагностират и лекуват медицински състояния, осигуряват превантивна грижа и насочват пациенти през здравни предизвикателства. Работят в болници, клиники, частни практики и специализирани медицински заведения.',
+        tips: [
+          'Подчертайте медицинското си образование и сертификати',
+          'Акцентирайте върху клиничния опит и резултатите на пациентите',
+          'Покажете специализирано обучение и области на експертиза',
+          'Включете изследователски публикации и медицински постижения',
+          'Демонстрирайте ангажираност към непрекъснато медицинско образование'
+        ],
+        skills: [
+          'Медицинска диагностика и планиране на лечение',
+          'Консултация и преглед на пациент',
+          'Хирургически процедури (ако е приложимо)',
+          'Документиране на медицински записи',
+          'Междисциплинарно екипно сътрудничество',
+          'Медицинско изследване и практика, основана на доказателства',
+          'Комуникация с пациенти и емпатия'
+        ],
+        whyGood: [
+          'Ясна структура, подчертаваща медицинските квалификации',
+          'Акцентира върху клиничната експертиза и грижата за пациентите',
+          'Показва прогресия на медицинското обучение и специализация',
+          'Демонстрира ангажираност към медицинско превъзходство',
+          'Формат, съвместим с ATS с медицински ключови думи'
+        ]
+      },
+      da: {
+        name: 'Læge',
+        slug: 'laege',
+        description: 'Læger diagnosticerer og behandler medicinske tilstande, yder forebyggende pleje og vejleder patienter gennem sundhedsudfordringer. De arbejder på hospitaler, klinikker, private praksisser og specialiserede medicinske faciliteter.',
+        tips: [
+          'Fremhæv din medicinske uddannelse og certificeringer',
+          'Fremhæv klinisk erfaring og patientresultater',
+          'Vis specialiseret træning og ekspertiseområder',
+          'Inkluder forskningspublikationer og medicinske præstationer',
+          'Demonstrer forpligtelse til kontinuerlig medicinsk uddannelse'
+        ],
+        skills: [
+          'Medicinsk diagnose og behandlingsplanlægning',
+          'Patientkonsultation og undersøgelse',
+          'Kirurgiske procedurer (hvis relevant)',
+          'Dokumentation af medicinske journaler',
+          'Tværfagligt teamarbejde',
+          'Medicinsk forskning og evidensbaseret praksis',
+          'Patientkommunikation og empati'
+        ],
+        whyGood: [
+          'Tydelig struktur, der fremhæver medicinske kvalifikationer',
+          'Fremhæver klinisk ekspertise og patientpleje',
+          'Viser progression af medicinsk træning og specialisering',
+          'Demonstrer forpligtelse til medicinsk ekspertise',
+          'ATS-venligt format med medicinske nøgleord'
+        ]
+      },
+      fi: {
+        name: 'Lääkäri',
+        slug: 'laakari',
+        description: 'Lääkärit diagnostisoivat ja hoitavat lääketieteellisiä tiloja, tarjoavat ehkäisevää hoitoa ja ohjaavat potilaita terveyshaasteiden läpi. He työskentelevät sairaaloissa, klinikoilla, yksityisissä vastaanotoissa ja erikoistuneissa lääketieteellisissä laitoksissa.',
+        tips: [
+          'Korosta lääketieteellistä koulutustasi ja sertifikaatteja',
+          'Korosta kliinistä kokemusta ja potilastuloksia',
+          'Näytä erikoistunut koulutus ja asiantuntemuksen alat',
+          'Sisällytä tutkimusjulkaisut ja lääketieteelliset saavutukset',
+          'Näytä sitoutuminen jatkuvaan lääketieteelliseen koulutukseen'
+        ],
+        skills: [
+          'Lääketieteellinen diagnosointi ja hoitosuunnittelu',
+          'Potilaskonsultaatio ja tutkimus',
+          'Kirurgiset toimenpiteet (jos soveltuu)',
+          'Lääketieteellisten asiakirjojen dokumentointi',
+          'Tieteidenvälinen tiimityö',
+          'Lääketieteellinen tutkimus ja näyttöön perustuva käytäntö',
+          'Potilaskommunikaatio ja empatia'
+        ],
+        whyGood: [
+          'Selkeä rakenne, joka korostaa lääketieteellisiä pätevyyksiä',
+          'Korostaa kliinistä asiantuntemusta ja potilashoitoa',
+          'Näyttää lääketieteellisen koulutuksen ja erikoistumisen kehityksen',
+          'Näyttää sitoutumisen lääketieteelliseen huippuosaamiseen',
+          'ATS-yhteensopiva muoto lääketieteellisillä avainsanoilla'
+        ]
+      },
+      sk: {
+        name: 'Lekár',
+        slug: 'lekar',
+        description: 'Lekári diagnostikujú a liečia zdravotné stavy, poskytujú preventívnu starostlivosť a vedú pacientov cez zdravotné výzvy. Pracujú v nemocniciach, klinikách, súkromných ordináciách a špecializovaných zdravotníckych zariadeniach.',
+        tips: [
+          'Zdôraznite svoje lekárske vzdelanie a certifikácie',
+          'Zdôraznite klinické skúsenosti a výsledky pacientov',
+          'Ukážte špecializované školenie a oblasti odbornosti',
+          'Zahrňte výskumné publikácie a lekárske úspechy',
+          'Preukážte záväzok k ďalšiemu lekárskemu vzdelávaniu'
+        ],
+        skills: [
+          'Lekárska diagnostika a plánovanie liečby',
+          'Konzultácia a vyšetrenie pacienta',
+          'Chirurgické zákroky (ak je to možné)',
+          'Dokumentácia lekárskej dokumentácie',
+          'Medzioborová tímová spolupráca',
+          'Lekársky výskum a prax založená na dôkazoch',
+          'Komunikácia s pacientmi a empatia'
+        ],
+        whyGood: [
+          'Jasná štruktúra zdôrazňujúca lekárske kvalifikácie',
+          'Zdôrazňuje klinickú odbornosť a starostlivosť o pacientov',
+          'Ukazuje pokrok v lekárskej edukácii a špecializácii',
+          'Preukazuje záväzok k lekárskej excelencii',
+          'Formát kompatibilný s ATS s lekárske kľúčovými slovami'
+        ]
+      },
+      no: {
+        name: 'Lege',
+        slug: 'lege',
+        description: 'Leger diagnostiserer og behandler medisinske tilstander, gir forebyggende omsorg og veileder pasienter gjennom helseutfordringer. De arbeider på sykehus, klinikker, private praksiser og spesialiserte medisinske fasiliteter.',
+        tips: [
+          'Fremhev din medisinske utdanning og sertifiseringer',
+          'Fremhev klinisk erfaring og pasientresultater',
+          'Vis spesialisert trening og ekspertiseområder',
+          'Inkluder forskningspublikasjoner og medisinske prestasjoner',
+          'Vis forpliktelse til kontinuerlig medisinsk utdanning'
+        ],
+        skills: [
+          'Medisinsk diagnostikk og behandlingsplanlegging',
+          'Pasientkonsultasjon og undersøkelse',
+          'Kirurgiske prosedyrer (hvis aktuelt)',
+          'Dokumentasjon av medisinske journaler',
+          'Tverrfaglig teamarbeid',
+          'Medisinsk forskning og evidensbasert praksis',
+          'Pasientkommunikasjon og empati'
+        ],
+        whyGood: [
+          'Tydelig struktur som fremhever medisinske kvalifikasjoner',
+          'Fremhever klinisk ekspertise og pasientomsorg',
+          'Viser progresjon av medisinsk trening og spesialisering',
+          'Viser forpliktelse til medisinsk ekspertise',
+          'ATS-vennlig format med medisinske nøkkelord'
+        ]
+      },
+      hr: {
+        name: 'Liječnik',
+        slug: 'lijecnik',
+        description: 'Liječnici dijagnosticiraju i liječe medicinska stanja, pružaju preventivnu skrb i vode pacijente kroz zdravstvene izazove. Rade u bolnicama, klinikama, privatnim ordinacijama i specijaliziranim medicinskim ustanovama.',
+        tips: [
+          'Istaknite svoje medicinsko obrazovanje i certifikate',
+          'Naglasite kliničko iskustvo i rezultate pacijenata',
+          'Pokažite specijaliziranu obuku i područja stručnosti',
+          'Uključite istraživačke publikacije i medicinska postignuća',
+          'Pokažite predanost kontinuiranom medicinskom obrazovanju'
+        ],
+        skills: [
+          'Medicinska dijagnostika i planiranje liječenja',
+          'Konzultacija i pregled pacijenta',
+          'Kirurški postupci (ako je primjenjivo)',
+          'Dokumentacija medicinskih kartona',
+          'Interdisciplinarna timska suradnja',
+          'Medicinsko istraživanje i praksa temeljena na dokazima',
+          'Komunikacija s pacijentima i empatija'
+        ],
+        whyGood: [
+          'Jasna struktura koja ističe medicinske kvalifikacije',
+          'Naglašava kliničku stručnost i skrb o pacijentima',
+          'Pokazuje napredak medicinskog obrazovanja i specijalizacije',
+          'Pokazuje predanost medicinskoj izvrsnosti',
+          'Format kompatibilan s ATS s medicinskim ključnim riječima'
+        ]
+      },
+      sr: {
+        name: 'Лекар',
+        slug: 'lekar',
+        description: 'Лекари дијагностикују и лече медицинска стања, пружају превентивну негу и воде пацијенте кроз здравствене изазове. Раде у болницама, клиникама, приватним ординацијама и специјализованим медицинским установама.',
+        tips: [
+          'Истакните своје медицинско образовање и сертификате',
+          'Нагласите клиничко искуство и резултате пацијената',
+          'Покажите специјализовану обуку и области стручности',
+          'Укључите истраживачке публикације и медицинска достигнућа',
+          'Покажите посвећеност континуираном медицинском образовању'
+        ],
+        skills: [
+          'Медицинска дијагноза и планирање лечења',
+          'Консултација и преглед пацијента',
+          'Хируршки поступци (ако је применљиво)',
+          'Документовање медицинских картона',
+          'Интердисциплинарна тимска сарадња',
+          'Медицинско истраживање и пракса заснована на доказима',
+          'Комуникација са пацијентима и емпатија'
+        ],
+        whyGood: [
+          'Јасна структура која истиче медицинске квалификације',
+          'Наглашава клиничку стручност и негу пацијената',
+          'Показује напредак медицинског образовања и специјализације',
+          'Показује посвећеност медицинској изврсности',
+          'Формат компатибилан са ATS са медицинским кључним речима'
+        ]
+      }
+    }
+  },
+  // Healthcare: Pharmacist
+  {
+    id: 'pharmacist',
+    category: 'healthcare',
+    translations: {
+      en: {
+        name: 'Pharmacist',
+        slug: 'pharmacist',
+        description: 'Pharmacists dispense medications, provide pharmaceutical care, and offer health advice to patients. They ensure safe and effective medication use and work in pharmacies, hospitals, and healthcare facilities.',
+        tips: [
+          'Highlight your pharmacy education and licensure',
+          'Emphasize medication management and patient counseling experience',
+          'Showcase knowledge of drug interactions and safety protocols',
+          'Include experience with insurance and prescription processing',
+          'Demonstrate commitment to patient health and safety'
+        ],
+        skills: [
+          'Medication dispensing and verification',
+          'Patient counseling and medication therapy management',
+          'Drug interaction screening',
+          'Prescription processing and insurance billing',
+          'Pharmaceutical inventory management',
+          'Compounding and sterile preparation',
+          'Health screening and immunizations'
+        ],
+        whyGood: [
+          'Clear structure highlighting pharmaceutical expertise',
+          'Emphasizes patient care and medication safety',
+          'Shows knowledge of pharmaceutical regulations',
+          'Demonstrates commitment to healthcare excellence',
+          'ATS-friendly format with pharmacy keywords'
+        ]
+      },
+      nl: {
+        name: 'Apotheker',
+        slug: 'apotheker',
+        description: 'Apothekers verstrekken medicijnen, bieden farmaceutische zorg en geven gezondheidsadvies aan patiënten. Ze zorgen voor veilig en effectief medicijngebruik en werken in apotheken, ziekenhuizen en zorginstellingen.',
+        tips: [
+          'Benadruk je apothekersopleiding en licentie',
+          'Leg nadruk op medicatiebeheer en patiëntadvieservaring',
+          'Toon kennis van geneesmiddelinteracties en veiligheidsprotocollen',
+          'Vermeld ervaring met verzekeringen en receptverwerking',
+          'Demonstreer toewijding aan patiëntgezondheid en veiligheid'
+        ],
+        skills: [
+          'Medicatieverstrekking en verificatie',
+          'Patiëntadvies en medicatietherapiebeheer',
+          'Geneesmiddelinteractiescreening',
+          'Receptverwerking en verzekeringsfacturering',
+          'Farmaceutisch voorraadbeheer',
+          'Bereiden en steriele bereiding',
+          'Gezondheidsscreening en vaccinaties'
+        ],
+        whyGood: [
+          'Duidelijke structuur die farmaceutische expertise benadrukt',
+          'Legt nadruk op patiëntenzorg en medicatieveiligheid',
+          'Toont kennis van farmaceutische regelgeving',
+          'Demonstreert toewijding aan zorg excellentie',
+          'ATS-vriendelijk formaat met apotheek trefwoorden'
+        ]
+      },
+      fr: {
+        name: 'Pharmacien',
+        slug: 'pharmacien',
+        description: 'Les pharmaciens délivrent des médicaments, fournissent des soins pharmaceutiques et offrent des conseils de santé aux patients. Ils assurent une utilisation sûre et efficace des médicaments et travaillent dans les pharmacies, hôpitaux et établissements de santé.',
+        tips: [
+          'Mettez en avant votre formation pharmaceutique et licence',
+          'Soulignez l\'expérience en gestion des médicaments et conseil aux patients',
+          'Montrez la connaissance des interactions médicamenteuses et protocoles de sécurité',
+          'Incluez l\'expérience avec les assurances et traitement des ordonnances',
+          'Démontrez l\'engagement envers la santé et la sécurité des patients'
+        ],
+        skills: [
+          'Délivrance et vérification des médicaments',
+          'Conseil aux patients et gestion de la thérapie médicamenteuse',
+          'Dépistage des interactions médicamenteuses',
+          'Traitement des ordonnances et facturation d\'assurance',
+          'Gestion des stocks pharmaceutiques',
+          'Préparation et préparation stérile',
+          'Dépistage de santé et vaccinations'
+        ],
+        whyGood: [
+          'Structure claire mettant en évidence l\'expertise pharmaceutique',
+          'Met l\'accent sur les soins aux patients et la sécurité des médicaments',
+          'Montre la connaissance des réglementations pharmaceutiques',
+          'Démontre l\'engagement envers l\'excellence des soins de santé',
+          'Format compatible ATS avec mots-clés pharmaceutiques'
+        ]
+      },
+      es: {
+        name: 'Farmacéutico',
+        slug: 'farmaceutico',
+        description: 'Los farmacéuticos dispensan medicamentos, brindan atención farmacéutica y ofrecen consejos de salud a los pacientes. Aseguran el uso seguro y efectivo de medicamentos y trabajan en farmacias, hospitales e instalaciones de salud.',
+        tips: [
+          'Destaca tu educación farmacéutica y licencia',
+          'Enfatiza experiencia en gestión de medicamentos y asesoramiento al paciente',
+          'Muestra conocimiento de interacciones farmacológicas y protocolos de seguridad',
+          'Incluye experiencia con seguros y procesamiento de recetas',
+          'Demuestra compromiso con la salud y seguridad del paciente'
+        ],
+        skills: [
+          'Dispensación y verificación de medicamentos',
+          'Asesoramiento al paciente y gestión de terapia farmacológica',
+          'Detección de interacciones farmacológicas',
+          'Procesamiento de recetas y facturación de seguros',
+          'Gestión de inventario farmacéutico',
+          'Preparación y preparación estéril',
+          'Detección de salud e inmunizaciones'
+        ],
+        whyGood: [
+          'Estructura clara que destaca la experiencia farmacéutica',
+          'Enfatiza la atención al paciente y seguridad de medicamentos',
+          'Muestra conocimiento de regulaciones farmacéuticas',
+          'Demuestra compromiso con la excelencia en salud',
+          'Formato compatible con ATS con palabras clave farmacéuticas'
+        ]
+      },
+      de: {
+        name: 'Apotheker',
+        slug: 'apotheker',
+        description: 'Apotheker geben Medikamente ab, bieten pharmazeutische Betreuung und geben Gesundheitsberatung für Patienten. Sie gewährleisten sichere und wirksame Medikamentenanwendung und arbeiten in Apotheken, Krankenhäusern und Gesundheitseinrichtungen.',
+        tips: [
+          'Heben Sie Ihre pharmazeutische Ausbildung und Lizenz hervor',
+          'Betonen Sie Erfahrung in Arzneimittelverwaltung und Patientenberatung',
+          'Zeigen Sie Kenntnisse über Arzneimittelwechselwirkungen und Sicherheitsprotokolle',
+          'Fügen Sie Erfahrung mit Versicherungen und Rezeptverarbeitung hinzu',
+          'Demonstrieren Sie Engagement für Patientengesundheit und Sicherheit'
+        ],
+        skills: [
+          'Arzneimittelabgabe und Verifizierung',
+          'Patientenberatung und Arzneimitteltherapiemanagement',
+          'Arzneimittelwechselwirkungs-Screening',
+          'Rezeptverarbeitung und Versicherungsabrechnung',
+          'Pharmazeutisches Bestandsmanagement',
+          'Zubereitung und sterile Herstellung',
+          'Gesundheitsscreening und Impfungen'
+        ],
+        whyGood: [
+          'Klare Struktur, die pharmazeutische Expertise hervorhebt',
+          'Betont Patientenversorgung und Arzneimittelsicherheit',
+          'Zeigt Kenntnisse pharmazeutischer Vorschriften',
+          'Demonstriert Engagement für Exzellenz im Gesundheitswesen',
+          'ATS-freundliches Format mit Apotheken-Schlüsselwörtern'
+        ]
+      },
+      it: {
+        name: 'Farmacista',
+        slug: 'farmacista',
+        description: 'I farmacisti dispensano farmaci, forniscono assistenza farmaceutica e offrono consigli sulla salute ai pazienti. Garantiscono un uso sicuro ed efficace dei farmaci e lavorano in farmacie, ospedali e strutture sanitarie.',
+        tips: [
+          'Evidenzia la tua formazione farmaceutica e licenza',
+          'Enfatizza l\'esperienza nella gestione dei farmaci e consulenza ai pazienti',
+          'Mostra conoscenza delle interazioni farmacologiche e protocolli di sicurezza',
+          'Includi esperienza con assicurazioni e elaborazione delle prescrizioni',
+          'Dimostra impegno per la salute e sicurezza del paziente'
+        ],
+        skills: [
+          'Dispensazione e verifica dei farmaci',
+          'Consulenza ai pazienti e gestione della terapia farmacologica',
+          'Screening delle interazioni farmacologiche',
+          'Elaborazione delle prescrizioni e fatturazione assicurativa',
+          'Gestione dell\'inventario farmaceutico',
+          'Preparazione e preparazione sterile',
+          'Screening sanitario e immunizzazioni'
+        ],
+        whyGood: [
+          'Struttura chiara che evidenzia l\'esperienza farmaceutica',
+          'Enfatizza la cura del paziente e la sicurezza dei farmaci',
+          'Mostra conoscenza delle normative farmaceutiche',
+          'Dimostra impegno per l\'eccellenza sanitaria',
+          'Formato compatibile ATS con parole chiave farmaceutiche'
+        ]
+      },
+      pl: {
+        name: 'Farmaceuta',
+        slug: 'farmaceuta',
+        description: 'Farmaceuci wydają leki, zapewniają opiekę farmaceutyczną i oferują porady zdrowotne pacjentom. Zapewniają bezpieczne i skuteczne stosowanie leków i pracują w aptekach, szpitalach i placówkach opieki zdrowotnej.',
+        tips: [
+          'Podkreśl swoje wykształcenie farmaceutyczne i licencję',
+          'Podkreśl doświadczenie w zarządzaniu lekami i poradnictwie dla pacjentów',
+          'Pokaż znajomość interakcji lekowych i protokołów bezpieczeństwa',
+          'Uwzględnij doświadczenie z ubezpieczeniami i przetwarzaniem recept',
+          'Wykazuj zaangażowanie w zdrowie i bezpieczeństwo pacjentów'
+        ],
+        skills: [
+          'Wydawanie i weryfikacja leków',
+          'Poradnictwo dla pacjentów i zarządzanie terapią lekową',
+          'Badanie interakcji lekowych',
+          'Przetwarzanie recept i rozliczanie ubezpieczeń',
+          'Zarządzanie zapasami farmaceutycznymi',
+          'Przygotowywanie i sterylna preparatyka',
+          'Badania przesiewowe i szczepienia'
+        ],
+        whyGood: [
+          'Jasna struktura podkreślająca wiedzę farmaceutyczną',
+          'Podkreśla opiekę nad pacjentem i bezpieczeństwo leków',
+          'Pokazuje znajomość przepisów farmaceutycznych',
+          'Wykazuje zaangażowanie w doskonałość opieki zdrowotnej',
+          'Format przyjazny dla ATS z kluczowymi słowami farmaceutycznymi'
+        ]
+      },
+      ro: {
+        name: 'Farmacist',
+        slug: 'farmacist',
+        description: 'Farmaciștii eliberează medicamente, oferă îngrijire farmaceutică și oferă sfaturi de sănătate pacienților. Asigură utilizarea sigură și eficientă a medicamentelor și lucrează în farmacii, spitale și facilități de sănătate.',
+        tips: [
+          'Evidențiază educația farmaceutică și licența',
+          'Subliniază experiența în managementul medicamentelor și consilierea pacienților',
+          'Prezintă cunoștințe despre interacțiunile medicamentoase și protocoalele de siguranță',
+          'Include experiența cu asigurările și procesarea rețetelor',
+          'Demonstrează angajamentul față de sănătatea și siguranța pacienților'
+        ],
+        skills: [
+          'Eliberarea și verificarea medicamentelor',
+          'Consilierea pacienților și managementul terapiei medicamentoase',
+          'Screeningul interacțiunilor medicamentoase',
+          'Procesarea rețetelor și facturarea asigurărilor',
+          'Managementul inventarului farmaceutic',
+          'Prepararea și prepararea sterilă',
+          'Screeningul sănătății și imunizările'
+        ],
+        whyGood: [
+          'Structură clară care evidențiază expertiza farmaceutică',
+          'Subliniază îngrijirea pacienților și siguranța medicamentelor',
+          'Arată cunoștințe despre reglementările farmaceutice',
+          'Demonstrează angajamentul față de excelența în sănătate',
+          'Format compatibil ATS cu cuvinte cheie farmaceutice'
+        ]
+      },
+      hu: {
+        name: 'Gyógyszerész',
+        slug: 'gyogyszeresz',
+        description: 'A gyógyszerészek kiadnak gyógyszereket, gyógyszerészeti ellátást nyújtanak és egészségügyi tanácsokat adnak a betegeknek. Biztosítják a gyógyszerek biztonságos és hatékony használatát, és gyógyszertárakban, kórházakban és egészségügyi létesítményekben dolgoznak.',
+        tips: [
+          'Hangsúlyozza gyógyszerészeti képzését és engedélyét',
+          'Hangsúlyozza a gyógyszerkezelés és betegtanácsadás tapasztalatát',
+          'Mutassa be a gyógyszerkölcsönhatások és biztonsági protokollok ismeretét',
+          'Tartalmazza a biztosításokkal és receptfeldolgozással kapcsolatos tapasztalatot',
+          'Mutassa be a beteg egészségéhez és biztonságához való elkötelezettségét'
+        ],
+        skills: [
+          'Gyógyszerkiadás és ellenőrzés',
+          'Betegtanácsadás és gyógyszerterápia kezelés',
+          'Gyógyszerkölcsönhatás szűrés',
+          'Receptfeldolgozás és biztosítási számlázás',
+          'Gyógyszerészeti készletkezelés',
+          'Keverés és steril előkészítés',
+          'Egészségügyi szűrés és immunizáció'
+        ],
+        whyGood: [
+          'Világos struktúra, amely kiemeli a gyógyszerészeti szakértelemet',
+          'Hangsúlyozza a betegellátást és a gyógyszerbiztonságot',
+          'Mutatja a gyógyszerészeti szabályozások ismeretét',
+          'Bemutatja az egészségügyi kiválósághoz való elkötelezettséget',
+          'ATS-barát formátum gyógyszerészeti kulcsszavakkal'
+        ]
+      },
+      el: {
+        name: 'Φαρμακοποιός',
+        slug: 'farmakopoios',
+        description: 'Οι φαρμακοποιοί διανέμουν φάρμακα, παρέχουν φαρμακευτική φροντίδα και προσφέρουν συμβουλές υγείας σε ασθενείς. Εξασφαλίζουν την ασφαλή και αποτελεσματική χρήση φαρμάκων και εργάζονται σε φαρμακεία, νοσοκομεία και ιατρικές εγκαταστάσεις.',
+        tips: [
+          'Επισημάνετε τη φαρμακευτική σας εκπαίδευση και άδεια',
+          'Τονίστε την εμπειρία στη διαχείριση φαρμάκων και συμβουλευτική ασθενών',
+          'Παρουσιάστε γνώση αλληλεπιδράσεων φαρμάκων και πρωτοκόλλων ασφαλείας',
+          'Συμπεριλάβετε εμπειρία με ασφάλειες και επεξεργασία συνταγών',
+          'Αποδείξτε δέσμευση στην υγεία και ασφάλεια των ασθενών'
+        ],
+        skills: [
+          'Διανομή και επαλήθευση φαρμάκων',
+          'Συμβουλευτική ασθενών και διαχείριση φαρμακευτικής θεραπείας',
+          'Συστηματική επιτήρηση αλληλεπιδράσεων φαρμάκων',
+          'Επεξεργασία συνταγών και χρέωση ασφάλειων',
+          'Διαχείριση φαρμακευτικού αποθέματος',
+          'Σύνθεση και στείρα προετοιμασία',
+          'Συστηματική επιτήρηση υγείας και ανοσοποίηση'
+        ],
+        whyGood: [
+          'Σαφής δομή που επισημαίνει τη φαρμακευτική εμπειρογνωμοσύνη',
+          'Τονίζει τη φροντίδα ασθενών και την ασφάλεια φαρμάκων',
+          'Δείχνει γνώση φαρμακευτικών κανονισμών',
+          'Αποδεικνύει δέσμευση στην υγειονομική αριστεία',
+          'Μορφή συμβατή με ATS με φαρμακευτικές λέξεις-κλειδιά'
+        ]
+      },
+      cs: {
+        name: 'Lékárník',
+        slug: 'lekarnik',
+        description: 'Lékárníci vydávají léky, poskytují farmaceutickou péči a nabízejí zdravotní poradenství pacientům. Zajišťují bezpečné a účinné používání léků a pracují v lékárnách, nemocnicích a zdravotnických zařízeních.',
+        tips: [
+          'Zdůrazněte své farmaceutické vzdělání a licenci',
+          'Zdůrazněte zkušenosti s řízením léků a poradenstvím pro pacienty',
+          'Ukažte znalosti lékových interakcí a bezpečnostních protokolů',
+          'Zahrňte zkušenosti s pojištěním a zpracováním receptů',
+          'Prokažte závazek k zdraví a bezpečnosti pacientů'
+        ],
+        skills: [
+          'Vydávání a ověřování léků',
+          'Poradenství pro pacienty a řízení lékové terapie',
+          'Screening lékových interakcí',
+          'Zpracování receptů a fakturace pojištění',
+          'Řízení farmaceutických zásob',
+          'Příprava a sterilní příprava',
+          'Zdravotní screening a očkování'
+        ],
+        whyGood: [
+          'Jasná struktura zdůrazňující farmaceutickou odbornost',
+          'Zdůrazňuje péči o pacienty a bezpečnost léků',
+          'Ukazuje znalosti farmaceutických předpisů',
+          'Prokazuje závazek k excelenci ve zdravotnictví',
+          'Formát kompatibilní s ATS s farmaceutickými klíčovými slovy'
+        ]
+      },
+      pt: {
+        name: 'Farmacêutico',
+        slug: 'farmaceutico',
+        description: 'Os farmacêuticos dispensam medicamentos, fornecem cuidados farmacêuticos e oferecem conselhos de saúde aos pacientes. Garantem o uso seguro e eficaz de medicamentos e trabalham em farmácias, hospitais e instalações de saúde.',
+        tips: [
+          'Destaque sua educação farmacêutica e licença',
+          'Enfatize experiência em gestão de medicamentos e aconselhamento ao paciente',
+          'Mostre conhecimento de interações medicamentosas e protocolos de segurança',
+          'Inclua experiência com seguros e processamento de receitas',
+          'Demonstre compromisso com a saúde e segurança do paciente'
+        ],
+        skills: [
+          'Dispensação e verificação de medicamentos',
+          'Aconselhamento ao paciente e gestão de terapia medicamentosa',
+          'Triagem de interações medicamentosas',
+          'Processamento de receitas e faturamento de seguros',
+          'Gestão de estoque farmacêutico',
+          'Preparação e preparação estéril',
+          'Triagem de saúde e imunizações'
+        ],
+        whyGood: [
+          'Estrutura clara destacando expertise farmacêutica',
+          'Enfatiza cuidado ao paciente e segurança de medicamentos',
+          'Mostra conhecimento de regulamentações farmacêuticas',
+          'Demonstra compromisso com excelência em saúde',
+          'Formato compatível com ATS com palavras-chave farmacêuticas'
+        ]
+      },
+      sv: {
+        name: 'Apotekare',
+        slug: 'apotekare',
+        description: 'Apotekare levererar läkemedel, ger farmaceutisk vård och erbjuder hälsorådgivning till patienter. De säkerställer säkert och effektivt läkemedelsanvändning och arbetar på apotek, sjukhus och hälsoanläggningar.',
+        tips: [
+          'Framhäv din farmaceutiska utbildning och licens',
+          'Betona erfarenhet av läkemedelshantering och patientrådgivning',
+          'Visa kunskap om läkemedelsinteraktioner och säkerhetsprotokoll',
+          'Inkludera erfarenhet av försäkringar och receptbearbetning',
+          'Visa engagemang för patienthälsa och säkerhet'
+        ],
+        skills: [
+          'Läkemedelsleverans och verifiering',
+          'Patientrådgivning och läkemedelsterapihantering',
+          'Screening av läkemedelsinteraktioner',
+          'Receptbearbetning och försäkringsfakturering',
+          'Farmaceutisk lagerhantering',
+          'Beredning och steril beredning',
+          'Hälsoscreening och vaccinationer'
+        ],
+        whyGood: [
+          'Tydlig struktur som framhäver farmaceutisk expertis',
+          'Betonar patientvård och läkemedelssäkerhet',
+          'Visar kunskap om farmaceutiska regler',
+          'Visar engagemang för hälsoexcellens',
+          'ATS-vänligt format med farmaceutiska nyckelord'
+        ]
+      },
+      bg: {
+        name: 'Фармацевт',
+        slug: 'farmatsevt',
+        description: 'Фармацевтите отпускат лекарства, осигуряват фармацевтична грижа и предлагат здравни съвети на пациенти. Осигуряват безопасно и ефективно използване на лекарства и работят в аптеки, болници и здравни заведения.',
+        tips: [
+          'Подчертайте фармацевтичното си образование и лиценз',
+          'Акцентирайте върху опита в управлението на лекарства и консултиране на пациенти',
+          'Покажете познания за лекарствени взаимодействия и протоколи за безопасност',
+          'Включете опит със застраховки и обработка на рецепти',
+          'Демонстрирайте ангажираност към здравето и безопасността на пациентите'
+        ],
+        skills: [
+          'Отпускане и верификация на лекарства',
+          'Консултиране на пациенти и управление на лекарствена терапия',
+          'Скрининг на лекарствени взаимодействия',
+          'Обработка на рецепти и фактуриране на застраховки',
+          'Управление на фармацевтични запаси',
+          'Приготвяне и стерилна подготовка',
+          'Здравен скрининг и имунизации'
+        ],
+        whyGood: [
+          'Ясна структура, подчертаваща фармацевтичната експертиза',
+          'Акцентира върху грижата за пациентите и безопасността на лекарствата',
+          'Показва познания за фармацевтични разпоредби',
+          'Демонстрира ангажираност към здравно превъзходство',
+          'Формат, съвместим с ATS с фармацевтични ключови думи'
+        ]
+      },
+      da: {
+        name: 'Apoteker',
+        slug: 'apoteker',
+        description: 'Apotekere udleverer medicin, yder farmaceutisk pleje og tilbyder sundhedsrådgivning til patienter. De sikrer sikker og effektiv medicinanvendelse og arbejder på apoteker, hospitaler og sundhedsfaciliteter.',
+        tips: [
+          'Fremhæv din farmaceutiske uddannelse og licens',
+          'Fremhæv erfaring med medicinhåndtering og patientrådgivning',
+          'Vis viden om lægemiddelinteraktioner og sikkerhedsprotokoller',
+          'Inkluder erfaring med forsikringer og receptbehandling',
+          'Demonstrer forpligtelse til patientens sundhed og sikkerhed'
+        ],
+        skills: [
+          'Medicinudlevering og verifikation',
+          'Patientrådgivning og medicinbehandlingshåndtering',
+          'Screening af lægemiddelinteraktioner',
+          'Receptbehandling og forsikringsfakturering',
+          'Farmaceutisk lagerstyring',
+          'Blanding og steril forberedelse',
+          'Sundhedsscreening og vaccinationer'
+        ],
+        whyGood: [
+          'Tydelig struktur, der fremhæver farmaceutisk ekspertise',
+          'Fremhæver patientpleje og medicinsikkerhed',
+          'Vis viden om farmaceutiske regler',
+          'Demonstrer forpligtelse til sundhedsekspertise',
+          'ATS-venligt format med farmaceutiske nøgleord'
+        ]
+      },
+      fi: {
+        name: 'Apteekkari',
+        slug: 'apteekkari',
+        description: 'Apteekkarit jakavat lääkkeitä, tarjoavat farmaseuttista hoitoa ja antavat terveysneuvontaa potilaille. He varmistavat lääkkeiden turvallisen ja tehokkaan käytön ja työskentelevät apteekeissa, sairaaloissa ja terveyslaitoksissa.',
+        tips: [
+          'Korosta farmaseuttista koulutustasi ja lisenssiä',
+          'Korosta lääkehallinnan ja potilasneuvonnan kokemusta',
+          'Näytä tietoa lääkevuorovaikutuksista ja turvallisuusprotokollista',
+          'Sisällytä kokemus vakuutuksista ja reseptien käsittelystä',
+          'Näytä sitoutuminen potilaan terveyteen ja turvallisuuteen'
+        ],
+        skills: [
+          'Lääkkeiden jakelu ja vahvistus',
+          'Potilasneuvonta ja lääketerapian hallinta',
+          'Lääkevuorovaikutusten seulonta',
+          'Reseptien käsittely ja vakuutuslaskutus',
+          'Farmaseuttinen varastonhallinta',
+          'Valmistelu ja steriili valmistelu',
+          'Terveysseulonta ja rokottaminen'
+        ],
+        whyGood: [
+          'Selkeä rakenne, joka korostaa farmaseuttista asiantuntemusta',
+          'Korostaa potilashoitoa ja lääketurvallisuutta',
+          'Näyttää tietoa farmaseuttisista säännöistä',
+          'Näyttää sitoutumisen terveydenhuollon huippuosaamiseen',
+          'ATS-yhteensopiva muoto farmaseuttisilla avainsanoilla'
+        ]
+      },
+      sk: {
+        name: 'Farmaceut',
+        slug: 'farmaceut',
+        description: 'Farmaceuti vydávajú lieky, poskytujú farmaceutickú starostlivosť a ponúkajú zdravotné poradenstvo pacientom. Zabezpečujú bezpečné a účinné používanie liekov a pracujú v lekárňach, nemocniciach a zdravotníckych zariadeniach.',
+        tips: [
+          'Zdôraznite svoje farmaceutické vzdelanie a licenciu',
+          'Zdôraznite skúsenosti s riadením liekov a poradenstvom pre pacientov',
+          'Ukážte znalosti liekových interakcií a bezpečnostných protokolov',
+          'Zahrňte skúsenosti s poisťovaním a spracovaním receptov',
+          'Preukážte záväzok k zdraviu a bezpečnosti pacientov'
+        ],
+        skills: [
+          'Vydávanie a overovanie liekov',
+          'Poradenstvo pre pacientov a riadenie liekovej terapie',
+          'Screening liekových interakcií',
+          'Spracovanie receptov a fakturácia poisťovania',
+          'Riadenie farmaceutických zásob',
+          'Príprava a sterilná príprava',
+          'Zdravotný screening a očkovanie'
+        ],
+        whyGood: [
+          'Jasná štruktúra zdôrazňujúca farmaceutickú odbornosť',
+          'Zdôrazňuje starostlivosť o pacientov a bezpečnosť liekov',
+          'Ukazuje znalosti farmaceutických predpisov',
+          'Preukazuje záväzok k excelencii vo zdravotníctve',
+          'Formát kompatibilný s ATS s farmaceutickými kľúčovými slovami'
+        ]
+      },
+      no: {
+        name: 'Apoteker',
+        slug: 'apoteker',
+        description: 'Apotekere utleverer medisiner, gir farmasøytisk omsorg og tilbyr helserådgivning til pasienter. De sikrer trygg og effektiv medisinbruk og arbeider på apotek, sykehus og helsefasiliteter.',
+        tips: [
+          'Fremhev din farmasøytiske utdanning og lisens',
+          'Fremhev erfaring med medisinforvaltning og pasientrådgivning',
+          'Vis kunnskap om legemiddelinteraksjoner og sikkerhetsprotokoller',
+          'Inkluder erfaring med forsikringer og reseptbehandling',
+          'Vis forpliktelse til pasientens helse og sikkerhet'
+        ],
+        skills: [
+          'Medisinutlevering og verifisering',
+          'Pasientrådgivning og medisinbehandlingshåndtering',
+          'Screening av legemiddelinteraksjoner',
+          'Reseptbehandling og forsikringsfakturering',
+          'Farmasøytisk lagerstyring',
+          'Blanding og steril forberedelse',
+          'Helsescreening og vaksinasjoner'
+        ],
+        whyGood: [
+          'Tydelig struktur som fremhever farmasøytisk ekspertise',
+          'Fremhever pasientomsorg og medisinsikkerhet',
+          'Vis kunnskap om farmasøytiske regler',
+          'Vis forpliktelse til helseekspertise',
+          'ATS-vennlig format med farmasøytiske nøkkelord'
+        ]
+      },
+      hr: {
+        name: 'Farmaceut',
+        slug: 'farmaceut',
+        description: 'Farmaceuti izdaju lijekove, pružaju farmaceutsku skrb i nude zdravstvene savjete pacijentima. Osiguravaju sigurnu i učinkovitu upotrebu lijekova i rade u ljekarnama, bolnicama i zdravstvenim ustanovama.',
+        tips: [
+          'Istaknite svoje farmaceutske obrazovanje i licencu',
+          'Naglasite iskustvo u upravljanju lijekovima i savjetovanju pacijenata',
+          'Pokažite znanje o interakcijama lijekova i sigurnosnim protokolima',
+          'Uključite iskustvo s osiguranjima i obradom recepata',
+          'Pokažite predanost zdravlju i sigurnosti pacijenata'
+        ],
+        skills: [
+          'Izdavanje i provjera lijekova',
+          'Savjetovanje pacijenata i upravljanje terapijom lijekovima',
+          'Screening interakcija lijekova',
+          'Obrada recepata i naplata osiguranja',
+          'Upravljanje farmaceutskim zalihama',
+          'Priprema i sterilna priprema',
+          'Zdravstveni pregled i imunizacija'
+        ],
+        whyGood: [
+          'Jasna struktura koja ističe farmaceutsku stručnost',
+          'Naglašava skrb o pacijentima i sigurnost lijekova',
+          'Pokazuje znanje o farmaceutskim propisima',
+          'Pokazuje predanost zdravstvenoj izvrsnosti',
+          'Format kompatibilan s ATS s farmaceutskim ključnim riječima'
+        ]
+      },
+      sr: {
+        name: 'Фармацеут',
+        slug: 'farmaceut',
+        description: 'Фармацеути издају лекове, пружају фармацеутску негу и нуде здравствене савете пацијентима. Обезбеђују сигурну и ефикасну употребу лекова и раде у апотекама, болницама и здравственим установама.',
+        tips: [
+          'Истакните своје фармацеутско образовање и лиценцу',
+          'Нагласите искуство у управљању лековима и саветовању пацијената',
+          'Покажите знање о интеракцијама лекова и безбедносним протоколима',
+          'Укључите искуство са осигурањима и обрадом рецепата',
+          'Покажите посвећеност здрављу и безбедности пацијената'
+        ],
+        skills: [
+          'Издавање и провера лекова',
+          'Саветовање пацијената и управљање терапијом лекова',
+          'Скрининг интеракција лекова',
+          'Обрада рецепата и наплата осигурања',
+          'Управљање фармацеутским залихама',
+          'Припрема и стерилна припрема',
+          'Здравствени преглед и имунизација'
+        ],
+        whyGood: [
+          'Јасна структура која истиче фармацеутску стручност',
+          'Наглашава негу пацијената и безбедност лекова',
+          'Показује знање о фармацеутским прописима',
+          'Показује посвећеност здравственој изврсности',
+          'Формат компатибилан са ATS са фармацеутским кључним речима'
+        ]
+      }
+    }
   }
   // Note: More professions can be added here with full translations
 ]
