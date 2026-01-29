@@ -8783,6 +8783,573 @@ export const PROFESSIONS: Profession[] = [
         ]
       }
     }
+  },
+  // Creative: Copywriter
+  {
+    id: 'copywriter',
+    category: 'creative',
+    translations: {
+      en: {
+        name: 'Copywriter',
+        slug: 'copywriter',
+        description: 'Copywriters create written content for advertising, marketing, and promotional materials. They craft compelling messages that persuade audiences and drive action across various media channels.',
+        tips: [
+          'Showcase your portfolio with diverse writing samples',
+          'Highlight experience with different industries and audiences',
+          'Emphasize ability to write for multiple formats (web, print, social media)',
+          'Include examples of successful campaigns and conversions',
+          'Demonstrate understanding of SEO and content marketing'
+        ],
+        skills: [
+          'Content writing and copywriting',
+          'SEO optimization and keyword research',
+          'Brand voice and tone development',
+          'Marketing campaign development',
+          'Social media content creation',
+          'Email marketing and newsletters',
+          'Editing and proofreading'
+        ],
+        whyGood: [
+          'Clear structure highlighting writing portfolio',
+          'Emphasizes versatility across writing formats',
+          'Shows progression of copywriting experience',
+          'Demonstrates understanding of marketing principles',
+          'ATS-friendly format with writing and marketing keywords'
+        ]
+      },
+      nl: {
+        name: 'Copywriter',
+        slug: 'copywriter',
+        description: 'Copywriters creëren geschreven inhoud voor advertenties, marketing en promotiemateriaal. Ze maken overtuigende berichten die doelgroepen overtuigen en actie stimuleren via verschillende mediakanalen.',
+        tips: [
+          'Toon je portfolio met diverse schrijfsamples',
+          'Benadruk ervaring met verschillende industrieën en doelgroepen',
+          'Leg nadruk op vaardigheid om voor meerdere formaten te schrijven (web, print, sociale media)',
+          'Vermeld voorbeelden van succesvolle campagnes en conversies',
+          'Demonstreer begrip van SEO en contentmarketing'
+        ],
+        skills: [
+          'Content writing en copywriting',
+          'SEO optimalisatie en zoekwoordonderzoek',
+          'Merkenstem en toonontwikkeling',
+          'Marketingcampagneontwikkeling',
+          'Sociale mediacontentcreatie',
+          'E-mailmarketing en nieuwsbrieven',
+          'Redigeren en proeflezen'
+        ],
+        whyGood: [
+          'Duidelijke structuur die schrijfportfolio benadrukt',
+          'Legt nadruk op veelzijdigheid in schrijfformaten',
+          'Toont progressie van copywriting-ervaring',
+          'Demonstreert begrip van marketingprincipes',
+          'ATS-vriendelijk formaat met schrijf- en marketingtrefwoorden'
+        ]
+      },
+      fr: {
+        name: 'Rédacteur Publicitaire',
+        slug: 'redacteur-publicitaire',
+        description: 'Les rédacteurs publicitaires créent du contenu écrit pour la publicité, le marketing et les matériaux promotionnels. Ils rédigent des messages convaincants qui persuadent les audiences et incitent à l\'action sur divers canaux médiatiques.',
+        tips: [
+          'Présentez votre portfolio avec des échantillons d\'écriture diversifiés',
+          'Mettez en avant l\'expérience avec différentes industries et audiences',
+          'Soulignez la capacité à écrire pour plusieurs formats (web, print, médias sociaux)',
+          'Incluez des exemples de campagnes et conversions réussies',
+          'Démontrez la compréhension du SEO et du marketing de contenu'
+        ],
+        skills: [
+          'Rédaction de contenu et copywriting',
+          'Optimisation SEO et recherche de mots-clés',
+          'Développement de la voix et du ton de marque',
+          'Développement de campagnes marketing',
+          'Création de contenu pour médias sociaux',
+          'Marketing par email et newsletters',
+          'Édition et relecture'
+        ],
+        whyGood: [
+          'Structure claire mettant en évidence le portfolio d\'écriture',
+          'Met l\'accent sur la polyvalence à travers les formats d\'écriture',
+          'Montre la progression de l\'expérience en copywriting',
+          'Démontre la compréhension des principes marketing',
+          'Format compatible ATS avec mots-clés d\'écriture et marketing'
+        ]
+      },
+      es: {
+        name: 'Redactor Publicitario',
+        slug: 'redactor-publicitario',
+        description: 'Los redactores publicitarios crean contenido escrito para publicidad, marketing y materiales promocionales. Elaboran mensajes convincentes que persuaden a las audiencias y generan acción a través de diversos canales de medios.',
+        tips: [
+          'Muestra tu portafolio con muestras de escritura diversas',
+          'Destaca experiencia con diferentes industrias y audiencias',
+          'Enfatiza capacidad para escribir para múltiples formatos (web, impresión, redes sociales)',
+          'Incluye ejemplos de campañas exitosas y conversiones',
+          'Demuestra comprensión de SEO y marketing de contenido'
+        ],
+        skills: [
+          'Redacción de contenido y copywriting',
+          'Optimización SEO e investigación de palabras clave',
+          'Desarrollo de voz y tono de marca',
+          'Desarrollo de campañas de marketing',
+          'Creación de contenido para redes sociales',
+          'Marketing por email y newsletters',
+          'Edición y corrección de pruebas'
+        ],
+        whyGood: [
+          'Estructura clara que destaca portafolio de escritura',
+          'Enfatiza versatilidad en formatos de escritura',
+          'Muestra progresión de experiencia en copywriting',
+          'Demuestra comprensión de principios de marketing',
+          'Formato compatible con ATS con palabras clave de escritura y marketing'
+        ]
+      },
+      de: {
+        name: 'Werbetexter',
+        slug: 'werbetexter',
+        description: 'Werbetexter erstellen geschriebene Inhalte für Werbung, Marketing und Werbematerialien. Sie verfassen überzeugende Botschaften, die Zielgruppen überzeugen und Handlungen über verschiedene Medienkanäle auslösen.',
+        tips: [
+          'Präsentieren Sie Ihr Portfolio mit vielfältigen Schreibproben',
+          'Heben Sie Erfahrung mit verschiedenen Branchen und Zielgruppen hervor',
+          'Betonen Sie die Fähigkeit, für mehrere Formate zu schreiben (Web, Print, soziale Medien)',
+          'Fügen Sie Beispiele erfolgreicher Kampagnen und Konversionen hinzu',
+          'Demonstrieren Sie Verständnis für SEO und Content-Marketing'
+        ],
+        skills: [
+          'Content-Schreiben und Copywriting',
+          'SEO-Optimierung und Keyword-Recherche',
+          'Markenstimme und Tonentwicklung',
+          'Marketingkampagnenentwicklung',
+          'Social-Media-Content-Erstellung',
+          'E-Mail-Marketing und Newsletter',
+          'Bearbeitung und Korrekturlesen'
+        ],
+        whyGood: [
+          'Klare Struktur, die das Schreibportfolio hervorhebt',
+          'Betont Vielseitigkeit in Schreibformaten',
+          'Zeigt Fortschritt der Copywriting-Erfahrung',
+          'Demonstriert Verständnis für Marketingprinzipien',
+          'ATS-freundliches Format mit Schreib- und Marketing-Schlüsselwörtern'
+        ]
+      },
+      it: {
+        name: 'Copywriter',
+        slug: 'copywriter',
+        description: 'I copywriter creano contenuti scritti per pubblicità, marketing e materiali promozionali. Creano messaggi convincenti che persuadono il pubblico e stimolano l\'azione attraverso vari canali multimediali.',
+        tips: [
+          'Mostra il tuo portfolio con campioni di scrittura diversi',
+          'Evidenzia esperienza con diverse industrie e pubblici',
+          'Enfatizza la capacità di scrivere per più formati (web, stampa, social media)',
+          'Includi esempi di campagne di successo e conversioni',
+          'Dimostra comprensione di SEO e content marketing'
+        ],
+        skills: [
+          'Scrittura di contenuti e copywriting',
+          'Ottimizzazione SEO e ricerca di parole chiave',
+          'Sviluppo della voce e del tono del brand',
+          'Sviluppo di campagne di marketing',
+          'Creazione di contenuti per social media',
+          'Email marketing e newsletter',
+          'Editing e correzione di bozze'
+        ],
+        whyGood: [
+          'Struttura chiara che evidenzia il portfolio di scrittura',
+          'Enfatizza la versatilità nei formati di scrittura',
+          'Mostra la progressione dell\'esperienza di copywriting',
+          'Dimostra comprensione dei principi di marketing',
+          'Formato compatibile con ATS con parole chiave di scrittura e marketing'
+        ]
+      },
+      pl: {
+        name: 'Copywriter',
+        slug: 'copywriter',
+        description: 'Copywriterzy tworzą treści pisane do reklam, marketingu i materiałów promocyjnych. Tworzą przekonujące wiadomości, które przekonują odbiorców i skłaniają do działania w różnych kanałach medialnych.',
+        tips: [
+          'Pokaż swoje portfolio z różnorodnymi próbkami pisania',
+          'Podkreśl doświadczenie z różnymi branżami i odbiorcami',
+          'Podkreśl zdolność pisania dla wielu formatów (web, druk, media społecznościowe)',
+          'Uwzględnij przykłady udanych kampanii i konwersji',
+          'Wykazuj zrozumienie SEO i marketingu treści'
+        ],
+        skills: [
+          'Pisanie treści i copywriting',
+          'Optymalizacja SEO i badania słów kluczowych',
+          'Rozwój głosu i tonu marki',
+          'Rozwój kampanii marketingowych',
+          'Tworzenie treści w mediach społecznościowych',
+          'Marketing e-mailowy i biuletyny',
+          'Edycja i korekta'
+        ],
+        whyGood: [
+          'Jasna struktura podkreślająca portfolio pisarskie',
+          'Kładzie nacisk na wszechstronność w formatach pisania',
+          'Pokazuje postęp doświadczenia w copywritingu',
+          'Wykazuje zrozumienie zasad marketingu',
+          'Format przyjazny dla ATS z kluczowymi słowami pisania i marketingu'
+        ]
+      },
+      ro: {
+        name: 'Copywriter',
+        slug: 'copywriter',
+        description: 'Copywriterii creează conținut scris pentru publicitate, marketing și materiale promoționale. Ei creează mesaje convingătoare care conving audiențele și generează acțiune în diverse canale media.',
+        tips: [
+          'Prezintă portofoliul tău cu mostre de scriere diverse',
+          'Evidențiază experiența cu diferite industrii și audiențe',
+          'Subliniază capacitatea de a scrie pentru multiple formate (web, print, social media)',
+          'Include exemple de campanii de succes și conversii',
+          'Demonstrează înțelegerea SEO și marketingului de conținut'
+        ],
+        skills: [
+          'Scrierea de conținut și copywriting',
+          'Optimizarea SEO și cercetarea cuvintelor cheie',
+          'Dezvoltarea vocii și tonului mărcii',
+          'Dezvoltarea campaniilor de marketing',
+          'Crearea de conținut pentru social media',
+          'Marketing prin email și newslettere',
+          'Editare și corectare'
+        ],
+        whyGood: [
+          'Structură clară care evidențiază portofoliul de scriere',
+          'Subliniază versatilitatea în formatele de scriere',
+          'Arată progresia experienței în copywriting',
+          'Demonstrează înțelegerea principiilor de marketing',
+          'Format compatibil cu ATS cu cuvinte cheie de scriere și marketing'
+        ]
+      },
+      hu: {
+        name: 'Copywriter',
+        slug: 'copywriter',
+        description: 'A copywriterek írott tartalmat hoznak létre reklámokhoz, marketinghez és promóciós anyagokhoz. Meggyőző üzeneteket készítenek, amelyek meggyőzik a közönséget és cselekvést váltanak ki különböző média csatornákon.',
+        tips: [
+          'Mutassa be portfólióját különböző írásmintákkal',
+          'Hangsúlyozza a különböző iparágakkal és közönségekkel szerzett tapasztalatokat',
+          'Kiemeli a több formátumhoz (web, nyomtatás, közösségi média) való írási képességet',
+          'Tartalmazza a sikeres kampányok és konverziók példáit',
+          'Mutassa be a SEO és tartalommarketing megértését'
+        ],
+        skills: [
+          'Tartalomírás és copywriting',
+          'SEO optimalizálás és kulcsszó kutatás',
+          'Márka hang és tónus fejlesztés',
+          'Marketingkampány fejlesztés',
+          'Közösségi média tartalom létrehozás',
+          'E-mail marketing és hírlevelek',
+          'Szerkesztés és korrektorlás'
+        ],
+        whyGood: [
+          'Világos struktúra, amely kiemeli az írási portfóliót',
+          'Hangsúlyozza a sokoldalúságot az írási formátumokban',
+          'Mutatja a copywriting tapasztalat fejlődését',
+          'Bemutatja a marketing elveinek megértését',
+          'ATS-barát formátum írási és marketingkulcsszavakkal'
+        ]
+      },
+      el: {
+        name: 'Συγγραφέας Διαφημίσεων',
+        slug: 'syggrafeas-diafimiseon',
+        description: 'Οι συγγραφείς διαφημίσεων δημιουργούν γραπτό περιεχόμενο για διαφημίσεις, μάρκετινγκ και προωθητικά υλικά. Δημιουργούν πειστικά μηνύματα που πείθουν το κοινό και προκαλούν δράση σε διάφορα κανάλια μέσων.',
+        tips: [
+          'Παρουσιάστε το portfolio σας με διάφορα δείγματα γραφής',
+          'Επισημάνετε την εμπειρία με διαφορετικές βιομηχανίες και κοινά',
+          'Τονίστε την ικανότητα γραφής για πολλαπλές μορφές (web, εκτύπωση, κοινωνικά μέσα)',
+          'Συμπεριλάβετε παραδείγματα επιτυχημένων καμπανιών και μετατροπών',
+          'Αποδείξτε κατανόηση SEO και μάρκετινγκ περιεχομένου'
+        ],
+        skills: [
+          'Γραφή περιεχομένου και copywriting',
+          'Βελτιστοποίηση SEO και έρευνα λέξεων-κλειδιά',
+          'Ανάπτυξη φωνής και τόνου μάρκας',
+          'Ανάπτυξη καμπανιών μάρκετινγκ',
+          'Δημιουργία περιεχομένου κοινωνικών μέσων',
+          'Μάρκετινγκ email και ενημερωτικά δελτία',
+          'Επεξεργασία και προεκτυπωτική διόρθωση'
+        ],
+        whyGood: [
+          'Σαφής δομή που επισημαίνει το portfolio γραφής',
+          'Τονίζει την ευελιξία στις μορφές γραφής',
+          'Δείχνει την πρόοδο της εμπειρίας copywriting',
+          'Αποδεικνύει κατανόηση των αρχών μάρκετινγκ',
+          'Μορφή συμβατή με ATS με λέξεις-κλειδιά γραφής και μάρκετινγκ'
+        ]
+      },
+      cs: {
+        name: 'Copywriter',
+        slug: 'copywriter',
+        description: 'Copywriteři vytvářejí psaný obsah pro reklamu, marketing a propagační materiály. Vytvářejí přesvědčivé zprávy, které přesvědčují publikum a vyvolávají akci napříč různými mediálními kanály.',
+        tips: [
+          'Předveďte své portfolio s různorodými vzorky psaní',
+          'Zdůrazněte zkušenosti s různými odvětvími a publikem',
+          'Zdůrazněte schopnost psát pro více formátů (web, tisk, sociální média)',
+          'Zahrňte příklady úspěšných kampaní a konverzí',
+          'Prokažte porozumění SEO a content marketingu'
+        ],
+        skills: [
+          'Psaní obsahu a copywriting',
+          'SEO optimalizace a výzkum klíčových slov',
+          'Vývoj hlasu a tónu značky',
+          'Vývoj marketingových kampaní',
+          'Tvorba obsahu pro sociální média',
+          'Emailový marketing a newsletter',
+          'Editace a korektura'
+        ],
+        whyGood: [
+          'Jasná struktura zdůrazňující portfolio psaní',
+          'Zdůrazňuje všestrannost ve formátech psaní',
+          'Ukazuje pokrok zkušeností s copywritingem',
+          'Prokazuje porozumění marketingovým principům',
+          'Formát kompatibilní s ATS s klíčovými slovy psaní a marketingu'
+        ]
+      },
+      pt: {
+        name: 'Redator Publicitário',
+        slug: 'redator-publicitario',
+        description: 'Redatores publicitários criam conteúdo escrito para publicidade, marketing e materiais promocionais. Elaboram mensagens convincentes que persuadem audiências e geram ação em diversos canais de mídia.',
+        tips: [
+          'Mostre seu portfólio com amostras de escrita diversas',
+          'Destaque experiência com diferentes indústrias e audiências',
+          'Enfatize capacidade de escrever para múltiplos formatos (web, impresso, redes sociais)',
+          'Inclua exemplos de campanhas bem-sucedidas e conversões',
+          'Demonstre compreensão de SEO e marketing de conteúdo'
+        ],
+        skills: [
+          'Escrita de conteúdo e copywriting',
+          'Otimização SEO e pesquisa de palavras-chave',
+          'Desenvolvimento de voz e tom da marca',
+          'Desenvolvimento de campanhas de marketing',
+          'Criação de conteúdo para redes sociais',
+          'Marketing por email e newsletters',
+          'Edição e revisão'
+        ],
+        whyGood: [
+          'Estrutura clara destacando portfólio de escrita',
+          'Enfatiza versatilidade em formatos de escrita',
+          'Mostra progressão de experiência em copywriting',
+          'Demonstra compreensão de princípios de marketing',
+          'Formato compatível com ATS com palavras-chave de escrita e marketing'
+        ]
+      },
+      sv: {
+        name: 'Textförfattare',
+        slug: 'textforfattare',
+        description: 'Textförfattare skapar skriftligt innehåll för reklam, marknadsföring och marknadsföringsmaterial. De skapar övertygande meddelanden som övertalar publik och driver handling på olika mediefkanaler.',
+        tips: [
+          'Visa ditt portfolio med olika skrivprover',
+          'Framhäv erfarenhet med olika branscher och målgrupper',
+          'Betona förmåga att skriva för flera format (webb, tryck, sociala medier)',
+          'Inkludera exempel på framgångsrika kampanjer och konverteringar',
+          'Visa förståelse för SEO och content marketing'
+        ],
+        skills: [
+          'Innehållsskrivande och copywriting',
+          'SEO-optimering och nyckelordsforskning',
+          'Varumärkesröst och tonutveckling',
+          'Marknadsföringskampanjutveckling',
+          'Skapande av innehåll för sociala medier',
+          'E-postmarknadsföring och nyhetsbrev',
+          'Redigering och korrekturläsning'
+        ],
+        whyGood: [
+          'Tydlig struktur som framhäver skrivportfolio',
+          'Betonar mångsidighet i skrivformat',
+          'Visar progression av copywritingerfarenhet',
+          'Visar förståelse för marknadsföringsprinciper',
+          'ATS-vänligt format med nyckelord för skrivande och marknadsföring'
+        ]
+      },
+      bg: {
+        name: 'Копирайтър',
+        slug: 'kopiraitur',
+        description: 'Копирайтърите създават писмено съдържание за реклама, маркетинг и промоционални материали. Те съставят убедителни съобщения, които убеждават аудиториите и стимулират действия в различни медийни канали.',
+        tips: [
+          'Покажете портфолиото си с различни примерки за писане',
+          'Подчертайте опита с различни индустрии и аудитории',
+          'Акцентирайте върху способността да пишете за множество формати (уеб, печат, социални медии)',
+          'Включете примери за успешни кампании и конверсии',
+          'Демонстрирайте разбиране на SEO и маркетинг на съдържание'
+        ],
+        skills: [
+          'Писане на съдържание и копирайтинг',
+          'SEO оптимизация и изследване на ключови думи',
+          'Развитие на глас и тон на марка',
+          'Развитие на маркетингови кампании',
+          'Създаване на съдържание за социални медии',
+          'Имейл маркетинг и информационни бюлетини',
+          'Редактиране и корекция'
+        ],
+        whyGood: [
+          'Ясна структура, която подчертава портфолио за писане',
+          'Акцентира върху гъвкавостта във форматите за писане',
+          'Показва прогресия на опита с копирайтинг',
+          'Демонстрира разбиране на маркетинговите принципи',
+          'Формат, съвместим с ATS с ключови думи за писане и маркетинг'
+        ]
+      },
+      da: {
+        name: 'Copywriter',
+        slug: 'copywriter',
+        description: 'Copywriters skaber skriftligt indhold til reklamer, markedsføring og promotionsmaterialer. De skaber overbevisende beskeder, der overtaler målgrupper og driver handling på tværs af forskellige mediekanaler.',
+        tips: [
+          'Præsenter dit portfolio med forskellige skrivprøver',
+          'Fremhæv erfaring med forskellige brancher og målgrupper',
+          'Fremhæv evne til at skrive for flere formater (web, print, sociale medier)',
+          'Inkluder eksempler på succesfulde kampagner og konverteringer',
+          'Vis forståelse af SEO og content marketing'
+        ],
+        skills: [
+          'Indholdsskrivning og copywriting',
+          'SEO-optimering og nøgleordsforskning',
+          'Brandstem og toneudvikling',
+          'Marketingkampagneudvikling',
+          'Oprettelse af indhold til sociale medier',
+          'E-mailmarketing og nyhedsbreve',
+          'Redigering og korrekturlæsning'
+        ],
+        whyGood: [
+          'Tydelig struktur, der fremhæver skriveportfolio',
+          'Fremhæver alsidighed på tværs af skriveformater',
+          'Vis progression af copywritingerfaring',
+          'Vis forståelse af marketingprincipper',
+          'ATS-venligt format med nøgleord til skrivning og markedsføring'
+        ]
+      },
+      fi: {
+        name: 'Copywriter',
+        slug: 'copywriter',
+        description: 'Copywriterit luovat kirjoitettua sisältöä mainontaan, markkinointiin ja markkinointimateriaaleihin. He luovat vakuuttavia viestejä, jotka vakuuttavat yleisön ja herättävät toimintaa eri media kanavilla.',
+        tips: [
+          'Näytä portfolio erilaisilla kirjoitusesimerkeillä',
+          'Korosta kokemusta eri aloilla ja yleisöillä',
+          'Korosta kykyä kirjoittaa useille muodoille (web, painettu, sosiaalinen media)',
+          'Sisällytä esimerkkejä onnistuneista kampanjoista ja konversioista',
+          'Näytä ymmärrys SEO:sta ja sisällön markkinoinnista'
+        ],
+        skills: [
+          'Sisällön kirjoittaminen ja copywriting',
+          'SEO optimointi ja avainsana tutkimus',
+          'Brändin ääni ja sävy kehitys',
+          'Markkinointi kampanja kehitys',
+          'Sosiaalisen median sisällön luominen',
+          'Sähköposti markkinointi ja uutiskirjeet',
+          'Muokkaus ja oikoluku'
+        ],
+        whyGood: [
+          'Selkeä rakenne, joka korostaa kirjoitusportfoliota',
+          'Korostaa monipuolisuutta kirjoitusmuodoissa',
+          'Näyttää copywriting kokemuksen kehityksen',
+          'Näyttää markkinoinnin periaatteiden ymmärryksen',
+          'ATS-yhteensopiva muoto kirjoittamisen ja markkinoinnin avainsanoilla'
+        ]
+      },
+      sk: {
+        name: 'Copywriter',
+        slug: 'copywriter',
+        description: 'Copywriteri vytvárajú písaný obsah pre reklamu, marketing a propagačné materiály. Vytvárajú presvedčivé správy, ktoré presviedčajú publikum a vyvolávajú akciu v rôznych mediálnych kanáloch.',
+        tips: [
+          'Ukážte svoje portfolio s rôznorodými vzorkami písania',
+          'Zdôraznite skúsenosti s rôznymi odvetviami a publikom',
+          'Zdôraznite schopnosť písať pre viacero formátov (web, tlač, sociálne médiá)',
+          'Zahrňte príklady úspešných kampaní a konverzií',
+          'Preukážte porozumenie SEO a content marketingu'
+        ],
+        skills: [
+          'Písanie obsahu a copywriting',
+          'SEO optimalizácia a výskum kľúčových slov',
+          'Vývoj hlasu a tónu značky',
+          'Vývoj marketingových kampaní',
+          'Tvorba obsahu pre sociálne médiá',
+          'Emailový marketing a newsletter',
+          'Editácia a korektúra'
+        ],
+        whyGood: [
+          'Jasná štruktúra zdôrazňujúca portfolio písania',
+          'Zdôrazňuje všestrannosť vo formátoch písania',
+          'Ukazuje pokrok skúseností s copywritingom',
+          'Preukazuje porozumenie marketingovým princípom',
+          'Formát kompatibilný s ATS s kľúčovými slovami písania a marketingu'
+        ]
+      },
+      no: {
+        name: 'Copywriter',
+        slug: 'copywriter',
+        description: 'Copywriters skaper skrevet innhold for reklame, markedsføring og markedsføringsmateriell. De skaper overbevisende meldinger som overbeviser målgrupper og driver handling på tvers av ulike mediekanaler.',
+        tips: [
+          'Vis porteføljen din med ulike skrivprøver',
+          'Fremhev erfaring med ulike bransjer og målgrupper',
+          'Fremhev evne til å skrive for flere formater (web, trykk, sosiale medier)',
+          'Inkluder eksempler på vellykkede kampanjer og konverteringer',
+          'Vis forståelse av SEO og innhold markedsføring'
+        ],
+        skills: [
+          'Innholdsskriving og copywriting',
+          'SEO-optimalisering og nøkkelordsforskning',
+          'Varemerke stemme og tone utvikling',
+          'Markedsføringskampanje utvikling',
+          'Opprettelse av innhold for sosiale medier',
+          'E-post markedsføring og nyhetsbrev',
+          'Redigering og korrekturlæsning'
+        ],
+        whyGood: [
+          'Tydelig struktur som fremhever skriveportefølje',
+          'Fremhever alsidighet på tvers av skriveformater',
+          'Vis progresjon av copywritingerfaring',
+          'Vis forståelse av markedsføringsprinsipper',
+          'ATS-vennlig format med nøkkelord for skriving og markedsføring'
+        ]
+      },
+      hr: {
+        name: 'Copywriter',
+        slug: 'copywriter',
+        description: 'Copywriteri stvaraju pisani sadržaj za oglašavanje, marketing i promocijski materijal. Kreiraju uvjerljive poruke koje uvjeravaju publiku i potiču akciju kroz različite medijske kanale.',
+        tips: [
+          'Pokažite svoj portfolio s različitim uzorcima pisanja',
+          'Naglasite iskustvo s različitim industrijama i publikom',
+          'Naglasite sposobnost pisanja za više formata (web, tisak, društveni mediji)',
+          'Uključite primjere uspješnih kampanja i konverzija',
+          'Pokažite razumijevanje SEO-a i content marketinga'
+        ],
+        skills: [
+          'Pisanje sadržaja i copywriting',
+          'SEO optimizacija i istraživanje ključnih riječi',
+          'Razvoj glasa i tona marke',
+          'Razvoj marketinških kampanja',
+          'Kreiranje sadržaja za društvene medije',
+          'Email marketing i newsletteri',
+          'Uređivanje i korektura'
+        ],
+        whyGood: [
+          'Jasna struktura koja ističe portfolio pisanja',
+          'Naglašava svestranost u formatima pisanja',
+          'Pokazuje napredak iskustva u copywritingu',
+          'Pokazuje razumijevanje marketinških principa',
+          'Format kompatibilan s ATS s ključnim riječima pisanja i marketinga'
+        ]
+      },
+      sr: {
+        name: 'Копирајтер',
+        slug: 'kopirajter',
+        description: 'Копирајтери стварају писани садржај за оглашавање, маркетинг и промоционални материјал. Креирају убедљиве поруке које убеђују публику и подстичу акцију кроз различите медијске канале.',
+        tips: [
+          'Покажите свој портфолио са различитим узорцима писања',
+          'Нагласите искуство са различитим индустријама и публиком',
+          'Нагласите способност писања за више формата (веб, штампа, друштвени медији)',
+          'Укључите примере успешних кампања и конверзија',
+          'Покажите разумевање SEO-а и content маркетинга'
+        ],
+        skills: [
+          'Писање садржаја и копирајтинг',
+          'SEO оптимизација и истраживање кључних речи',
+          'Развој гласа и тона марке',
+          'Развој маркетиншких кампања',
+          'Креирање садржаја за друштвене медије',
+          'Емаил маркетинг и билтени',
+          'Уређивање и коректура'
+        ],
+        whyGood: [
+          'Јасна структура која истиче портфолио писања',
+          'Наглашава свестраност у форматима писања',
+          'Показује напредак искуства у копирајтингу',
+          'Показује разумевање маркетиншких принципа',
+          'Формат компатибилан са ATS са кључним речима писања и маркетинга'
+        ]
+      }
+    }
   }
   // Note: More professions can be added here with full translations
 ]
