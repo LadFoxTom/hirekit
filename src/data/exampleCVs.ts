@@ -443,7 +443,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
       template: 'modern',
       fullName: 'Thomas de Wit',
       title: 'Ingenieur',
-      summary: 'Ervaren ingenieur met 11 jaar ervaring in projectmanagement, technisch ontwerp en kwaliteitscontrole. Gespecialiseerd in infrastructurele projecten en duurzame oplossingen. Gepassioneerd over innovatie en technische excellentie.',
+      summary: 'Ervaren ingenieur met 11 jaar ervaring in projectmanagement, technisch ontwerp en kwaliteitscontrole. Gespecialiseerd in infrastructurele projecten en duurzame oplossingen. Gepassioneerd over innovatie en technische excellentie. met bewezen track record in projectmanagement en technische excellentie.',
       photoUrl: getPlaceholderPhoto('Thomas de Wit'),
       contact: {
         email: 'thomas.dewit@email.nl',
@@ -457,12 +457,15 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
           location: 'Rotterdam',
           dates: '2018 - Heden',
           current: true,
-          achievements: [
+          achievements: [[
             'Leiding aan infrastructurele projecten van €10M+',
             'Technisch ontwerp en engineering',
             'Coördinatie met aannemers en stakeholders',
-            'Kwaliteitscontrole en veiligheidsmanagement'
-          ]
+            'Kwaliteitscontrole en veiligheidsmanagement',
+            'Ontwerp en ontwikkeling van infrastructurele projecten met waarde van €10M+',
+            'Leiding aan team van 5 engineers met focus op kwaliteit en veiligheid',
+            'Implementatie van nieuwe technologieën resulterend in 30% kostenbesparing'
+          ]]
         },
         {
           title: 'Ingenieur',
@@ -486,8 +489,22 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
         }
       ],
       skills: {
-        technical: ['AutoCAD', 'Revit', 'Projectmanagement', 'Berekeningen', 'Risicoanalyse'],
-        soft: ['Probleemoplossend denken', 'Leiderschap', 'Communicatie', 'Teamwerk']
+        technical: ['AutoCAD', 'Revit', 'Projectmanagement', 'Berekeningen', 'Risicoanalyse',
+        'CAD software (AutoCAD, SolidWorks)',
+        'Project management tools',
+        'Engineering standards (ISO, NEN)',
+        'Technical analysis',
+        'Quality control',
+        'Risk assessment'
+      ],
+        soft: ['Probleemoplossend denken', 'Leiderschap', 'Communicatie', 'Teamwerk',
+        'Probleemoplossing',
+        'Teamleiderschap',
+        'Projectmanagement',
+        'Communicatie',
+        'Analytisch denken',
+        'Kwaliteitsbewustzijn'
+      ]
       },
       certifications: [
         { title: 'Project Management Professional (PMP)', institution: 'PMI', year: '2019' }
@@ -554,7 +571,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
       template: 'modern',
       fullName: 'Anna van Dijk',
       title: 'Hoofdchef',
-      summary: 'Creatieve chef met 10 jaar ervaring in fine dining en restaurant management. Gespecialiseerd in moderne Europese keuken en seizoensgebonden ingrediënten. Gepassioneerd over culinaire innovatie en teamontwikkeling.',
+      summary: 'Creatieve chef met 10 jaar ervaring in fine dining en restaurant management. Gespecialiseerd in moderne Europese keuken en seizoensgebonden ingrediënten. Gepassioneerd over culinaire innovatie en teamontwikkeling. met bewezen track record in culinaire innovatie en teamleiderschap.',
       photoUrl: getPlaceholderPhoto('Anna van Dijk'),
       contact: {
         email: 'anna.vandijk@email.nl',
@@ -568,12 +585,17 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
           location: 'Amsterdam',
           dates: '2019 - Heden',
           current: true,
-          achievements: [
+          achievements: [[
             'Leiding aan keukenbrigade van 8 koks',
-            'Ontwikkeling van seizoensmenu\'s',
-            'Michelin ster behouden sinds 2020',
-            'Kostenbeheer en inkoop optimalisatie'
-          ]
+            'Ontwikkeling van seizoensmenu\',
+            ',
+            ',
+            ',
+            ',
+            'Leiding aan keuken team van 8+ koks met focus op kwaliteit en efficiëntie',
+            'Ontwikkeling van seizoensmenu's met focus op lokale ingrediënten en duurzaamheid',
+            'Kostenbeheer resulterend in 20% verbetering in food cost percentage'
+          ]]
         },
         {
           title: 'Sous Chef',
@@ -597,8 +619,22 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
         }
       ],
       skills: {
-        technical: ['Menu ontwikkeling', 'Food safety', 'Kostenbeheer', 'Kitchen management'],
-        soft: ['Creativiteit', 'Leiderschap', 'Stressbestendigheid', 'Teamwerk']
+        technical: ['Menu ontwikkeling', 'Food safety', 'Kostenbeheer', 'Kitchen management',
+        'Culinaire technieken',
+        'Menu ontwikkeling',
+        'Food safety (HACCP)',
+        'Inventory management',
+        'Cost control',
+        'Kitchen management systems'
+      ],
+        soft: ['Creativiteit', 'Leiderschap', 'Stressbestendigheid', 'Teamwerk',
+        'Creativiteit',
+        'Teamleiderschap',
+        'Stressbestendigheid',
+        'Kwaliteitsbewustzijn',
+        'Gastgerichtheid',
+        'Innovatie'
+      ]
       },
       certifications: [
         { title: 'HACCP Certificaat', institution: 'HACCP Nederland', year: '2015' }
@@ -610,7 +646,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
       template: 'modern',
       fullName: 'Julia Hendriks',
       title: 'Advocaat',
-      summary: 'Ervaren advocaat met 9 jaar ervaring in corporate law en contractenrecht. Gespecialiseerd in M&A transacties en commerciële geschillen. Gepassioneerd over juridische excellentie en klantgerichtheid.',
+      summary: 'Ervaren advocaat met 9 jaar ervaring in corporate law en contractenrecht. Gespecialiseerd in M&A transacties en commerciële geschillen. Gepassioneerd over juridische excellentie en klantgerichtheid. met bewezen track record in complexe juridische zaken en cliëntadvies.',
       photoUrl: getPlaceholderPhoto('Julia Hendriks'),
       contact: {
         email: 'julia.hendriks@email.nl',
@@ -624,12 +660,15 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
           location: 'Den Haag',
           dates: '2018 - Heden',
           current: true,
-          achievements: [
+          achievements: [[
             'Begeleiding van M&A transacties tot €50M',
             'Contractonderhandelingen en due diligence',
             'Geschilbeslechting en arbitrage',
-            'Leiding aan team van 3 junior advocaten'
-          ]
+            'Leiding aan team van 3 junior advocaten',
+            'Behandeling van 50+ juridische zaken per jaar met 85%+ succespercentage',
+            'Advies en ondersteuning bij M&A transacties met totale waarde van €100M+',
+            'Voorbereiding van 100+ contracten en juridische documenten'
+          ]]
         },
         {
           title: 'Advocaat',
@@ -653,8 +692,22 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
         }
       ],
       skills: {
-        technical: ['Contractrecht', 'Ondernemingsrecht', 'M&A', 'Geschilbeslechting'],
-        soft: ['Analytisch denken', 'Communicatie', 'Onderhandelen', 'Precisie']
+        technical: ['Contractrecht', 'Ondernemingsrecht', 'M&A', 'Geschilbeslechting',
+        'Juridisch onderzoek',
+        'Contractenrecht',
+        'Procedurerecht',
+        'Legal software (LexisNexis)',
+        'Documentbeheer',
+        'Case management'
+      ],
+        soft: ['Analytisch denken', 'Communicatie', 'Onderhandelen', 'Precisie',
+        'Analytisch denken',
+        'Precisie',
+        'Effectieve communicatie',
+        'Onderhandeling',
+        'Klantgerichtheid',
+        'Strategisch denken'
+      ]
       },
       certifications: [
         { title: 'Advocatenregister', institution: 'Nederlandse Orde van Advocaten', year: '2014' }
@@ -666,7 +719,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
       template: 'modern',
       fullName: 'Ruben Visser',
       title: 'Data Scientist',
-      summary: 'Data scientist met 6 jaar ervaring in machine learning, predictive analytics en data engineering. Gespecialiseerd in Python, SQL en cloud platforms. Gepassioneerd over het omzetten van data in actionable insights.',
+      summary: 'Data scientist met 6 jaar ervaring in machine learning, predictive analytics en data engineering. Gespecialiseerd in Python, SQL en cloud platforms. Gepassioneerd over het omzetten van data in actionable insights. met bewezen track record in data-analyse en machine learning implementaties.',
       photoUrl: getPlaceholderPhoto('Ruben Visser'),
       contact: {
         email: 'ruben.visser@email.nl',
@@ -681,12 +734,15 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
           location: 'Amsterdam',
           dates: '2020 - Heden',
           current: true,
-          achievements: [
+          achievements: [[
             'Ontwikkeling van ML modellen voor voorspellingen',
             'Data pipeline engineering en ETL processen',
             'Presentatie van insights aan stakeholders',
-            'Leiding aan team van 4 data scientists'
-          ]
+            'Leiding aan team van 4 data scientists',
+            'Ontwikkeling van machine learning modellen voor 10+ business cases',
+            'Data analyse van datasets met 1M+ records resulterend in actionable insights',
+            'Implementatie van predictive analytics resulterend in 25% verbetering in forecasting'
+          ]]
         },
         {
           title: 'Data Scientist',
@@ -720,7 +776,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
       template: 'modern',
       fullName: 'Dr. Bas van den Berg',
       title: 'Huisarts',
-      summary: 'Ervaren huisarts met 12 jaar ervaring in eerstelijns gezondheidszorg. Gespecialiseerd in preventieve zorg en chronische ziektebeheer. Gepassioneerd over patiëntgerichte zorg en continue medische educatie.',
+      summary: 'Ervaren huisarts met 12 jaar ervaring in eerstelijns gezondheidszorg. Gespecialiseerd in preventieve zorg en chronische ziektebeheer. Gepassioneerd over patiëntgerichte zorg en continue medische educatie. met bewezen track record in patiëntenzorg en medische excellentie.',
       photoUrl: getPlaceholderPhoto('Dr. Bas van den Berg'),
       contact: {
         email: 'bas.vandenberg@email.nl',
@@ -734,12 +790,15 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
           location: 'Utrecht',
           dates: '2015 - Heden',
           current: true,
-          achievements: [
+          achievements: [[
             'Zorg voor 2000+ patiënten',
             'Preventieve zorg en gezondheidsvoorlichting',
             'Chronische ziektebeheer (diabetes, hypertensie)',
-            'Samenwerking met specialisten en ziekenhuizen'
-          ]
+            'Samenwerking met specialisten en ziekenhuizen',
+            'Behandeling van gemiddeld 30+ patiënten per dag met focus op kwaliteit van zorg',
+            'Samenwerking met multidisciplinair team voor complexe medische cases',
+            'Implementatie van evidence-based behandelprotocollen'
+          ]]
         },
         {
           title: 'Arts-assistent',
@@ -763,8 +822,22 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
         }
       ],
       skills: {
-        technical: ['Diagnostiek', 'Behandelplanning', 'Medische procedures', 'EPD systemen'],
-        soft: ['Empathie', 'Communicatie', 'Stressbestendigheid', 'Besluitvorming']
+        technical: ['Diagnostiek', 'Behandelplanning', 'Medische procedures', 'EPD systemen',
+        'Medische diagnostiek',
+        'Behandelprotocollen',
+        'EPD systemen',
+        'Medische apparatuur',
+        'Kwaliteitsborging',
+        'Evidence-based medicine'
+      ],
+        soft: ['Empathie', 'Communicatie', 'Stressbestendigheid', 'Besluitvorming',
+        'Empathie',
+        'Communicatie',
+        'Stressbestendigheid',
+        'Teamwerk',
+        'Kritisch denken',
+        'Patiëntgerichtheid'
+      ]
       },
       certifications: [
         { title: 'BIG Registratie', institution: 'BIG Register', year: '2011' }
@@ -776,7 +849,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
       template: 'modern',
       fullName: 'Marieke van der Laan',
       title: 'Apotheker',
-      summary: 'Ervaren apotheker met 8 jaar ervaring in community pharmacy en medicatiebeheer. Gespecialiseerd in farmaceutische zorg en medicatiebeoordeling. Gepassioneerd over patiëntveiligheid en medicatieoptimalisatie.',
+      summary: 'Ervaren apotheker met 8 jaar ervaring in community pharmacy en medicatiebeheer. Gespecialiseerd in farmaceutische zorg en medicatiebeoordeling. Gepassioneerd over patiëntveiligheid en medicatieoptimalisatie. met bewezen track record in farmaceutische zorg en medicatiebeheer.',
       photoUrl: getPlaceholderPhoto('Marieke van der Laan'),
       contact: {
         email: 'marieke.vanderlaan@email.nl',
@@ -790,12 +863,15 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
           location: 'Rotterdam',
           dates: '2018 - Heden',
           current: true,
-          achievements: [
+          achievements: [[
             'Medicatiebeoordeling en -advies',
             'Farmaceutische patiëntenzorg',
             'Samenwerking met huisartsen en specialisten',
-            'Leiding aan team van 5 medewerkers'
-          ]
+            'Leiding aan team van 5 medewerkers',
+            'Dagelijkse medicatiebeoordeling voor 100+ patiënten met focus op veiligheid',
+            'Farmaceutische zorg en medicatiebeoordeling resulterend in 30% reductie van medicatiefouten',
+            'Samenwerking met huisartsen en specialisten voor optimale medicatie'
+          ]]
         },
         {
           title: 'Apotheker in opleiding',
@@ -819,8 +895,22 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
         }
       ],
       skills: {
-        technical: ['Medicatiebeoordeling', 'Farmaceutische bereiding', 'Drug interactions', 'Farmaceutische zorg'],
-        soft: ['Precisie', 'Communicatie', 'Empathie', 'Teamwerk']
+        technical: ['Medicatiebeoordeling', 'Farmaceutische bereiding', 'Drug interactions', 'Farmaceutische zorg',
+        'Farmaceutische kennis',
+        'Medicatiebeoordeling',
+        'Farmaceutische software',
+        'Kwaliteitsborging',
+        'Regulatory compliance',
+        'Drug interactions'
+      ],
+        soft: ['Precisie', 'Communicatie', 'Empathie', 'Teamwerk',
+        'Empathie',
+        'Communicatie',
+        'Precisie',
+        'Patiëntgerichtheid',
+        'Teamwerk',
+        'Kritisch denken'
+      ]
       },
       certifications: [
         { title: 'BIG Registratie', institution: 'BIG Register', year: '2015' }
@@ -832,7 +922,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
       template: 'modern',
       fullName: 'Kevin de Boer',
       title: 'IT Support Specialist',
-      summary: 'Technische IT support specialist met 5 jaar ervaring in helpdesk support, systeembeheer en troubleshooting. Gespecialiseerd in Windows en Linux systemen. Gepassioneerd over probleemoplossing en klanttevredenheid.',
+      summary: 'Technische IT support specialist met 5 jaar ervaring in helpdesk support, systeembeheer en troubleshooting. Gespecialiseerd in Windows en Linux systemen. Gepassioneerd over probleemoplossing en klanttevredenheid. met bewezen track record in IT troubleshooting en gebruikersondersteuning.',
       photoUrl: getPlaceholderPhoto('Kevin de Boer'),
       contact: {
         email: 'kevin.deboer@email.nl',
@@ -846,12 +936,15 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
           location: 'Eindhoven',
           dates: '2020 - Heden',
           current: true,
-          achievements: [
+          achievements: [[
             'Eerste en tweede lijns support voor 500+ gebruikers',
             'Systeembeheer en onderhoud',
             'Implementatie van nieuwe IT systemen',
-            'Training van gebruikers en junior medewerkers'
-          ]
+            'Training van gebruikers en junior medewerkers',
+            'Ondersteuning van 200+ gebruikers met gemiddeld 95%+ oplossingspercentage',
+            'Resolutie van 50+ IT tickets per week met focus op snelle response tijden',
+            'Implementatie van nieuwe systemen en software voor 50+ gebruikers'
+          ]]
         },
         {
           title: 'IT Support Medewerker',
@@ -875,8 +968,22 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
         }
       ],
       skills: {
-        technical: ['Windows Server', 'Linux', 'Active Directory', 'Networking', 'Troubleshooting'],
-        soft: ['Klantgerichtheid', 'Probleemoplossend', 'Communicatie', 'Geduld']
+        technical: ['Windows Server', 'Linux', 'Active Directory', 'Networking', 'Troubleshooting',
+        'Windows/Linux systemen',
+        'Networking',
+        'Helpdesk software',
+        'Remote support tools',
+        'Hardware troubleshooting',
+        'Software installation'
+      ],
+        soft: ['Klantgerichtheid', 'Probleemoplossend', 'Communicatie', 'Geduld',
+        'Probleemoplossing',
+        'Geduld',
+        'Communicatie',
+        'Klantgerichtheid',
+        'Teamwerk',
+        'Proactief werken'
+      ]
       },
       certifications: [
         { title: 'CompTIA A+', institution: 'CompTIA', year: '2019' },
@@ -889,7 +996,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
       template: 'modern',
       fullName: 'Prof. Dr. Sarah van der Meer',
       title: 'Hoogleraar',
-      summary: 'Gerenommeerde hoogleraar met 15+ jaar ervaring in onderzoek en onderwijs. Gespecialiseerd in sociale psychologie en gedragswetenschappen. Gepassioneerd over wetenschappelijk onderzoek en kennisoverdracht.',
+      summary: 'Gerenommeerde hoogleraar met 15+ jaar ervaring in onderzoek en onderwijs. Gespecialiseerd in sociale psychologie en gedragswetenschappen. Gepassioneerd over wetenschappelijk onderzoek en kennisoverdracht. met bewezen track record in onderzoek en onderwijs.',
       photoUrl: getPlaceholderPhoto('Prof. Dr. Sarah van der Meer'),
       contact: {
         email: 'sarah.vandermeer@email.nl',
@@ -903,12 +1010,15 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
           location: 'Amsterdam',
           dates: '2016 - Heden',
           current: true,
-          achievements: [
+          achievements: [[
             'Onderwijs aan bachelor en master studenten',
             'Leiding aan onderzoeksgroep van 8 onderzoekers',
             '30+ wetenschappelijke publicaties',
-            'Begeleiding van 15+ promovendi'
-          ]
+            'Begeleiding van 15+ promovendi',
+            'Onderwijs aan 200+ studenten per jaar met focus op interactief leren',
+            'Publicatie van 15+ peer-reviewed artikelen in toonaangevende journals',
+            'Begeleiding van 10+ promovendi en onderzoekers'
+          ]]
         },
         {
           title: 'Universitair Docent',
@@ -942,7 +1052,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
       template: 'modern',
       fullName: 'Iris van der Wal',
       title: 'Schooldecaan',
-      summary: 'Ervaren schooldecaan met 7 jaar ervaring in studie- en loopbaanbegeleiding. Gespecialiseerd in het ondersteunen van leerlingen bij studiekeuze en persoonlijke ontwikkeling. Gepassioneerd over het helpen van jongeren bij het bereiken van hun potentieel.',
+      summary: 'Ervaren schooldecaan met 7 jaar ervaring in studie- en loopbaanbegeleiding. Gespecialiseerd in het ondersteunen van leerlingen bij studiekeuze en persoonlijke ontwikkeling. Gepassioneerd over het helpen van jongeren bij het bereiken van hun potentieel. met bewezen track record in leerlingbegeleiding en loopbaanoriëntatie.',
       photoUrl: getPlaceholderPhoto('Iris van der Wal'),
       contact: {
         email: 'iris.vanderwal@email.nl',
@@ -956,12 +1066,15 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
           location: 'Groningen',
           dates: '2019 - Heden',
           current: true,
-          achievements: [
+          achievements: [[
             'Begeleiding van 300+ leerlingen per jaar',
             'Studie- en loopbaanadvies',
             'Organisatie van voorlichtingsactiviteiten',
-            'Samenwerking met ouders en docenten'
-          ]
+            'Samenwerking met ouders en docenten',
+            'Begeleiding van 100+ leerlingen per jaar bij studiekeuze en persoonlijke ontwikkeling',
+            'Organisatie van 20+ loopbaanoriëntatie activiteiten per jaar',
+            'Samenwerking met ouders, docenten en externe partijen voor leerlingbegeleiding'
+          ]]
         },
         {
           title: 'Decaan',
@@ -985,8 +1098,22 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
         }
       ],
       skills: {
-        technical: ['Loopbaanbegeleiding', 'Studieadvies', 'Coaching', 'Assessment'],
-        soft: ['Empathie', 'Communicatie', 'Geduld', 'Luistervaardigheid']
+        technical: ['Loopbaanbegeleiding', 'Studieadvies', 'Coaching', 'Assessment',
+        'Counseling technieken',
+        'Assessment tools',
+        'Career guidance',
+        'Educational systems',
+        'Student information systems',
+        'Crisis intervention'
+      ],
+        soft: ['Empathie', 'Communicatie', 'Geduld', 'Luistervaardigheid',
+        'Empathie',
+        'Actief luisteren',
+        'Communicatie',
+        'Geduld',
+        'Probleemoplossing',
+        'Vertrouwelijkheid'
+      ]
       },
       languages: ['Nederlands (Moedertaal)', 'Engels (Vloeiend)'],
       hobbies: ['Lezen', 'Yoga', 'Wandelen', 'Vrijwilligerswerk']
@@ -995,7 +1122,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
       template: 'modern',
       fullName: 'Dennis van der Veen',
       title: 'Financieel Analist',
-      summary: 'Analytische financieel analist met 6 jaar ervaring in financiële analyse, forecasting en risicobeheer. Gespecialiseerd in corporate finance en investment analysis. Gepassioneerd over data-driven besluitvorming.',
+      summary: 'Analytische financieel analist met 6 jaar ervaring in financiële analyse, forecasting en risicobeheer. Gespecialiseerd in corporate finance en investment analysis. Gepassioneerd over data-driven besluitvorming. met bewezen track record in financiële analyse en strategische advisering.',
       photoUrl: getPlaceholderPhoto('Dennis van der Veen'),
       contact: {
         email: 'dennis.vanderveen@email.nl',
@@ -1009,12 +1136,15 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
           location: 'Amsterdam',
           dates: '2020 - Heden',
           current: true,
-          achievements: [
+          achievements: [[
             'Financiële modellen en forecasting',
             'Due diligence voor M&A transacties',
             'Risicoanalyse en -beheer',
-            'Presentaties aan management en investeerders'
-          ]
+            'Presentaties aan management en investeerders',
+            'Financiële analyses en forecasting voor bedrijven met omzet van €50M+',
+            'Ontwikkeling van financiële modellen voor strategische besluitvorming',
+            'Risicoanalyse en due diligence onderzoeken voor investeerders'
+          ]]
         },
         {
           title: 'Financieel Analist',
@@ -1038,8 +1168,22 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
         }
       ],
       skills: {
-        technical: ['Excel', 'Financial modeling', 'SQL', 'Bloomberg', 'Risk analysis'],
-        soft: ['Analytisch denken', 'Aandacht voor detail', 'Communicatie', 'Teamwerk']
+        technical: ['Excel', 'Financial modeling', 'SQL', 'Bloomberg', 'Risk analysis',
+        'Excel (geavanceerd)',
+        'Financial modeling',
+        'Data analysis tools',
+        'Accounting software',
+        'Risk analysis',
+        'Forecasting'
+      ],
+        soft: ['Analytisch denken', 'Aandacht voor detail', 'Communicatie', 'Teamwerk',
+        'Analytisch denken',
+        'Precisie',
+        'Communicatie',
+        'Kritisch denken',
+        'Probleemoplossing',
+        'Attention to detail'
+      ]
       },
       languages: ['Nederlands (Moedertaal)', 'Engels (Vloeiend)', 'Duits (Goed)'],
       hobbies: ['Golf', 'Lezen', 'Reizen', 'Fotografie']
@@ -1048,7 +1192,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
       template: 'modern',
       fullName: 'Fleur van der Berg',
       title: 'Fotograaf',
-      summary: 'Creatieve professionele fotograaf met 8 jaar ervaring in portret-, bruilofts- en commerciële fotografie. Gespecialiseerd in natuurlijk licht en storytelling. Gepassioneerd over het vastleggen van authentieke momenten.',
+      summary: 'Creatieve professionele fotograaf met 8 jaar ervaring in portret-, bruilofts- en commerciële fotografie. Gespecialiseerd in natuurlijk licht en storytelling. Gepassioneerd over het vastleggen van authentieke momenten. met bewezen track record in creatieve fotografie en visuele communicatie.',
       photoUrl: getPlaceholderPhoto('Fleur van der Berg'),
       contact: {
         email: 'fleur.vanderberg@email.nl',
@@ -1063,12 +1207,15 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
           location: 'Amsterdam',
           dates: '2018 - Heden',
           current: true,
-          achievements: [
+          achievements: [[
             'Portret- en bruiloftsfotografie',
             'Commerciële opdrachten voor merken',
             '100+ tevreden klanten',
-            'Publicaties in verschillende magazines'
-          ]
+            'Publicaties in verschillende magazines',
+            'Fotografie voor 50+ evenementen en commerciële projecten per jaar',
+            'Portfolio met 200+ gepubliceerde foto's in magazines en online media',
+            'Samenwerking met 30+ klanten voor branding en marketing fotografie'
+          ]]
         },
         {
           title: 'Fotograaf',
@@ -1092,8 +1239,22 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
         }
       ],
       skills: {
-        technical: ['Adobe Lightroom', 'Photoshop', 'Camera techniek', 'Compositie', 'Lighting'],
-        soft: ['Creativiteit', 'Communicatie', 'Klantgerichtheid', 'Flexibiliteit']
+        technical: ['Adobe Lightroom', 'Photoshop', 'Camera techniek', 'Compositie', 'Lighting',
+        'Photography equipment',
+        'Adobe Lightroom',
+        'Adobe Photoshop',
+        'Color grading',
+        'Studio lighting',
+        'Post-production'
+      ],
+        soft: ['Creativiteit', 'Communicatie', 'Klantgerichtheid', 'Flexibiliteit',
+        'Creativiteit',
+        'Visuele communicatie',
+        'Klantgerichtheid',
+        'Flexibiliteit',
+        'Netwerken',
+        'Artistieke visie'
+      ]
       },
       languages: ['Nederlands (Moedertaal)', 'Engels (Vloeiend)'],
       hobbies: ['Fotografie', 'Reizen', 'Kunst', 'Muziek']
@@ -1102,7 +1263,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
       template: 'modern',
       fullName: 'Roos van der Laan',
       title: 'Copywriter',
-      summary: 'Creatieve copywriter met 5 jaar ervaring in content marketing, advertising en brand storytelling. Gespecialiseerd in digitale content en social media. Gepassioneerd over het creëren van overtuigende verhalen die resulteren.',
+      summary: 'Creatieve copywriter met 5 jaar ervaring in content marketing, advertising en brand storytelling. Gespecialiseerd in digitale content en social media. Gepassioneerd over het creëren van overtuigende verhalen die resulteren. met bewezen track record in content marketing en copywriting.',
       photoUrl: getPlaceholderPhoto('Roos van der Laan'),
       contact: {
         email: 'roos.vanderlaan@email.nl',
@@ -1116,12 +1277,15 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
           location: 'Utrecht',
           dates: '2021 - Heden',
           current: true,
-          achievements: [
+          achievements: [[
             'Content strategie en creatie voor 20+ merken',
             'Campagne ontwikkeling en copywriting',
             'Social media content en storytelling',
-            'Leiding aan team van 3 copywriters'
-          ]
+            'Leiding aan team van 3 copywriters',
+            'Schrijven van 100+ marketing teksten per jaar voor diverse kanalen',
+            'Content strategie ontwikkeling resulterend in 40% verhoogde engagement',
+            'Samenwerking met marketing teams voor geïntegreerde campagnes'
+          ]]
         },
         {
           title: 'Copywriter',
@@ -1145,8 +1309,22 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
         }
       ],
       skills: {
-        technical: ['Copywriting', 'Content strategie', 'SEO', 'Social media', 'Email marketing'],
-        soft: ['Creativiteit', 'Schrijven', 'Storytelling', 'Teamwerk']
+        technical: ['Copywriting', 'Content strategie', 'SEO', 'Social media', 'Email marketing',
+        'Content management systems',
+        'SEO tools',
+        'Analytics tools',
+        'Design software basics',
+        'Marketing automation',
+        'Social media platforms'
+      ],
+        soft: ['Creativiteit', 'Schrijven', 'Storytelling', 'Teamwerk',
+        'Creativiteit',
+        'Schrijfvaardigheid',
+        'Research skills',
+        'Klantgerichtheid',
+        'Teamwerk',
+        'Deadline management'
+      ]
       },
       languages: ['Nederlands (Moedertaal)', 'Engels (Vloeiend)'],
       hobbies: ['Schrijven', 'Lezen', 'Reizen', 'Kunst']
@@ -1155,7 +1333,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
       template: 'modern',
       fullName: 'Joris van der Meulen',
       title: 'Werktuigbouwkundig Ingenieur',
-      summary: 'Ervaren werktuigbouwkundig ingenieur met 9 jaar ervaring in productontwikkeling en machine design. Gespecialiseerd in CAD/CAM en prototyping. Gepassioneerd over innovatie en technische oplossingen.',
+      summary: 'Ervaren werktuigbouwkundig ingenieur met 9 jaar ervaring in productontwikkeling en machine design. Gespecialiseerd in CAD/CAM en prototyping. Gepassioneerd over innovatie en technische oplossingen. met bewezen track record in mechanisch ontwerp en productontwikkeling.',
       photoUrl: getPlaceholderPhoto('Joris van der Meulen'),
       contact: {
         email: 'joris.vandermeulen@email.nl',
@@ -1169,12 +1347,15 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
           location: 'Veldhoven',
           dates: '2018 - Heden',
           current: true,
-          achievements: [
+          achievements: [[
             'Ontwerp en ontwikkeling van precisie componenten',
             'CAD/CAM engineering en prototyping',
             'Kwaliteitscontrole en testing',
-            'Leiding aan engineering team'
-          ]
+            'Leiding aan engineering team',
+            'Ontwerp en ontwikkeling van mechanische systemen voor 10+ projecten',
+            'CAD/CAM engineering en prototyping voor productontwikkeling',
+            'Projectmanagement van engineering projecten met waarde van €5M+'
+          ]]
         },
         {
           title: 'Mechanical Engineer',
@@ -1198,8 +1379,22 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
         }
       ],
       skills: {
-        technical: ['SolidWorks', 'AutoCAD', 'FEM Analysis', 'Prototyping', '3D Printing'],
-        soft: ['Probleemoplossend', 'Precisie', 'Teamwerk', 'Innovatie']
+        technical: ['SolidWorks', 'AutoCAD', 'FEM Analysis', 'Prototyping', '3D Printing',
+        'CAD/CAM software',
+        'Finite Element Analysis',
+        'Manufacturing processes',
+        'Quality control',
+        'Project management',
+        'Technical documentation'
+      ],
+        soft: ['Probleemoplossend', 'Precisie', 'Teamwerk', 'Innovatie',
+        'Probleemoplossing',
+        'Teamwerk',
+        'Projectmanagement',
+        'Communicatie',
+        'Analytisch denken',
+        'Innovatie'
+      ]
       },
       languages: ['Nederlands (Moedertaal)', 'Engels (Vloeiend)'],
       hobbies: ['3D Printing', 'Fietsen', 'Technologie', 'Lezen']
@@ -1208,7 +1403,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
       template: 'modern',
       fullName: 'Marijn van der Steen',
       title: 'Civiel Ingenieur',
-      summary: 'Ervaren civiel ingenieur met 10 jaar ervaring in infrastructurele projecten en bouwmanagement. Gespecialiseerd in bruggen en wegenbouw. Gepassioneerd over duurzame infrastructuur en veiligheid.',
+      summary: 'Ervaren civiel ingenieur met 10 jaar ervaring in infrastructurele projecten en bouwmanagement. Gespecialiseerd in bruggen en wegenbouw. Gepassioneerd over duurzame infrastructuur en veiligheid. met bewezen track record in infrastructurele projecten en bouwmanagement.',
       photoUrl: getPlaceholderPhoto('Marijn van der Steen'),
       contact: {
         email: 'marijn.vandersteen@email.nl',
@@ -1222,12 +1417,15 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
           location: 'Rotterdam',
           dates: '2019 - Heden',
           current: true,
-          achievements: [
+          achievements: [[
             'Leiding aan infrastructurele projecten van €15M+',
             'Planning en uitvoering van wegen- en waterbouwprojecten',
             'Coördinatie met aannemers en stakeholders',
-            'Kwaliteits- en veiligheidsmanagement'
-          ]
+            'Kwaliteits- en veiligheidsmanagement',
+            'Ontwerp en ontwikkeling van infrastructurele projecten met waarde van €20M+',
+            'Projectmanagement van bouwprojecten binnen budget en deadline',
+            'Kwaliteitsborging en veiligheidscompliance voor alle projecten'
+          ]]
         },
         {
           title: 'Civiel Ingenieur',
@@ -1251,8 +1449,22 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
         }
       ],
       skills: {
-        technical: ['AutoCAD', 'Revit', 'Projectmanagement', 'Berekeningen', 'Risicoanalyse'],
-        soft: ['Leiderschap', 'Communicatie', 'Probleemoplossend', 'Teamwerk']
+        technical: ['AutoCAD', 'Revit', 'Projectmanagement', 'Berekeningen', 'Risicoanalyse',
+        'CAD software',
+        'Structural analysis',
+        'Project management',
+        'Construction methods',
+        'Quality control',
+        'Safety compliance'
+      ],
+        soft: ['Leiderschap', 'Communicatie', 'Probleemoplossend', 'Teamwerk',
+        'Probleemoplossing',
+        'Teamleiderschap',
+        'Projectmanagement',
+        'Communicatie',
+        'Analytisch denken',
+        'Kwaliteitsbewustzijn'
+      ]
       },
       languages: ['Nederlands (Moedertaal)', 'Engels (Vloeiend)'],
       hobbies: ['Fietsen', 'Fotografie', 'Lezen', 'Reizen']
@@ -1261,7 +1473,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
       template: 'modern',
       fullName: 'Sanne van der Pol',
       title: 'Account Manager',
-      summary: 'Resultaatgerichte account manager met 6 jaar ervaring in B2B account management en klantrelaties. Gespecialiseerd in enterprise accounts en complexe sales. Gepassioneerd over het helpen van klanten bij succes.',
+      summary: 'Resultaatgerichte account manager met 6 jaar ervaring in B2B account management en klantrelaties. Gespecialiseerd in enterprise accounts en complexe sales. Gepassioneerd over het helpen van klanten bij succes. met bewezen track record in account groei en klantrelatiebeheer.',
       photoUrl: getPlaceholderPhoto('Sanne van der Pol'),
       contact: {
         email: 'sanne.vanderpol@email.nl',
@@ -1276,12 +1488,15 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
           location: 'Amsterdam',
           dates: '2020 - Heden',
           current: true,
-          achievements: [
+          achievements: [[
             'Beheer van portefeuille van 40+ enterprise klanten',
             'Jaarlijkse omzet van €1.8M+',
             'Uitbreiding van klantrelaties en upselling',
-            'Leiding aan account team'
-          ]
+            'Leiding aan account team',
+            'Beheer van portfolio van 25+ enterprise accounts met totale waarde van €2M+',
+            'Account groei van gemiddeld 35% per jaar door proactieve relatiebeheer',
+            'Ontwikkeling van accountstrategieën resulterend in 40% verhoogde customer lifetime value'
+          ]]
         },
         {
           title: 'Account Manager',
@@ -1306,8 +1521,22 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
         }
       ],
       skills: {
-        technical: ['CRM systemen', 'Sales forecasting', 'Presentatievaardigheden', 'Contractonderhandeling'],
-        soft: ['Relatiebeheer', 'Communicatie', 'Overtuigingskracht', 'Resultaatgerichtheid']
+        technical: ['CRM systemen', 'Sales forecasting', 'Presentatievaardigheden', 'Contractonderhandeling',
+        'CRM systems (Salesforce, HubSpot)',
+        'Sales analytics',
+        'Contract management',
+        'Presentation tools',
+        'Market research',
+        'Competitive analysis'
+      ],
+        soft: ['Relatiebeheer', 'Communicatie', 'Overtuigingskracht', 'Resultaatgerichtheid',
+        'Relatiebeheer',
+        'Onderhandeling',
+        'Strategisch denken',
+        'Klantgerichtheid',
+        'Communicatie',
+        'Resultaatgerichtheid'
+      ]
       },
       languages: ['Nederlands (Moedertaal)', 'Engels (Vloeiend)', 'Duits (Goed)'],
       hobbies: ['Netwerken', 'Golf', 'Reizen', 'Lezen']
@@ -1369,7 +1598,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
       template: 'modern',
       fullName: 'Lotte van der Heijden',
       title: 'Kantoor Manager',
-      summary: 'Proactieve kantoor manager met 7 jaar ervaring in office management, HR en administratie. Gespecialiseerd in efficiënte workflow en teamcoördinatie. Gepassioneerd over het creëren van een positieve werkomgeving.',
+      summary: 'Proactieve kantoor manager met 7 jaar ervaring in office management, HR en administratie. Gespecialiseerd in efficiënte workflow en teamcoördinatie. Gepassioneerd over het creëren van een positieve werkomgeving. met bewezen track record in kantoorbeheer en teamcoördinatie.',
       photoUrl: getPlaceholderPhoto('Lotte van der Heijden'),
       contact: {
         email: 'lotte.vanderheijden@email.nl',
@@ -1383,12 +1612,15 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
           location: 'Utrecht',
           dates: '2020 - Heden',
           current: true,
-          achievements: [
+          achievements: [[
             'Leiding aan administratief team van 8 medewerkers',
             'HR ondersteuning en recruitment',
             'Facility management en inkoop',
-            'Budgetbeheer en rapportage'
-          ]
+            'Budgetbeheer en rapportage',
+            'Leiding aan administratief team van 8+ medewerkers',
+            'Beheer van kantoorfaciliteiten voor 50+ medewerkers',
+            'Implementatie van process verbeteringen resulterend in 30% efficiëntie verhoging'
+          ]]
         },
         {
           title: 'Office Coordinator',
@@ -1412,8 +1644,22 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
         }
       ],
       skills: {
-        technical: ['Microsoft Office', 'HR systemen', 'Boekhoudsoftware', 'Projectmanagement'],
-        soft: ['Organisatie', 'Communicatie', 'Leiderschap', 'Multitasking']
+        technical: ['Microsoft Office', 'HR systemen', 'Boekhoudsoftware', 'Projectmanagement',
+        'Office software',
+        'HR systems',
+        'Financial software',
+        'Facility management',
+        'Project management tools',
+        'Document management'
+      ],
+        soft: ['Organisatie', 'Communicatie', 'Leiderschap', 'Multitasking',
+        'Organisatie',
+        'Teamleiderschap',
+        'Communicatie',
+        'Probleemoplossing',
+        'Multitasking',
+        'Efficiëntie'
+      ]
       },
       languages: ['Nederlands (Moedertaal)', 'Engels (Vloeiend)', 'Duits (Basis)'],
       hobbies: ['Yoga', 'Lezen', 'Koken', 'Wandelen']
@@ -1422,7 +1668,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
       template: 'modern',
       fullName: 'Niels van der Vliet',
       title: 'Executive Assistant',
-      summary: 'Ervaren executive assistant met 9 jaar ervaring in executive support en administratieve coördinatie. Gespecialiseerd in C-level ondersteuning en complexe planning. Gepassioneerd over efficiency en discretie.',
+      summary: 'Ervaren executive assistant met 9 jaar ervaring in executive support en administratieve coördinatie. Gespecialiseerd in C-level ondersteuning en complexe planning. Gepassioneerd over efficiency en discretie. met bewezen track record in executive ondersteuning en organisatie.',
       photoUrl: getPlaceholderPhoto('Niels van der Vliet'),
       contact: {
         email: 'niels.vandervliet@email.nl',
@@ -1436,12 +1682,15 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
           location: 'Amsterdam',
           dates: '2018 - Heden',
           current: true,
-          achievements: [
+          achievements: [[
             'Ondersteuning van CEO en directie',
             'Complexe agenda beheer en reisplanning',
             'Organisatie van board meetings en events',
-            'Vertrouwelijke documentbeheer'
-          ]
+            'Vertrouwelijke documentbeheer',
+            'Ondersteuning van 3+ C-level executives met focus op efficiëntie',
+            'Coördinatie van 20+ executive meetings en evenementen per maand',
+            'Voorbereiding van 30+ presentaties en rapporten per maand'
+          ]]
         },
         {
           title: 'Management Assistant',
@@ -1465,8 +1714,22 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
         }
       ],
       skills: {
-        technical: ['Microsoft Office', 'Outlook', 'CRM', 'Projectmanagement tools'],
-        soft: ['Discretie', 'Organisatie', 'Communicatie', 'Proactiviteit', 'Stressbestendigheid']
+        technical: ['Microsoft Office', 'Outlook', 'CRM', 'Projectmanagement tools',
+        'Microsoft Office Suite',
+        'Calendar management',
+        'Travel booking systems',
+        'Document management',
+        'Presentation tools',
+        'Communication tools'
+      ],
+        soft: ['Discretie', 'Organisatie', 'Communicatie', 'Proactiviteit', 'Stressbestendigheid',
+        'Discretie',
+        'Organisatie',
+        'Proactief werken',
+        'Communicatie',
+        'Multitasking',
+        'Attention to detail'
+      ]
       },
       languages: ['Nederlands (Moedertaal)', 'Engels (Vloeiend)', 'Frans (Goed)', 'Duits (Basis)'],
       hobbies: ['Lezen', 'Golf', 'Reizen', 'Fotografie']
@@ -1475,7 +1738,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
       template: 'modern',
       fullName: 'Femke van der Berg',
       title: 'Hotel Manager',
-      summary: 'Ervaren hotel manager met 10 jaar ervaring in hospitality management en gastenservice. Gespecialiseerd in luxury hotels en operationele excellentie. Gepassioneerd over het creëren van onvergetelijke gastenervaringen.',
+      summary: 'Ervaren hotel manager met 10 jaar ervaring in hospitality management en gastenservice. Gespecialiseerd in luxury hotels en operationele excellentie. Gepassioneerd over het creëren van onvergetelijke gastenervaringen. met bewezen track record in hospitality management en gastenservice.',
       photoUrl: getPlaceholderPhoto('Femke van der Berg'),
       contact: {
         email: 'femke.vanderberg@email.nl',
@@ -1489,12 +1752,15 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
           location: 'Amsterdam',
           dates: '2019 - Heden',
           current: true,
-          achievements: [
+          achievements: [[
             'Leiding aan team van 50+ medewerkers',
             'Omzetoptimalisatie en budgetbeheer',
             'Gastenservice en tevredenheid',
-            'Operational excellence en kwaliteitsmanagement'
-          ]
+            'Operational excellence en kwaliteitsmanagement',
+            'Leiding aan team van 25+ medewerkers met focus op gastenservice',
+            'Beheer van hotel met 80+ kamers en gemiddeld 70% bezettingsgraad',
+            'Implementatie van service verbeteringen resulterend in 4.5+ sterren rating'
+          ]]
         },
         {
           title: 'Front Office Manager',
@@ -1518,8 +1784,22 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
         }
       ],
       skills: {
-        technical: ['Hotel management systemen', 'Revenue management', 'Event planning', 'Food & Beverage'],
-        soft: ['Leiderschap', 'Gastgerichtheid', 'Teamwerk', 'Probleemoplossend']
+        technical: ['Hotel management systemen', 'Revenue management', 'Event planning', 'Food & Beverage',
+        'Property management systems',
+        'Revenue management',
+        'Event planning software',
+        'Financial management',
+        'Customer service systems',
+        'Inventory management'
+      ],
+        soft: ['Leiderschap', 'Gastgerichtheid', 'Teamwerk', 'Probleemoplossend',
+        'Gastenservice',
+        'Teamleiderschap',
+        'Stressbestendigheid',
+        'Communicatie',
+        'Probleemoplossing',
+        'Commercieel inzicht'
+      ]
       },
       languages: ['Nederlands (Moedertaal)', 'Engels (Vloeiend)', 'Frans (Goed)', 'Duits (Goed)'],
       hobbies: ['Reizen', 'Koken', 'Lezen', 'Fotografie']
@@ -1528,7 +1808,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
       template: 'modern',
       fullName: 'Jeroen van der Molen',
       title: 'Restaurant Manager',
-      summary: 'Ervaren restaurant manager met 8 jaar ervaring in restaurant management en gastenservice. Gespecialiseerd in fine dining en teamleiderschap. Gepassioneerd over culinaire excellentie en gasttevredenheid.',
+      summary: 'Ervaren restaurant manager met 8 jaar ervaring in restaurant management en gastenservice. Gespecialiseerd in fine dining en teamleiderschap. Gepassioneerd over culinaire excellentie en gasttevredenheid. met bewezen track record in restaurant management en operationele excellentie.',
       photoUrl: getPlaceholderPhoto('Jeroen van der Molen'),
       contact: {
         email: 'jeroen.vandermolen@email.nl',
@@ -1542,12 +1822,15 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
           location: 'Amsterdam',
           dates: '2020 - Heden',
           current: true,
-          achievements: [
+          achievements: [[
             'Leiding aan team van 20+ medewerkers',
             'Dagelijkse operaties en service management',
             'Gastenservice en tevredenheid',
-            'Samenwerking met keuken en sommelier'
-          ]
+            'Samenwerking met keuken en sommelier',
+            'Leiding aan team van 15+ medewerkers met focus op gastenservice',
+            'Beheer van restaurant met 60+ covers en gemiddeld 200 covers per dag',
+            'Implementatie van service verbeteringen resulterend in 4.5+ sterren rating'
+          ]]
         },
         {
           title: 'Floor Manager',
@@ -1571,8 +1854,22 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
         }
       ],
       skills: {
-        technical: ['Restaurant systemen', 'Reserveringsbeheer', 'Wijnkennis', 'Food & Beverage'],
-        soft: ['Leiderschap', 'Gastgerichtheid', 'Teamwerk', 'Stressbestendigheid']
+        technical: ['Restaurant systemen', 'Reserveringsbeheer', 'Wijnkennis', 'Food & Beverage',
+        'POS systems',
+        'Reservation systems',
+        'Inventory management',
+        'Financial management',
+        'Staff scheduling',
+        'Food safety systems'
+      ],
+        soft: ['Leiderschap', 'Gastgerichtheid', 'Teamwerk', 'Stressbestendigheid',
+        'Gastenservice',
+        'Teamleiderschap',
+        'Stressbestendigheid',
+        'Communicatie',
+        'Probleemoplossing',
+        'Kwaliteitsbewustzijn'
+      ]
       },
       languages: ['Nederlands (Moedertaal)', 'Engels (Vloeiend)', 'Frans (Goed)'],
       hobbies: ['Wijnproeven', 'Koken', 'Reizen', 'Fotografie']
@@ -1581,7 +1878,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
       template: 'modern',
       fullName: 'Maud van der Linden',
       title: 'Paralegal',
-      summary: 'Ervaren paralegal met 6 jaar ervaring in juridische ondersteuning en documentbeheer. Gespecialiseerd in corporate law en contractenrecht. Gepassioneerd over precisie en juridische excellentie.',
+      summary: 'Ervaren paralegal met 6 jaar ervaring in juridische ondersteuning en documentbeheer. Gespecialiseerd in corporate law en contractenrecht. Gepassioneerd over precisie en juridische excellentie. met bewezen track record in juridische ondersteuning en documentbeheer.',
       photoUrl: getPlaceholderPhoto('Maud van der Linden'),
       contact: {
         email: 'maud.vanderlinden@email.nl',
@@ -1595,12 +1892,15 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
           location: 'Den Haag',
           dates: '2020 - Heden',
           current: true,
-          achievements: [
+          achievements: [[
             'Juridische ondersteuning aan advocaten',
             'Documentbeheer en -onderzoek',
             'Contracten opstellen en beoordelen',
-            'Begeleiding van M&A transacties'
-          ]
+            'Begeleiding van M&A transacties',
+            'Ondersteuning bij 100+ juridische zaken per jaar',
+            'Voorbereiding van 200+ juridische documenten en contracten',
+            'Juridisch onderzoek en documentatie voor advocaten'
+          ]]
         },
         {
           title: 'Paralegal',
@@ -1624,8 +1924,22 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
         }
       ],
       skills: {
-        technical: ['Juridisch onderzoek', 'Documentbeheer', 'Contractrecht', 'Legal software'],
-        soft: ['Precisie', 'Analytisch denken', 'Communicatie', 'Organisatie']
+        technical: ['Juridisch onderzoek', 'Documentbeheer', 'Contractrecht', 'Legal software',
+        'Legal research',
+        'Document management',
+        'Case management software',
+        'Legal databases',
+        'Court filing systems',
+        'Legal writing'
+      ],
+        soft: ['Precisie', 'Analytisch denken', 'Communicatie', 'Organisatie',
+        'Analytisch denken',
+        'Precisie',
+        'Organisatie',
+        'Communicatie',
+        'Teamwerk',
+        'Attention to detail'
+      ]
       },
       languages: ['Nederlands (Moedertaal)', 'Engels (Vloeiend)', 'Frans (Basis)'],
       hobbies: ['Lezen', 'Yoga', 'Wandelen', 'Muziek']
@@ -1634,7 +1948,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
       template: 'modern',
       fullName: 'Rick van der Hoek',
       title: 'Juridisch Medewerker',
-      summary: 'Proactieve juridisch medewerker met 5 jaar ervaring in juridische administratie en ondersteuning. Gespecialiseerd in documentbeheer en klantcommunicatie. Gepassioneerd over efficiëntie en service.',
+      summary: 'Proactieve juridisch medewerker met 5 jaar ervaring in juridische administratie en ondersteuning. Gespecialiseerd in documentbeheer en klantcommunicatie. Gepassioneerd over efficiëntie en service. met bewezen track record in juridische administratie en ondersteuning.',
       photoUrl: getPlaceholderPhoto('Rick van der Hoek'),
       contact: {
         email: 'rick.vanderhoek@email.nl',
@@ -1648,12 +1962,15 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
           location: 'Amsterdam',
           dates: '2020 - Heden',
           current: true,
-          achievements: [
+          achievements: [[
             'Juridische administratie en documentbeheer',
             'Klantcommunicatie en -ondersteuning',
             'Planning en agenda beheer',
-            'Ondersteuning bij procedures'
-          ]
+            'Ondersteuning bij procedures',
+            'Ondersteuning bij 80+ juridische zaken per jaar',
+            'Voorbereiding van 150+ juridische documenten en administratie',
+            'Juridisch onderzoek en documentatie voor juridisch team'
+          ]]
         },
         {
           title: 'Administratief Medewerker',
