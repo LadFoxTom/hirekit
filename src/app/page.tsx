@@ -2729,56 +2729,97 @@ export default function HomePage() {
               className="fixed inset-0 z-50 flex items-center justify-center px-4"
             >
               <div
-                className="w-full max-w-md rounded-2xl p-6"
-                style={{ backgroundColor: 'var(--bg-elevated)', border: '1px solid var(--border-medium)', boxShadow: 'var(--shadow-lg)' }}
+                className="w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden"
+                style={{ backgroundColor: 'var(--bg-elevated)', border: '1px solid var(--border-medium)' }}
               >
-                <h3 className="text-lg font-semibold mb-2" style={{ color: 'var(--text-primary)' }}>
-                  {t('cv_editor.unsaved_changes')}
-                </h3>
-                <p className="text-sm mb-5" style={{ color: 'var(--text-secondary)' }}>
-                  {t('cv_editor.leave_prompt')}
-                </p>
-                <div className="flex items-center gap-2 justify-end">
+                {/* Header with Icon */}
+                <div className="px-6 pt-6 pb-4">
+                  <div className="flex items-start gap-4">
+                    <div className="flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center" style={{ backgroundColor: 'rgba(251, 191, 36, 0.1)' }}>
+                      <svg className="w-6 h-6" style={{ color: '#fbbf24' }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                      </svg>
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-xl font-semibold mb-1.5" style={{ color: 'var(--text-primary)' }}>
+                        {t('cv_editor.unsaved_changes').replace('⚠️ ', '')}
+                      </h3>
+                      <p className="text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+                        {t('cv_editor.leave_prompt')}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Action Buttons */}
+                <div className="px-6 py-4 flex flex-wrap items-center gap-3 justify-end" style={{ backgroundColor: 'var(--bg-tertiary)', borderTop: '1px solid var(--border-subtle)' }}>
                   <button
                     onClick={handleLeaveCancel}
-                    className="px-4 py-2 text-sm rounded-lg transition-colors min-w-[140px]"
-                    style={{ color: 'var(--text-tertiary)' }}
+                    className="px-5 py-2.5 text-sm font-medium rounded-lg transition-all duration-200 flex-shrink-0"
+                    style={{ 
+                      color: 'var(--text-primary)',
+                      backgroundColor: 'var(--bg-elevated)',
+                      border: '1px solid var(--border-medium)'
+                    }}
                     onMouseEnter={(e) => {
-                      e.currentTarget.style.color = 'var(--text-primary)';
                       e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                      e.currentTarget.style.borderColor = 'var(--border-medium)';
+                      e.currentTarget.style.transform = 'translateY(-1px)';
                     }}
                     onMouseLeave={(e) => {
-                      e.currentTarget.style.color = 'var(--text-tertiary)';
-                      e.currentTarget.style.backgroundColor = 'transparent';
+                      e.currentTarget.style.backgroundColor = 'var(--bg-elevated)';
+                      e.currentTarget.style.borderColor = 'var(--border-medium)';
+                      e.currentTarget.style.transform = 'translateY(0)';
                     }}
                   >
-                    {t('cv_editor.leave_cancel')}
+                    <span className="whitespace-nowrap">{t('cv_editor.leave_cancel')}</span>
                   </button>
                   <button
                     onClick={handleLeaveWithoutSaving}
-                    className="px-4 py-2 text-sm rounded-lg transition-colors min-w-[140px]"
-                    style={{ color: 'var(--text-secondary)' }}
+                    className="px-5 py-2.5 text-sm font-medium rounded-lg transition-all duration-200 flex-shrink-0"
+                    style={{ 
+                      color: '#ef4444',
+                      backgroundColor: 'var(--bg-elevated)',
+                      border: '1px solid var(--border-medium)'
+                    }}
                     onMouseEnter={(e) => {
-                      e.currentTarget.style.color = 'var(--text-primary)';
-                      e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                      e.currentTarget.style.backgroundColor = 'rgba(239, 68, 68, 0.1)';
+                      e.currentTarget.style.borderColor = 'rgba(239, 68, 68, 0.3)';
+                      e.currentTarget.style.transform = 'translateY(-1px)';
                     }}
                     onMouseLeave={(e) => {
-                      e.currentTarget.style.color = 'var(--text-secondary)';
-                      e.currentTarget.style.backgroundColor = 'transparent';
+                      e.currentTarget.style.backgroundColor = 'var(--bg-elevated)';
+                      e.currentTarget.style.borderColor = 'var(--border-medium)';
+                      e.currentTarget.style.transform = 'translateY(0)';
                     }}
                   >
-                    {t('cv_editor.leave_without_saving')}
+                    <span className="whitespace-nowrap">{t('cv_editor.leave_without_saving')}</span>
                   </button>
                   <button
                     onClick={handleLeaveSave}
                     disabled={isSavingBeforeLeave}
-                    className="px-4 py-2 text-sm font-medium rounded-lg transition-colors disabled:opacity-50 min-w-[140px]"
+                    className="px-5 py-2.5 text-sm font-medium rounded-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex-shrink-0"
                     style={{
                       backgroundColor: 'var(--color-ladderfox-blue)',
-                      color: '#ffffff'
+                      color: '#ffffff',
+                      boxShadow: '0 2px 8px rgba(59, 130, 246, 0.25)'
+                    }}
+                    onMouseEnter={(e) => {
+                      if (!isSavingBeforeLeave) {
+                        e.currentTarget.style.backgroundColor = '#2563eb';
+                        e.currentTarget.style.transform = 'translateY(-1px)';
+                        e.currentTarget.style.boxShadow = '0 4px 12px rgba(59, 130, 246, 0.35)';
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (!isSavingBeforeLeave) {
+                        e.currentTarget.style.backgroundColor = 'var(--color-ladderfox-blue)';
+                        e.currentTarget.style.transform = 'translateY(0)';
+                        e.currentTarget.style.boxShadow = '0 2px 8px rgba(59, 130, 246, 0.25)';
+                      }
                     }}
                   >
-                    {isSavingBeforeLeave ? t('pricing.processing') : t('cv_editor.save_continue')}
+                    <span className="whitespace-nowrap">{isSavingBeforeLeave ? t('pricing.processing') : t('cv_editor.save_continue')}</span>
                   </button>
                 </div>
               </div>
