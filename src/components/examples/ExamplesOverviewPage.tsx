@@ -322,7 +322,7 @@ export default function ExamplesOverviewPage({ type, language }: ExamplesOvervie
       <div className="pt-14">
         {/* Hero Section */}
         <div className="py-16" style={{ backgroundColor: 'var(--bg-secondary)' }}>
-          <div className="max-w-6xl mx-auto px-4">
+          <div className="max-w-7xl mx-auto px-4">
             <div className="flex items-center gap-2 mb-4" style={{ color: 'var(--text-tertiary)' }}>
               <Link href={`/${segments.examples}`} className="hover:opacity-80 transition-opacity">
                 {t('examples.breadcrumb.examples') || 'Examples'}
@@ -341,7 +341,7 @@ export default function ExamplesOverviewPage({ type, language }: ExamplesOvervie
           </div>
         </div>
         
-        <div className="max-w-6xl mx-auto px-4 py-12">
+        <div className="max-w-7xl mx-auto px-4 py-12">
           {/* Introduction Section */}
           <section className="rounded-lg p-8 mb-8" style={{ backgroundColor: 'var(--bg-elevated)', border: '1px solid var(--border-subtle)' }}>
             <h2 className="text-2xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>
