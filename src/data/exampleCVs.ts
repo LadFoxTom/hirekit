@@ -587,7 +587,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
           current: true,
           achievements: [
             'Leiding aan keuken team van 8+ koks met focus op kwaliteit en efficiëntie',
-            'Ontwikkeling van seizoensmenu\'s met focus op lokale ingrediënten en duurzaamheid',
+            "Ontwikkeling van seizoensmenu's met focus op lokale ingrediënten en duurzaamheid",
             'Kostenbeheer resulterend in 20% verbetering in food cost percentage',
             'Training en ontwikkeling van junior koks in culinaire technieken',
             'Gastentevredenheid van 4.5+ sterren door consistente kwaliteit en innovatie'

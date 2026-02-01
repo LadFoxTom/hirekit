@@ -1131,6 +1131,8 @@ export default function HomePage() {
   const [currentCVId, setCurrentCVId] = useState<string | null>(null);
   
   // Letter State
+  const [savedLetters, setSavedLetters] = useState<SavedCV[]>([]);
+  const [currentLetterId, setCurrentLetterId] = useState<string | null>(null);
   const [letterData, setLetterData] = useState<LetterData>({
     opening: 'Dear Hiring Manager,',
     body: '',
@@ -1379,6 +1381,24 @@ export default function HomePage() {
     }
   }, [isAuthenticated]);
 
+  // Fetch saved Letters
+  useEffect(() => {
+    if (isAuthenticated) {
+      fetch('/api/letter')
+        .then(res => res.json())
+        .then(data => {
+          if (data.letters) {
+            setSavedLetters(data.letters.slice(0, 5).map((letter: any) => ({
+              id: letter.id,
+              title: letter.title || 'Untitled Letter',
+              updatedAt: formatRelativeTime(new Date(letter.updatedAt)),
+            })));
+          }
+        })
+        .catch(err => console.error('Failed to fetch letters:', err));
+    }
+  }, [isAuthenticated]);
+
   // Load a saved CV
   const handleLoadCV = async (cvId: string) => {
     try {
@@ -1436,6 +1456,28 @@ export default function HomePage() {
     setIsSidebarOpen(false);
   };
 
+  // Load a saved Letter
+  const handleLoadLetter = async (letterId: string) => {
+    try {
+      const res = await fetch(`/api/letter/${letterId}`);
+      const data = await res.json();
+      if (data.letter?.content) {
+        const content = typeof data.letter.content === 'string' 
+          ? JSON.parse(data.letter.content) 
+          : data.letter.content;
+        
+        // Restore letter data
+        setLetterData(content);
+        setCurrentLetterId(letterId);
+        setArtifactType('letter');
+        toast.success(t('letter_builder.messages.letter_saved') || 'Letter loaded');
+      }
+    } catch (err) {
+      toast.error(t('letter_builder.messages.save_error') || 'Failed to load letter');
+    }
+    setIsSidebarOpen(false);
+  };
+
   // Save current CV
   const handleSaveCV = async (): Promise<boolean> => {
     if (!isAuthenticated) {
@@ -1486,6 +1528,58 @@ export default function HomePage() {
     }
   };
 
+  // Save current Letter
+  const handleSaveLetter = async (): Promise<boolean> => {
+    if (!isAuthenticated) {
+      toast.error(t('toast.please_sign_in'));
+      return false;
+    }
+    
+    try {
+      const endpoint = currentLetterId ? `/api/letter/${currentLetterId}` : '/api/letter';
+      const method = currentLetterId ? 'PUT' : 'POST';
+      
+      const requestBody = currentLetterId 
+        ? letterData // For PUT, just send the content
+        : { // For POST, send title and content
+            title: letterData.recipientName && letterData.companyName 
+              ? `Letter to ${letterData.recipientName} at ${letterData.companyName}` 
+              : letterData.companyName 
+              ? `Letter to ${letterData.companyName}`
+              : 'My Letter',
+            content: letterData,
+          };
+      
+      const res = await fetch(endpoint, {
+        method,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(requestBody),
+      });
+      
+      const data = await res.json();
+      if (data.letter?.id) {
+        setCurrentLetterId(data.letter.id);
+        toast.success(t('letter_builder.messages.letter_saved') || 'Letter saved!');
+        markAsSaved();
+        clearDraft();
+        // Refresh saved letters list
+        const lettersRes = await fetch('/api/letter');
+        const lettersData = await lettersRes.json();
+        if (lettersData.letters) {
+          setSavedLetters(lettersData.letters.slice(0, 5).map((letter: any) => ({
+            id: letter.id,
+            title: letter.title || 'Untitled Letter',
+            updatedAt: formatRelativeTime(new Date(letter.updatedAt)),
+          })));
+        }
+      }
+      return true;
+    } catch (err) {
+      toast.error(t('letter_builder.messages.save_error') || 'Failed to save letter');
+      return false;
+    }
+  };
+
   const handleLeaveWithoutSaving = useCallback(() => {
     setShowLeavePrompt(false);
     clearDraft();
@@ -1503,14 +1597,21 @@ export default function HomePage() {
     persistDraft();
     let savedOk = true;
     if (isAuthenticated) {
-      savedOk = await handleSaveCV();
+      // Save CV if there are CV changes
+      if (cvData.fullName || (cvData.experience && cvData.experience.length > 0) || (cvData.education && cvData.education.length > 0)) {
+        savedOk = await handleSaveCV();
+      }
+      // Save Letter if there are letter changes
+      if (savedOk && letterData.body) {
+        savedOk = await handleSaveLetter();
+      }
     }
     setIsSavingBeforeLeave(false);
     if (!savedOk) return;
     setShowLeavePrompt(false);
     pendingLeaveAction.current?.();
     pendingLeaveAction.current = null;
-  }, [handleSaveCV, isAuthenticated, persistDraft]);
+  }, [handleSaveCV, handleSaveLetter, isAuthenticated, persistDraft, cvData, letterData]);
 
   // Auto-resize textarea
   const handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -3109,6 +3210,55 @@ export default function HomePage() {
                   </div>
                 </div>
 
+                {/* Saved Letters */}
+                <div className="mb-6">
+                  <h3 className="text-xs font-medium uppercase tracking-wider mb-3 px-2" style={{ color: 'var(--text-tertiary)' }}>
+                    {t('nav.my_letters') || 'My Letters'}
+                  </h3>
+                  <div 
+                    className="space-y-1 overflow-y-auto"
+                    style={{ 
+                      maxHeight: 'calc(100vh - 400px)',
+                      scrollbarWidth: 'thin',
+                      scrollbarColor: 'var(--border-subtle) transparent',
+                    }}
+                  >
+                    {savedLetters.length > 0 ? (
+                      savedLetters.map((letter) => (
+                        <button
+                          key={letter.id}
+                          onClick={() => handleLoadLetter(letter.id)}
+                          className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors text-left"
+                          style={{
+                            backgroundColor: currentLetterId === letter.id ? 'var(--bg-hover)' : 'transparent',
+                            color: 'var(--text-primary)',
+                          }}
+                          onMouseEnter={(e) => {
+                            if (currentLetterId !== letter.id) {
+                              e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                            }
+                          }}
+                          onMouseLeave={(e) => {
+                            if (currentLetterId !== letter.id) {
+                              e.currentTarget.style.backgroundColor = 'transparent';
+                            }
+                          }}
+                        >
+                          <FiMail size={14} className="text-green-400 flex-shrink-0" />
+                          <div className="flex-1 min-w-0">
+                            <p className="text-sm truncate">{letter.title}</p>
+                            <p className="text-xs" style={{ color: 'var(--text-tertiary)' }}>{letter.updatedAt}</p>
+                          </div>
+                        </button>
+                      ))
+                    ) : (
+                      <p className="text-xs px-3 py-2" style={{ color: 'var(--text-tertiary)' }}>
+                        {isAuthenticated ? 'No saved letters yet' : 'Sign in to see your letters'}
+                      </p>
+                    )}
+                  </div>
+                </div>
+
                 {/* Quick Actions */}
                 <div>
                   <h3 className="text-xs font-medium uppercase tracking-wider mb-3 px-2" style={{ color: 'var(--text-tertiary)' }}>
@@ -4680,6 +4830,14 @@ export default function HomePage() {
                         >
                           <FiCopy size={14} />
                           <span className="hidden sm:inline">Copy</span>
+                        </button>
+                        <button
+                          onClick={handleSaveLetter}
+                          className="flex items-center gap-1.5 px-3 py-1.5 text-sm text-gray-300 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
+                          title="Save Letter"
+                        >
+                          <FiCheck size={14} />
+                          <span className="hidden sm:inline">Save</span>
                         </button>
                         <button
                           onClick={() => {
