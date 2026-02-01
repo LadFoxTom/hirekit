@@ -223,6 +223,8 @@
   "dashboard.cv_duplicated": "CV duplicated",
   "dashboard.letter_duplicated": "Letter duplicated",
   "dashboard.failed_to_duplicate": "Failed to duplicate",
+  "dashboard.document_type.cv": "CV",
+  "dashboard.document_type.letter": "Letter",
   
   "faq.title": "Frequently Asked Questions",
   "faq.page.hero.title": "Help & Support",
@@ -624,6 +626,7 @@
   "letter_builder.tabs.upload": "Upload",
   "letter_builder.tabs.editor": "Editor",
   "letter_builder.tabs.analysis": "Analysis",
+  "editor.letter_editor": "Letter Editor",
   "letter_builder.welcome": "Welcome to the Motivational Letter Builder! I'll help you create a compelling letter that showcases your qualifications and enthusiasm for the position. Let's start by gathering some information about the recipient and position.",
   "letter_builder.generate_letter": "Generate Letter",
   "letter_builder.edit_letter": "Edit Letter",

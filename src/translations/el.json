@@ -213,6 +213,8 @@
   "dashboard.cv_duplicated": "Το CV αντιγράφηκε",
   "dashboard.letter_duplicated": "Η επιστολή αντιγράφηκε",
   "dashboard.failed_to_duplicate": "Αποτυχία αντιγραφής",
+  "dashboard.document_type.cv": "CV",
+  "dashboard.document_type.letter": "Επιστολή",
   "faq.title": "Συχνές Ερωτήσεις",
   "faq.page.hero.title": "Βοήθεια & Υποστήριξη",
   "faq.page.hero.subtitle": "Βρείτε απαντήσεις σε συχνές ερωτήσεις σχετικά με το LadderFox. Δεν βρίσκετε αυτό που ψάχνετε; Επικοινωνήστε με την ομάδα υποστήριξής μας.",

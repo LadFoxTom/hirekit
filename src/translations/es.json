@@ -125,6 +125,8 @@
   "dashboard.cv_duplicated": "CV duplicado",
   "dashboard.letter_duplicated": "Carta duplicada",
   "dashboard.failed_to_duplicate": "Error al duplicar",
+  "dashboard.document_type.cv": "CV",
+  "dashboard.document_type.letter": "Carta",
   "auth.welcome_back": "Bienvenido de nuevo",
   "builder.controls.addPhoto": "Agregar Foto",
   "builder.controls.clear": "Limpiar CV",

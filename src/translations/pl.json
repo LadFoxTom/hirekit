@@ -213,6 +213,8 @@
   "dashboard.cv_duplicated": "CV zduplikowane",
   "dashboard.letter_duplicated": "List zduplikowany",
   "dashboard.failed_to_duplicate": "Nie udało się zduplikować",
+  "dashboard.document_type.cv": "CV",
+  "dashboard.document_type.letter": "List",
   "faq.title": "Często zadawane pytania",
   "faq.page.hero.title": "Pomoc i Wsparcie",
   "faq.page.hero.subtitle": "Znajdź odpowiedzi na najczęstsze pytania dotyczące LadderFox. Nie możesz znaleźć tego, czego szukasz? Skontaktuj się z naszym zespołem wsparcia.",

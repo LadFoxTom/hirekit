@@ -213,6 +213,8 @@
   "dashboard.cv_duplicated": "Životopis dupliciran",
   "dashboard.letter_duplicated": "Pismo duplicirano",
   "dashboard.failed_to_duplicate": "Neuspješno dupliciranje",
+  "dashboard.document_type.cv": "CV",
+  "dashboard.document_type.letter": "Pismo",
   "faq.title": "Često postavljana pitanja",
   "faq.page.hero.title": "Help & Support",
   "faq.page.hero.subtitle": "Find answers to common questions about LadderFox. Can't find what you're looking for? Contact our support team.",

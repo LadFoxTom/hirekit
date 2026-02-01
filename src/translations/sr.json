@@ -213,6 +213,8 @@
   "dashboard.cv_duplicated": "CV duplicated",
   "dashboard.letter_duplicated": "Letter duplicated",
   "dashboard.failed_to_duplicate": "Failed to duplicate",
+  "dashboard.document_type.cv": "CV",
+  "dashboard.document_type.letter": "Pismo",
   "faq.title": "Frequently Asked Questions",
   "faq.page.hero.title": "Help & Support",
   "faq.page.hero.subtitle": "Find answers to common questions about LadderFox. Can't find what you're looking for? Contact our support team.",

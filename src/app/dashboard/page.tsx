@@ -302,6 +302,8 @@ export default function DashboardPage() {
 
   const handleEditLetter = (letter: SavedLetter) => {
     localStorage.setItem('letterData', JSON.stringify(letter.content))
+    localStorage.setItem('saved_letter_id', letter.id)
+    localStorage.setItem('activateSplitscreen', 'true')
     localStorage.setItem('preferredArtifactType', 'letter')
     router.push('/')
   }
@@ -1184,8 +1186,11 @@ export default function DashboardPage() {
                           <div className={viewMode === 'grid' ? 'mb-4' : 'flex-1'}>
                             <div className="flex items-center gap-2 mb-1">
                               <h3 className="font-medium truncate" style={{ color: 'var(--text-primary)' }}>{item.title}</h3>
+                              {item.type === 'cv' && (
+                                <span className="text-xs bg-blue-500/10 text-blue-400 px-2 py-0.5 rounded-full">{t('dashboard.document_type.cv')}</span>
+                              )}
                               {item.type === 'letter' && (
-                                <span className="text-xs bg-green-500/10 text-green-400 px-2 py-0.5 rounded-full">Letter</span>
+                                <span className="text-xs bg-green-500/10 text-green-400 px-2 py-0.5 rounded-full">{t('dashboard.document_type.letter')}</span>
                               )}
                               {item.isFavorite && <FiStar className="text-yellow-400" size={14} />}
                             </div>

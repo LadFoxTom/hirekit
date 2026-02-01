@@ -213,6 +213,8 @@
   "dashboard.cv_duplicated": "Önéletrajz duplikálva",
   "dashboard.letter_duplicated": "Levél duplikálva",
   "dashboard.failed_to_duplicate": "A duplikálás sikertelen",
+  "dashboard.document_type.cv": "CV",
+  "dashboard.document_type.letter": "Levél",
   "faq.title": "Gyakran ismételt kérdések",
   "faq.page.hero.title": "Súgó és támogatás",
   "faq.page.hero.subtitle": "Találd meg a válaszokat a LadderFox-ról szóló gyakori kérdésekre. Nem találod, amit keresel? Lépj kapcsolatba a támogatási csapatunkkal.",

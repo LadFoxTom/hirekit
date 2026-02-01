@@ -213,6 +213,8 @@
   "dashboard.cv_duplicated": "CV monistettu",
   "dashboard.letter_duplicated": "Kirje monistettu",
   "dashboard.failed_to_duplicate": "Monistaminen epäonnistui",
+  "dashboard.document_type.cv": "CV",
+  "dashboard.document_type.letter": "Kirje",
   "faq.title": "Usein kysytyt kysymykset",
   "faq.page.hero.title": "Ohjeet ja tuki",
   "faq.page.hero.subtitle": "Löydä vastauksia yleisiin LadderFox-kysymyksiin. Etkö löydä etsimääsi? Ota yhteyttä tukitiimiimme.",

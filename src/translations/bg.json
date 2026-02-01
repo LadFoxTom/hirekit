@@ -213,6 +213,8 @@
   "dashboard.cv_duplicated": "CV е дублирано",
   "dashboard.letter_duplicated": "Писмото е дублирано",
   "dashboard.failed_to_duplicate": "Неуспешно дублиране",
+  "dashboard.document_type.cv": "CV",
+  "dashboard.document_type.letter": "Писмо",
   "faq.title": "Често задавани въпроси",
   "faq.page.hero.title": "Помощ и поддръжка",
   "faq.page.hero.subtitle": "Намерете отговори на често задавани въпроси за LadderFox. Не можете да намерите това, което търсите? Свържете се с нашия екип за поддръжка.",

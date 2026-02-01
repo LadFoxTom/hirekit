@@ -213,6 +213,8 @@
   "dashboard.cv_duplicated": "CV duplicat",
   "dashboard.letter_duplicated": "Scrisoare duplicată",
   "dashboard.failed_to_duplicate": "Eroare la duplicare",
+  "dashboard.document_type.cv": "CV",
+  "dashboard.document_type.letter": "Scrisoare",
   "faq.title": "Întrebări frecvente",
   "faq.page.hero.title": "Ajutor și Suport",
   "faq.page.hero.subtitle": "Găsește răspunsuri la întrebările frecvente despre LadderFox. Nu găsești ce cauți? Contactează echipa noastră de suport.",

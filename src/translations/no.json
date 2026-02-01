@@ -213,6 +213,8 @@
   "dashboard.cv_duplicated": "CV duplisert",
   "dashboard.letter_duplicated": "Brev duplisert",
   "dashboard.failed_to_duplicate": "Kunne ikke duplisere",
+  "dashboard.document_type.cv": "CV",
+  "dashboard.document_type.letter": "Brev",
   "faq.title": "Ofte stilte spørsmål",
   "faq.page.hero.title": "Hjelp & Støtte",
   "faq.page.hero.subtitle": "Finn svar på vanlige spørsmål om LadderFox. Finner du ikke det du leter etter? Kontakt vårt støtteteam.",

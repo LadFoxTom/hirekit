@@ -171,7 +171,8 @@ function InlineEditor({
   onLetterSave,
   activeEditorTab,
   setActiveEditorTab,
-  isAuthenticated = false
+  isAuthenticated = false,
+  t
 }: { 
   data: CVData; 
   onSave: (data: CVData) => void;
@@ -180,6 +181,7 @@ function InlineEditor({
   activeEditorTab?: 'cv' | 'letter';
   setActiveEditorTab?: (tab: 'cv' | 'letter') => void;
   isAuthenticated?: boolean;
+  t: (key: string) => string;
 }) {
   const [editingSection, setEditingSection] = useState<string | null>(null);
   const [expandedSections, setExpandedSections] = useState<string[]>(['personal', 'summary']);
@@ -278,7 +280,7 @@ function InlineEditor({
             onMouseLeave={(e) => editorTab !== 'letter' && (e.currentTarget.style.color = 'var(--text-tertiary)')}
           >
             <FiMail size={14} />
-            Letter Editor
+            {t('editor.letter_editor')}
           </button>
         </div>
       )}
@@ -1086,6 +1088,38 @@ export default function HomePage() {
       }
     }
   }, [t]); // Include t for consistency
+
+  // Load Letter from localStorage (when redirected from dashboard) - similar to CV loading
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const savedLetterData = localStorage.getItem('letterData');
+      const savedLetterId = localStorage.getItem('saved_letter_id');
+      
+      if (savedLetterData && savedLetterId) {
+        try {
+          const content = JSON.parse(savedLetterData);
+          
+          // Restore letter data
+          setLetterData(content);
+          
+          setCurrentLetterId(savedLetterId);
+          setIsConversationActive(true);
+          setArtifactType('letter');
+          
+          // Clear localStorage flags after loading
+          localStorage.removeItem('letterData');
+          localStorage.removeItem('saved_letter_id');
+          
+          toast.success(t('toast.letter_loaded') || 'Letter loaded successfully');
+        } catch (err) {
+          console.error('Error loading letter from localStorage:', err);
+          // Clear invalid data
+          localStorage.removeItem('letterData');
+          localStorage.removeItem('saved_letter_id');
+        }
+      }
+    }
+  }, [t]);
 
   // Track Hotjar state changes for SPA navigation
   useEffect(() => {
@@ -2950,14 +2984,15 @@ export default function HomePage() {
                 </div>
 
                 {/* Action Buttons */}
-                <div className="px-6 py-4 flex flex-nowrap items-center gap-3 justify-end" style={{ backgroundColor: 'var(--bg-tertiary)', borderTop: '1px solid var(--border-subtle)' }}>
+                <div className="px-6 py-4 flex flex-nowrap items-stretch gap-3 justify-end" style={{ backgroundColor: 'var(--bg-tertiary)', borderTop: '1px solid var(--border-subtle)' }}>
                   <button
                     onClick={handleLeaveCancel}
-                    className="px-5 py-2.5 text-sm font-medium rounded-lg transition-all duration-200 flex-shrink-0"
+                    className="px-5 py-2.5 text-sm font-medium rounded-lg transition-all duration-200 flex-shrink-0 flex items-center justify-center"
                     style={{ 
                       color: 'var(--text-primary)',
                       backgroundColor: 'var(--bg-elevated)',
-                      border: '1px solid var(--border-medium)'
+                      border: '1px solid var(--border-medium)',
+                      minHeight: '40px'
                     }}
                     onMouseEnter={(e) => {
                       e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
@@ -2974,11 +3009,12 @@ export default function HomePage() {
                   </button>
                   <button
                     onClick={handleLeaveWithoutSaving}
-                    className="px-5 py-2.5 text-sm font-medium rounded-lg transition-all duration-200 flex-shrink-0"
+                    className="px-5 py-2.5 text-sm font-medium rounded-lg transition-all duration-200 flex-shrink-0 flex items-center justify-center"
                     style={{ 
                       color: '#ef4444',
                       backgroundColor: 'var(--bg-elevated)',
-                      border: '1px solid var(--border-medium)'
+                      border: '1px solid var(--border-medium)',
+                      minHeight: '40px'
                     }}
                     onMouseEnter={(e) => {
                       e.currentTarget.style.backgroundColor = 'rgba(239, 68, 68, 0.1)';
@@ -2996,11 +3032,12 @@ export default function HomePage() {
                   <button
                     onClick={handleLeaveSave}
                     disabled={isSavingBeforeLeave}
-                    className="px-5 py-2.5 text-sm font-medium rounded-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex-shrink-0"
+                    className="px-5 py-2.5 text-sm font-medium rounded-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex-shrink-0 flex items-center justify-center"
                     style={{
                       backgroundColor: 'var(--color-ladderfox-blue)',
                       color: '#ffffff',
-                      boxShadow: '0 2px 8px rgba(59, 130, 246, 0.25)'
+                      boxShadow: '0 2px 8px rgba(59, 130, 246, 0.25)',
+                      minHeight: '40px'
                     }}
                     onMouseEnter={(e) => {
                       if (!isSavingBeforeLeave) {
@@ -4669,6 +4706,7 @@ export default function HomePage() {
                           setLetterData(updated);
                           debouncedLetterToast();
                         }}
+                        t={t}
                       />
                     </div>
                   </div>

@@ -125,6 +125,8 @@
   "dashboard.cv_duplicated": "CV dupliziert",
   "dashboard.letter_duplicated": "Brief dupliziert",
   "dashboard.failed_to_duplicate": "Fehler beim Duplizieren",
+  "dashboard.document_type.cv": "CV",
+  "dashboard.document_type.letter": "Brief",
   "auth.welcome_back": "Willkommen zurück",
   "builder.controls.addPhoto": "Foto hinzufügen",
   "builder.controls.clear": "CV löschen",

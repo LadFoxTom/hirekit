@@ -213,6 +213,8 @@
   "dashboard.cv_duplicated": "CV duplikováno",
   "dashboard.letter_duplicated": "Dopis duplikován",
   "dashboard.failed_to_duplicate": "Nepodařilo se duplikovat",
+  "dashboard.document_type.cv": "CV",
+  "dashboard.document_type.letter": "Dopis",
   "faq.title": "Často kladené otázky",
   "faq.page.hero.title": "Nápověda a podpora",
   "faq.page.hero.subtitle": "Najděte odpovědi na běžné otázky o LadderFox. Nemůžete najít to, co hledáte? Kontaktujte náš tým podpory.",
