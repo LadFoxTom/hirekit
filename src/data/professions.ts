@@ -6187,13 +6187,6 @@ export const PROFESSIONS: Profession[] = [
           'Format geeignet für deutsche IT-Unternehmen und Industrie',
           'Demonstriert sowohl technische Fähigkeiten als auch Service-Orientierung'
         ]
-        whyGood: [
-          'Klare Struktur, die technische Kompetenzen hervorhebt',
-          'Betont Kundenservice und Problemlösung',
-          'Zeigt Fortschritt technischer Fähigkeiten und Zertifizierungen',
-          'Demonstriert Fähigkeit, unter Druck zu arbeiten',
-          'ATS-freundliches Format mit IT-Schlüsselwörtern'
-        ]
       },
       it: {
         name: 'Specialista Supporto IT',
@@ -6770,7 +6763,7 @@ export const PROFESSIONS: Profession[] = [
           'Betont Erfahrung mit deutschen Hochschulsystemen',
           'Zeigt Kenntnisse deutscher Forschungsförderung (DFG, ERC)',
           'Demonstriert Compliance mit deutschen Habilitationsanforderungen',
-          'Format geeignet für deutsche Universitäten und Hochschulen'
+          'Format geeignet für deutsche Universitäten und Hochschulen',
           'Zeigt Fortschritt der akademischen Karriere',
           'Demonstriert Engagement für Bildung und Wissenschaft',
           'ATS-freundliches Format mit akademischen Schlüsselwörtern'
@@ -7928,13 +7921,6 @@ export const PROFESSIONS: Profession[] = [
           'Zeigt Kenntnisse deutscher Finanzvorschriften und BaFin',
           'Demonstriert Compliance mit deutschen Qualifikationsanforderungen',
           'Format geeignet für deutsche Banken, Vermögensverwalter und Finanzinstitute'
-        ]
-        whyGood: [
-          'Klare Struktur, die analytische Expertise hervorhebt',
-          'Betont quantitative Fähigkeiten und Leistungen',
-          'Zeigt Fortschritt der Finanzanalyseerfahrung',
-          'Demonstriert Engagement für berufliche Entwicklung',
-          'ATS-freundliches Format mit Finanzschlüsselwörtern'
         ]
       },
       it: {
