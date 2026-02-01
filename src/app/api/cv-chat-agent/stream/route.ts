@@ -1035,7 +1035,7 @@ Return ONLY the JSON object.`;
         letterData = {
           opening: 'Madame, Monsieur,',
           body: `Je souhaite postuler pour ce poste intéressant. Avec mon expérience en tant que ${cvData.title || cvData.professionalHeadline || 'professionnel'}, je serais un atout précieux pour votre équipe.\n\nMon expérience comprend notamment ${cvData.experience?.[0]?.title || 'des postes pertinents'} où j'ai développé des compétences qui correspondent directement à ce rôle. Je suis passionné par la livraison d'excellents résultats et la contribution au succès de l'équipe.\n\nJ'aimerais avoir l'opportunité de discuter de la façon dont mes compétences et mon expérience peuvent bénéficier à votre organisation.`,
-          closing: 'Merci de considérer ma candidature. J'ai hâte de discuter de la façon dont je peux contribuer à votre équipe.',
+          closing: `Merci de considérer ma candidature. J'ai hâte de discuter de la façon dont je peux contribuer à votre équipe.`,
           signature: cvData.fullName || 'Votre Nom',
         };
       } else if (detectedLanguage === 'es') {
