@@ -253,25 +253,29 @@ function InlineEditor({
     <div className="p-4 space-y-3">
       {/* Editor Tab Switcher */}
       {letterData && onLetterSave && (
-        <div className="flex items-center gap-2 mb-4 p-1 bg-white/5 rounded-lg">
+        <div className="flex items-center gap-2 mb-4 p-1 rounded-lg" style={{ backgroundColor: 'var(--bg-secondary)' }}>
           <button
             onClick={() => setEditorTab('cv')}
-            className={`flex-1 flex items-center justify-center gap-2 px-4 py-2 rounded-lg text-sm transition-colors ${
-              editorTab === 'cv' 
-                ? 'bg-white/10 text-white' 
-                : 'text-gray-400 hover:text-white'
-            }`}
+            className="flex-1 flex items-center justify-center gap-2 px-4 py-2 rounded-lg text-sm transition-colors"
+            style={editorTab === 'cv' 
+              ? { backgroundColor: 'var(--bg-tertiary)', color: 'var(--text-primary)' }
+              : { color: 'var(--text-tertiary)' }
+            }
+            onMouseEnter={(e) => editorTab !== 'cv' && (e.currentTarget.style.color = 'var(--text-primary)')}
+            onMouseLeave={(e) => editorTab !== 'cv' && (e.currentTarget.style.color = 'var(--text-tertiary)')}
           >
             <FiFileText size={14} />
-            CV Editor
+            Editor
           </button>
           <button
             onClick={() => setEditorTab('letter')}
-            className={`flex-1 flex items-center justify-center gap-2 px-4 py-2 rounded-lg text-sm transition-colors ${
-              editorTab === 'letter' 
-                ? 'bg-white/10 text-white' 
-                : 'text-gray-400 hover:text-white'
-            }`}
+            className="flex-1 flex items-center justify-center gap-2 px-4 py-2 rounded-lg text-sm transition-colors"
+            style={editorTab === 'letter' 
+              ? { backgroundColor: 'var(--bg-tertiary)', color: 'var(--text-primary)' }
+              : { color: 'var(--text-tertiary)' }
+            }
+            onMouseEnter={(e) => editorTab !== 'letter' && (e.currentTarget.style.color = 'var(--text-primary)')}
+            onMouseLeave={(e) => editorTab !== 'letter' && (e.currentTarget.style.color = 'var(--text-tertiary)')}
           >
             <FiMail size={14} />
             Letter Editor
@@ -283,51 +287,55 @@ function InlineEditor({
       {editorTab === 'letter' && letterData && onLetterSave && (
         <div className="space-y-3">
           {/* Recipient Info */}
-          <div className="bg-[#1a1a1a] border border-white/5 rounded-xl p-4 space-y-3">
-            <h3 className="text-sm font-medium flex items-center gap-2 mb-3">
+          <div className="rounded-xl p-4 space-y-3" style={{ backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border-medium)' }}>
+            <h3 className="text-sm font-medium flex items-center gap-2 mb-3" style={{ color: 'var(--text-heading)' }}>
               <FiUser size={14} className="text-blue-400" />
               Recipient Details
             </h3>
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="text-xs text-gray-500 mb-1 block">Recipient Name</label>
+                <label className="text-xs mb-1 block" style={{ color: 'var(--text-secondary)' }}>Recipient Name</label>
                 <input
                   type="text"
                   value={letterData.recipientName || ''}
                   onChange={(e) => handleLetterChange('recipientName', e.target.value)}
-                  className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500/50"
+                  className="w-full rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500/50"
+                  style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', border: '1px solid var(--border-medium)' }}
                   placeholder="Hiring Manager"
                 />
               </div>
               <div>
-                <label className="text-xs text-gray-500 mb-1 block">Title</label>
+                <label className="text-xs mb-1 block" style={{ color: 'var(--text-secondary)' }}>Title</label>
                 <input
                   type="text"
                   value={letterData.recipientTitle || ''}
                   onChange={(e) => handleLetterChange('recipientTitle', e.target.value)}
-                  className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500/50"
+                  className="w-full rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500/50"
+                  style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', border: '1px solid var(--border-medium)' }}
                   placeholder="HR Director"
                 />
               </div>
             </div>
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="text-xs text-gray-500 mb-1 block">Company Name</label>
+                <label className="text-xs mb-1 block" style={{ color: 'var(--text-secondary)' }}>Company Name</label>
                 <input
                   type="text"
                   value={letterData.companyName || ''}
                   onChange={(e) => handleLetterChange('companyName', e.target.value)}
-                  className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500/50"
+                  className="w-full rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500/50"
+                  style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', border: '1px solid var(--border-medium)' }}
                   placeholder="Acme Corp"
                 />
               </div>
               <div>
-                <label className="text-xs text-gray-500 mb-1 block">Job Title</label>
+                <label className="text-xs mb-1 block" style={{ color: 'var(--text-secondary)' }}>Job Title</label>
                 <input
                   type="text"
                   value={letterData.jobTitle || ''}
                   onChange={(e) => handleLetterChange('jobTitle', e.target.value)}
-                  className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500/50"
+                  className="w-full rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500/50"
+                  style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', border: '1px solid var(--border-medium)' }}
                   placeholder="Software Engineer"
                 />
               </div>
@@ -335,63 +343,67 @@ function InlineEditor({
           </div>
 
           {/* Letter Content */}
-          <div className="bg-[#1a1a1a] border border-white/5 rounded-xl p-4 space-y-3">
-            <h3 className="text-sm font-medium flex items-center gap-2 mb-3">
+          <div className="rounded-xl p-4 space-y-3" style={{ backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border-medium)' }}>
+            <h3 className="text-sm font-medium flex items-center gap-2 mb-3" style={{ color: 'var(--text-heading)' }}>
               <FiMail size={14} className="text-purple-400" />
               Letter Content
             </h3>
             <div>
-              <label className="text-xs text-gray-500 mb-1 block">Opening / Salutation</label>
+              <label className="text-xs mb-1 block" style={{ color: 'var(--text-secondary)' }}>Opening / Salutation</label>
               <input
                 type="text"
                 value={letterData.opening || ''}
                 onChange={(e) => handleLetterChange('opening', e.target.value)}
-                className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500/50"
+                className="w-full rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500/50"
+                style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', border: '1px solid var(--border-medium)' }}
                 placeholder="Dear Hiring Manager,"
               />
             </div>
             <div>
-              <label className="text-xs text-gray-500 mb-1 block">Body</label>
+              <label className="text-xs mb-1 block" style={{ color: 'var(--text-secondary)' }}>Body</label>
               <textarea
                 value={letterData.body || ''}
                 onChange={(e) => handleLetterChange('body', e.target.value)}
                 rows={10}
-                className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500/50 resize-none"
+                className="w-full rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500/50 resize-none"
+                style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', border: '1px solid var(--border-medium)' }}
                 placeholder="I am writing to express my interest in the position..."
               />
-              <p className="text-xs text-gray-500 mt-1">
+              <p className="text-xs mt-1" style={{ color: 'var(--text-tertiary)' }}>
                 {letterData.body?.length || 0} characters • Use double line breaks for new paragraphs
               </p>
             </div>
             <div>
-              <label className="text-xs text-gray-500 mb-1 block">Closing</label>
+              <label className="text-xs mb-1 block" style={{ color: 'var(--text-secondary)' }}>Closing</label>
               <textarea
                 value={letterData.closing || ''}
                 onChange={(e) => handleLetterChange('closing', e.target.value)}
                 rows={2}
-                className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500/50 resize-none"
+                className="w-full rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500/50 resize-none"
+                style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', border: '1px solid var(--border-medium)' }}
                 placeholder="Thank you for considering my application..."
               />
             </div>
             <div>
-              <label className="text-xs text-gray-500 mb-1 block">Signature</label>
+              <label className="text-xs mb-1 block" style={{ color: 'var(--text-secondary)' }}>Signature</label>
               <input
                 type="text"
                 value={letterData.signature || ''}
                 onChange={(e) => handleLetterChange('signature', e.target.value)}
-                className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500/50"
+                className="w-full rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500/50"
+                style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', border: '1px solid var(--border-medium)' }}
                 placeholder="Your Name"
               />
             </div>
           </div>
 
           {/* AI Suggestions */}
-          <div className="bg-gradient-to-r from-purple-500/10 to-blue-500/10 border border-purple-500/20 rounded-xl p-4">
-            <h4 className="text-sm font-medium flex items-center gap-2 mb-2">
+          <div className="bg-gradient-to-r from-purple-500/10 to-blue-500/10 rounded-xl p-4" style={{ border: '1px solid var(--border-medium)' }}>
+            <h4 className="text-sm font-medium flex items-center gap-2 mb-2" style={{ color: 'var(--text-heading)' }}>
               <FiStar size={14} className="text-purple-400" />
               AI Writing Tips
             </h4>
-            <ul className="text-xs text-gray-400 space-y-1">
+            <ul className="text-xs space-y-1" style={{ color: 'var(--text-secondary)' }}>
               <li>• Keep your letter concise (300-400 words ideal)</li>
               <li>• Mention the specific job title and company name</li>
               <li>• Highlight 2-3 relevant achievements from your CV</li>
@@ -405,91 +417,101 @@ function InlineEditor({
       {(editorTab === 'cv' || !letterData) && (
         <>
       {/* Personal Info Section */}
-      <div className="bg-[#1a1a1a] border border-white/5 rounded-xl overflow-hidden">
+      <div className="rounded-xl overflow-hidden" style={{ backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border-medium)' }}>
         <button
           onClick={() => toggleSection('personal')}
-          className="w-full flex items-center justify-between p-4 hover:bg-white/5 transition-colors"
+          className="w-full flex items-center justify-between p-4 transition-colors"
+          style={{ color: 'var(--text-primary)' }}
+          onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--bg-hover)'}
+          onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
         >
           <div className="flex items-center gap-3">
             <FiUser size={16} className="text-blue-400" />
             <span className="font-medium">Personal Information</span>
           </div>
-          <FiChevronRight size={16} className={`text-gray-400 transition-transform ${expandedSections.includes('personal') ? 'rotate-90' : ''}`} />
+          <FiChevronRight size={16} className={`transition-transform ${expandedSections.includes('personal') ? 'rotate-90' : ''}`} style={{ color: 'var(--text-tertiary)' }} />
         </button>
         {expandedSections.includes('personal') && (
-          <div className="p-4 pt-0 space-y-3 border-t border-white/5">
+          <div className="p-4 pt-0 space-y-3" style={{ borderTop: '1px solid var(--border-subtle)' }}>
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="text-xs text-gray-500 mb-1 block">Full Name</label>
+                <label className="text-xs mb-1 block" style={{ color: 'var(--text-secondary)' }}>Full Name</label>
                 <input
                   type="text"
                   value={data.fullName || ''}
                   onChange={(e) => handleFieldChange('fullName', e.target.value)}
-                  className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500/50"
+                  className="w-full rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500/50"
+                  style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', border: '1px solid var(--border-medium)' }}
                   placeholder="John Doe"
                 />
               </div>
               <div>
-                <label className="text-xs text-gray-500 mb-1 block">Job Title</label>
+                <label className="text-xs mb-1 block" style={{ color: 'var(--text-secondary)' }}>Job Title</label>
                 <input
                   type="text"
                   value={data.title || ''}
                   onChange={(e) => handleFieldChange('title', e.target.value)}
-                  className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500/50"
+                  className="w-full rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500/50"
+                  style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', border: '1px solid var(--border-medium)' }}
                   placeholder="Software Engineer"
                 />
               </div>
             </div>
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="text-xs text-gray-500 mb-1 block">Email</label>
+                <label className="text-xs mb-1 block" style={{ color: 'var(--text-secondary)' }}>Email</label>
                 <input
                   type="email"
                   value={data.contact?.email || ''}
                   onChange={(e) => handleFieldChange('email', e.target.value, 'contact')}
-                  className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500/50"
+                  className="w-full rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500/50"
+                  style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', border: '1px solid var(--border-medium)' }}
                   placeholder="john@example.com"
                 />
               </div>
               <div>
-                <label className="text-xs text-gray-500 mb-1 block">Phone</label>
+                <label className="text-xs mb-1 block" style={{ color: 'var(--text-secondary)' }}>Phone</label>
                 <input
                   type="tel"
                   value={data.contact?.phone || ''}
                   onChange={(e) => handleFieldChange('phone', e.target.value, 'contact')}
-                  className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500/50"
+                  className="w-full rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500/50"
+                  style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', border: '1px solid var(--border-medium)' }}
                   placeholder="+1 234 567 890"
                 />
               </div>
             </div>
             <div>
-              <label className="text-xs text-gray-500 mb-1 block">Location</label>
+              <label className="text-xs mb-1 block" style={{ color: 'var(--text-secondary)' }}>Location</label>
               <input
                 type="text"
                 value={data.contact?.location || ''}
                 onChange={(e) => handleFieldChange('location', e.target.value, 'contact')}
-                className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500/50"
+                className="w-full rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500/50"
+                style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', border: '1px solid var(--border-medium)' }}
                 placeholder="New York, NY"
               />
             </div>
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="text-xs text-gray-500 mb-1 block">LinkedIn</label>
+                <label className="text-xs mb-1 block" style={{ color: 'var(--text-secondary)' }}>LinkedIn</label>
                 <input
                   type="text"
                   value={data.social?.linkedin || ''}
                   onChange={(e) => handleFieldChange('linkedin', e.target.value, 'social')}
-                  className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500/50"
+                  className="w-full rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500/50"
+                  style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', border: '1px solid var(--border-medium)' }}
                   placeholder="linkedin.com/in/johndoe"
                 />
               </div>
               <div>
-                <label className="text-xs text-gray-500 mb-1 block">Website</label>
+                <label className="text-xs mb-1 block" style={{ color: 'var(--text-secondary)' }}>Website</label>
                 <input
                   type="text"
                   value={data.social?.website || ''}
                   onChange={(e) => handleFieldChange('website', e.target.value, 'social')}
-                  className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500/50"
+                  className="w-full rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500/50"
+                  style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', border: '1px solid var(--border-medium)' }}
                   placeholder="johndoe.com"
                 />
               </div>
@@ -499,24 +521,28 @@ function InlineEditor({
       </div>
 
       {/* Summary Section */}
-      <div className="bg-[#1a1a1a] border border-white/5 rounded-xl overflow-hidden">
+      <div className="rounded-xl overflow-hidden" style={{ backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border-medium)' }}>
         <button
           onClick={() => toggleSection('summary')}
-          className="w-full flex items-center justify-between p-4 hover:bg-white/5 transition-colors"
+          className="w-full flex items-center justify-between p-4 transition-colors"
+          style={{ color: 'var(--text-primary)' }}
+          onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--bg-hover)'}
+          onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
         >
           <div className="flex items-center gap-3">
             <FiFileText size={16} className="text-purple-400" />
             <span className="font-medium">Professional Summary</span>
           </div>
-          <FiChevronRight size={16} className={`text-gray-400 transition-transform ${expandedSections.includes('summary') ? 'rotate-90' : ''}`} />
+          <FiChevronRight size={16} className={`transition-transform ${expandedSections.includes('summary') ? 'rotate-90' : ''}`} style={{ color: 'var(--text-tertiary)' }} />
         </button>
         {expandedSections.includes('summary') && (
-          <div className="p-4 pt-0 border-t border-white/5">
+          <div className="p-4 pt-0" style={{ borderTop: '1px solid var(--border-subtle)' }}>
             <textarea
               value={data.summary || ''}
               onChange={(e) => handleFieldChange('summary', e.target.value)}
               rows={4}
-              className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500/50 resize-none"
+              className="w-full rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500/50 resize-none"
+              style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', border: '1px solid var(--border-medium)' }}
               placeholder="Brief professional summary..."
             />
           </div>
@@ -524,26 +550,29 @@ function InlineEditor({
       </div>
 
       {/* Experience Section */}
-      <div className="bg-[#1a1a1a] border border-white/5 rounded-xl overflow-hidden">
+      <div className="rounded-xl overflow-hidden" style={{ backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border-medium)' }}>
         <button
           onClick={() => toggleSection('experience')}
-          className="w-full flex items-center justify-between p-4 hover:bg-white/5 transition-colors"
+          className="w-full flex items-center justify-between p-4 transition-colors"
+          style={{ color: 'var(--text-primary)' }}
+          onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--bg-hover)'}
+          onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
         >
           <div className="flex items-center gap-3">
             <FiBriefcase size={16} className="text-green-400" />
             <span className="font-medium">Work Experience</span>
             {data.experience?.length ? (
-              <span className="text-xs text-gray-500">({data.experience.length})</span>
+              <span className="text-xs" style={{ color: 'var(--text-tertiary)' }}>({data.experience.length})</span>
             ) : null}
           </div>
-          <FiChevronRight size={16} className={`text-gray-400 transition-transform ${expandedSections.includes('experience') ? 'rotate-90' : ''}`} />
+          <FiChevronRight size={16} className={`transition-transform ${expandedSections.includes('experience') ? 'rotate-90' : ''}`} style={{ color: 'var(--text-tertiary)' }} />
         </button>
         {expandedSections.includes('experience') && (
-          <div className="p-4 pt-0 space-y-3 border-t border-white/5">
+          <div className="p-4 pt-0 space-y-3" style={{ borderTop: '1px solid var(--border-subtle)' }}>
             {(data.experience || []).map((exp, index) => (
-              <div key={index} className="bg-white/5 rounded-lg p-3 space-y-2">
+              <div key={index} className="rounded-lg p-3 space-y-2" style={{ backgroundColor: 'var(--bg-secondary)' }}>
                 <div className="flex items-center justify-between">
-                  <span className="text-xs text-gray-500">Position {index + 1}</span>
+                  <span className="text-xs" style={{ color: 'var(--text-tertiary)' }}>Position {index + 1}</span>
                   <button
                     onClick={() => removeExperience(index)}
                     className="p-1 text-red-400 hover:bg-red-500/10 rounded transition-colors"
@@ -555,35 +584,48 @@ function InlineEditor({
                   type="text"
                   value={exp.title || ''}
                   onChange={(e) => handleExperienceChange(index, 'title', e.target.value)}
-                  className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500/50"
+                  className="w-full rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500/50"
+                  style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', border: '1px solid var(--border-medium)' }}
                   placeholder="Job Title"
                 />
                 <input
                   type="text"
                   value={exp.company || ''}
                   onChange={(e) => handleExperienceChange(index, 'company', e.target.value)}
-                  className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500/50"
+                  className="w-full rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500/50"
+                  style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', border: '1px solid var(--border-medium)' }}
                   placeholder="Company Name"
                 />
                 <input
                   type="text"
                   value={exp.dates || ''}
                   onChange={(e) => handleExperienceChange(index, 'dates', e.target.value)}
-                  className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500/50"
+                  className="w-full rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500/50"
+                  style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', border: '1px solid var(--border-medium)' }}
                   placeholder="Jan 2020 - Present"
                 />
                 <textarea
                   value={Array.isArray(exp.content) ? exp.content.join('\n') : exp.content || ''}
                   onChange={(e) => handleExperienceChange(index, 'content', e.target.value.split('\n').filter(Boolean))}
                   rows={3}
-                  className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500/50 resize-none"
+                  className="w-full rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500/50 resize-none"
+                  style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', border: '1px solid var(--border-medium)' }}
                   placeholder="• Key achievement 1&#10;• Key achievement 2"
                 />
               </div>
             ))}
             <button
               onClick={addExperience}
-              className="w-full flex items-center justify-center gap-2 py-2 bg-white/5 hover:bg-white/10 border border-dashed border-white/10 rounded-lg text-sm text-gray-400 hover:text-white transition-colors"
+              className="w-full flex items-center justify-center gap-2 py-2 border border-dashed rounded-lg text-sm transition-colors"
+              style={{ backgroundColor: 'var(--bg-secondary)', color: 'var(--text-tertiary)', borderColor: 'var(--border-medium)' }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = 'var(--bg-tertiary)';
+                e.currentTarget.style.color = 'var(--text-primary)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'var(--bg-secondary)';
+                e.currentTarget.style.color = 'var(--text-tertiary)';
+              }}
             >
               <FiPlus size={14} />
               Add Experience
@@ -593,26 +635,29 @@ function InlineEditor({
       </div>
 
       {/* Education Section */}
-      <div className="bg-[#1a1a1a] border border-white/5 rounded-xl overflow-hidden">
+      <div className="rounded-xl overflow-hidden" style={{ backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border-medium)' }}>
         <button
           onClick={() => toggleSection('education')}
-          className="w-full flex items-center justify-between p-4 hover:bg-white/5 transition-colors"
+          className="w-full flex items-center justify-between p-4 transition-colors"
+          style={{ color: 'var(--text-primary)' }}
+          onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--bg-hover)'}
+          onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
         >
           <div className="flex items-center gap-3">
             <FiStar size={16} className="text-yellow-400" />
             <span className="font-medium">Education</span>
             {data.education?.length ? (
-              <span className="text-xs text-gray-500">({data.education.length})</span>
+              <span className="text-xs" style={{ color: 'var(--text-tertiary)' }}>({data.education.length})</span>
             ) : null}
           </div>
-          <FiChevronRight size={16} className={`text-gray-400 transition-transform ${expandedSections.includes('education') ? 'rotate-90' : ''}`} />
+          <FiChevronRight size={16} className={`transition-transform ${expandedSections.includes('education') ? 'rotate-90' : ''}`} style={{ color: 'var(--text-tertiary)' }} />
         </button>
         {expandedSections.includes('education') && (
-          <div className="p-4 pt-0 space-y-3 border-t border-white/5">
+          <div className="p-4 pt-0 space-y-3" style={{ borderTop: '1px solid var(--border-subtle)' }}>
             {(data.education || []).map((edu, index) => (
-              <div key={index} className="bg-white/5 rounded-lg p-3 space-y-2">
+              <div key={index} className="rounded-lg p-3 space-y-2" style={{ backgroundColor: 'var(--bg-secondary)' }}>
                 <div className="flex items-center justify-between">
-                  <span className="text-xs text-gray-500">Education {index + 1}</span>
+                  <span className="text-xs" style={{ color: 'var(--text-tertiary)' }}>Education {index + 1}</span>
                   <button
                     onClick={() => removeEducation(index)}
                     className="p-1 text-red-400 hover:bg-red-500/10 rounded transition-colors"
@@ -624,35 +669,48 @@ function InlineEditor({
                   type="text"
                   value={edu.degree || ''}
                   onChange={(e) => handleEducationChange(index, 'degree', e.target.value)}
-                  className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500/50"
+                  className="w-full rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500/50"
+                  style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', border: '1px solid var(--border-medium)' }}
                   placeholder="Degree (e.g., Bachelor of Science)"
                 />
                 <input
                   type="text"
                   value={edu.institution || ''}
                   onChange={(e) => handleEducationChange(index, 'institution', e.target.value)}
-                  className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500/50"
+                  className="w-full rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500/50"
+                  style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', border: '1px solid var(--border-medium)' }}
                   placeholder="Institution Name"
                 />
                 <input
                   type="text"
                   value={edu.field || ''}
                   onChange={(e) => handleEducationChange(index, 'field', e.target.value)}
-                  className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500/50"
+                  className="w-full rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500/50"
+                  style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', border: '1px solid var(--border-medium)' }}
                   placeholder="Field of Study"
                 />
                 <input
                   type="text"
                   value={edu.dates || ''}
                   onChange={(e) => handleEducationChange(index, 'dates', e.target.value)}
-                  className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500/50"
+                  className="w-full rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500/50"
+                  style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', border: '1px solid var(--border-medium)' }}
                   placeholder="2016 - 2020"
                 />
               </div>
             ))}
             <button
               onClick={addEducation}
-              className="w-full flex items-center justify-center gap-2 py-2 bg-white/5 hover:bg-white/10 border border-dashed border-white/10 rounded-lg text-sm text-gray-400 hover:text-white transition-colors"
+              className="w-full flex items-center justify-center gap-2 py-2 border border-dashed rounded-lg text-sm transition-colors"
+              style={{ backgroundColor: 'var(--bg-secondary)', color: 'var(--text-tertiary)', borderColor: 'var(--border-medium)' }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = 'var(--bg-tertiary)';
+                e.currentTarget.style.color = 'var(--text-primary)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'var(--bg-secondary)';
+                e.currentTarget.style.color = 'var(--text-tertiary)';
+              }}
             >
               <FiPlus size={14} />
               Add Education
@@ -662,19 +720,22 @@ function InlineEditor({
       </div>
 
       {/* Skills Section */}
-      <div className="bg-[#1a1a1a] border border-white/5 rounded-xl overflow-hidden">
+      <div className="rounded-xl overflow-hidden" style={{ backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border-medium)' }}>
         <button
           onClick={() => toggleSection('skills')}
-          className="w-full flex items-center justify-between p-4 hover:bg-white/5 transition-colors"
+          className="w-full flex items-center justify-between p-4 transition-colors"
+          style={{ color: 'var(--text-primary)' }}
+          onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--bg-hover)'}
+          onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
         >
           <div className="flex items-center gap-3">
             <FiEdit3 size={16} className="text-cyan-400" />
             <span className="font-medium">Skills</span>
           </div>
-          <FiChevronRight size={16} className={`text-gray-400 transition-transform ${expandedSections.includes('skills') ? 'rotate-90' : ''}`} />
+          <FiChevronRight size={16} className={`transition-transform ${expandedSections.includes('skills') ? 'rotate-90' : ''}`} style={{ color: 'var(--text-tertiary)' }} />
         </button>
         {expandedSections.includes('skills') && (
-          <div className="p-4 pt-0 border-t border-white/5">
+          <div className="p-4 pt-0" style={{ borderTop: '1px solid var(--border-subtle)' }}>
             <textarea
               value={
                 Array.isArray(data.skills) 
@@ -690,28 +751,32 @@ function InlineEditor({
               }
               onChange={(e) => handleFieldChange('skills', e.target.value.split(',').map(s => s.trim()).filter(Boolean))}
               rows={3}
-              className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500/50 resize-none"
+              className="w-full rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500/50 resize-none"
+              style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', border: '1px solid var(--border-medium)' }}
               placeholder="JavaScript, TypeScript, React, Node.js, Python..."
             />
-            <p className="text-xs text-gray-500 mt-2">Separate skills with commas</p>
+            <p className="text-xs mt-2" style={{ color: 'var(--text-tertiary)' }}>Separate skills with commas</p>
           </div>
         )}
       </div>
 
       {/* Languages Section */}
-      <div className="bg-[#1a1a1a] border border-white/5 rounded-xl overflow-hidden">
+      <div className="rounded-xl overflow-hidden" style={{ backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border-medium)' }}>
         <button
           onClick={() => toggleSection('languages')}
-          className="w-full flex items-center justify-between p-4 hover:bg-white/5 transition-colors"
+          className="w-full flex items-center justify-between p-4 transition-colors"
+          style={{ color: 'var(--text-primary)' }}
+          onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--bg-hover)'}
+          onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
         >
           <div className="flex items-center gap-3">
             <FiFolder size={16} className="text-orange-400" />
             <span className="font-medium">Languages</span>
           </div>
-          <FiChevronRight size={16} className={`text-gray-400 transition-transform ${expandedSections.includes('languages') ? 'rotate-90' : ''}`} />
+          <FiChevronRight size={16} className={`transition-transform ${expandedSections.includes('languages') ? 'rotate-90' : ''}`} style={{ color: 'var(--text-tertiary)' }} />
         </button>
         {expandedSections.includes('languages') && (
-          <div className="p-4 pt-0 border-t border-white/5">
+          <div className="p-4 pt-0" style={{ borderTop: '1px solid var(--border-subtle)' }}>
             <textarea
               value={
                 Array.isArray(data.languages) 
@@ -729,36 +794,41 @@ function InlineEditor({
               }
               onChange={(e) => handleFieldChange('languages', e.target.value.split(',').map(s => s.trim()).filter(Boolean))}
               rows={2}
-              className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500/50 resize-none"
+              className="w-full rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500/50 resize-none"
+              style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', border: '1px solid var(--border-medium)' }}
               placeholder="English (Native), Spanish (Fluent), French (Basic)..."
             />
-            <p className="text-xs text-gray-500 mt-2">Separate languages with commas</p>
+            <p className="text-xs mt-2" style={{ color: 'var(--text-tertiary)' }}>Separate languages with commas</p>
           </div>
         )}
       </div>
 
       {/* Hobbies Section */}
-      <div className="bg-[#1a1a1a] border border-white/5 rounded-xl overflow-hidden">
+      <div className="rounded-xl overflow-hidden" style={{ backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border-medium)' }}>
         <button
           onClick={() => toggleSection('hobbies')}
-          className="w-full flex items-center justify-between p-4 hover:bg-white/5 transition-colors"
+          className="w-full flex items-center justify-between p-4 transition-colors"
+          style={{ color: 'var(--text-primary)' }}
+          onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--bg-hover)'}
+          onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
         >
           <div className="flex items-center gap-3">
             <FiClock size={16} className="text-pink-400" />
             <span className="font-medium">Hobbies & Interests</span>
           </div>
-          <FiChevronRight size={16} className={`text-gray-400 transition-transform ${expandedSections.includes('hobbies') ? 'rotate-90' : ''}`} />
+          <FiChevronRight size={16} className={`transition-transform ${expandedSections.includes('hobbies') ? 'rotate-90' : ''}`} style={{ color: 'var(--text-tertiary)' }} />
         </button>
         {expandedSections.includes('hobbies') && (
-          <div className="p-4 pt-0 border-t border-white/5">
+          <div className="p-4 pt-0" style={{ borderTop: '1px solid var(--border-subtle)' }}>
             <textarea
               value={Array.isArray(data.hobbies) ? data.hobbies.join(', ') : data.hobbies || ''}
               onChange={(e) => handleFieldChange('hobbies', e.target.value.split(',').map(s => s.trim()).filter(Boolean))}
               rows={2}
-              className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500/50 resize-none"
+              className="w-full rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500/50 resize-none"
+              style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', border: '1px solid var(--border-medium)' }}
               placeholder="Photography, Hiking, Reading, Chess..."
             />
-            <p className="text-xs text-gray-500 mt-2">Separate hobbies with commas</p>
+            <p className="text-xs mt-2" style={{ color: 'var(--text-tertiary)' }}>Separate hobbies with commas</p>
           </div>
         )}
       </div>
