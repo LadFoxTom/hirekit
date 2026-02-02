@@ -32,7 +32,7 @@ export default function PricingPage() {
   const { t, language, setLanguage, availableLanguages } = useLocale()
   
   // Fetch subscription directly from API to get latest data
-  const [subscription, setSubscription] = useState(authSubscription)
+  const [subscription, setSubscription] = useState<{ plan: string; status: string; currentPeriodEnd?: string; cancelAtPeriodEnd?: boolean } | null>(authSubscription || null)
   const [subscriptionLoading, setSubscriptionLoading] = useState(false)
   
   useEffect(() => {
