@@ -1138,7 +1138,7 @@ export default function PricingPage() {
                     <div className="flex items-baseline gap-1">
                       <span className="text-4xl font-bold" style={{ color: 'var(--text-primary)' }}>{currencySymbol}{getPriceForInterval(billingInterval)}</span>
                       <span style={{ color: 'var(--text-secondary)' }}>
-                        {billingInterval === 'monthly' ? ' trial' : billingInterval === 'quarterly' ? ' trial' : ' trial'}
+                        {' ' + t('pricing.trial')}
                       </span>
                     </div>
                     <div className="mt-1 space-y-0.5">
@@ -1152,8 +1152,12 @@ export default function PricingPage() {
                         {billingInterval === 'monthly' 
                           ? t('pricing.trial_auto_renew')
                           : billingInterval === 'quarterly'
-                          ? `After trial, automatically renews to ${currencySymbol}${getMonthlyPrice(billingInterval)}/month (${currencySymbol}${(parseFloat(getMonthlyPrice(billingInterval)) * 3).toFixed(2)} per quarter)`
-                          : `After trial, automatically renews to ${currencySymbol}${getMonthlyPrice(billingInterval)}/month (${currencySymbol}${(parseFloat(getMonthlyPrice(billingInterval)) * 12).toFixed(2)} per year)`
+                          ? t('pricing.trial_auto_renew_quarterly')
+                              .replace('{monthlyPrice}', currencySymbol + getMonthlyPrice(billingInterval))
+                              .replace('{quarterlyPrice}', currencySymbol + (parseFloat(getMonthlyPrice(billingInterval)) * 3).toFixed(2))
+                          : t('pricing.trial_auto_renew_yearly')
+                              .replace('{monthlyPrice}', currencySymbol + getMonthlyPrice(billingInterval))
+                              .replace('{yearlyPrice}', currencySymbol + (parseFloat(getMonthlyPrice(billingInterval)) * 12).toFixed(2))
                         }
                       </p>
                     </div>
