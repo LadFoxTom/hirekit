@@ -72,6 +72,11 @@ interface LetterData {
   closing?: string;
   signature?: string;
   template?: string;
+  senderName?: string;
+  senderTitle?: string;
+  senderAddress?: string;
+  senderEmail?: string;
+  senderPhone?: string;
   layout?: {
     fontFamily?: string;
     fontSize?: string;
@@ -347,22 +352,22 @@ function InlineEditor({
                 <label className="text-xs mb-1 block" style={{ color: 'var(--text-secondary)' }}>Full Name</label>
                 <input
                   type="text"
-                  value={letterData.senderName || cvData.fullName || ''}
+                  value={letterData.senderName || data.fullName || ''}
                   onChange={(e) => handleLetterChange('senderName', e.target.value)}
                   className="w-full rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500/50"
                   style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', border: '1px solid var(--border-medium)' }}
-                  placeholder={cvData.fullName || t('letter.sender_name')}
+                  placeholder={data.fullName || 'Your full name'}
                 />
               </div>
               <div>
                 <label className="text-xs mb-1 block" style={{ color: 'var(--text-secondary)' }}>Job Title</label>
                 <input
                   type="text"
-                  value={letterData.senderTitle || cvData.professionalHeadline || ''}
+                  value={letterData.senderTitle || data.professionalHeadline || ''}
                   onChange={(e) => handleLetterChange('senderTitle', e.target.value)}
                   className="w-full rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500/50"
                   style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', border: '1px solid var(--border-medium)' }}
-                  placeholder={cvData.professionalHeadline || t('letter.sender_title')}
+                  placeholder={data.professionalHeadline || 'Your job title'}
                 />
               </div>
             </div>
@@ -371,22 +376,22 @@ function InlineEditor({
                 <label className="text-xs mb-1 block" style={{ color: 'var(--text-secondary)' }}>Email</label>
                 <input
                   type="email"
-                  value={letterData.senderEmail || cvData.contact?.email || ''}
+                  value={letterData.senderEmail || data.contact?.email || ''}
                   onChange={(e) => handleLetterChange('senderEmail', e.target.value)}
                   className="w-full rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500/50"
                   style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', border: '1px solid var(--border-medium)' }}
-                  placeholder={cvData.contact?.email || t('letter.sender_email')}
+                  placeholder={data.contact?.email || 'your.email@example.com'}
                 />
               </div>
               <div>
                 <label className="text-xs mb-1 block" style={{ color: 'var(--text-secondary)' }}>Phone</label>
                 <input
                   type="tel"
-                  value={letterData.senderPhone || cvData.contact?.phone || ''}
+                  value={letterData.senderPhone || data.contact?.phone || ''}
                   onChange={(e) => handleLetterChange('senderPhone', e.target.value)}
                   className="w-full rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500/50"
                   style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', border: '1px solid var(--border-medium)' }}
-                  placeholder={cvData.contact?.phone || t('letter.sender_phone')}
+                  placeholder={data.contact?.phone || '+1 (555) 123-4567'}
                 />
               </div>
             </div>
@@ -398,7 +403,7 @@ function InlineEditor({
                 rows={2}
                 className="w-full rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500/50 resize-none"
                 style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', border: '1px solid var(--border-medium)' }}
-                placeholder={cvData.contact?.location || 'Your address'}
+                  placeholder={data.contact?.location || 'Your address'}
               />
             </div>
           </div>
