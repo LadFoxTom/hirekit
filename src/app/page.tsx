@@ -68,10 +68,21 @@ interface LetterData {
   companyAddress?: string;
   jobTitle?: string;
   opening?: string;
-  body?: string;
+  body?: string | string[];
   closing?: string;
   signature?: string;
   template?: string;
+  layout?: {
+    fontFamily?: string;
+    fontSize?: string;
+    lineSpacing?: string;
+    margins?: string;
+    alignment?: 'left' | 'center' | 'justify';
+    showDate?: boolean;
+    showAddress?: boolean;
+    showSubject?: boolean;
+    letterStyle?: 'formal' | 'semi-formal' | 'creative';
+  };
 }
 
 // Suggestion prompts - will be made dynamic based on language
@@ -1277,7 +1288,6 @@ export default function HomePage() {
     body: '',
     closing: 'Thank you for considering my application. I look forward to the opportunity to discuss how I can contribute to your team.',
     signature: cvData.fullName || '',
-    template: 'professional',
     template: 'professional',
   });
 
