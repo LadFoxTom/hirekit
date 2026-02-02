@@ -106,14 +106,12 @@ function LetterPreview({
   data, 
   onDataChange, 
   cvData,
-  t,
-  onNavigateToEditor
+  t
 }: { 
   data: LetterData; 
   onDataChange: (data: LetterData) => void;
   cvData: CVData;
   t: (key: string) => string;
-  onNavigateToEditor?: () => void;
 }) {
   // Get the selected template or default to professional
   const template = LETTER_TEMPLATES.find((t) => t.id === (data.template || 'professional')) || LETTER_TEMPLATES[0];
@@ -149,43 +147,19 @@ function LetterPreview({
             </div>
             
             {/* Recipient Information */}
-            {data.companyName || data.recipientName ? (
+            {(data.companyName || data.recipientName) && (
               <div className="text-sm text-gray-600 mb-6">
                 <p>{data.recipientName || 'Hiring Manager'}</p>
                 {data.recipientTitle && <p>{data.recipientTitle}</p>}
                 {data.companyName && <p>{data.companyName}</p>}
                 {data.companyAddress && <p>{data.companyAddress}</p>}
               </div>
-            ) : (
-              <div 
-                className="text-sm text-gray-400 mb-6 p-3 rounded-lg border-2 border-dashed border-gray-300 cursor-pointer hover:border-blue-400 hover:bg-blue-50/50 transition-colors"
-                onClick={onNavigateToEditor}
-                title={t('letter.preview.click_to_edit_recipient')}
-              >
-                <div className="flex items-center gap-2">
-                  <FiEdit3 size={14} className="text-gray-400" />
-                  <p className="italic">{t('letter.preview.add_recipient_info')}</p>
-                </div>
-              </div>
             )}
           </div>
 
           {/* Letter Body */}
           <div className="space-y-4 text-gray-800 leading-relaxed">
-            {data.opening ? (
-              <p className="font-medium">{data.opening}</p>
-            ) : (
-              <div 
-                className="p-3 rounded-lg border-2 border-dashed border-gray-300 cursor-pointer hover:border-blue-400 hover:bg-blue-50/50 transition-colors"
-                onClick={onNavigateToEditor}
-                title={t('letter.preview.click_to_edit_opening')}
-              >
-                <div className="flex items-center gap-2 text-gray-500 italic">
-                  <FiEdit3 size={14} />
-                  <p>{t('letter.preview.add_opening')}</p>
-                </div>
-              </div>
-            )}
+            <p className="font-medium">{data.opening || 'Dear Hiring Manager,'}</p>
             
             {data.body ? (
               typeof data.body === 'string' ? (
@@ -362,11 +336,78 @@ function InlineEditor({
       {/* Letter Editor */}
       {editorTab === 'letter' && letterData && onLetterSave && (
         <div className="space-y-3">
+          {/* Sender Info (Your Information) */}
+          <div className="rounded-xl p-4 space-y-3" style={{ backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border-medium)' }}>
+            <h3 className="text-sm font-medium flex items-center gap-2 mb-3" style={{ color: 'var(--text-heading)' }}>
+              <FiUser size={14} className="text-green-400" />
+              {t('letter.sections.sender')}
+            </h3>
+            <div className="grid grid-cols-2 gap-3">
+              <div>
+                <label className="text-xs mb-1 block" style={{ color: 'var(--text-secondary)' }}>Full Name</label>
+                <input
+                  type="text"
+                  value={letterData.senderName || cvData.fullName || ''}
+                  onChange={(e) => handleLetterChange('senderName', e.target.value)}
+                  className="w-full rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500/50"
+                  style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', border: '1px solid var(--border-medium)' }}
+                  placeholder={cvData.fullName || t('letter.sender_name')}
+                />
+              </div>
+              <div>
+                <label className="text-xs mb-1 block" style={{ color: 'var(--text-secondary)' }}>Job Title</label>
+                <input
+                  type="text"
+                  value={letterData.senderTitle || cvData.professionalHeadline || ''}
+                  onChange={(e) => handleLetterChange('senderTitle', e.target.value)}
+                  className="w-full rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500/50"
+                  style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', border: '1px solid var(--border-medium)' }}
+                  placeholder={cvData.professionalHeadline || t('letter.sender_title')}
+                />
+              </div>
+            </div>
+            <div className="grid grid-cols-2 gap-3">
+              <div>
+                <label className="text-xs mb-1 block" style={{ color: 'var(--text-secondary)' }}>Email</label>
+                <input
+                  type="email"
+                  value={letterData.senderEmail || cvData.contact?.email || ''}
+                  onChange={(e) => handleLetterChange('senderEmail', e.target.value)}
+                  className="w-full rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500/50"
+                  style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', border: '1px solid var(--border-medium)' }}
+                  placeholder={cvData.contact?.email || t('letter.sender_email')}
+                />
+              </div>
+              <div>
+                <label className="text-xs mb-1 block" style={{ color: 'var(--text-secondary)' }}>Phone</label>
+                <input
+                  type="tel"
+                  value={letterData.senderPhone || cvData.contact?.phone || ''}
+                  onChange={(e) => handleLetterChange('senderPhone', e.target.value)}
+                  className="w-full rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500/50"
+                  style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', border: '1px solid var(--border-medium)' }}
+                  placeholder={cvData.contact?.phone || t('letter.sender_phone')}
+                />
+              </div>
+            </div>
+            <div>
+              <label className="text-xs mb-1 block" style={{ color: 'var(--text-secondary)' }}>Address (Optional)</label>
+              <textarea
+                value={letterData.senderAddress || ''}
+                onChange={(e) => handleLetterChange('senderAddress', e.target.value)}
+                rows={2}
+                className="w-full rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500/50 resize-none"
+                style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', border: '1px solid var(--border-medium)' }}
+                placeholder={cvData.contact?.location || 'Your address'}
+              />
+            </div>
+          </div>
+
           {/* Recipient Info */}
           <div className="rounded-xl p-4 space-y-3" style={{ backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border-medium)' }}>
             <h3 className="text-sm font-medium flex items-center gap-2 mb-3" style={{ color: 'var(--text-heading)' }}>
               <FiUser size={14} className="text-blue-400" />
-              Recipient Details
+              {t('letter.sections.recipient')}
             </h3>
             <div className="grid grid-cols-2 gap-3">
               <div>
@@ -381,7 +422,7 @@ function InlineEditor({
                 />
               </div>
               <div>
-                <label className="text-xs mb-1 block" style={{ color: 'var(--text-secondary)' }}>Title</label>
+                <label className="text-xs mb-1 block" style={{ color: 'var(--text-secondary)' }}>Recipient Title</label>
                 <input
                   type="text"
                   value={letterData.recipientTitle || ''}
@@ -405,7 +446,7 @@ function InlineEditor({
                 />
               </div>
               <div>
-                <label className="text-xs mb-1 block" style={{ color: 'var(--text-secondary)' }}>Job Title</label>
+                <label className="text-xs mb-1 block" style={{ color: 'var(--text-secondary)' }}>Position Applied For</label>
                 <input
                   type="text"
                   value={letterData.jobTitle || ''}
@@ -415,6 +456,17 @@ function InlineEditor({
                   placeholder="Software Engineer"
                 />
               </div>
+            </div>
+            <div>
+              <label className="text-xs mb-1 block" style={{ color: 'var(--text-secondary)' }}>Company Address (Optional)</label>
+              <textarea
+                value={letterData.companyAddress || ''}
+                onChange={(e) => handleLetterChange('companyAddress', e.target.value)}
+                rows={2}
+                className="w-full rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500/50 resize-none"
+                style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', border: '1px solid var(--border-medium)' }}
+                placeholder="Company address"
+              />
             </div>
           </div>
 
@@ -5161,13 +5213,6 @@ export default function HomePage() {
                           onDataChange={setLetterData}
                           cvData={cvData}
                           t={t}
-                          onNavigateToEditor={() => {
-                            setActiveView('editor');
-                            // Set the editor tab to letter if not already set
-                            if (artifactType !== 'letter') {
-                              setArtifactType('letter');
-                            }
-                          }}
                         />
                       </motion.div>
                     )}
