@@ -24,6 +24,7 @@ import { useDebouncedCallback } from 'use-debounce';
 import { JobSwiper, JobMatch } from '@/components/JobSwiper';
 import TemplateQuickSelector from '@/components/TemplateQuickSelector';
 import LetterTemplateQuickSelector from '@/components/LetterTemplateQuickSelector';
+import { LETTER_TEMPLATES } from '@/data/letterTemplates';
 import { CVTemplate } from '@/components/pdf/CVDocumentPDF';
 import { sanitizeCVDataForAPI as sanitizeForAPI } from '@/utils/cvDataSanitizer';
 import { ThemeSwitcher } from '@/components/ThemeSwitcher';
@@ -99,11 +100,29 @@ function LetterPreview({
   onDataChange: (data: LetterData) => void;
   cvData: CVData;
 }) {
+  // Get the selected template or default to professional
+  const template = LETTER_TEMPLATES.find((t) => t.id === (data.template || 'professional')) || LETTER_TEMPLATES[0];
+  const styles = template.styles;
+  
+  // Use layout overrides if provided, otherwise use template styles
+  const fontFamily = data.layout?.fontFamily || styles.fontFamily;
+  const fontSize = data.layout?.fontSize || styles.fontSize;
+  const lineHeight = data.layout?.lineSpacing || styles.lineSpacing;
+  const textAlign = (data.layout?.alignment || styles.alignment) as 'left' | 'center' | 'justify';
+  
   return (
     <div className="h-full flex flex-col bg-[#0d0d0d]">
       {/* Letter Document */}
       <div className="flex-1 overflow-auto p-6">
-        <div className="max-w-2xl mx-auto bg-white text-gray-900 rounded-lg shadow-2xl p-8 min-h-[600px]">
+        <div 
+          className="max-w-2xl mx-auto bg-white text-gray-900 rounded-lg shadow-2xl p-8 min-h-[600px]"
+          style={{
+            fontFamily,
+            fontSize,
+            lineHeight,
+            textAlign,
+          }}
+        >
           {/* Letter Header */}
           <div className="mb-8">
             <div className="text-right text-sm text-gray-600 mb-6">
@@ -129,9 +148,15 @@ function LetterPreview({
             <p className="font-medium">{data.opening || 'Dear Hiring Manager,'}</p>
             
             {data.body ? (
-              data.body.split('\n\n').map((paragraph, idx) => (
-                <p key={idx}>{paragraph}</p>
-              ))
+              typeof data.body === 'string' ? (
+                data.body.split('\n\n').map((paragraph, idx) => (
+                  <p key={idx}>{paragraph}</p>
+                ))
+              ) : (
+                data.body.map((paragraph, idx) => (
+                  <p key={idx}>{paragraph}</p>
+                ))
+              )
             ) : (
               <div className="text-gray-400 italic py-8 text-center border-2 border-dashed border-gray-200 rounded-lg">
                 <FiMail size={32} className="mx-auto mb-2 opacity-50" />
@@ -154,10 +179,10 @@ function LetterPreview({
       <div className="border-t border-white/5 p-3 bg-[#111111]">
         <div className="flex items-center justify-between max-w-2xl mx-auto">
           <span className="text-xs text-gray-500">
-            {data.body ? `${data.body.length} characters` : 'No content yet'}
+            {data.body ? (typeof data.body === 'string' ? data.body.length : data.body.join('').length) : 0} characters
           </span>
           <div className="flex items-center gap-2">
-            <span className="text-xs text-gray-500">Pro tip: Use the Editor tab to customize your letter</span>
+            <span className="text-xs text-gray-500">Template: {template.name}</span>
           </div>
         </div>
       </div>
@@ -1252,6 +1277,8 @@ export default function HomePage() {
     body: '',
     closing: 'Thank you for considering my application. I look forward to the opportunity to discuss how I can contribute to your team.',
     signature: cvData.fullName || '',
+    template: 'professional',
+    template: 'professional',
   });
 
   // Unsaved changes + leave guard
