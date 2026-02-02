@@ -118,6 +118,23 @@ function isMobileDevice(userAgent: string): boolean {
   return /Mobile|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|webOS|Windows Phone/i.test(userAgent)
 }
 
+// Check if bot is a legitimate search engine crawler
+function isLegitimateSearchBot(userAgent: string): boolean {
+  const legitimateBots = [
+    /googlebot/i,
+    /bingbot/i,
+    /slurp/i, // Yahoo
+    /duckduckbot/i,
+    /baiduspider/i,
+    /yandexbot/i,
+    /facebookexternalhit/i,
+    /twitterbot/i,
+    /linkedinbot/i,
+  ]
+  
+  return legitimateBots.some(pattern => pattern.test(userAgent))
+}
+
 // Bot detection - exclude mobile browsers
 function isBot(request: NextRequest): boolean {
   const userAgent = request.headers.get('user-agent') || ''
@@ -209,13 +226,49 @@ export function middleware(request: NextRequest) {
   
   // Bot detection and handling (desktop only)
   if (isBot(request)) {
-    // Allow bots for public pages, but rate limit them
-    const isPublicPage = request.nextUrl.pathname === '/' || 
-                        request.nextUrl.pathname.startsWith('/api/') ||
-                        request.nextUrl.pathname.startsWith('/_next/')
+    const userAgent = request.headers.get('user-agent') || ''
     
-    if (!isPublicPage) {
-      return new NextResponse('Forbidden', { status: 403 })
+    // Always allow legitimate search engine bots (Google, Bing, etc.) to access all public content
+    if (isLegitimateSearchBot(userAgent)) {
+      // Allow access to all public pages and SEO files
+      const isPublicOrSEO = request.nextUrl.pathname === '/' || 
+                            request.nextUrl.pathname.startsWith('/api/') ||
+                            request.nextUrl.pathname.startsWith('/_next/') ||
+                            request.nextUrl.pathname === '/sitemap.xml' ||
+                            request.nextUrl.pathname.startsWith('/sitemap') ||
+                            request.nextUrl.pathname === '/robots.txt' ||
+                            request.nextUrl.pathname === '/favicon.ico' ||
+                            request.nextUrl.pathname.startsWith('/builder') ||
+                            request.nextUrl.pathname.startsWith('/quick-cv') ||
+                            request.nextUrl.pathname.startsWith('/letter') ||
+                            request.nextUrl.pathname.startsWith('/templates') ||
+                            request.nextUrl.pathname.startsWith('/pricing') ||
+                            request.nextUrl.pathname.startsWith('/faq') ||
+                            request.nextUrl.pathname.startsWith('/about') ||
+                            request.nextUrl.pathname.startsWith('/contact') ||
+                            request.nextUrl.pathname.startsWith('/terms') ||
+                            request.nextUrl.pathname.startsWith('/privacy') ||
+                            request.nextUrl.pathname.startsWith('/cv-guide') ||
+                            request.nextUrl.pathname.startsWith('/letter-guide') ||
+                            request.nextUrl.pathname.startsWith('/examples') ||
+                            request.nextUrl.pathname.startsWith('/auth/login') ||
+                            request.nextUrl.pathname.startsWith('/auth/signup')
+      
+      if (!isPublicOrSEO) {
+        return new NextResponse('Forbidden', { status: 403 })
+      }
+    } else {
+      // For other bots, only allow public pages and API routes
+      const isPublicPage = request.nextUrl.pathname === '/' || 
+                          request.nextUrl.pathname.startsWith('/api/') ||
+                          request.nextUrl.pathname.startsWith('/_next/') ||
+                          request.nextUrl.pathname === '/sitemap.xml' ||
+                          request.nextUrl.pathname.startsWith('/sitemap') ||
+                          request.nextUrl.pathname === '/robots.txt'
+      
+      if (!isPublicPage) {
+        return new NextResponse('Forbidden', { status: 403 })
+      }
     }
   }
   
