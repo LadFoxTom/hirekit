@@ -70,6 +70,7 @@ interface LetterData {
   body?: string;
   closing?: string;
   signature?: string;
+  template?: string;
 }
 
 // Suggestion prompts - will be made dynamic based on language
