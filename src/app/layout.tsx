@@ -93,8 +93,8 @@ export const metadata: Metadata = {
   classification: 'CV Builder, Resume Builder, Career Tools',
   icons: {
     icon: [
-      { url: '/favicon.svg', type: 'image/svg+xml' },
       { url: '/favicon.ico', sizes: 'any' },
+      { url: '/favicon.svg', type: 'image/svg+xml' },
       { url: '/icon-192.png', sizes: '192x192', type: 'image/png' },
       { url: '/icon-512.png', sizes: '512x512', type: 'image/png' },
     ],
@@ -143,6 +143,28 @@ export default function RootLayout({
         )}
       </head>
       <body className={inter.className}>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "name": "LadderFox",
+              "url": process.env.NEXT_PUBLIC_APP_URL || process.env.NEXTAUTH_URL || "https://www.ladderfox.com",
+              "logo": `${process.env.NEXT_PUBLIC_APP_URL || process.env.NEXTAUTH_URL || "https://www.ladderfox.com"}/logo.png`,
+              "description": "AI-powered CV and resume builder helping professionals create stunning resumes",
+              "sameAs": [
+                "https://twitter.com/ladderfox",
+                "https://linkedin.com/company/ladderfox"
+              ],
+              "contactPoint": {
+                "@type": "ContactPoint",
+                "contactType": "customer service",
+                "email": "info@ladderfox.com"
+              }
+            })
+          }}
+        />
         {gaEnabled && (
           <GoogleAnalytics 
             trackingId={gaId}
