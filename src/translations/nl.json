@@ -236,6 +236,7 @@
   "voice.error": "Spraakbericht verwerken mislukt",
   "voice.microphone_error": "Geen toegang tot microfoon. Controleer de machtigingen.",
   "voice.hold_to_record": "Houd ingedrukt om spraakbericht op te nemen",
+  "voice.hold_hint": "Houd de knop ingedrukt om op te nemen",
 
   "intro.welcome": "Welkom bij de CV Bouwer! Ik help je stap voor stap een professioneel CV te maken. Laten we beginnen met het verzamelen van je basisinformatie.",
   "question.fullName": "Wat is je volledige naam?",

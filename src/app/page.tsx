@@ -2803,18 +2803,55 @@ export default function HomePage() {
 
   // Voice recording handlers (WhatsApp-style press and hold)
   const recordingToastId = useRef<string | null>(null);
-  const isStartingRecording = useRef(false);
+  const holdTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const mediaStreamRef = useRef<MediaStream | null>(null);
+  const isHoldingRef = useRef(false);
+  const HOLD_THRESHOLD_MS = 400; // Minimum hold time before recording starts
 
-  const startRecording = async () => {
-    // Prevent multiple simultaneous start attempts
-    if (isRecording || isStartingRecording.current || isProcessing || isTranscribing) {
-      return;
+  // Called when user starts pressing the button
+  const handleVoicePressStart = () => {
+    if (isRecording || isProcessing || isTranscribing) return;
+
+    isHoldingRef.current = true;
+
+    // Start a timer - only begin recording after holding for threshold
+    holdTimerRef.current = setTimeout(() => {
+      if (isHoldingRef.current) {
+        actuallyStartRecording();
+      }
+    }, HOLD_THRESHOLD_MS);
+  };
+
+  // Called when user releases the button
+  const handleVoicePressEnd = () => {
+    const wasHolding = isHoldingRef.current;
+    isHoldingRef.current = false;
+
+    // Clear the hold timer if it hasn't fired yet
+    if (holdTimerRef.current) {
+      clearTimeout(holdTimerRef.current);
+      holdTimerRef.current = null;
     }
 
-    isStartingRecording.current = true;
+    // If we were recording, stop and send
+    if (isRecording) {
+      stopRecording();
+    } else if (wasHolding) {
+      // User released before threshold - show hint
+      toast(t('voice.hold_hint') || 'Hold the button to record', {
+        icon: '💡',
+        duration: 2000,
+        id: 'voice-hold-hint',
+      });
+    }
+  };
 
+  // Actually start the recording (called after hold threshold)
+  const actuallyStartRecording = async () => {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      mediaStreamRef.current = stream;
+
       const mediaRecorder = new MediaRecorder(stream, {
         mimeType: MediaRecorder.isTypeSupported('audio/webm') ? 'audio/webm' : 'audio/mp4'
       });
@@ -2830,7 +2867,10 @@ export default function HomePage() {
 
       mediaRecorder.onstop = async () => {
         // Stop all tracks to release microphone
-        stream.getTracks().forEach(track => track.stop());
+        if (mediaStreamRef.current) {
+          mediaStreamRef.current.getTracks().forEach(track => track.stop());
+          mediaStreamRef.current = null;
+        }
 
         // Dismiss the recording toast
         if (recordingToastId.current) {
@@ -2849,19 +2889,17 @@ export default function HomePage() {
       mediaRecorder.start();
       setIsRecording(true);
 
-      // Show recording toast with unique ID to prevent duplicates
+      // Show recording toast
       recordingToastId.current = toast(t('voice.recording') || 'Recording... Release to send', {
         icon: '🎤',
-        duration: Infinity, // Keep showing until dismissed
-        id: 'voice-recording-toast', // Unique ID prevents duplicates
+        duration: Infinity,
+        id: 'voice-recording-toast',
       }) as string;
     } catch (error) {
       console.error('Failed to start recording:', error);
       toast.error(t('voice.microphone_error') || 'Could not access microphone. Please check permissions.', {
-        id: 'voice-error-toast', // Prevent duplicate error toasts
+        id: 'voice-error-toast',
       });
-    } finally {
-      isStartingRecording.current = false;
     }
   };
 
@@ -2870,7 +2908,7 @@ export default function HomePage() {
       mediaRecorderRef.current.stop();
       setIsRecording(false);
     }
-    // Also dismiss toast if somehow still showing
+    // Dismiss toast if still showing
     if (recordingToastId.current) {
       toast.dismiss(recordingToastId.current);
       recordingToastId.current = null;
@@ -2999,20 +3037,20 @@ export default function HomePage() {
   // Note: Don't use preventDefault() as React uses passive event listeners for touch events
   // The touch-manipulation CSS class on the button prevents unwanted behaviors
   const handleVoiceTouchStart = () => {
-    startRecording();
+    handleVoicePressStart();
   };
 
   const handleVoiceTouchEnd = () => {
-    stopRecording();
+    handleVoicePressEnd();
   };
 
   // Handle mouse events for desktop voice recording
   const handleVoiceMouseDown = () => {
-    startRecording();
+    handleVoicePressStart();
   };
 
   const handleVoiceMouseUp = () => {
-    stopRecording();
+    handleVoicePressEnd();
   };
 
   return (

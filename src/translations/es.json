@@ -186,6 +186,7 @@
   "voice.error": "Error al procesar mensaje de voz",
   "voice.microphone_error": "No se pudo acceder al micrófono. Verifica los permisos.",
   "voice.hold_to_record": "Mantén presionado para grabar mensaje de voz",
+  "voice.hold_hint": "Mantén presionado el botón para grabar",
 
   "common.faq": "Preguntas Frecuentes",
   "common.photos": "Fotos",

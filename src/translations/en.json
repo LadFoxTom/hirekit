@@ -851,6 +851,7 @@
   "voice.error": "Failed to process voice message",
   "voice.microphone_error": "Could not access microphone. Please check permissions.",
   "voice.hold_to_record": "Hold to record voice message",
+  "voice.hold_hint": "Hold the button to record",
 
   "intro.welcome": "Welcome to the Advanced CV Builder! I'll help you create a professional CV step by step. Let's start by gathering your basic information.",
   "intro.welcome_with_quick_cv": "Welcome to the Advanced CV Builder! I'll help you create a professional CV step by step. For a faster experience, try our Basic CV Builder at /quick-cv",
