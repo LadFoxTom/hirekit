@@ -2802,7 +2802,17 @@ export default function HomePage() {
   };
 
   // Voice recording handlers (WhatsApp-style press and hold)
+  const recordingToastId = useRef<string | null>(null);
+  const isStartingRecording = useRef(false);
+
   const startRecording = async () => {
+    // Prevent multiple simultaneous start attempts
+    if (isRecording || isStartingRecording.current || isProcessing || isTranscribing) {
+      return;
+    }
+
+    isStartingRecording.current = true;
+
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
       const mediaRecorder = new MediaRecorder(stream, {
@@ -2822,6 +2832,12 @@ export default function HomePage() {
         // Stop all tracks to release microphone
         stream.getTracks().forEach(track => track.stop());
 
+        // Dismiss the recording toast
+        if (recordingToastId.current) {
+          toast.dismiss(recordingToastId.current);
+          recordingToastId.current = null;
+        }
+
         if (audioChunksRef.current.length > 0) {
           const audioBlob = new Blob(audioChunksRef.current, {
             type: mediaRecorder.mimeType || 'audio/webm'
@@ -2832,10 +2848,20 @@ export default function HomePage() {
 
       mediaRecorder.start();
       setIsRecording(true);
-      toast(t('voice.recording') || 'Recording... Release to send', { icon: '🎤' });
+
+      // Show recording toast with unique ID to prevent duplicates
+      recordingToastId.current = toast(t('voice.recording') || 'Recording... Release to send', {
+        icon: '🎤',
+        duration: Infinity, // Keep showing until dismissed
+        id: 'voice-recording-toast', // Unique ID prevents duplicates
+      }) as string;
     } catch (error) {
       console.error('Failed to start recording:', error);
-      toast.error(t('voice.microphone_error') || 'Could not access microphone. Please check permissions.');
+      toast.error(t('voice.microphone_error') || 'Could not access microphone. Please check permissions.', {
+        id: 'voice-error-toast', // Prevent duplicate error toasts
+      });
+    } finally {
+      isStartingRecording.current = false;
     }
   };
 
@@ -2843,6 +2869,11 @@ export default function HomePage() {
     if (mediaRecorderRef.current && isRecording) {
       mediaRecorderRef.current.stop();
       setIsRecording(false);
+    }
+    // Also dismiss toast if somehow still showing
+    if (recordingToastId.current) {
+      toast.dismiss(recordingToastId.current);
+      recordingToastId.current = null;
     }
   };
 
@@ -4107,23 +4138,41 @@ export default function HomePage() {
                   
                   {/* Textarea row with buttons */}
                   <div className="relative flex items-center">
+                    {/* Recording Overlay */}
+                    {isRecording && (
+                      <div className="absolute inset-0 flex items-center justify-center bg-red-500/10 backdrop-blur-[1px] rounded-2xl z-10 pointer-events-none">
+                        <div className="flex items-center gap-3">
+                          <div className="w-3 h-3 bg-red-500 rounded-full animate-pulse" />
+                          <span className="text-red-500 font-medium">{t('voice.recording') || 'Recording...'}</span>
+                        </div>
+                      </div>
+                    )}
+                    {/* Transcribing Overlay */}
+                    {isTranscribing && (
+                      <div className="absolute inset-0 flex items-center justify-center bg-amber-500/10 backdrop-blur-[1px] rounded-2xl z-10 pointer-events-none">
+                        <div className="flex items-center gap-3">
+                          <div className="w-4 h-4 border-2 border-amber-500 border-t-transparent rounded-full animate-spin" />
+                          <span className="text-amber-500 font-medium">{t('voice.processing') || 'Processing...'}</span>
+                        </div>
+                      </div>
+                    )}
                     <textarea
                       ref={inputRef}
                       value={inputValue}
                       onChange={handleTextareaChange}
                       onKeyDown={handleKeyDown}
                       placeholder={
-                        isUploading 
+                        isUploading
                           ? t('landing.main.prompt.placeholder.uploading')
-                          : attachedFile 
+                          : attachedFile
                           ? t('landing.main.prompt.placeholder.with_file')
                           : t('landing.main.prompt.placeholder')
                       }
                       rows={1}
                       className="flex-1 bg-transparent px-4 sm:px-6 pr-28 sm:pr-32 text-base sm:text-lg resize-none focus:outline-none [&::-webkit-scrollbar]:hidden"
-                      style={{ 
+                      style={{
                         height: '64px',
-                        minHeight: '64px', 
+                        minHeight: '64px',
                         maxHeight: '200px',
                         paddingTop: '20px',
                         paddingBottom: '24px',
@@ -4134,9 +4183,9 @@ export default function HomePage() {
                         boxSizing: 'border-box',
                         color: 'var(--text-primary)',
                       } as React.CSSProperties}
-                      disabled={isUploading}
+                      disabled={isUploading || isRecording}
                     />
-                    
+
                     {/* Input Actions - positioned in the textarea row */}
                     <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1.5">
                       <button
@@ -5103,26 +5152,44 @@ export default function HomePage() {
                     <div className="rounded-xl overflow-hidden" style={{ backgroundColor: 'var(--bg-elevated)', border: '1px solid var(--border-medium)' }}>
                       {/* Textarea row with buttons */}
                       <div className="relative flex items-center">
+                        {/* Recording Overlay */}
+                        {isRecording && (
+                          <div className="absolute inset-0 flex items-center justify-center bg-red-500/10 backdrop-blur-[1px] rounded-xl z-20 pointer-events-none">
+                            <div className="flex items-center gap-2">
+                              <div className="w-2.5 h-2.5 bg-red-500 rounded-full animate-pulse" />
+                              <span className="text-red-500 font-medium text-sm">{t('voice.recording') || 'Recording...'}</span>
+                            </div>
+                          </div>
+                        )}
+                        {/* Transcribing Overlay */}
+                        {isTranscribing && (
+                          <div className="absolute inset-0 flex items-center justify-center bg-amber-500/10 backdrop-blur-[1px] rounded-xl z-20 pointer-events-none">
+                            <div className="flex items-center gap-2">
+                              <div className="w-3 h-3 border-2 border-amber-500 border-t-transparent rounded-full animate-spin" />
+                              <span className="text-amber-500 font-medium text-sm">{t('voice.processing') || 'Processing...'}</span>
+                            </div>
+                          </div>
+                        )}
                         <textarea
                           ref={inputRef}
                           value={inputValue}
                           onChange={handleTextareaChange}
                           onKeyDown={handleKeyDown}
                           placeholder={
-                            isUploading 
-                              ? "Processing file..." 
-                              : attachedFile 
-                              ? "Describe what you'd like to do..." 
+                            isUploading
+                              ? "Processing file..."
+                              : attachedFile
+                              ? "Describe what you'd like to do..."
                               : t('chat.continue_conversation')
                           }
                           rows={1}
                           className="flex-1 bg-transparent px-4 py-3 pr-32 resize-none focus:outline-none text-sm"
-                          style={{ 
-                            minHeight: '48px', 
+                          style={{
+                            minHeight: '48px',
                             maxHeight: '120px',
                             color: 'var(--text-primary)',
                           }}
-                          disabled={isProcessing || isUploading}
+                          disabled={isProcessing || isUploading || isRecording}
                         />
                         <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center gap-1 z-10">
                           <input
