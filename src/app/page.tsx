@@ -4357,7 +4357,7 @@ export default function HomePage() {
                       }}
                     >
                       <FiGrid size={14} className="text-teal-400" />
-                      <span>Templates</span>
+                      <span>{t('templates.title')}</span>
                     </button>
                     <button
                       onClick={() => setActiveView('ats-checker')}
@@ -4394,7 +4394,7 @@ export default function HomePage() {
                       <div className="flex items-center justify-between">
                         <h2 className="text-sm font-medium flex items-center gap-2" style={{ color: 'var(--text-primary)' }}>
                           <FiImage size={16} className="text-blue-400" />
-                          Photo Management
+                          {t('photos.management')}
                         </h2>
                         <button
                           onClick={() => setActiveView('chat')}
@@ -4416,14 +4416,14 @@ export default function HomePage() {
                     </div>
                     
                     {/* Photos Content */}
-                    <div className="flex-1 overflow-y-auto p-4">
+                    <div className="flex-1 overflow-y-auto p-4 pb-16 lg:pb-4">
                       <div className="max-w-2xl mx-auto space-y-4">
                         {/* Photo Toggle */}
                         <div className="rounded-xl p-4" style={{ backgroundColor: 'var(--bg-elevated)', border: '1px solid var(--border-subtle)' }}>
                           <div className="flex items-center justify-between">
                             <div>
-                              <h3 className="text-sm font-medium mb-1" style={{ color: 'var(--text-primary)' }}>Show Photo on CV</h3>
-                              <p className="text-xs" style={{ color: 'var(--text-tertiary)' }}>Toggle photo visibility on your CV</p>
+                              <h3 className="text-sm font-medium mb-1" style={{ color: 'var(--text-primary)' }}>{t('photos.show_on_cv')}</h3>
+                              <p className="text-xs" style={{ color: 'var(--text-tertiary)' }}>{t('photos.toggle_visibility')}</p>
                             </div>
                             <button
                               onClick={() => {
@@ -4455,7 +4455,7 @@ export default function HomePage() {
 
                         {/* Upload New Photo */}
                         <div className="rounded-xl p-4" style={{ backgroundColor: 'var(--bg-elevated)', border: '1px solid var(--border-subtle)' }}>
-                          <h3 className="text-sm font-medium mb-3" style={{ color: 'var(--text-primary)' }}>Add New Photo</h3>
+                          <h3 className="text-sm font-medium mb-3" style={{ color: 'var(--text-primary)' }}>{t('photos.add_new')}</h3>
                           <button
                             onClick={() => {
                               const input = document.createElement('input');
@@ -4541,7 +4541,7 @@ export default function HomePage() {
                             <FiUpload size={16} />
                             {t('common.upload_photos')}
                           </button>
-                          <p className="text-xs mt-2 text-center" style={{ color: 'var(--text-tertiary)' }}>JPG, PNG up to 4MB each. You can upload multiple photos.</p>
+                          <p className="text-xs mt-2 text-center" style={{ color: 'var(--text-tertiary)' }}>{t('photos.upload_hint')}</p>
                         </div>
 
                         {/* Photo Gallery */}
@@ -4622,7 +4622,7 @@ export default function HomePage() {
                                         setSelectedPhotoIndex(selectedPhotoIndex - 1);
                                       }
                                       
-                                      toast.success('Photo removed');
+                                      toast.success(t('toast.photo_removed'));
                                     }}
                                     className="absolute top-2 right-2 p-1.5 bg-red-500 hover:bg-red-600 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
                                     title="Remove photo"
@@ -4643,11 +4643,11 @@ export default function HomePage() {
                         {/* Photo Settings */}
                         {selectedPhotoIndex !== null && photos[selectedPhotoIndex] && (
                           <div className="rounded-xl p-4 space-y-4" style={{ backgroundColor: 'var(--bg-elevated)', border: '1px solid var(--border-subtle)' }}>
-                            <h3 className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>Photo Settings</h3>
+                            <h3 className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>{t('photos.settings')}</h3>
                             
                             {/* Shape Selector */}
                             <div>
-                              <label className="text-xs mb-2 block" style={{ color: 'var(--text-tertiary)' }}>Shape</label>
+                              <label className="text-xs mb-2 block" style={{ color: 'var(--text-tertiary)' }}>{t('photos.shape')}</label>
                               <div className="flex gap-2">
                                 {(['circle', 'square', 'rounded'] as const).map((shape) => (
                                   <button
@@ -4706,7 +4706,7 @@ export default function HomePage() {
                             {/* Photo Size Control */}
                             <div>
                               <div className="flex justify-between items-center mb-2">
-                                <label className="text-xs" style={{ color: 'var(--text-tertiary)' }}>Photo Size</label>
+                                <label className="text-xs" style={{ color: 'var(--text-tertiary)' }}>{t('photos.size')}</label>
                                 <span className="text-xs text-blue-400 font-medium">{cvData.layout?.photoSize ?? 60}px</span>
                               </div>
                               <input
@@ -5258,7 +5258,7 @@ export default function HomePage() {
                       <div className="flex items-center justify-between">
                         <h2 className="text-sm font-medium flex items-center gap-2" style={{ color: 'var(--text-primary)' }}>
                           <FiGrid size={16} className="text-teal-400" />
-                          Templates
+                          {t('templates.title')}
                         </h2>
                         <button
                           onClick={() => setActiveView('chat')}
@@ -5293,7 +5293,7 @@ export default function HomePage() {
                           onMouseLeave={(e) => templateTab !== 'cv' && (e.currentTarget.style.color = 'var(--text-tertiary)')}
                         >
                           <FiFileText size={14} />
-                          CV Templates
+                          {t('templates.cv_templates')}
                         </button>
                         <button
                           onClick={() => setTemplateTab('letter')}
@@ -5306,13 +5306,13 @@ export default function HomePage() {
                           onMouseLeave={(e) => templateTab !== 'letter' && (e.currentTarget.style.color = 'var(--text-tertiary)')}
                         >
                           <FiMail size={14} />
-                          Letter Templates
+                          {t('templates.letter_templates')}
                         </button>
                       </div>
                     </div>
                     
                     {/* Templates Content */}
-                    <div className="flex-1 overflow-y-auto">
+                    <div className="flex-1 overflow-y-auto pb-16 lg:pb-0">
                       {templateTab === 'cv' ? (
                         <TemplateQuickSelector
                           currentTemplate={(cvData.template as CVTemplate) || 'modern'}
@@ -5370,7 +5370,7 @@ export default function HomePage() {
                     </div>
                     
                     {/* Editor Content */}
-                    <div className="flex-1 overflow-y-auto">
+                    <div className="flex-1 overflow-y-auto pb-16 lg:pb-0">
                       <InlineEditor 
                         data={cvData} 
                         onSave={(updated) => {
@@ -5418,7 +5418,7 @@ export default function HomePage() {
                     </div>
                     
                     {/* ATS Checker Content */}
-                    <div className="flex-1 overflow-y-auto">
+                    <div className="flex-1 overflow-y-auto pb-16 lg:pb-0">
                       <ATSChecker cvData={cvData} />
                     </div>
                   </div>

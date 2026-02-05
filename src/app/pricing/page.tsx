@@ -21,6 +21,7 @@ import { LanguageSelector } from '@/components/LanguageSelector'
 export default function PricingPage() {
   const [selectedPlan, setSelectedPlan] = useState<string | null>(null)
   const [billingInterval, setBillingInterval] = useState<'monthly' | 'quarterly' | 'yearly'>('monthly')
+  const [mobilePlanView, setMobilePlanView] = useState<'free' | 'basic'>('basic') // Default to Basic on mobile
   const [isLoading, setIsLoading] = useState(false)
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false)
   const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false)
@@ -861,8 +862,8 @@ export default function PricingPage() {
             </motion.div>
 
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-              {/* Sidebar Navigation */}
-              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
+              {/* Sidebar Navigation - Hidden on mobile */}
+              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="hidden lg:block">
                 <div className="rounded-xl p-2 space-y-1" style={{ backgroundColor: 'var(--bg-card)', border: '1px solid var(--border-subtle)' }}>
                   <button
                     onClick={() => setBillingInterval('monthly')}
@@ -1026,14 +1027,42 @@ export default function PricingPage() {
               </div>
             </motion.div>
 
+                {/* Mobile Plan Selector - Only visible on mobile */}
+                <div className="md:hidden flex justify-center mb-6">
+                  <div className="rounded-xl p-1 flex w-full max-w-xs" style={{ backgroundColor: 'var(--bg-card)', border: '1px solid var(--border-subtle)' }}>
+                    <button
+                      onClick={() => setMobilePlanView('free')}
+                      className="flex-1 px-4 py-2.5 text-sm font-medium rounded-lg transition-all"
+                      style={{
+                        backgroundColor: mobilePlanView === 'free' ? 'var(--bg-elevated)' : 'transparent',
+                        color: mobilePlanView === 'free' ? 'var(--text-primary)' : 'var(--text-tertiary)',
+                        boxShadow: mobilePlanView === 'free' ? 'var(--shadow-md)' : 'none'
+                      }}
+                    >
+                      {t('pricing.plan.free')}
+                    </button>
+                    <button
+                      onClick={() => setMobilePlanView('basic')}
+                      className="flex-1 px-4 py-2.5 text-sm font-medium rounded-lg transition-all"
+                      style={{
+                        backgroundColor: mobilePlanView === 'basic' ? 'var(--bg-elevated)' : 'transparent',
+                        color: mobilePlanView === 'basic' ? 'var(--text-primary)' : 'var(--text-tertiary)',
+                        boxShadow: mobilePlanView === 'basic' ? 'var(--shadow-md)' : 'none'
+                      }}
+                    >
+                      {t('pricing.plan.basic')} ⭐
+                    </button>
+                  </div>
+                </div>
+
                 {/* Pricing Cards */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-              {/* Free Plan */}
-              <motion.div 
+              {/* Free Plan - hidden on mobile when Basic is selected */}
+              <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
-                className="rounded-2xl p-8 relative overflow-hidden flex flex-col"
+                className={`rounded-2xl p-8 relative overflow-hidden flex flex-col ${mobilePlanView === 'basic' ? 'hidden md:flex' : ''}`}
                 style={{ backgroundColor: 'var(--bg-card)', border: '1px solid var(--border-subtle)' }}
               >
                 {/* Current Plan Badge for logged-in users on Free plan */}
@@ -1105,13 +1134,13 @@ export default function PricingPage() {
                 </div>
               </motion.div>
 
-              {/* Basic Plan */}
-              <motion.div 
+              {/* Basic Plan - hidden on mobile when Free is selected */}
+              <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
-                className="rounded-2xl p-8 relative overflow-hidden flex flex-col"
-                style={{ 
+                className={`rounded-2xl p-8 relative overflow-hidden flex flex-col ${mobilePlanView === 'free' ? 'hidden md:flex' : ''}`}
+                style={{
                   background: 'linear-gradient(to bottom, rgba(59, 130, 246, 0.1), rgba(168, 85, 247, 0.1))',
                   border: '1px solid rgba(59, 130, 246, 0.3)'
                 }}

@@ -15,7 +15,7 @@ import {
   FiCreditCard, FiSettings, FiHelpCircle, FiLogOut, FiEye,
   FiGlobe, FiBriefcase, FiUser, FiCheckCircle, FiArrowRight,
   FiBook, FiTarget, FiAward, FiMenu, FiX, FiFileText, FiMail,
-  FiZap, FiList, FiStar
+  FiZap, FiList, FiStar, FiHome
 } from 'react-icons/fi'
 
 interface CVAdvisorPageProps {
@@ -277,7 +277,7 @@ function getCategoryName(category: string, language: Language): string {
 }
 
 export default function CVAdvisorPage({ type, language }: CVAdvisorPageProps) {
-  const { t, language: currentLanguage } = useLocale()
+  const { t, language: currentLanguage, setLanguage, availableLanguages } = useLocale()
   const { user, subscription } = useAuth()
   const router = useRouter()
   const [selectedCountry, setSelectedCountry] = useState<string | null>(null)
@@ -286,6 +286,7 @@ export default function CVAdvisorPage({ type, language }: CVAdvisorPageProps) {
   const [activeSection, setActiveSection] = useState('advisor')
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false)
+  const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false)
   const userMenuRef = useRef<HTMLDivElement>(null)
 
   const segments = URL_SEGMENTS[language]
@@ -396,7 +397,7 @@ export default function CVAdvisorPage({ type, language }: CVAdvisorPageProps) {
           </div>
 
           <div className="flex items-center gap-2">
-            <LanguageSelector onMobileMenuOpen={() => {}} />
+            <LanguageSelector onMobileMenuOpen={() => setIsLanguageMenuOpen(true)} />
             <ThemeSwitcher />
             {user ? (
               <div className="relative" ref={userMenuRef}>
@@ -459,6 +460,15 @@ export default function CVAdvisorPage({ type, language }: CVAdvisorPageProps) {
             <div className="absolute inset-0 bg-black/50" onClick={() => setIsMobileMenuOpen(false)} />
             <div className="relative w-72 h-full overflow-y-auto" style={{ backgroundColor: 'var(--bg-secondary)' }}>
               <nav className="p-4 space-y-1">
+                {/* Home Button */}
+                <button
+                  onClick={() => { setIsMobileMenuOpen(false); router.push('/'); }}
+                  className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors mb-2"
+                  style={{ color: 'var(--text-secondary)', borderBottom: '1px solid var(--border-subtle)' }}
+                >
+                  <FiHome size={18} />
+                  {t('nav.home') || 'Home'}
+                </button>
                 {getNavSections().map((section) => (
                   <button
                     key={section.id}
@@ -475,6 +485,96 @@ export default function CVAdvisorPage({ type, language }: CVAdvisorPageProps) {
               </nav>
             </div>
           </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Language Menu (Mobile) */}
+      <AnimatePresence>
+        {isLanguageMenuOpen && (
+          <>
+            {/* Mobile Overlay */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsLanguageMenuOpen(false)}
+              className="fixed inset-0 z-40 lg:hidden"
+              style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}
+            />
+
+            {/* Language Menu - Slide in from right */}
+            <motion.aside
+              initial={{ x: 280 }}
+              animate={{ x: 0 }}
+              exit={{ x: 280 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+              className="fixed top-14 right-0 bottom-0 z-40 overflow-y-auto lg:hidden"
+              style={{
+                backgroundColor: 'var(--bg-elevated)',
+                borderLeft: '1px solid var(--border-subtle)',
+                width: '200px',
+              }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="p-4 space-y-2">
+                {/* Close Button */}
+                <div className="flex items-center justify-between mb-4">
+                  <span className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>
+                    {t('nav.language') || 'Language'}
+                  </span>
+                  <button
+                    onClick={() => setIsLanguageMenuOpen(false)}
+                    className="p-2 rounded-lg transition-colors"
+                    style={{ color: 'var(--text-tertiary)' }}
+                  >
+                    <FiX size={18} />
+                  </button>
+                </div>
+
+                {/* Language Options */}
+                <div className="space-y-1">
+                  {availableLanguages.map((lang) => {
+                    const flagMap: Record<string, string> = {
+                      'en': '/flags/gb.svg',
+                      'nl': '/flags/nl.svg',
+                      'fr': '/flags/fr.svg',
+                      'es': '/flags/es.svg',
+                      'de': '/flags/de.svg',
+                    }
+                    const flagSrc = flagMap[lang.code] || ''
+
+                    return (
+                      <button
+                        key={lang.code}
+                        onClick={() => {
+                          setLanguage(lang.code as any)
+                          setIsLanguageMenuOpen(false)
+                        }}
+                        className="w-full flex items-center gap-3 p-3 rounded-lg transition-colors"
+                        style={{
+                          backgroundColor: currentLanguage === lang.code ? 'var(--bg-hover)' : 'transparent',
+                        }}
+                      >
+                        {flagSrc ? (
+                          <img
+                            src={flagSrc}
+                            alt={`${lang.code.toUpperCase()} flag`}
+                            className="rounded object-cover"
+                            style={{ width: '20px', height: '20px' }}
+                          />
+                        ) : (
+                          <span style={{ fontSize: '20px' }}>🏳️</span>
+                        )}
+                        <span className="text-sm" style={{ color: 'var(--text-primary)' }}>
+                          {lang.name}
+                        </span>
+                      </button>
+                    )
+                  })}
+                </div>
+              </div>
+            </motion.aside>
+          </>
         )}
       </AnimatePresence>
 

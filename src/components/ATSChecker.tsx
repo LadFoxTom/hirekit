@@ -144,7 +144,7 @@ const LOGIN_PROMPT_TEXT = {
 
 const ATSChecker: React.FC<ATSCheckerProps> = ({ cvData, onClose }) => {
   const { isAuthenticated } = useAuth();
-  const { language } = useLocale();
+  const { language, t } = useLocale();
   const [assessment, setAssessment] = useState<ATSAssessment | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -254,10 +254,10 @@ const ATSChecker: React.FC<ATSCheckerProps> = ({ cvData, onClose }) => {
   };
 
   const getScoreLabel = (score: number) => {
-    if (score >= 80) return 'Excellent';
-    if (score >= 60) return 'Good';
-    if (score >= 40) return 'Needs Improvement';
-    return 'Poor';
+    if (score >= 80) return t('ats.excellent') || 'Excellent';
+    if (score >= 60) return t('ats.good') || 'Good';
+    if (score >= 40) return t('ats.needs_improvement') || 'Needs Improvement';
+    return t('ats.poor') || 'Poor';
   };
 
   // Show login prompt if not authenticated (after all hooks)
@@ -303,7 +303,7 @@ const ATSChecker: React.FC<ATSCheckerProps> = ({ cvData, onClose }) => {
           <div className="text-center">
             <FiRefreshCw className="animate-spin mx-auto mb-4 text-2xl" style={{ color: 'var(--text-primary)' }} />
             <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
-              Analyzing your CV for ATS compatibility...
+              {t('ats.analyzing') || 'Analyzing your CV for ATS compatibility...'}
             </p>
           </div>
         </div>
@@ -318,7 +318,7 @@ const ATSChecker: React.FC<ATSCheckerProps> = ({ cvData, onClose }) => {
           <div className="flex items-center gap-2 mb-2">
             <FiXCircle className="text-red-500" size={18} />
             <h3 className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>
-              Assessment Error
+              {t('ats.error_title') || 'Assessment Error'}
             </h3>
           </div>
           <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
@@ -338,7 +338,7 @@ const ATSChecker: React.FC<ATSCheckerProps> = ({ cvData, onClose }) => {
               e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
             }}
           >
-            Try Again
+            {t('ats.try_again') || 'Try Again'}
           </button>
         </div>
       </div>
@@ -350,7 +350,7 @@ const ATSChecker: React.FC<ATSCheckerProps> = ({ cvData, onClose }) => {
       <div className="p-4 space-y-4">
         <div className="text-center py-12">
           <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
-            No assessment data available
+            {t('ats.no_data') || 'No assessment data available'}
           </p>
         </div>
       </div>
@@ -358,16 +358,16 @@ const ATSChecker: React.FC<ATSCheckerProps> = ({ cvData, onClose }) => {
   }
 
   return (
-    <div className="p-4 space-y-4 overflow-y-auto" style={{ maxHeight: 'calc(100vh - 200px)' }}>
+    <div className="p-4 pb-20 lg:pb-4 space-y-4 overflow-y-auto" style={{ maxHeight: 'calc(100vh - 200px)' }}>
       {/* Header */}
       <div className="flex items-center justify-between mb-4">
         <div>
           <h2 className="text-lg font-semibold flex items-center gap-2" style={{ color: 'var(--text-primary)' }}>
             <FiCheckCircle className="text-indigo-500" size={20} />
-            ATS Assessment
+            {t('ats.title') || 'ATS Assessment'}
           </h2>
           <p className="text-xs mt-1" style={{ color: 'var(--text-tertiary)' }}>
-            Comprehensive CV compatibility analysis
+            {t('ats.subtitle') || 'Comprehensive CV compatibility analysis'}
           </p>
         </div>
         {onClose && (
@@ -394,7 +394,7 @@ const ATSChecker: React.FC<ATSCheckerProps> = ({ cvData, onClose }) => {
         <div className="flex items-center justify-between mb-4">
           <div>
             <h3 className="text-sm font-medium mb-1" style={{ color: 'var(--text-primary)' }}>
-              Overall Grade
+              {t('ats.overall_grade') || 'Overall Grade'}
             </h3>
             <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>
               {getScoreLabel(assessment.overallScore)}
@@ -418,7 +418,7 @@ const ATSChecker: React.FC<ATSCheckerProps> = ({ cvData, onClose }) => {
         <div className={`rounded-lg p-4 border ${getScoreBgColor(assessment.atsScore)}`}>
           <div className="flex items-center justify-between mb-3">
             <span className="text-xs font-medium" style={{ color: 'var(--text-secondary)' }}>
-              ATS Compatibility
+              {t('ats.ats_compatibility') || 'ATS Compatibility'}
             </span>
             <span className={`text-lg font-bold ${getScoreColor(assessment.atsScore)}`}>
               {assessment.atsScore}
@@ -433,7 +433,7 @@ const ATSChecker: React.FC<ATSCheckerProps> = ({ cvData, onClose }) => {
         <div className={`rounded-lg p-4 border ${getScoreBgColor(assessment.contentScore)}`}>
           <div className="flex items-center justify-between mb-3">
             <span className="text-xs font-medium" style={{ color: 'var(--text-secondary)' }}>
-              Content Quality
+              {t('ats.content_quality') || 'Content Quality'}
             </span>
             <span className={`text-lg font-bold ${getScoreColor(assessment.contentScore)}`}>
               {assessment.contentScore}
@@ -452,7 +452,7 @@ const ATSChecker: React.FC<ATSCheckerProps> = ({ cvData, onClose }) => {
         <div className="rounded-xl p-4 space-y-3" style={{ backgroundColor: 'var(--bg-tertiary)', border: '1px solid var(--border-subtle)' }}>
           <h3 className="text-sm font-medium flex items-center gap-2" style={{ color: 'var(--text-primary)' }}>
             <FiInfo size={14} className="text-blue-500" />
-            Detailed Metrics
+            {t('ats.detailed_metrics') || 'Detailed Metrics'}
           </h3>
           <div className="grid grid-cols-2 gap-2">
             {assessment.details.parseability !== undefined && (
@@ -554,7 +554,7 @@ const ATSChecker: React.FC<ATSCheckerProps> = ({ cvData, onClose }) => {
         <div className="rounded-xl p-4 space-y-3" style={{ backgroundColor: 'var(--bg-tertiary)', border: '1px solid var(--border-subtle)' }}>
           <h3 className="text-sm font-medium flex items-center gap-2" style={{ color: 'var(--text-primary)' }}>
             <FiCheckCircle size={14} className="text-green-500" />
-            Strengths
+            {t('ats.strengths') || 'Strengths'}
           </h3>
           <ul className="space-y-2">
             {assessment.strengths.map((strength, index) => (
@@ -574,7 +574,7 @@ const ATSChecker: React.FC<ATSCheckerProps> = ({ cvData, onClose }) => {
         <div className="rounded-xl p-4 space-y-3" style={{ backgroundColor: 'var(--bg-tertiary)', border: '1px solid var(--border-subtle)' }}>
           <h3 className="text-sm font-medium flex items-center gap-2" style={{ color: 'var(--text-primary)' }}>
             <FiAlertCircle size={14} className="text-yellow-500" />
-            Areas for Improvement
+            {t('ats.weaknesses') || 'Areas for Improvement'}
           </h3>
           <ul className="space-y-2">
             {assessment.weaknesses.map((weakness, index) => (
@@ -594,7 +594,7 @@ const ATSChecker: React.FC<ATSCheckerProps> = ({ cvData, onClose }) => {
         <div className="rounded-xl p-4 space-y-3" style={{ backgroundColor: 'var(--bg-tertiary)', border: '1px solid var(--border-subtle)' }}>
           <h3 className="text-sm font-medium flex items-center gap-2" style={{ color: 'var(--text-primary)' }}>
             <FiInfo size={14} className="text-blue-500" />
-            Actionable Suggestions
+            {t('ats.suggestions') || 'Actionable Suggestions'}
           </h3>
           <ul className="space-y-2">
             {assessment.suggestions.map((suggestion, index) => (
@@ -614,7 +614,7 @@ const ATSChecker: React.FC<ATSCheckerProps> = ({ cvData, onClose }) => {
         <div className="bg-gradient-to-r from-indigo-500/10 to-blue-500/10 border border-indigo-500/20 rounded-xl p-4 space-y-3">
           <h3 className="text-sm font-medium flex items-center gap-2" style={{ color: 'var(--text-primary)' }}>
             <FiInfo size={14} className="text-indigo-500" />
-            Key Findings
+            {t('ats.key_findings') || 'Key Findings'}
           </h3>
           <ul className="space-y-2">
             {assessment.explanation.keyFindings.map((finding, index) => (
@@ -650,7 +650,7 @@ const ATSChecker: React.FC<ATSCheckerProps> = ({ cvData, onClose }) => {
         }}
       >
         <FiRefreshCw className={isLoading ? 'animate-spin' : ''} size={14} />
-        {isLoading ? 'Assessing...' : 'Refresh Assessment'}
+        {isLoading ? (t('ats.assessing') || 'Assessing...') : (t('ats.refresh') || 'Refresh Assessment')}
       </button>
     </div>
   );
