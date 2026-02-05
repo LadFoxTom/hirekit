@@ -16,8 +16,15 @@ import { useSubscription } from '@/hooks/useSubscription'
 import { useRouter } from 'next/navigation'
 import { toast } from 'react-hot-toast'
 
-// Import CVPreview for HTML-based mobile preview (mobile browsers can't render embedded PDFs)
-import { CVPreview } from '@/components/CVPreview'
+// Import react-pdf for rendering PDF on mobile (mobile browsers can't render embedded PDFs via iframe)
+import { Document, Page, pdfjs } from 'react-pdf'
+import 'react-pdf/dist/Page/AnnotationLayer.css'
+import 'react-pdf/dist/Page/TextLayer.css'
+
+// Set up PDF.js worker for react-pdf
+if (typeof window !== 'undefined') {
+  pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`
+}
 
 // Detect mobile device
 const isMobileDevice = (): boolean => {
@@ -675,57 +682,42 @@ export const PDFPreviewViewer: React.FC<PDFPreviewViewerProps> = ({
                 Retry
               </button>
             </motion.div>
-          ) : isMobile && data ? (
-            /* Mobile: Show HTML-based CV preview (mobile browsers can't render embedded PDFs) */
+          ) : isMobile && pdfUrl ? (
+            /* Mobile: Render PDF using react-pdf (same design as desktop) */
             <motion.div
               key="mobile-preview"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0 }}
-              className="w-full"
+              className="w-full pb-20"
             >
-              {/* Mobile info banner */}
-              <div className={`px-4 py-3 text-white mb-4 rounded-lg ${
-                canDownloadPDF
-                  ? 'bg-gradient-to-r from-blue-500 to-purple-500'
-                  : 'bg-gradient-to-r from-amber-500 to-orange-500'
-              }`}>
-                <div className="flex items-center gap-2 text-sm font-medium">
-                  {canDownloadPDF ? <FiFileText size={16} /> : <FiLock size={16} />}
-                  <span>{canDownloadPDF ? 'CV Preview' : 'Preview Mode'}</span>
-                </div>
-                <p className="text-xs text-white/80 mt-1">
-                  {canDownloadPDF
-                    ? 'Tap download to get the full PDF'
-                    : 'Upgrade to Pro to download your CV'
+              {/* PDF Preview using react-pdf - renders actual PDF pages as canvas */}
+              <div className="relative bg-white rounded-lg shadow-lg mx-auto" style={{ maxWidth: '100%', width: 'fit-content' }}>
+                <Document
+                  file={pdfUrl}
+                  loading={
+                    <div className="flex items-center justify-center py-20">
+                      <div className="w-8 h-8 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
+                    </div>
                   }
-                </p>
-              </div>
-
-              {/* HTML-based CV Preview - renders natively on mobile */}
-              <div className="relative bg-white rounded-lg shadow-lg overflow-hidden mx-auto" style={{ maxWidth: '100%', width: '100%' }}>
-                <div
-                  className="overflow-auto"
-                  style={{
-                    maxHeight: '60vh',
-                    overflow: 'auto',
-                    WebkitOverflowScrolling: 'touch'
-                  }}
+                  error={
+                    <div className="p-8 text-center text-gray-500">
+                      <p>Could not load preview</p>
+                    </div>
+                  }
+                  onLoadSuccess={({ numPages }) => setTotalPages(numPages)}
                 >
-                  {/* Scale down the CV preview to fit mobile screens using zoom for proper layout */}
-                  <div style={{
-                    zoom: 0.45,
-                    WebkitTextSizeAdjust: 'none',
-                    maxWidth: '595px',
-                    margin: '0 auto'
-                  }}>
-                    <CVPreview data={data} isPreview={true} />
-                  </div>
-                </div>
+                  <Page
+                    pageNumber={1}
+                    width={Math.min(window.innerWidth - 32, 400)}
+                    renderTextLayer={false}
+                    renderAnnotationLayer={false}
+                  />
+                </Document>
 
                 {/* Upgrade overlay for free users */}
                 {!canDownloadPDF && (
-                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent p-6 pt-20">
+                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent p-6 pt-20 rounded-b-lg">
                     <div className="text-center text-white">
                       <FiLock size={24} className="mx-auto mb-2" />
                       <p className="font-medium mb-1">Preview Only</p>
@@ -736,7 +728,7 @@ export const PDFPreviewViewer: React.FC<PDFPreviewViewerProps> = ({
               </div>
 
               {/* Mobile download/upgrade section */}
-              <div className="mt-4 px-4" style={{ maxWidth: '100%', width: '100%' }}>
+              <div className="mt-4 px-4 pb-4" style={{ maxWidth: '100%', width: '100%' }}>
                 <button
                   onClick={handleDownload}
                   disabled={isDownloading || subscriptionLoading}
