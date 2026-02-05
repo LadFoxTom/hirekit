@@ -99,7 +99,8 @@ const getSuggestions = (t: (key: string) => string, language: string) => [
     text: t('landing.main.suggestions.create_cv'),
     prompt: t('landing.main.suggestions.prompt.create_cv'),
     action: 'instant-cv' as const,
-    instantResponse: t('landing.main.suggestions.instant.cv_response')
+    instantResponse: t('landing.main.suggestions.instant.cv_response'),
+    instantResponseMobile: t('landing.main.suggestions.instant.cv_response_mobile')
   },
   {
     icon: FiEdit3,
@@ -107,14 +108,17 @@ const getSuggestions = (t: (key: string) => string, language: string) => [
     prompt: t('landing.main.suggestions.prompt.update_resume'),
     action: 'update-cv' as const,
     instantResponseLoggedIn: t('landing.main.suggestions.instant.update_cv_logged_in'),
-    instantResponseGuest: t('landing.main.suggestions.instant.update_cv_guest')
+    instantResponseLoggedInMobile: t('landing.main.suggestions.instant.update_cv_logged_in_mobile'),
+    instantResponseGuest: t('landing.main.suggestions.instant.update_cv_guest'),
+    instantResponseGuestMobile: t('landing.main.suggestions.instant.update_cv_guest_mobile')
   },
   {
     icon: FiMail,
     text: t('landing.main.suggestions.write_letter'),
     prompt: t('landing.main.suggestions.prompt.write_letter'),
     action: 'instant-letter' as const,
-    instantResponse: t('landing.main.suggestions.instant.letter_response')
+    instantResponse: t('landing.main.suggestions.instant.letter_response'),
+    instantResponseMobile: t('landing.main.suggestions.instant.letter_response_mobile')
   },
   // Link to CV/Letter guide page
   {
@@ -1970,6 +1974,7 @@ export default function HomePage() {
   // Handle instant action - starts chat immediately with predefined response
   const handleInstantAction = (suggestion: ReturnType<typeof getSuggestions>[number]) => {
     const now = Date.now();
+    const isMobileScreen = typeof window !== 'undefined' && window.innerWidth < 1024;
 
     // Create user message
     const userMessage: Message = {
@@ -1979,26 +1984,41 @@ export default function HomePage() {
       timestamp: new Date(),
     };
 
-    // Determine the instant response based on action type
+    // Determine the instant response based on action type and screen size
     let instantResponse = '';
     if (suggestion.action === 'instant-cv') {
-      instantResponse = 'instantResponse' in suggestion ? suggestion.instantResponse : '';
+      // Use mobile-specific response on mobile
+      if (isMobileScreen && 'instantResponseMobile' in suggestion) {
+        instantResponse = suggestion.instantResponseMobile;
+      } else {
+        instantResponse = 'instantResponse' in suggestion ? suggestion.instantResponse : '';
+      }
       setArtifactType('cv');
-      // On mobile, switch to preview after a short delay
-      if (typeof window !== 'undefined' && window.innerWidth < 1024) {
-        setTimeout(() => setMobileView('preview'), 500);
-      }
+      // Keep chat open on mobile (don't switch to preview)
     } else if (suggestion.action === 'instant-letter') {
-      instantResponse = 'instantResponse' in suggestion ? suggestion.instantResponse : '';
-      setArtifactType('letter');
-      // On mobile, switch to preview after a short delay
-      if (typeof window !== 'undefined' && window.innerWidth < 1024) {
-        setTimeout(() => setMobileView('preview'), 500);
+      // Use mobile-specific response on mobile
+      if (isMobileScreen && 'instantResponseMobile' in suggestion) {
+        instantResponse = suggestion.instantResponseMobile;
+      } else {
+        instantResponse = 'instantResponse' in suggestion ? suggestion.instantResponse : '';
       }
+      setArtifactType('letter');
+      // Keep chat open on mobile (don't switch to preview)
     } else if (suggestion.action === 'update-cv') {
-      instantResponse = isAuthenticated
-        ? ('instantResponseLoggedIn' in suggestion ? suggestion.instantResponseLoggedIn : '')
-        : ('instantResponseGuest' in suggestion ? suggestion.instantResponseGuest : '');
+      // Use mobile-specific response on mobile based on auth state
+      if (isAuthenticated) {
+        if (isMobileScreen && 'instantResponseLoggedInMobile' in suggestion) {
+          instantResponse = suggestion.instantResponseLoggedInMobile;
+        } else {
+          instantResponse = 'instantResponseLoggedIn' in suggestion ? suggestion.instantResponseLoggedIn : '';
+        }
+      } else {
+        if (isMobileScreen && 'instantResponseGuestMobile' in suggestion) {
+          instantResponse = suggestion.instantResponseGuestMobile;
+        } else {
+          instantResponse = 'instantResponseGuest' in suggestion ? suggestion.instantResponseGuest : '';
+        }
+      }
       setArtifactType('cv');
     }
 
@@ -2014,6 +2034,11 @@ export default function HomePage() {
     setMessages([userMessage, assistantMessage]);
     setIsConversationActive(true);
     setInputValue('');
+
+    // On mobile, ensure we stay on chat view
+    if (isMobileScreen) {
+      setMobileView('chat');
+    }
   };
 
   // Detect artifact type from user input
