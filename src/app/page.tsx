@@ -2965,13 +2965,13 @@ export default function HomePage() {
   };
 
   // Handle touch events for mobile voice recording
-  const handleVoiceTouchStart = (e: React.TouchEvent) => {
-    e.preventDefault();
+  // Note: Don't use preventDefault() as React uses passive event listeners for touch events
+  // The touch-manipulation CSS class on the button prevents unwanted behaviors
+  const handleVoiceTouchStart = () => {
     startRecording();
   };
 
-  const handleVoiceTouchEnd = (e: React.TouchEvent) => {
-    e.preventDefault();
+  const handleVoiceTouchEnd = () => {
     stopRecording();
   };
 
