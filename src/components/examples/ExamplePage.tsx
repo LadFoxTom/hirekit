@@ -11,11 +11,12 @@ import { LanguageSelector } from '@/components/LanguageSelector'
 import { motion, AnimatePresence } from 'framer-motion'
 import { signOut } from 'next-auth/react'
 import { toast } from 'react-hot-toast'
-import { 
-  FiArrowLeft, FiChevronDown, FiGrid, FiFolder, FiBriefcase, 
+import {
+  FiArrowLeft, FiChevronDown, FiGrid, FiFolder, FiBriefcase,
   FiClipboard, FiCreditCard, FiSettings, FiHelpCircle, FiLogOut, FiEye,
   FiTool
 } from 'react-icons/fi'
+import MobileUserMenu from '@/components/MobileUserMenu'
 import { FaCheckCircle, FaArrowRight, FaFileAlt, FaUser } from 'react-icons/fa'
 import { CVPreviewServer } from '@/components/CVPreviewServer'
 import { getExampleCV } from '@/data/exampleCVs'
@@ -327,6 +328,16 @@ export default function ExamplePage({ professionId, type, language }: ExamplePag
           </div>
         </div>
       </header>
+
+      {/* User Menu (Mobile) - Shared component matching main page */}
+      <AnimatePresence>
+        <MobileUserMenu
+          isOpen={isUserMenuOpen}
+          onClose={() => setIsUserMenuOpen(false)}
+          user={user}
+          subscriptionBadge={subBadge}
+        />
+      </AnimatePresence>
 
       {/* Content */}
       <div className="pt-14">

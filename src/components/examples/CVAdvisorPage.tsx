@@ -17,6 +17,7 @@ import {
   FiBook, FiTarget, FiAward, FiMenu, FiX, FiFileText, FiMail,
   FiZap, FiList, FiStar, FiHome
 } from 'react-icons/fi'
+import MobileUserMenu from '@/components/MobileUserMenu'
 
 interface CVAdvisorPageProps {
   type: 'cv' | 'letter'
@@ -296,6 +297,7 @@ export default function CVAdvisorPage({ type, language }: CVAdvisorPageProps) {
   const isActiveOrTrialing = subscription?.status === 'active' || subscription?.status === 'trialing'
   const plan = isActiveOrTrialing ? (subscription?.plan || 'free') : 'free'
   const isPro = plan !== 'free'
+  const subBadge = isPro ? 'Pro' : 'Free'
 
   // Close menus when clicking outside
   useEffect(() => {
@@ -447,6 +449,16 @@ export default function CVAdvisorPage({ type, language }: CVAdvisorPageProps) {
           </div>
         </div>
       </header>
+
+      {/* User Menu (Mobile) - Shared component matching main page */}
+      <AnimatePresence>
+        <MobileUserMenu
+          isOpen={isUserMenuOpen}
+          onClose={() => setIsUserMenuOpen(false)}
+          user={user}
+          subscriptionBadge={subBadge}
+        />
+      </AnimatePresence>
 
       {/* Mobile Navigation Overlay */}
       <AnimatePresence>

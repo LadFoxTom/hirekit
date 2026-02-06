@@ -21,6 +21,7 @@ import { Toaster, toast } from 'react-hot-toast'
 import ConfirmationModal from '@/components/ConfirmationModal'
 import { ThemeSwitcher } from '@/components/ThemeSwitcher'
 import { LanguageSelector } from '@/components/LanguageSelector'
+import MobileUserMenu from '@/components/MobileUserMenu'
 
 interface SavedCV {
   id: string
@@ -637,207 +638,14 @@ export default function DashboardPage() {
         </div>
       </header>
 
-      {/* User Menu (Mobile) - Same structure as hamburger menu */}
+      {/* User Menu (Mobile) - Shared component matching main page */}
       <AnimatePresence>
-        {isUserMenuOpen && (
-          <>
-            {/* Mobile Overlay */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setIsUserMenuOpen(false)}
-              className="fixed inset-0 z-40 lg:hidden"
-              style={{ backgroundColor: 'var(--overlay)' }}
-            />
-            
-            {/* User Menu - Slide in from right (like hamburger from left) */}
-            <motion.aside
-              initial={{ x: 280 }}
-              animate={{ x: 0 }}
-              exit={{ x: 280 }}
-              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="fixed top-14 right-0 bottom-0 w-[280px] z-40 overflow-y-auto lg:hidden"
-              style={{ 
-                backgroundColor: 'var(--bg-secondary)',
-                borderLeft: '1px solid var(--border-subtle)'
-              }}
-              onClick={(e) => e.stopPropagation()}
-              onTouchStart={(e) => e.stopPropagation()}
-            >
-              <div className="p-4 space-y-4">
-                {/* User Info */}
-                <div className="px-4 py-3 mb-4" style={{ borderBottom: '1px solid var(--border-subtle)' }}>
-                  <p className="font-medium text-sm" style={{ color: 'var(--text-primary)' }}>{user?.name || 'User'}</p>
-                  <p className="text-xs truncate" style={{ color: 'var(--text-tertiary)' }}>{user?.email || 'user@example.com'}</p>
-                </div>
-                
-                {/* Menu Items */}
-                <div className="space-y-1">
-                  <button
-                    onClick={() => { setIsUserMenuOpen(false); router.push('/dashboard'); }}
-                    className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors text-left"
-                    style={{ color: 'var(--text-primary)' }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.backgroundColor = 'transparent';
-                    }}
-                  >
-                    <FiGrid size={14} style={{ color: 'var(--text-tertiary)' }} />
-                    <span className="text-sm">{t('nav.dashboard')}</span>
-                  </button>
-                  <button
-                    onClick={() => { setIsUserMenuOpen(false); router.push('/dashboard?tab=cvs'); }}
-                    className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors text-left"
-                    style={{ color: 'var(--text-primary)' }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.backgroundColor = 'transparent';
-                    }}
-                  >
-                    <FiFolder size={14} style={{ color: 'var(--text-tertiary)' }} />
-                    <span className="text-sm">{t('nav.my_cvs')}</span>
-                  </button>
-                  <button
-                    onClick={() => { 
-                      setIsUserMenuOpen(false); 
-                      const segments = URL_SEGMENTS[language as Language] || URL_SEGMENTS.en;
-                      router.push(`/${segments.examples}/${segments.cv}`); 
-                    }}
-                    className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors text-left"
-                    style={{ color: 'var(--text-primary)' }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.backgroundColor = 'transparent';
-                    }}
-                  >
-                    <FiEye size={14} style={{ color: 'var(--text-tertiary)' }} />
-                    <span className="text-sm">{t('nav.cv_examples')}</span>
-                  </button>
-                  <button
-                    onClick={() => { 
-                      setIsUserMenuOpen(false); 
-                      const segments = URL_SEGMENTS[language as Language] || URL_SEGMENTS.en;
-                      router.push(`/${segments.examples}/${segments.letter}`); 
-                    }}
-                    className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors text-left"
-                    style={{ color: 'var(--text-primary)' }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.backgroundColor = 'transparent';
-                    }}
-                  >
-                    <FiEye size={14} style={{ color: 'var(--text-tertiary)' }} />
-                    <span className="text-sm">{t('nav.letter_examples')}</span>
-                  </button>
-                  <button
-                    onClick={() => { setIsUserMenuOpen(false); toast(t('toast.job_applications_coming_soon')); }}
-                    className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors text-left"
-                    style={{ color: 'var(--text-primary)' }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.backgroundColor = 'transparent';
-                    }}
-                  >
-                    <FiBriefcase size={14} style={{ color: 'var(--text-tertiary)' }} />
-                    <span className="text-sm">{t('nav.job_applications_coming_soon')}</span>
-                  </button>
-                </div>
-                
-                <div className="pt-2 mt-2 space-y-1" style={{ borderTop: '1px solid var(--border-subtle)' }}>
-                  <button
-                    onClick={() => { setIsUserMenuOpen(false); router.push('/pricing'); }}
-                    className="w-full flex items-center justify-between px-3 py-2.5 rounded-lg transition-colors text-left"
-                    style={{ color: 'var(--text-primary)' }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.backgroundColor = 'transparent';
-                    }}
-                  >
-                    <div className="flex items-center gap-3">
-                      <FiCreditCard size={14} style={{ color: 'var(--text-tertiary)' }} />
-                      <span className="text-sm">{t('nav.subscription')}</span>
-                    </div>
-                    <span className="px-2 py-0.5 bg-gradient-to-r from-blue-500 to-purple-500 text-white text-[10px] font-medium rounded-full">{subBadge}</span>
-                  </button>
-                  <button
-                    onClick={() => { setIsUserMenuOpen(false); router.push('/settings'); }}
-                    className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors text-left"
-                    style={{ color: 'var(--text-primary)' }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.backgroundColor = 'transparent';
-                    }}
-                  >
-                    <FiSettings size={14} style={{ color: 'var(--text-tertiary)' }} />
-                    <span className="text-sm">{t('nav.settings')}</span>
-                  </button>
-                  <button
-                    onClick={() => { setIsUserMenuOpen(false); router.push('/faq'); }}
-                    className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors text-left"
-                    style={{ color: 'var(--text-primary)' }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.backgroundColor = 'transparent';
-                    }}
-                  >
-                    <FiHelpCircle size={14} style={{ color: 'var(--text-tertiary)' }} />
-                    <span className="text-sm">{t('nav.help_support')}</span>
-                  </button>
-                </div>
-                
-                {/* Theme & Language */}
-                <div className="pt-2 mt-2" style={{ borderTop: '1px solid var(--border-subtle)' }}>
-                  <div className="px-3 py-2">
-                    <div className="flex items-center justify-between gap-2">
-                      <span className="text-xs font-medium uppercase tracking-wider" style={{ color: 'var(--text-tertiary)' }}>Language</span>
-                      <LanguageSelector />
-                    </div>
-                  </div>
-                  <div className="px-3 py-2">
-                    <div className="flex items-center justify-between gap-2">
-                      <span className="text-xs font-medium uppercase tracking-wider" style={{ color: 'var(--text-tertiary)' }}>Theme</span>
-                      <ThemeSwitcher />
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="pt-2 mt-2" style={{ borderTop: '1px solid var(--border-subtle)' }}>
-                  <button
-                    onClick={() => { setIsUserMenuOpen(false); signOut({ callbackUrl: '/' }); }}
-                    className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors text-left"
-                    style={{ color: '#ef4444' }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundColor = 'rgba(239, 68, 68, 0.1)';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.backgroundColor = 'transparent';
-                    }}
-                  >
-                    <FiLogOut size={14} />
-                    <span className="text-sm">{t('nav.sign_out')}</span>
-                  </button>
-                </div>
-              </div>
-            </motion.aside>
-          </>
-        )}
+        <MobileUserMenu
+          isOpen={isUserMenuOpen}
+          onClose={() => setIsUserMenuOpen(false)}
+          user={user}
+          subscriptionBadge={subBadge}
+        />
       </AnimatePresence>
 
       {/* Language Menu (Mobile) */}
