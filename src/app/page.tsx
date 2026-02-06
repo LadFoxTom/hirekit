@@ -1500,6 +1500,29 @@ export default function HomePage() {
   }, [requestNavigation, router, pathname]);
 
   const guardedSignOut = useCallback(() => {
+    // Clear all cached CV and letter data before signing out
+    if (typeof window !== 'undefined') {
+      // CV data
+      localStorage.removeItem('cvData');
+      localStorage.removeItem('saved_cv_id');
+      localStorage.removeItem('cv_builder_messages');
+      localStorage.removeItem('cv_builder_question_index');
+      localStorage.removeItem('cv_builder_draft');
+      localStorage.removeItem('cv_builder_draft_updated_at');
+      // Letter data
+      localStorage.removeItem('letterData');
+      localStorage.removeItem('saved_letter_id');
+      // ATS cache
+      localStorage.removeItem('ats_assessment_cache');
+      localStorage.removeItem('ats_cv_hash');
+      localStorage.removeItem('ats_cache_timestamp');
+      // Job applications
+      localStorage.removeItem('savedJobApplications');
+      // Other session data
+      localStorage.removeItem('activateSplitscreen');
+      localStorage.removeItem('preferredArtifactType');
+      localStorage.removeItem('instantAction');
+    }
     requestNavigation(() => signOut({ callbackUrl: '/' }));
   }, [requestNavigation]);
 
