@@ -29,7 +29,7 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json();
-    const { cvId, cvData } = body;
+    const { cvId, cvData, language } = body;
 
     // Allow either cvId (from database) or cvData (direct assessment)
     let assessmentCvData = cvData;
@@ -58,6 +58,7 @@ export async function POST(request: NextRequest) {
       messages: [],
       cvId: assessmentCvId || "",
       cvData: assessmentCvData,
+      language: language || 'en',
       timestamp: new Date(),
     };
 

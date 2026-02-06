@@ -204,7 +204,7 @@ const ATSChecker: React.FC<ATSCheckerProps> = ({ cvData, onClose }) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ cvData }),
+        body: JSON.stringify({ cvData, language }),
       });
 
       if (!response.ok) {

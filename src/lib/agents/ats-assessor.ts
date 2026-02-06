@@ -245,11 +245,29 @@ ${Array.isArray(cvData.languages) ? cvData.languages.join(', ') : cvData.languag
 }
 
 /**
+ * Get language name for prompt instructions
+ */
+function getLanguageName(langCode: string): string {
+  const languages: Record<string, string> = {
+    en: 'English',
+    nl: 'Dutch',
+    de: 'German',
+    fr: 'French',
+    es: 'Spanish',
+    it: 'Italian',
+    pt: 'Portuguese',
+    pl: 'Polish',
+  };
+  return languages[langCode] || 'English';
+}
+
+/**
  * Generate comprehensive ATS assessment prompt with all knowledge integrated
  */
-function createATSAssessmentPrompt(cvData: any): string {
+function createATSAssessmentPrompt(cvData: any, language: string = 'en'): string {
   const formattedCV = formatCVForAnalysis(cvData);
-  
+  const languageName = getLanguageName(language);
+
   return `You are an expert ATS (Applicant Tracking System) and CV assessment specialist with deep knowledge of:
 1. How ATS systems parse and extract data from CVs
 2. The psychology of how recruiters read and evaluate CVs
@@ -409,11 +427,21 @@ ${sanitizeCVDataForLLM(cvData)}
    - Senior title but junior-level language = inconsistency
    - Achievements that don't scale with scope = red flag
 
-IMPORTANT: 
+IMPORTANT:
 - Return ONLY valid JSON, no additional text
 - All scores must be 0-100
 - All arrays must have the required number of items
-- Provide detailed explanations that help the candidate understand WHY they received their grade`;
+- Provide detailed explanations that help the candidate understand WHY they received their grade
+
+=== LANGUAGE REQUIREMENT ===
+CRITICAL: ALL text content in your response MUST be written in ${languageName}.
+This includes:
+- All strengths (in ${languageName})
+- All weaknesses (in ${languageName})
+- All suggestions (in ${languageName})
+- All explanations (gradeExplanation, atsExplanation, contentExplanation, keyFindings) (in ${languageName})
+
+The JSON structure and field names should remain in English, but all human-readable content must be in ${languageName}.`;
 }
 
 /**
@@ -441,8 +469,9 @@ export async function assessATSAgent(
       };
     }
 
-    // Generate assessment prompt
-    const prompt = createATSAssessmentPrompt(state.cvData);
+    // Generate assessment prompt with language support
+    const language = (state as any).language || 'en';
+    const prompt = createATSAssessmentPrompt(state.cvData, language);
 
     // Call LLM for assessment
     console.log("[ATS Assessor] Calling GPT-4 for assessment");
