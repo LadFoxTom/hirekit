@@ -443,41 +443,43 @@ export const LetterPreviewViewer: React.FC<LetterPreviewViewerProps> = ({
                 )}
               </div>
 
-              {/* Mobile download section */}
-              <div className="mt-4 px-4 pb-4" style={{ maxWidth: '100%', width: '100%' }}>
-                <button
-                  onClick={handleDownload}
-                  disabled={isDownloading || subscriptionLoading}
-                  className={`w-full flex items-center justify-center gap-2 py-4 text-white font-semibold rounded-xl shadow-lg transition-all disabled:opacity-70 ${
-                    canDownloadPDF
-                      ? 'bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600'
-                      : 'bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600'
-                  }`}
-                >
-                  {isDownloading ? (
-                    <>
-                      <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                      <span>Preparing PDF...</span>
-                    </>
-                  ) : !canDownloadPDF ? (
-                    <>
-                      <FiLock size={20} />
-                      <span>Upgrade to Download PDF</span>
-                    </>
-                  ) : (
-                    <>
-                      <FiDownload size={20} />
-                      <span>Download PDF</span>
-                    </>
-                  )}
-                </button>
-                <p className="text-center text-xs text-gray-500 dark:text-gray-400 mt-2">
-                  {canDownloadPDF
-                    ? 'Your letter will be downloaded as a professional PDF'
-                    : 'Upgrade to a premium plan to download your letter as PDF'
-                  }
-                </p>
-              </div>
+              {/* Mobile download section - only show if controls are enabled */}
+              {showControls && (
+                <div className="mt-4 px-4 pb-4" style={{ maxWidth: '100%', width: '100%' }}>
+                  <button
+                    onClick={handleDownload}
+                    disabled={isDownloading || subscriptionLoading}
+                    className={`w-full flex items-center justify-center gap-2 py-4 text-white font-semibold rounded-xl shadow-lg transition-all disabled:opacity-70 ${
+                      canDownloadPDF
+                        ? 'bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600'
+                        : 'bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600'
+                    }`}
+                  >
+                    {isDownloading ? (
+                      <>
+                        <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                        <span>Preparing PDF...</span>
+                      </>
+                    ) : !canDownloadPDF ? (
+                      <>
+                        <FiLock size={20} />
+                        <span>Upgrade to Download PDF</span>
+                      </>
+                    ) : (
+                      <>
+                        <FiDownload size={20} />
+                        <span>Download PDF</span>
+                      </>
+                    )}
+                  </button>
+                  <p className="text-center text-xs text-gray-500 dark:text-gray-400 mt-2">
+                    {canDownloadPDF
+                      ? 'Your letter will be downloaded as a professional PDF'
+                      : 'Upgrade to a premium plan to download your letter as PDF'
+                    }
+                  </p>
+                </div>
+              )}
             </motion.div>
           ) : isMobile && isGenerating ? (
             /* Mobile loading state */
@@ -529,8 +531,8 @@ export const LetterPreviewViewer: React.FC<LetterPreviewViewerProps> = ({
         </AnimatePresence>
       </div>
 
-      {/* Quick stats footer */}
-      {hasContent(data) && (
+      {/* Quick stats footer - only show if controls are enabled */}
+      {showControls && hasContent(data) && (
         <div className="px-4 py-2 bg-white dark:bg-[#1a1a1a] border-t border-gray-200 dark:border-white/5 text-xs text-gray-500 dark:text-gray-400 flex items-center justify-between">
           <span>
             {normalizeBody(data.body).length} paragraphs • Template: {currentTemplate}

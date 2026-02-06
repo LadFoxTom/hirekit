@@ -5724,7 +5724,7 @@ export default function HomePage() {
                         <LetterPreviewViewer
                           data={letterData}
                           onDataChange={setLetterData}
-                          showControls={true}
+                          showControls={false}
                         />
                       </motion.div>
                     )}
