@@ -32,7 +32,6 @@ import { ThemeSwitcher } from '@/components/ThemeSwitcher';
 import { LanguageSelector } from '@/components/LanguageSelector';
 import ATSChecker from '@/components/ATSChecker';
 import CVUploadModal from '@/components/CVUploadModal';
-import UploadedPDFPreview from '@/components/UploadedPDFPreview';
 import { hotjarStateChange } from '@/components/Hotjar';
 
 // Dynamically import PDF preview viewer (React-PDF based for guaranteed preview=export consistency)
@@ -61,6 +60,22 @@ const LetterPreviewViewer = dynamic(
         <div className="text-center">
           <div className="w-10 h-10 border-2 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
           <div className="text-gray-400">Preparing letter preview...</div>
+        </div>
+      </div>
+    )
+  }
+);
+
+// Dynamically import Uploaded PDF preview (uses react-pdf, must be client-side only)
+const UploadedPDFPreview = dynamic(
+  () => import('@/components/UploadedPDFPreview'),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="w-full h-full flex items-center justify-center bg-[#0d0d0d]">
+        <div className="text-center">
+          <div className="w-10 h-10 border-2 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+          <div className="text-gray-400">Loading preview...</div>
         </div>
       </div>
     )
