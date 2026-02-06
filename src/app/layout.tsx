@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import dynamic from 'next/dynamic'
 import './globals.css'
@@ -15,13 +15,15 @@ const ConsentBanner = dynamic(() => import('@/components/ConsentBanner'), {
 
 const inter = Inter({ subsets: ['latin'] })
 
+// Viewport configuration - must be separate from metadata in Next.js 14+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+}
+
 export const metadata: Metadata = {
-  viewport: {
-    width: 'device-width',
-    initialScale: 1,
-    maximumScale: 5,
-    userScalable: true,
-  },
   title: {
     default: 'LadderFox - Create Professional CVs with AI Assistance',
     template: '%s | LadderFox'
