@@ -273,6 +273,8 @@
   "toast.photo_shown": "Foto getoond",
   "toast.cv_loaded": "CV geladen!",
   "toast.cv_load_failed": "CV laden mislukt",
+  "toast.letter_loaded": "Brief geladen!",
+  "toast.letter_load_failed": "Brief laden mislukt",
   "toast.please_sign_in": "Log in om op te slaan",
   "toast.cv_saved": "CV opgeslagen!",
   "toast.cv_save_failed": "CV opslaan mislukt",

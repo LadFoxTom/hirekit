@@ -1727,18 +1727,24 @@ export default function HomePage() {
       const res = await fetch(`/api/letter/${letterId}`);
       const data = await res.json();
       if (data.letter?.content) {
-        const content = typeof data.letter.content === 'string' 
-          ? JSON.parse(data.letter.content) 
+        const content = typeof data.letter.content === 'string'
+          ? JSON.parse(data.letter.content)
           : data.letter.content;
-        
+
         // Restore letter data
         setLetterData(content);
         setCurrentLetterId(letterId);
+        setIsConversationActive(true);
         setArtifactType('letter');
-        toast.success(t('letter_builder.messages.letter_saved') || 'Letter loaded');
+        setMobileView('preview'); // Show preview on mobile
+        toast.success(t('toast.letter_loaded') || 'Letter loaded!');
+        clearDraft();
+        setTimeout(() => {
+          markAsSaved();
+        }, 0);
       }
     } catch (err) {
-      toast.error(t('letter_builder.messages.save_error') || 'Failed to load letter');
+      toast.error(t('toast.letter_load_failed') || 'Failed to load letter');
     }
     setIsSidebarOpen(false);
   };

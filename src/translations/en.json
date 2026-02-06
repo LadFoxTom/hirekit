@@ -887,6 +887,8 @@
   "toast.photo_shown": "Photo shown",
   "toast.cv_loaded": "CV loaded!",
   "toast.cv_load_failed": "Failed to load CV",
+  "toast.letter_loaded": "Letter loaded!",
+  "toast.letter_load_failed": "Failed to load letter",
   "toast.please_sign_in": "Please sign in to save",
   "toast.cv_saved": "CV saved!",
   "toast.cv_save_failed": "Failed to save CV",

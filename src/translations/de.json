@@ -159,6 +159,8 @@
   "toast.photo_shown": "Foto angezeigt",
   "toast.cv_loaded": "Lebenslauf geladen!",
   "toast.cv_load_failed": "Lebenslauf laden fehlgeschlagen",
+  "toast.letter_loaded": "Anschreiben geladen!",
+  "toast.letter_load_failed": "Anschreiben laden fehlgeschlagen",
   "toast.please_sign_in": "Bitte anmelden, um zu speichern",
   "toast.cv_saved": "Lebenslauf gespeichert!",
   "toast.cv_save_failed": "Lebenslauf speichern fehlgeschlagen",

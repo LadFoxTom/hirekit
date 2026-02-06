@@ -157,6 +157,8 @@
   "toast.photo_shown": "Photo affichée",
   "toast.cv_loaded": "CV chargé !",
   "toast.cv_load_failed": "Échec du chargement du CV",
+  "toast.letter_loaded": "Lettre chargée !",
+  "toast.letter_load_failed": "Échec du chargement de la lettre",
   "toast.please_sign_in": "Veuillez vous connecter pour enregistrer",
   "toast.cv_saved": "CV enregistré !",
   "toast.cv_save_failed": "Échec de l'enregistrement du CV",

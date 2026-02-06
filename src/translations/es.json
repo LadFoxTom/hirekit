@@ -166,6 +166,8 @@
   "toast.photo_shown": "Foto mostrada",
   "toast.cv_loaded": "¡CV cargado!",
   "toast.cv_load_failed": "Error al cargar CV",
+  "toast.letter_loaded": "¡Carta cargada!",
+  "toast.letter_load_failed": "Error al cargar carta",
   "toast.please_sign_in": "Por favor, inicia sesión para guardar",
   "toast.cv_saved": "¡CV guardado!",
   "toast.cv_save_failed": "Error al guardar CV",
