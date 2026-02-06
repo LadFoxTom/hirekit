@@ -612,6 +612,7 @@
   "landing.main.suggestions.find_jobs": "Encontrar trabajos que coincidan",
   "landing.main.suggestions.write_letter": "Escribir una carta de presentación",
   "landing.main.suggestions.cv_guide": "Consejos de CV",
+  "landing.main.suggestions.ats_check": "Verificación ATS",
   "landing.main.suggestions.prompt.create_cv": "Ayúdame a crear un CV profesional",
   "landing.main.suggestions.prompt.update_resume": "Quiero actualizar mi currículum existente",
   "landing.main.suggestions.prompt.find_jobs": "Encuentra trabajos que coincidan con mis habilidades",

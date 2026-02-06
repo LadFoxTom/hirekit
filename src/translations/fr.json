@@ -593,6 +593,7 @@
   "landing.main.suggestions.find_jobs": "Trouver des emplois correspondants",
   "landing.main.suggestions.write_letter": "Rédiger une lettre de motivation",
   "landing.main.suggestions.cv_guide": "Conseils CV",
+  "landing.main.suggestions.ats_check": "Vérification ATS",
   "landing.main.suggestions.prompt.create_cv": "Aidez-moi à créer un CV professionnel",
   "landing.main.suggestions.prompt.update_resume": "Je veux mettre à jour mon CV existant",
   "landing.main.suggestions.prompt.find_jobs": "Trouvez des emplois qui correspondent à mes compétences",

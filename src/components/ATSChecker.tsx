@@ -1,11 +1,21 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { FiCheckCircle, FiXCircle, FiAlertCircle, FiInfo, FiRefreshCw, FiLock } from 'react-icons/fi';
+import { FiCheckCircle, FiXCircle, FiAlertCircle, FiInfo, FiRefreshCw, FiLock, FiFileText, FiUpload, FiPlus } from 'react-icons/fi';
 import { useAuth } from '@/context/AuthContext';
 import { useLocale } from '@/context/LocaleContext';
 import Link from 'next/link';
 
+interface SavedCV {
+  id: string;
+  title: string;
+  updatedAt: string;
+}
+
 interface ATSCheckerProps {
   cvData: any;
+  savedCVs?: SavedCV[];
+  onLoadCV?: (cvId: string) => void;
+  onCreateCV?: () => void;
+  onUploadCV?: () => void;
   onClose?: () => void;
 }
 
@@ -103,6 +113,81 @@ const clearATSCache = () => {
   localStorage.removeItem(ATS_CACHE_TIMESTAMP_KEY);
 };
 
+// Check if CV data has meaningful content (not just empty default values)
+const hasMeaningfulCVContent = (cvData: any): boolean => {
+  if (!cvData) return false;
+
+  const hasName = !!(cvData.fullName?.trim() || cvData.personalInfo?.fullName?.trim());
+  const hasTitle = !!(cvData.title?.trim() || cvData.professionalHeadline?.trim());
+  const hasSummary = !!(cvData.summary?.trim() || cvData.objective?.trim());
+  const hasExperience = !!(cvData.experience && Array.isArray(cvData.experience) && cvData.experience.length > 0 &&
+    cvData.experience.some((exp: any) => exp.company?.trim() || exp.title?.trim()));
+  const hasEducation = !!(cvData.education && Array.isArray(cvData.education) && cvData.education.length > 0 &&
+    cvData.education.some((edu: any) => edu.institution?.trim() || edu.degree?.trim()));
+  const hasSkills = !!(
+    (cvData.skills?.technical && cvData.skills.technical.length > 0) ||
+    (cvData.skills?.soft && cvData.skills.soft.length > 0) ||
+    (cvData.technicalSkills?.trim()) ||
+    (cvData.softSkills?.trim())
+  );
+
+  // CV is meaningful if it has at least name + one other major section
+  return hasName && (hasTitle || hasSummary || hasExperience || hasEducation || hasSkills);
+};
+
+// No CV state translations
+const NO_CV_TEXT = {
+  title: {
+    en: 'No CV Available',
+    nl: 'Geen CV Beschikbaar',
+    es: 'No hay CV Disponible',
+    de: 'Kein Lebenslauf Verfügbar',
+    fr: 'Pas de CV Disponible'
+  },
+  description: {
+    en: 'Create or upload a CV to check its ATS compatibility.',
+    nl: 'Maak of upload een CV om de ATS-compatibiliteit te controleren.',
+    es: 'Crea o sube un CV para verificar su compatibilidad con ATS.',
+    de: 'Erstellen oder laden Sie einen Lebenslauf hoch, um die ATS-Kompatibilität zu prüfen.',
+    fr: 'Créez ou téléchargez un CV pour vérifier sa compatibilité ATS.'
+  },
+  createCV: {
+    en: 'Create CV',
+    nl: 'CV Maken',
+    es: 'Crear CV',
+    de: 'Lebenslauf Erstellen',
+    fr: 'Créer CV'
+  },
+  uploadCV: {
+    en: 'Upload CV',
+    nl: 'CV Uploaden',
+    es: 'Subir CV',
+    de: 'Lebenslauf Hochladen',
+    fr: 'Télécharger CV'
+  },
+  selectCVTitle: {
+    en: 'Select a CV to Analyze',
+    nl: 'Selecteer een CV om te Analyseren',
+    es: 'Seleccionar un CV para Analizar',
+    de: 'Wählen Sie einen Lebenslauf zur Analyse',
+    fr: 'Sélectionner un CV à Analyser'
+  },
+  selectCVDescription: {
+    en: 'Choose from your saved CVs or create a new one.',
+    nl: 'Kies uit je opgeslagen CV\'s of maak een nieuwe.',
+    es: 'Elige de tus CV guardados o crea uno nuevo.',
+    de: 'Wählen Sie aus Ihren gespeicherten Lebensläufen oder erstellen Sie einen neuen.',
+    fr: 'Choisissez parmi vos CV sauvegardés ou créez-en un nouveau.'
+  },
+  orText: {
+    en: 'or',
+    nl: 'of',
+    es: 'o',
+    de: 'oder',
+    fr: 'ou'
+  }
+};
+
 // Login prompt translations (outside component to avoid recreation)
 const LOGIN_PROMPT_TEXT = {
   title: {
@@ -142,7 +227,7 @@ const LOGIN_PROMPT_TEXT = {
   }
 };
 
-const ATSChecker: React.FC<ATSCheckerProps> = ({ cvData, onClose }) => {
+const ATSChecker: React.FC<ATSCheckerProps> = ({ cvData, savedCVs, onLoadCV, onCreateCV, onUploadCV, onClose }) => {
   const { isAuthenticated } = useAuth();
   const { language, t } = useLocale();
   const [assessment, setAssessment] = useState<ATSAssessment | null>(null);
@@ -151,6 +236,12 @@ const ATSChecker: React.FC<ATSCheckerProps> = ({ cvData, onClose }) => {
 
   const getLoginText = (key: keyof typeof LOGIN_PROMPT_TEXT) =>
     LOGIN_PROMPT_TEXT[key][language as keyof typeof LOGIN_PROMPT_TEXT.title] || LOGIN_PROMPT_TEXT[key].en;
+
+  const getNoCVText = (key: keyof typeof NO_CV_TEXT) =>
+    NO_CV_TEXT[key][language as keyof typeof NO_CV_TEXT.title] || NO_CV_TEXT[key].en;
+
+  // Check if CV has meaningful content
+  const cvHasContent = hasMeaningfulCVContent(cvData);
 
   // Fetch new assessment (only when explicitly called or CV changes)
   const fetchAssessment = useCallback(async (forceRefresh = false) => {
@@ -233,9 +324,9 @@ const ATSChecker: React.FC<ATSCheckerProps> = ({ cvData, onClose }) => {
     }
   }, [cvData]);
 
-  // Load cached assessment or fetch new one when CV data is available and authenticated
+  // Load cached assessment or fetch new one when CV data is available, authenticated, and has meaningful content
   useEffect(() => {
-    if (cvData && isAuthenticated) {
+    if (cvData && isAuthenticated && hasMeaningfulCVContent(cvData)) {
       fetchAssessment(false); // Try cache first, fetch if needed
     }
   }, [cvData, fetchAssessment, isAuthenticated]); // Re-run if CV data changes
@@ -292,6 +383,103 @@ const ATSChecker: React.FC<ATSCheckerProps> = ({ cvData, onClose }) => {
         <p className="mt-4 text-xs" style={{ color: 'var(--text-tertiary)' }}>
           {getLoginText('freeFeature')}
         </p>
+      </div>
+    );
+  }
+
+  // Show "No CV" state when authenticated but no CV content and no saved CVs
+  if (!cvHasContent && (!savedCVs || savedCVs.length === 0)) {
+    return (
+      <div className="flex flex-col items-center justify-center p-8 text-center min-h-[400px]">
+        <div className="w-16 h-16 rounded-full flex items-center justify-center mb-6"
+          style={{ backgroundColor: 'var(--bg-tertiary)' }}>
+          <FiFileText size={32} style={{ color: 'var(--text-tertiary)' }} />
+        </div>
+        <h3 className="text-xl font-semibold mb-3" style={{ color: 'var(--text-primary)' }}>
+          {getNoCVText('title')}
+        </h3>
+        <p className="text-sm mb-6 max-w-md" style={{ color: 'var(--text-secondary)' }}>
+          {getNoCVText('description')}
+        </p>
+        <div className="flex flex-col sm:flex-row gap-3">
+          <button
+            onClick={onCreateCV}
+            className="px-6 py-3 bg-blue-500 text-white font-medium rounded-lg hover:bg-blue-600 transition-colors flex items-center gap-2"
+          >
+            <FiPlus size={18} />
+            {getNoCVText('createCV')}
+          </button>
+          <button
+            onClick={onUploadCV}
+            className="px-6 py-3 rounded-lg font-medium transition-colors flex items-center gap-2"
+            style={{ backgroundColor: 'var(--bg-tertiary)', color: 'var(--text-primary)' }}
+          >
+            <FiUpload size={18} />
+            {getNoCVText('uploadCV')}
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  // Show CV selection when authenticated with saved CVs but no current CV content
+  if (!cvHasContent && savedCVs && savedCVs.length > 0) {
+    return (
+      <div className="flex flex-col p-4 min-h-[400px]">
+        <h3 className="text-lg font-semibold mb-2" style={{ color: 'var(--text-primary)' }}>
+          {getNoCVText('selectCVTitle')}
+        </h3>
+        <p className="text-sm mb-4" style={{ color: 'var(--text-secondary)' }}>
+          {getNoCVText('selectCVDescription')}
+        </p>
+
+        {/* CV List */}
+        <div className="space-y-2 mb-4 flex-1 overflow-y-auto" style={{ maxHeight: '300px' }}>
+          {savedCVs.map((cv) => (
+            <button
+              key={cv.id}
+              onClick={() => onLoadCV?.(cv.id)}
+              className="w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors text-left"
+              style={{ backgroundColor: 'var(--bg-tertiary)', color: 'var(--text-primary)' }}
+              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--bg-hover)'}
+              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'var(--bg-tertiary)'}
+            >
+              <FiFileText size={18} className="text-blue-400 flex-shrink-0" />
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-medium truncate">{cv.title}</p>
+                <p className="text-xs" style={{ color: 'var(--text-tertiary)' }}>
+                  {new Date(cv.updatedAt).toLocaleDateString()}
+                </p>
+              </div>
+            </button>
+          ))}
+        </div>
+
+        {/* Divider */}
+        <div className="flex items-center gap-3 my-4">
+          <div className="flex-1 h-px" style={{ backgroundColor: 'var(--border-subtle)' }} />
+          <span className="text-xs" style={{ color: 'var(--text-tertiary)' }}>{getNoCVText('orText')}</span>
+          <div className="flex-1 h-px" style={{ backgroundColor: 'var(--border-subtle)' }} />
+        </div>
+
+        {/* Action buttons */}
+        <div className="flex flex-col sm:flex-row gap-2">
+          <button
+            onClick={onCreateCV}
+            className="flex-1 px-4 py-3 bg-blue-500 text-white text-sm font-medium rounded-lg hover:bg-blue-600 transition-colors flex items-center justify-center gap-2"
+          >
+            <FiPlus size={16} />
+            {getNoCVText('createCV')}
+          </button>
+          <button
+            onClick={onUploadCV}
+            className="flex-1 px-4 py-3 text-sm font-medium rounded-lg transition-colors flex items-center justify-center gap-2"
+            style={{ backgroundColor: 'var(--bg-tertiary)', color: 'var(--text-primary)' }}
+          >
+            <FiUpload size={16} />
+            {getNoCVText('uploadCV')}
+          </button>
+        </div>
       </div>
     );
   }

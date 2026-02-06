@@ -31,6 +31,7 @@ import { sanitizeCVDataForAPI as sanitizeForAPI } from '@/utils/cvDataSanitizer'
 import { ThemeSwitcher } from '@/components/ThemeSwitcher';
 import { LanguageSelector } from '@/components/LanguageSelector';
 import ATSChecker from '@/components/ATSChecker';
+import CVUploadModal from '@/components/CVUploadModal';
 import { hotjarStateChange } from '@/components/Hotjar';
 
 // Dynamically import PDF preview viewer (React-PDF based for guaranteed preview=export consistency)
@@ -108,7 +109,7 @@ interface LetterData {
 }
 
 // Suggestion prompts - will be made dynamic based on language
-// action: 'instant-cv' | 'instant-letter' | 'update-cv' | 'link'
+// action: 'instant-cv' | 'instant-letter' | 'update-cv' | 'link' | 'ats-check'
 const getSuggestions = (t: (key: string) => string, language: string) => [
   {
     icon: FiFileText,
@@ -135,6 +136,12 @@ const getSuggestions = (t: (key: string) => string, language: string) => [
     action: 'instant-letter' as const,
     instantResponse: t('landing.main.suggestions.instant.letter_response'),
     instantResponseMobile: t('landing.main.suggestions.instant.letter_response_mobile')
+  },
+  // ATS Check quick action
+  {
+    icon: FiCheckCircle,
+    text: t('landing.main.suggestions.ats_check') || 'ATS Check',
+    action: 'ats-check' as const
   },
   // Link to CV/Letter guide page
   {
@@ -946,7 +953,8 @@ export default function HomePage() {
   const [mobileView, setMobileView] = useState<'chat' | 'preview'>('chat');
   const [cvZoom, setCvZoom] = useState(0.75);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
-  
+  const [showCVUploadModal, setShowCVUploadModal] = useState(false);
+
   // Load preferred artifact type and activate splitscreen from localStorage on mount
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -1747,6 +1755,31 @@ export default function HomePage() {
       toast.error(t('toast.letter_load_failed') || 'Failed to load letter');
     }
     setIsSidebarOpen(false);
+  };
+
+  // Handler for "Create CV" from ATS Checker
+  const handleCreateCVFromATS = () => {
+    setActiveView('chat');
+    // Trigger the instant-cv flow
+    const cvSuggestion = SUGGESTIONS.find(s => s.action === 'instant-cv');
+    if (cvSuggestion) {
+      handleInstantAction(cvSuggestion);
+    }
+  };
+
+  // Handler for "Upload CV" from ATS Checker
+  const handleUploadCVFromATS = () => {
+    setShowCVUploadModal(true);
+  };
+
+  // Handler for when a CV is uploaded and created
+  const handleCVUploadComplete = async (cvId: string, cvData: CVData) => {
+    // Load the newly created CV
+    await handleLoadCV(cvId);
+    // Close modal
+    setShowCVUploadModal(false);
+    // Switch to ATS checker view
+    setActiveView('ats-checker');
   };
 
   // Save current CV
@@ -4222,6 +4255,10 @@ export default function HomePage() {
                       onClick={() => {
                         if (suggestion.action === 'link' && 'link' in suggestion) {
                           router.push((suggestion as any).link);
+                        } else if (suggestion.action === 'ats-check') {
+                          setIsConversationActive(true);
+                          setActiveView('ats-checker');
+                          setArtifactType('cv');
                         } else if (suggestion.action === 'instant-cv' || suggestion.action === 'instant-letter' || suggestion.action === 'update-cv') {
                           handleInstantAction(suggestion);
                         }
@@ -5425,7 +5462,13 @@ export default function HomePage() {
                     
                     {/* ATS Checker Content */}
                     <div className="flex-1 overflow-y-auto pb-16 lg:pb-0">
-                      <ATSChecker cvData={cvData} />
+                      <ATSChecker
+                        cvData={cvData}
+                        savedCVs={savedCVs}
+                        onLoadCV={handleLoadCV}
+                        onCreateCV={handleCreateCVFromATS}
+                        onUploadCV={handleUploadCVFromATS}
+                      />
                     </div>
                   </div>
                 ) : null}
@@ -5789,7 +5832,14 @@ export default function HomePage() {
           )}
         </AnimatePresence>
       </main>
-      
+
+      {/* CV Upload Modal */}
+      <CVUploadModal
+        isOpen={showCVUploadModal}
+        onClose={() => setShowCVUploadModal(false)}
+        onCVCreated={handleCVUploadComplete}
+      />
+
       {/* Language Debug Component (only in development) */}
       <LanguageDebug />
     </div>
