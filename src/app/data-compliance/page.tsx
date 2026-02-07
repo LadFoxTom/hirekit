@@ -1,7 +1,7 @@
 'use client';
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useState, useEffect } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { useLocale } from '@/context/LocaleContext';
 import Head from 'next/head';
@@ -10,7 +10,18 @@ import { FiArrowLeft, FiShield, FiLock, FiCpu, FiDatabase, FiUserCheck, FiDownlo
 export default function DataCompliancePage() {
   const { t } = useLocale();
   const router = useRouter();
-  const [activeSection, setActiveSection] = useState('privacy');
+  const searchParams = useSearchParams();
+  const sectionParam = searchParams?.get('section');
+  const validSections = ['privacy', 'terms', 'ai', 'cookies', 'rights'];
+  const initialSection = sectionParam && validSections.includes(sectionParam) ? sectionParam : 'privacy';
+  const [activeSection, setActiveSection] = useState(initialSection);
+
+  // Update active section when URL parameter changes
+  useEffect(() => {
+    if (sectionParam && validSections.includes(sectionParam)) {
+      setActiveSection(sectionParam);
+    }
+  }, [sectionParam]);
 
   const sections = [
     { id: 'privacy', name: t('data_compliance.sections.privacy'), icon: FiShield },

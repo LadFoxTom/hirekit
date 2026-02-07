@@ -1159,117 +1159,117 @@
     },
     "terms": {
       "disclaimer": {
-        "title": "Important Legal Disclaimer",
-        "description": "LadderFox provides AI-assisted CV building tools. We are not responsible for the content, accuracy, or outcomes of your job applications."
+        "title": "Wichtiger rechtlicher Hinweis",
+        "description": "LadderFox bietet KI-gestützte Lebenslauf-Erstellungstools. Wir sind nicht verantwortlich für den Inhalt, die Genauigkeit oder die Ergebnisse Ihrer Bewerbungen."
       },
       "service": {
-        "title": "Service Description",
-        "what": "What We Provide",
-        "description": "AI-powered CV and cover letter building tools with templates and optimization features.",
-        "limitations": "Service Limitations",
-        "no_guarantee": "No guarantee of job placement or interview success",
-        "no_liability": "No liability for application outcomes",
-        "user_responsibility": "User responsible for content accuracy",
-        "service_changes": "Service may change without notice"
+        "title": "Servicebeschreibung",
+        "what": "Was wir anbieten",
+        "description": "KI-gestützte Lebenslauf- und Anschreiben-Erstellungstools mit Vorlagen und Optimierungsfunktionen.",
+        "limitations": "Servicebeschränkungen",
+        "no_guarantee": "Keine Garantie für Stellenvermittlung oder Vorstellungsgespräch-Erfolg",
+        "no_liability": "Keine Haftung für Bewerbungsergebnisse",
+        "user_responsibility": "Benutzer verantwortlich für Inhaltsgenauigkeit",
+        "service_changes": "Service kann ohne Vorankündigung geändert werden"
       },
       "liability": {
-        "title": "Liability Limitations",
-        "limitation": "Limited Liability",
-        "description": "Our liability is strictly limited as outlined below. We are not responsible for any indirect, consequential, or punitive damages.",
-        "max_amount": "Maximum Liability",
-        "exclusions": "Exclusions",
-        "exclusions_desc": "Intentional misconduct, gross negligence, or violations of applicable law"
+        "title": "Haftungsbeschränkungen",
+        "limitation": "Beschränkte Haftung",
+        "description": "Unsere Haftung ist strikt begrenzt wie unten beschrieben. Wir sind nicht verantwortlich für indirekte, Folge- oder Strafschäden.",
+        "max_amount": "Maximale Haftung",
+        "exclusions": "Ausnahmen",
+        "exclusions_desc": "Vorsätzliches Fehlverhalten, grobe Fahrlässigkeit oder Verstöße gegen geltendes Recht"
       }
     },
     "ai": {
       "important": {
-        "title": "AI Processing Notice",
-        "description": "We use artificial intelligence to optimize your CV and cover letters. This involves processing your content through third-party AI services."
+        "title": "KI-Verarbeitungshinweis",
+        "description": "Wir verwenden künstliche Intelligenz, um Ihren Lebenslauf und Anschreiben zu optimieren. Dies beinhaltet die Verarbeitung Ihrer Inhalte durch KI-Dienste von Drittanbietern."
       },
       "processing": {
-        "title": "AI Processing Details",
-        "what": "What AI Does",
-        "content_analysis": "Analyzes your content for improvements",
-        "suggestions": "Provides writing suggestions and alternatives",
-        "optimization": "Optimizes text for better impact",
-        "grammar_check": "Checks grammar and spelling",
-        "providers": "AI Service Providers",
-        "third_party": "Third-party AI services (OpenAI, etc.)",
-        "encrypted": "Data encrypted during transmission",
-        "temporary": "Temporary processing only"
+        "title": "KI-Verarbeitungsdetails",
+        "what": "Was die KI macht",
+        "content_analysis": "Analysiert Ihre Inhalte für Verbesserungen",
+        "suggestions": "Bietet Schreibvorschläge und Alternativen",
+        "optimization": "Optimiert Text für bessere Wirkung",
+        "grammar_check": "Prüft Grammatik und Rechtschreibung",
+        "providers": "KI-Dienstanbieter",
+        "third_party": "KI-Dienste von Drittanbietern (OpenAI, etc.)",
+        "encrypted": "Daten während der Übertragung verschlüsselt",
+        "temporary": "Nur temporäre Verarbeitung"
       },
       "disclaimer": {
-        "title": "AI Disclaimer",
-        "warning": "Important AI Limitations",
-        "no_guarantee": "AI suggestions are not guaranteed to be accurate or appropriate",
-        "user_review": "Always review and edit AI-generated content",
-        "no_liability": "We are not liable for AI-generated content",
-        "professional_advice": "AI is not a substitute for professional career advice"
+        "title": "KI-Haftungsausschluss",
+        "warning": "Wichtige KI-Einschränkungen",
+        "no_guarantee": "KI-Vorschläge sind nicht garantiert genau oder angemessen",
+        "user_review": "Überprüfen und bearbeiten Sie immer KI-generierte Inhalte",
+        "no_liability": "Wir haften nicht für KI-generierte Inhalte",
+        "professional_advice": "KI ist kein Ersatz für professionelle Karriereberatung"
       }
     },
     "cookies": {
       "types": {
-        "title": "Types of Cookies We Use",
-        "essential": "Essential Cookies",
-        "essential_desc": "Required for basic website functionality and security",
-        "essential_required": "Cannot be disabled",
-        "analytics": "Analytics Cookies",
-        "analytics_desc": "Help us understand how visitors use our website",
-        "analytics_optional": "Can be disabled",
-        "marketing": "Marketing Cookies",
-        "marketing_desc": "Used for personalized advertising and content",
-        "marketing_optional": "Can be disabled"
+        "title": "Arten von Cookies, die wir verwenden",
+        "essential": "Essentielle Cookies",
+        "essential_desc": "Erforderlich für grundlegende Website-Funktionalität und Sicherheit",
+        "essential_required": "Kann nicht deaktiviert werden",
+        "analytics": "Analyse-Cookies",
+        "analytics_desc": "Helfen uns zu verstehen, wie Besucher unsere Website nutzen",
+        "analytics_optional": "Kann deaktiviert werden",
+        "marketing": "Marketing-Cookies",
+        "marketing_desc": "Verwendet für personalisierte Werbung und Inhalte",
+        "marketing_optional": "Kann deaktiviert werden"
       },
       "management": {
-        "title": "Managing Cookies",
-        "how": "How to Manage Your Cookies",
-        "browser_settings": "Adjust browser settings to block cookies",
-        "cookie_banner": "Use our cookie consent banner",
-        "contact": "Contact us to opt out of specific cookies",
-        "third_party": "Manage third-party cookies through their settings"
+        "title": "Cookies verwalten",
+        "how": "So verwalten Sie Ihre Cookies",
+        "browser_settings": "Browsereinstellungen anpassen, um Cookies zu blockieren",
+        "cookie_banner": "Unseren Cookie-Zustimmungsbanner verwenden",
+        "contact": "Kontaktieren Sie uns, um bestimmte Cookies abzulehnen",
+        "third_party": "Drittanbieter-Cookies über deren Einstellungen verwalten"
       }
     },
     "rights": {
       "your_rights": {
-        "title": "Your Privacy Rights"
+        "title": "Ihre Datenschutzrechte"
       },
       "access": {
-        "title": "Right to Access",
-        "description": "Request a copy of all personal data we hold about you"
+        "title": "Auskunftsrecht",
+        "description": "Eine Kopie aller personenbezogenen Daten anfordern, die wir über Sie speichern"
       },
       "correction": {
-        "title": "Right to Correction",
-        "description": "Request correction of inaccurate or incomplete data"
+        "title": "Recht auf Berichtigung",
+        "description": "Berichtigung ungenauer oder unvollständiger Daten anfordern"
       },
       "deletion": {
-        "title": "Right to Deletion",
-        "description": "Request deletion of your personal data (with exceptions)"
+        "title": "Recht auf Löschung",
+        "description": "Löschung Ihrer personenbezogenen Daten anfordern (mit Ausnahmen)"
       },
       "portability": {
-        "title": "Right to Portability",
-        "description": "Request your data in a portable, machine-readable format"
+        "title": "Recht auf Datenübertragbarkeit",
+        "description": "Ihre Daten in einem portablen, maschinenlesbaren Format anfordern"
       },
       "exercise": {
-        "title": "Exercising Your Rights",
-        "how": "How to Exercise Your Rights",
-        "email": "Contact us via email",
-        "response_time": "Response time",
-        "verification": "Identity verification required",
-        "days": "days"
+        "title": "Ihre Rechte ausüben",
+        "how": "So üben Sie Ihre Rechte aus",
+        "email": "Kontaktieren Sie uns per E-Mail",
+        "response_time": "Antwortzeit",
+        "verification": "Identitätsverifizierung erforderlich",
+        "days": "Tage"
       },
       "complaints": {
-        "title": "Filing Complaints",
-        "authorities": "Data Protection Authorities",
-        "netherlands": "Netherlands",
-        "eu": "European Union"
+        "title": "Beschwerden einreichen",
+        "authorities": "Datenschutzbehörden",
+        "netherlands": "Niederlande",
+        "eu": "Europäische Union"
       }
     },
     "footer": {
-      "last_updated": "Last Updated",
-      "last_updated_date": "December 9, 2024",
-      "contact": "Contact",
+      "last_updated": "Zuletzt aktualisiert",
+      "last_updated_date": "9. Dezember 2024",
+      "contact": "Kontakt",
       "version": "Version",
-      "compliant": "Compliant with"
+      "compliant": "Konform mit"
     }
   },
   "examples": {

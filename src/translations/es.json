@@ -1123,169 +1123,169 @@
   "cv_selection.use_cv": "Usar Este CV",
   "data_compliance": {
     "meta": {
-      "title": "Data Compliance & Privacy",
-      "description": "Learn about LadderFox's data protection practices, GDPR compliance, AI processing, and your privacy rights.",
-      "keywords": "data compliance, privacy policy, GDPR, AI processing, data protection, privacy rights"
+      "title": "Cumplimiento de Datos y Privacidad",
+      "description": "Conoce las prácticas de protección de datos de LadderFox, cumplimiento del RGPD, procesamiento de IA y tus derechos de privacidad.",
+      "keywords": "cumplimiento de datos, política de privacidad, RGPD, procesamiento de IA, protección de datos, derechos de privacidad"
     },
-    "title": "Data Compliance & Privacy",
-    "subtitle": "Transparent information about how we handle your data, AI processing, and your privacy rights",
+    "title": "Cumplimiento de Datos y Privacidad",
+    "subtitle": "Información transparente sobre cómo manejamos tus datos, procesamiento de IA y tus derechos de privacidad",
     "sections": {
-      "privacy": "Privacy Policy",
-      "terms": "Terms of Service",
-      "ai": "AI Processing",
-      "cookies": "Cookie Policy",
-      "rights": "Your Rights"
+      "privacy": "Política de Privacidad",
+      "terms": "Términos de Servicio",
+      "ai": "Procesamiento de IA",
+      "cookies": "Política de Cookies",
+      "rights": "Tus Derechos"
     },
     "privacy": {
-      "important_note": "Important Privacy Notice",
-      "important_description": "We are committed to protecting your privacy and ensuring compliance with international data protection regulations including GDPR, CCPA, and LGPD.",
+      "important_note": "Aviso Importante de Privacidad",
+      "important_description": "Nos comprometemos a proteger tu privacidad y garantizar el cumplimiento de las regulaciones internacionales de protección de datos, incluyendo RGPD, CCPA y LGPD.",
       "data_collection": {
-        "title": "Data We Collect",
-        "personal": "Personal Information",
-        "name": "Name and contact details",
-        "email": "Email address",
-        "contact": "Phone number and address",
-        "professional": "Professional information and CV content",
-        "technical": "Technical Data",
-        "ip": "IP address and device information",
-        "browser": "Browser type and settings",
-        "usage": "Usage patterns and preferences",
-        "session": "Session data and cookies"
+        "title": "Datos que Recopilamos",
+        "personal": "Información Personal",
+        "name": "Nombre y datos de contacto",
+        "email": "Dirección de correo electrónico",
+        "contact": "Número de teléfono y dirección",
+        "professional": "Información profesional y contenido del CV",
+        "technical": "Datos Técnicos",
+        "ip": "Dirección IP e información del dispositivo",
+        "browser": "Tipo y configuración del navegador",
+        "usage": "Patrones de uso y preferencias",
+        "session": "Datos de sesión y cookies"
       },
       "purposes": {
-        "title": "How We Use Your Data",
-        "service": "Service Provision",
-        "service_desc": "To provide CV building and optimization services",
-        "ai": "AI Processing",
-        "ai_desc": "To improve your documents using artificial intelligence",
-        "analytics": "Analytics",
-        "analytics_desc": "To improve our services and user experience"
+        "title": "Cómo Usamos tus Datos",
+        "service": "Provisión del Servicio",
+        "service_desc": "Para proporcionar servicios de creación y optimización de CV",
+        "ai": "Procesamiento de IA",
+        "ai_desc": "Para mejorar tus documentos usando inteligencia artificial",
+        "analytics": "Análisis",
+        "analytics_desc": "Para mejorar nuestros servicios y la experiencia del usuario"
       },
       "retention": {
-        "title": "Data Retention Periods",
-        "documents": "CV Documents",
-        "account": "Account Data",
-        "billing": "Billing Records",
-        "logs": "System Logs",
-        "days": "days",
-        "years": "years",
-        "months": "months",
-        "active": "While account is active"
+        "title": "Períodos de Retención de Datos",
+        "documents": "Documentos CV",
+        "account": "Datos de Cuenta",
+        "billing": "Registros de Facturación",
+        "logs": "Registros del Sistema",
+        "days": "días",
+        "years": "años",
+        "months": "meses",
+        "active": "Mientras la cuenta esté activa"
       }
     },
     "terms": {
       "disclaimer": {
-        "title": "Important Legal Disclaimer",
-        "description": "LadderFox provides AI-assisted CV building tools. We are not responsible for the content, accuracy, or outcomes of your job applications."
+        "title": "Aviso Legal Importante",
+        "description": "LadderFox proporciona herramientas de creación de CV asistidas por IA. No somos responsables del contenido, precisión o resultados de tus solicitudes de empleo."
       },
       "service": {
-        "title": "Service Description",
-        "what": "What We Provide",
-        "description": "AI-powered CV and cover letter building tools with templates and optimization features.",
-        "limitations": "Service Limitations",
-        "no_guarantee": "No guarantee of job placement or interview success",
-        "no_liability": "No liability for application outcomes",
-        "user_responsibility": "User responsible for content accuracy",
-        "service_changes": "Service may change without notice"
+        "title": "Descripción del Servicio",
+        "what": "Lo que Ofrecemos",
+        "description": "Herramientas de creación de CV y cartas de presentación impulsadas por IA con plantillas y funciones de optimización.",
+        "limitations": "Limitaciones del Servicio",
+        "no_guarantee": "Sin garantía de colocación laboral o éxito en entrevistas",
+        "no_liability": "Sin responsabilidad por los resultados de las solicitudes",
+        "user_responsibility": "El usuario es responsable de la precisión del contenido",
+        "service_changes": "El servicio puede cambiar sin previo aviso"
       },
       "liability": {
-        "title": "Liability Limitations",
-        "limitation": "Limited Liability",
-        "description": "Our liability is strictly limited as outlined below. We are not responsible for any indirect, consequential, or punitive damages.",
-        "max_amount": "Maximum Liability",
-        "exclusions": "Exclusions",
-        "exclusions_desc": "Intentional misconduct, gross negligence, or violations of applicable law"
+        "title": "Limitaciones de Responsabilidad",
+        "limitation": "Responsabilidad Limitada",
+        "description": "Nuestra responsabilidad está estrictamente limitada como se describe a continuación. No somos responsables de daños indirectos, consecuentes o punitivos.",
+        "max_amount": "Responsabilidad Máxima",
+        "exclusions": "Exclusiones",
+        "exclusions_desc": "Conducta intencional, negligencia grave o violaciones de la ley aplicable"
       }
     },
     "ai": {
       "important": {
-        "title": "AI Processing Notice",
-        "description": "We use artificial intelligence to optimize your CV and cover letters. This involves processing your content through third-party AI services."
+        "title": "Aviso de Procesamiento de IA",
+        "description": "Usamos inteligencia artificial para optimizar tu CV y cartas de presentación. Esto implica procesar tu contenido a través de servicios de IA de terceros."
       },
       "processing": {
-        "title": "AI Processing Details",
-        "what": "What AI Does",
-        "content_analysis": "Analyzes your content for improvements",
-        "suggestions": "Provides writing suggestions and alternatives",
-        "optimization": "Optimizes text for better impact",
-        "grammar_check": "Checks grammar and spelling",
-        "providers": "AI Service Providers",
-        "third_party": "Third-party AI services (OpenAI, etc.)",
-        "encrypted": "Data encrypted during transmission",
-        "temporary": "Temporary processing only"
+        "title": "Detalles del Procesamiento de IA",
+        "what": "Qué hace la IA",
+        "content_analysis": "Analiza tu contenido para mejoras",
+        "suggestions": "Proporciona sugerencias de redacción y alternativas",
+        "optimization": "Optimiza el texto para mayor impacto",
+        "grammar_check": "Verifica gramática y ortografía",
+        "providers": "Proveedores de Servicios de IA",
+        "third_party": "Servicios de IA de terceros (OpenAI, etc.)",
+        "encrypted": "Datos cifrados durante la transmisión",
+        "temporary": "Solo procesamiento temporal"
       },
       "disclaimer": {
-        "title": "AI Disclaimer",
-        "warning": "Important AI Limitations",
-        "no_guarantee": "AI suggestions are not guaranteed to be accurate or appropriate",
-        "user_review": "Always review and edit AI-generated content",
-        "no_liability": "We are not liable for AI-generated content",
-        "professional_advice": "AI is not a substitute for professional career advice"
+        "title": "Descargo de Responsabilidad de IA",
+        "warning": "Limitaciones Importantes de la IA",
+        "no_guarantee": "Las sugerencias de IA no están garantizadas como precisas o apropiadas",
+        "user_review": "Siempre revisa y edita el contenido generado por IA",
+        "no_liability": "No somos responsables del contenido generado por IA",
+        "professional_advice": "La IA no sustituye el asesoramiento profesional de carrera"
       }
     },
     "cookies": {
       "types": {
-        "title": "Types of Cookies We Use",
-        "essential": "Essential Cookies",
-        "essential_desc": "Required for basic website functionality and security",
-        "essential_required": "Cannot be disabled",
-        "analytics": "Analytics Cookies",
-        "analytics_desc": "Help us understand how visitors use our website",
-        "analytics_optional": "Can be disabled",
-        "marketing": "Marketing Cookies",
-        "marketing_desc": "Used for personalized advertising and content",
-        "marketing_optional": "Can be disabled"
+        "title": "Tipos de Cookies que Usamos",
+        "essential": "Cookies Esenciales",
+        "essential_desc": "Requeridas para la funcionalidad básica y seguridad del sitio",
+        "essential_required": "No se pueden desactivar",
+        "analytics": "Cookies de Análisis",
+        "analytics_desc": "Nos ayudan a entender cómo los visitantes usan nuestro sitio",
+        "analytics_optional": "Se pueden desactivar",
+        "marketing": "Cookies de Marketing",
+        "marketing_desc": "Usadas para publicidad y contenido personalizado",
+        "marketing_optional": "Se pueden desactivar"
       },
       "management": {
-        "title": "Managing Cookies",
-        "how": "How to Manage Your Cookies",
-        "browser_settings": "Adjust browser settings to block cookies",
-        "cookie_banner": "Use our cookie consent banner",
-        "contact": "Contact us to opt out of specific cookies",
-        "third_party": "Manage third-party cookies through their settings"
+        "title": "Gestión de Cookies",
+        "how": "Cómo gestionar tus cookies",
+        "browser_settings": "Ajustar la configuración del navegador para bloquear cookies",
+        "cookie_banner": "Usar nuestro banner de consentimiento de cookies",
+        "contact": "Contactarnos para rechazar cookies específicas",
+        "third_party": "Gestionar cookies de terceros a través de sus configuraciones"
       }
     },
     "rights": {
       "your_rights": {
-        "title": "Your Privacy Rights"
+        "title": "Tus Derechos de Privacidad"
       },
       "access": {
-        "title": "Right to Access",
-        "description": "Request a copy of all personal data we hold about you"
+        "title": "Derecho de Acceso",
+        "description": "Solicitar una copia de todos los datos personales que tenemos sobre ti"
       },
       "correction": {
-        "title": "Right to Correction",
-        "description": "Request correction of inaccurate or incomplete data"
+        "title": "Derecho de Rectificación",
+        "description": "Solicitar la corrección de datos inexactos o incompletos"
       },
       "deletion": {
-        "title": "Right to Deletion",
-        "description": "Request deletion of your personal data (with exceptions)"
+        "title": "Derecho de Supresión",
+        "description": "Solicitar la eliminación de tus datos personales (con excepciones)"
       },
       "portability": {
-        "title": "Right to Portability",
-        "description": "Request your data in a portable, machine-readable format"
+        "title": "Derecho a la Portabilidad",
+        "description": "Solicitar tus datos en un formato portátil y legible por máquina"
       },
       "exercise": {
-        "title": "Exercising Your Rights",
-        "how": "How to Exercise Your Rights",
-        "email": "Contact us via email",
-        "response_time": "Response time",
-        "verification": "Identity verification required",
-        "days": "days"
+        "title": "Ejercer tus Derechos",
+        "how": "Cómo ejercer tus derechos",
+        "email": "Contactarnos por correo electrónico",
+        "response_time": "Tiempo de respuesta",
+        "verification": "Verificación de identidad requerida",
+        "days": "días"
       },
       "complaints": {
-        "title": "Filing Complaints",
-        "authorities": "Data Protection Authorities",
-        "netherlands": "Netherlands",
-        "eu": "European Union"
+        "title": "Presentar Quejas",
+        "authorities": "Autoridades de Protección de Datos",
+        "netherlands": "Países Bajos",
+        "eu": "Unión Europea"
       }
     },
     "footer": {
-      "last_updated": "Last Updated",
-      "last_updated_date": "December 9, 2024",
-      "contact": "Contact",
-      "version": "Version",
-      "compliant": "Compliant with"
+      "last_updated": "Última Actualización",
+      "last_updated_date": "9 de diciembre de 2024",
+      "contact": "Contacto",
+      "version": "Versión",
+      "compliant": "Cumple con"
     }
   },
   "examples": {
