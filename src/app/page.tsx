@@ -3158,6 +3158,7 @@ export default function HomePage() {
                     setMessages([]);
                     setCvData({ template: 'modern', layout: { accentColor: '#3b82f6', showIcons: true } });
                     setCurrentCVId(null);
+                    setIsSidebarOpen(false);
                     setActiveView('chat');
                     // Reset unsaved changes tracking when starting new chat
                     initialSnapshotRef.current = null;
@@ -3951,8 +3952,8 @@ export default function HomePage() {
               onTouchStart={(e) => e.stopPropagation()}
             >
               <div className="p-4 space-y-4">
-                {/* Desktop close button */}
-                <div className="hidden lg:flex justify-end">
+                {/* Mobile close button - hidden on desktop since splitscreen is default there */}
+                <div className="flex lg:hidden justify-end">
                   <button
                     onClick={() => setIsSidebarOpen(false)}
                     className="p-2 flex items-center justify-center rounded-lg transition-colors"
