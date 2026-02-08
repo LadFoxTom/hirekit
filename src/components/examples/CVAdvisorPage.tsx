@@ -274,6 +274,74 @@ const UI_TRANSLATIONS = {
 // Helper to get translation
 const getT = (obj: Record<string, string>, lang: string) => obj[lang] || obj.en
 
+// Menu Item Component (matching homepage)
+function MenuItem({
+  icon: Icon,
+  label,
+  onClick,
+  badge,
+  disabled = false,
+  isActive = false
+}: {
+  icon: React.ComponentType<{ size?: number; className?: string }>;
+  label: string;
+  onClick: () => void;
+  badge?: string;
+  disabled?: boolean;
+  isActive?: boolean;
+}) {
+  return (
+    <button
+      onClick={disabled ? undefined : onClick}
+      disabled={disabled}
+      aria-disabled={disabled}
+      aria-current={isActive ? 'page' : undefined}
+      className={`
+        w-full flex items-center min-h-[44px] px-3 py-2.5
+        text-sm font-medium transition-all duration-150
+        relative
+        ${disabled
+          ? 'opacity-50 cursor-not-allowed'
+          : 'cursor-pointer'
+        }
+      `}
+      style={{
+        color: disabled ? 'var(--text-disabled)' : 'var(--text-primary)',
+        ...(isActive ? {
+          borderLeftWidth: '3px',
+          borderLeftColor: '#3b82f6',
+          backgroundColor: 'var(--bg-hover)',
+        } : {})
+      }}
+      onMouseEnter={(e) => {
+        if (!disabled && !isActive) {
+          e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+        }
+      }}
+      onMouseLeave={(e) => {
+        if (!disabled && !isActive) {
+          e.currentTarget.style.backgroundColor = 'transparent';
+        }
+      }}
+    >
+      <div className="flex items-center gap-3 flex-1 min-w-0">
+        <div className="w-5 h-5 flex items-center justify-center flex-shrink-0" style={{ color: 'var(--text-tertiary)' }}>
+          <Icon size={16} />
+        </div>
+        <span className="truncate">{label}</span>
+      </div>
+      {badge && (
+        <span
+          className="ml-2 px-2 py-0.5 text-xs font-medium rounded-full flex-shrink-0"
+          style={{ backgroundColor: 'var(--bg-tertiary)', color: 'var(--text-secondary)' }}
+        >
+          {badge}
+        </span>
+      )}
+    </button>
+  );
+}
+
 function getCategoryName(category: string, language: Language): string {
   const categories: Record<string, Record<string, string>> = {
     healthcare: { en: 'Healthcare', nl: 'Zorg', es: 'Salud', de: 'Gesundheit', fr: 'Santé' },
@@ -446,7 +514,9 @@ export default function CVAdvisorPage({ type, language }: CVAdvisorPageProps) {
                       transition={{ duration: 0.15 }}
                       className="hidden lg:block absolute right-0 top-full mt-2 rounded-xl z-[9999]"
                       style={{
-                        width: '280px',
+                        width: '320px',
+                        minWidth: '320px',
+                        maxWidth: '320px',
                         backgroundColor: 'var(--bg-elevated)',
                         border: '1px solid var(--border-medium)',
                         boxShadow: 'var(--shadow-lg)',
@@ -460,104 +530,67 @@ export default function CVAdvisorPage({ type, language }: CVAdvisorPageProps) {
 
                       {/* Navigation Items */}
                       <div className="py-1.5">
-                        <Link
-                          href="/dashboard"
-                          onClick={() => setIsUserMenuOpen(false)}
-                          className="flex items-center gap-3 px-3 py-2 text-sm transition-colors hover:bg-white/5"
-                          style={{ color: 'var(--text-primary)' }}
-                        >
-                          <FiGrid size={16} style={{ color: 'var(--text-tertiary)' }} />
-                          {t('nav.dashboard') || 'Dashboard'}
-                        </Link>
-                        <Link
-                          href="/dashboard?tab=cvs"
-                          onClick={() => setIsUserMenuOpen(false)}
-                          className="flex items-center gap-3 px-3 py-2 text-sm transition-colors hover:bg-white/5"
-                          style={{ color: 'var(--text-primary)' }}
-                        >
-                          <FiFolder size={16} style={{ color: 'var(--text-tertiary)' }} />
-                          {t('nav.my_cvs') || 'My CVs'}
-                        </Link>
-                        <Link
-                          href={`/${segments.examples}/${segments.cv}`}
-                          onClick={() => setIsUserMenuOpen(false)}
-                          className="flex items-center gap-3 px-3 py-2 text-sm transition-colors hover:bg-white/5"
-                          style={{ color: 'var(--text-primary)' }}
-                        >
-                          <FiEye size={16} style={{ color: 'var(--text-tertiary)' }} />
-                          {t('nav.cv_examples') || 'CV Examples'}
-                        </Link>
-                        <Link
-                          href={`/${segments.examples}/${segments.letter}`}
-                          onClick={() => setIsUserMenuOpen(false)}
-                          className="flex items-center gap-3 px-3 py-2 text-sm transition-colors hover:bg-white/5"
-                          style={{ color: 'var(--text-primary)' }}
-                        >
-                          <FiEye size={16} style={{ color: 'var(--text-tertiary)' }} />
-                          {t('nav.letter_examples') || 'Letter Examples'}
-                        </Link>
-                        <button
+                        <MenuItem
+                          icon={FiGrid}
+                          label={t('nav.dashboard') || 'Dashboard'}
+                          onClick={() => { setIsUserMenuOpen(false); router.push('/dashboard'); }}
+                        />
+                        <MenuItem
+                          icon={FiFolder}
+                          label={t('nav.my_cvs') || 'My CVs'}
+                          onClick={() => { setIsUserMenuOpen(false); router.push('/dashboard?tab=cvs'); }}
+                        />
+                        <MenuItem
+                          icon={FiEye}
+                          label={t('nav.cv_examples') || 'CV Examples'}
+                          onClick={() => { setIsUserMenuOpen(false); router.push(`/${segments.examples}/${segments.cv}`); }}
+                        />
+                        <MenuItem
+                          icon={FiEye}
+                          label={t('nav.letter_examples') || 'Letter Examples'}
+                          onClick={() => { setIsUserMenuOpen(false); router.push(`/${segments.examples}/${segments.letter}`); }}
+                        />
+                        <MenuItem
+                          icon={FiBriefcase}
+                          label={t('nav.job_applications_short') || 'Applications'}
                           onClick={() => { setIsUserMenuOpen(false); toast(t('toast.job_applications_coming_soon') || 'Coming soon'); }}
-                          disabled
-                          className="w-full flex items-center gap-3 px-3 py-2 text-sm opacity-50 cursor-not-allowed"
-                          style={{ color: 'var(--text-tertiary)' }}
-                        >
-                          <FiBriefcase size={16} />
-                          {t('nav.job_applications_short') || 'Applications'}
-                        </button>
-                        <button
+                          disabled={true}
+                        />
+                        <MenuItem
+                          icon={FiClipboard}
+                          label={t('nav.tests_short') || 'Tests'}
                           onClick={() => { setIsUserMenuOpen(false); toast(t('toast.tests_coming_soon') || 'Coming soon'); }}
-                          disabled
-                          className="w-full flex items-center gap-3 px-3 py-2 text-sm opacity-50 cursor-not-allowed"
-                          style={{ color: 'var(--text-tertiary)' }}
-                        >
-                          <FiClipboard size={16} />
-                          {t('nav.tests_short') || 'Tests'}
-                        </button>
+                          disabled={true}
+                        />
                       </div>
 
                       {/* Account Items */}
                       <div className="py-1.5" style={{ borderTop: '1px solid var(--border-subtle)' }}>
-                        <Link
-                          href="/pricing"
-                          onClick={() => setIsUserMenuOpen(false)}
-                          className="flex items-center gap-3 px-3 py-2 text-sm transition-colors hover:bg-white/5"
-                          style={{ color: 'var(--text-primary)' }}
-                        >
-                          <FiCreditCard size={16} style={{ color: 'var(--text-tertiary)' }} />
-                          {t('nav.subscription') || 'Subscription'}
-                          <span className="ml-auto px-2 py-0.5 text-xs rounded-full" style={{ backgroundColor: 'var(--bg-tertiary)', color: 'var(--text-secondary)' }}>{subBadge}</span>
-                        </Link>
-                        <Link
-                          href="/settings"
-                          onClick={() => setIsUserMenuOpen(false)}
-                          className="flex items-center gap-3 px-3 py-2 text-sm transition-colors hover:bg-white/5"
-                          style={{ color: 'var(--text-primary)' }}
-                        >
-                          <FiSettings size={16} style={{ color: 'var(--text-tertiary)' }} />
-                          {t('nav.settings') || 'Settings'}
-                        </Link>
-                        <Link
-                          href="/faq"
-                          onClick={() => setIsUserMenuOpen(false)}
-                          className="flex items-center gap-3 px-3 py-2 text-sm transition-colors hover:bg-white/5"
-                          style={{ color: 'var(--text-primary)' }}
-                        >
-                          <FiHelpCircle size={16} style={{ color: 'var(--text-tertiary)' }} />
-                          {t('nav.help_support_short') || 'Help'}
-                        </Link>
+                        <MenuItem
+                          icon={FiCreditCard}
+                          label={t('nav.subscription') || 'Subscription'}
+                          onClick={() => { setIsUserMenuOpen(false); router.push('/pricing'); }}
+                          badge={subBadge}
+                        />
+                        <MenuItem
+                          icon={FiSettings}
+                          label={t('nav.settings') || 'Settings'}
+                          onClick={() => { setIsUserMenuOpen(false); router.push('/settings'); }}
+                        />
+                        <MenuItem
+                          icon={FiHelpCircle}
+                          label={t('nav.help_support_short') || 'Help'}
+                          onClick={() => { setIsUserMenuOpen(false); router.push('/faq'); }}
+                        />
                       </div>
 
                       {/* Sign Out */}
                       <div className="py-1.5" style={{ borderTop: '1px solid var(--border-subtle)' }}>
-                        <button
+                        <MenuItem
+                          icon={FiLogOut}
+                          label={t('nav.sign_out') || 'Sign Out'}
                           onClick={() => { setIsUserMenuOpen(false); signOut({ callbackUrl: '/' }); }}
-                          className="w-full flex items-center gap-3 px-3 py-2 text-sm transition-colors hover:bg-white/5"
-                          style={{ color: 'var(--text-tertiary)' }}
-                        >
-                          <FiLogOut size={16} />
-                          {t('nav.sign_out') || 'Sign Out'}
-                        </button>
+                        />
                       </div>
                     </motion.div>
                   )}
