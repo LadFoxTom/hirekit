@@ -793,11 +793,11 @@ export default function DashboardPage() {
                   {t('dashboard.welcome_back').replace('{name}', user?.name?.split(' ')[0] || 'there')}
                 </p>
               </div>
-              <div className="flex gap-3">
+              <div className="hidden sm:flex gap-3">
                 <button
                   onClick={handleCreateNewLetter}
                   className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium transition-colors"
-                  style={{ 
+                  style={{
                     backgroundColor: 'var(--bg-tertiary)',
                     border: '1px solid var(--border-subtle)',
                     color: 'var(--text-primary)'
@@ -863,7 +863,7 @@ export default function DashboardPage() {
                 <div className="p-4" style={{ borderBottom: '1px solid var(--border-subtle)' }}>
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     {/* Tabs */}
-                    <div className="flex gap-1 p-1 rounded-lg" style={{ backgroundColor: 'var(--bg-tertiary)' }}>
+                    <div className="flex w-full sm:w-auto gap-1 p-1 rounded-lg" style={{ backgroundColor: 'var(--bg-tertiary)' }}>
                       {[
                         { id: 'all', label: t('dashboard.all') },
                         { id: 'cvs', label: t('dashboard.cvs') },
@@ -873,7 +873,7 @@ export default function DashboardPage() {
                         <button
                           key={tab.id}
                           onClick={() => setActiveTab(tab.id as any)}
-                          className="px-4 py-2 text-sm font-medium rounded-md transition-colors"
+                          className="flex-1 sm:flex-none px-4 py-2 text-sm font-medium rounded-md transition-colors text-center"
                           style={{
                             ...(activeTab === tab.id ? {
                               backgroundColor: 'var(--bg-elevated)',
@@ -899,15 +899,15 @@ export default function DashboardPage() {
                     </div>
 
                     {/* Search & View */}
-                    <div className="flex items-center gap-2">
-                      <div className="relative">
+                    <div className="flex items-center gap-2 w-full sm:w-auto">
+                      <div className="relative flex-1 sm:flex-none">
                         <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2" size={16} style={{ color: 'var(--text-tertiary)' }} />
                         <input
                           type="text"
                           placeholder={t('dashboard.search')}
                           value={searchQuery}
                           onChange={(e) => setSearchQuery(e.target.value)}
-                          className="rounded-lg py-2 pl-9 pr-4 text-sm focus:outline-none w-48"
+                          className="rounded-lg py-2 pl-9 pr-4 text-sm focus:outline-none w-full sm:w-48"
                           style={{
                             backgroundColor: 'var(--bg-tertiary)',
                             border: '1px solid var(--border-subtle)',
@@ -921,7 +921,7 @@ export default function DashboardPage() {
                           }}
                         />
                       </div>
-                      <div className="flex rounded-lg p-1" style={{ backgroundColor: 'var(--bg-tertiary)' }}>
+                      <div className="flex rounded-lg p-1 flex-shrink-0" style={{ backgroundColor: 'var(--bg-tertiary)' }}>
                         <button
                           onClick={() => setViewMode('list')}
                           className="p-2 flex items-center justify-center rounded-md"
