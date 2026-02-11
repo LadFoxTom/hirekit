@@ -1,3 +1,4 @@
 {
-  "installCommand": "cd ../.. && pnpm install"
+  "installCommand": "cd ../.. && pnpm install",
+  "buildCommand": "npx prisma generate --schema=../../packages/database-hirekit/prisma/schema.prisma && next build"
 }
