@@ -123,8 +123,8 @@ export default function ExamplesOverviewPage({ type, language }: ExamplesOvervie
   
   const typeSegment = type === 'cv' ? segments.cv : segments.letter
 
-  const isActiveOrTrialing = subscription?.status === 'active' || subscription?.status === 'trialing'
-  const plan = isActiveOrTrialing ? (subscription?.plan || 'free') : 'free'
+  const isActiveSubscription = subscription?.status === 'active'
+  const plan = isActiveSubscription ? (subscription?.plan || 'free') : 'free'
   const isPro = plan !== 'free'
   const subBadge = isPro ? 'Pro' : 'Free'
 

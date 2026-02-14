@@ -44,8 +44,7 @@ export async function GET(request: NextRequest) {
       where: { userId: session.user.id }
     });
 
-    // Treat 'trialing' as active (trial users have full access)
-    const isPaid = subscription && subscription.plan !== 'free' && (subscription.status === 'active' || subscription.status === 'trialing');
+    const isPaid = subscription && subscription.plan !== 'free' && subscription.status === 'active';
     const limit = isPaid ? Infinity : FREE_ACCOUNT_QUESTION_LIMIT;
     const remaining = isPaid ? Infinity : Math.max(0, limit - user.questionCount);
 
@@ -102,8 +101,7 @@ export async function POST(request: NextRequest) {
       where: { userId: session.user.id }
     });
 
-    // Treat 'trialing' as active (trial users have full access)
-    const isPaid = subscription && subscription.plan !== 'free' && (subscription.status === 'active' || subscription.status === 'trialing');
+    const isPaid = subscription && subscription.plan !== 'free' && subscription.status === 'active';
     const limit = isPaid ? Infinity : FREE_ACCOUNT_QUESTION_LIMIT;
     const currentCount = user.questionCount;
     const newCount = currentCount + 1;

@@ -376,8 +376,8 @@ export default function CVAdvisorPage({ type, language }: CVAdvisorPageProps) {
   const professionsByCategory = getProfessionsByCategory(language)
   const typeName = getT(UI_TRANSLATIONS.typeName[type], currentLanguage)
 
-  const isActiveOrTrialing = subscription?.status === 'active' || subscription?.status === 'trialing'
-  const plan = isActiveOrTrialing ? (subscription?.plan || 'free') : 'free'
+  const isActiveSubscription = subscription?.status === 'active'
+  const plan = isActiveSubscription ? (subscription?.plan || 'free') : 'free'
   const isPro = plan !== 'free'
   const subBadge = isPro ? 'Pro' : 'Free'
 

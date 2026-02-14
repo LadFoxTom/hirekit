@@ -22,7 +22,7 @@ import MobileUserMenu from '@/components/MobileUserMenu'
 
 export default function PricingPage() {
   const [selectedPlan, setSelectedPlan] = useState<string | null>(null)
-  const [billingInterval, setBillingInterval] = useState<'monthly' | 'quarterly' | 'yearly'>('monthly')
+  const [billingInterval, setBillingInterval] = useState<'monthly' | 'yearly'>('monthly')
   const [mobilePlanView, setMobilePlanView] = useState<'free' | 'basic'>('basic') // Default to Basic on mobile
   const [isLoading, setIsLoading] = useState(false)
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false)
@@ -76,7 +76,7 @@ export default function PricingPage() {
   // Debug log subscription state
   useEffect(() => {
     console.log('[Pricing] Subscription state changed:', subscription)
-    console.log('[Pricing] isSubscribed:', subscription && ['basic', 'pro'].includes(subscription.plan) && (subscription.status === 'active' || subscription.status === 'trialing'))
+    console.log('[Pricing] isSubscribed:', subscription && ['basic', 'pro'].includes(subscription.plan) && subscription.status === 'active')
   }, [subscription])
 
   // Close user menu when clicking outside (mouse + touch)
@@ -109,8 +109,7 @@ export default function PricingPage() {
 
   const currency = getUserCurrency()
   const currencySymbol = currency === 'EUR' ? '€' : '$'
-  // Treat 'trialing' as active for badge display
-  const isActiveSubscription = subscription?.status === 'active' || subscription?.status === 'trialing'
+  const isActiveSubscription = subscription?.status === 'active'
   const subBadge = isActiveSubscription && subscription?.plan !== 'free' ? 'Pro' : 'Free'
 
   // Feature translation mapping
@@ -332,35 +331,25 @@ export default function PricingPage() {
   
 
   const getPriceForInterval = (interval: string) => {
-    switch (interval) {
-      case 'monthly':
-        // For monthly, show trial price (setup fee)
-        return STRIPE_PLANS.basic.priceTrial || STRIPE_PLANS.basic.priceMonthly
-      case 'quarterly':
-        // For quarterly, show trial price (setup fee) - same for all intervals
-        return STRIPE_PLANS.basic.priceTrial || (STRIPE_PLANS.basic.priceQuarterly * 3).toFixed(2)
-      case 'yearly':
-        // For yearly, show trial price (setup fee) - same for all intervals
-        return STRIPE_PLANS.basic.priceTrial || STRIPE_PLANS.basic.priceYearly
-      default:
-        return STRIPE_PLANS.basic.priceTrial || STRIPE_PLANS.basic.priceYearly
+    if (currency === 'USD') {
+      return interval === 'yearly'
+        ? STRIPE_PLANS.basic.priceYearlyUSD
+        : STRIPE_PLANS.basic.priceMonthlyUSD
     }
+    return interval === 'yearly'
+      ? STRIPE_PLANS.basic.priceYearly
+      : STRIPE_PLANS.basic.priceMonthly
   }
 
   const getMonthlyPrice = (interval: string) => {
-    switch (interval) {
-      case 'monthly':
-        // After trial, monthly price
-        return STRIPE_PLANS.basic.priceMonthly.toFixed(2)
-      case 'quarterly':
-        // priceQuarterly is already per month
-        return STRIPE_PLANS.basic.priceQuarterly.toFixed(2)
-      case 'yearly':
-        // Calculate monthly equivalent for yearly
-        return (STRIPE_PLANS.basic.priceYearly / 12).toFixed(2)
-      default:
-        return STRIPE_PLANS.basic.priceMonthly.toFixed(2)
+    if (currency === 'USD') {
+      return interval === 'yearly'
+        ? (STRIPE_PLANS.basic.priceYearlyUSD / 12).toFixed(2)
+        : STRIPE_PLANS.basic.priceMonthlyUSD.toFixed(2)
     }
+    return interval === 'yearly'
+      ? (STRIPE_PLANS.basic.priceYearly / 12).toFixed(2)
+      : STRIPE_PLANS.basic.priceMonthly.toFixed(2)
   }
 
   const handleSubscribe = async (plan: string, interval?: string) => {
@@ -420,14 +409,13 @@ export default function PricingPage() {
     }
   }
 
-  // Helper to check if user is subscribed (treat 'trialing' as active)
-  const isSubscribed = !!(subscription && ['basic', 'pro'].includes(subscription.plan) && (subscription.status === 'active' || subscription.status === 'trialing'))
+  const isSubscribed = !!(subscription && ['basic', 'pro'].includes(subscription.plan) && subscription.status === 'active')
 
   return (
     <>
       <Head>
         <title>Pricing - LadderFox CV Builder</title>
-        <meta name="description" content="Choose the perfect plan for your CV building needs. Free plan available with premium features starting at €3.99 for 7-day trial, then €14.99/month." />
+        <meta name="description" content="Choose the perfect plan for your CV building needs. Free plan available with premium features starting at €1.99/month." />
       </Head>
       
       <div className="min-h-screen" style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)' }}>
@@ -717,28 +705,6 @@ export default function PricingPage() {
                     <FiCreditCard size={18} /> {t('pricing.billing.monthly')}
                   </button>
                   <button
-                    onClick={() => setBillingInterval('quarterly')}
-                    className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors"
-                    style={{
-                      backgroundColor: billingInterval === 'quarterly' ? 'var(--bg-hover)' : 'transparent',
-                      color: billingInterval === 'quarterly' ? 'var(--text-primary)' : 'var(--text-tertiary)'
-                    }}
-                    onMouseEnter={(e) => {
-                      if (billingInterval !== 'quarterly') {
-                        e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
-                        e.currentTarget.style.color = 'var(--text-primary)';
-                      }
-                    }}
-                    onMouseLeave={(e) => {
-                      if (billingInterval !== 'quarterly') {
-                        e.currentTarget.style.backgroundColor = 'transparent';
-                        e.currentTarget.style.color = 'var(--text-tertiary)';
-                      }
-                    }}
-                  >
-                    <FiCreditCard size={18} /> {t('pricing.billing.quarterly')}
-                  </button>
-                  <button
                     onClick={() => setBillingInterval('yearly')}
                     className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors"
                     style={{
@@ -848,9 +814,7 @@ export default function PricingPage() {
                       }
                     }}
                   >
-                    {interval === 'monthly' ? t('pricing.billing.monthly') : 
-                     interval === 'quarterly' ? t('pricing.billing.quarterly') : 
-                     t('pricing.billing.yearly')}
+                    {interval === 'monthly' ? t('pricing.billing.monthly') : t('pricing.billing.yearly')}
                   </button>
                 ))}
               </div>
@@ -998,31 +962,20 @@ export default function PricingPage() {
                       <FiStar className="text-yellow-500" size={16} />
                     </h3>
                     <div className="flex items-baseline gap-1">
-                      <span className="text-4xl font-bold" style={{ color: 'var(--text-primary)' }}>{currencySymbol}{getPriceForInterval(billingInterval)}</span>
+                      <span className="text-4xl font-bold" style={{ color: 'var(--text-primary)' }}>
+                        {currencySymbol}{billingInterval === 'yearly' ? getMonthlyPrice(billingInterval) : getPriceForInterval(billingInterval)}
+                      </span>
                       <span style={{ color: 'var(--text-secondary)' }}>
-                        {' ' + t('pricing.trial')}
+                        /{t('pricing.per_month')}
                       </span>
                     </div>
-                    <div className="mt-1 space-y-0.5">
-                      <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
-                        {t('pricing.trial_info')
-                          .replace('{trialPrice}', currencySymbol + STRIPE_PLANS.basic.priceTrial)
-                          .replace('{monthlyPrice}', currencySymbol + getMonthlyPrice(billingInterval))
-                          .replace('{days}', STRIPE_PLANS.basic.trialDays.toString())}
-                      </p>
-                      <p className="text-xs" style={{ color: 'var(--text-tertiary)' }}>
-                        {billingInterval === 'monthly' 
-                          ? t('pricing.trial_auto_renew')
-                          : billingInterval === 'quarterly'
-                          ? t('pricing.trial_auto_renew_quarterly')
-                              .replace('{monthlyPrice}', currencySymbol + getMonthlyPrice(billingInterval))
-                              .replace('{quarterlyPrice}', currencySymbol + (parseFloat(getMonthlyPrice(billingInterval)) * 3).toFixed(2))
-                          : t('pricing.trial_auto_renew_yearly')
-                              .replace('{monthlyPrice}', currencySymbol + getMonthlyPrice(billingInterval))
-                              .replace('{yearlyPrice}', currencySymbol + (parseFloat(getMonthlyPrice(billingInterval)) * 12).toFixed(2))
-                        }
-                      </p>
-                    </div>
+                    {billingInterval === 'yearly' && (
+                      <div className="mt-1">
+                        <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
+                          {t('pricing.billed_yearly').replace('{yearlyPrice}', currencySymbol + getPriceForInterval(billingInterval))}
+                        </p>
+                      </div>
+                    )}
                   </div>
                   
                   {/* Features list - grows to fill space */}
@@ -1068,7 +1021,7 @@ export default function PricingPage() {
                       ) : isSubscribed ? (
                         t('pricing.current_plan_badge')
                       ) : (
-                        t('pricing.start_trial')
+                        t('pricing.subscribe_now')
                       )}
                     </button>
                   </div>

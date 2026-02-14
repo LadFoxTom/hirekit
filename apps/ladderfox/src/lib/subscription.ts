@@ -173,8 +173,7 @@ export class SubscriptionService {
   static async hasFeatureAccess(userId: string, feature: keyof FeatureAccess): Promise<boolean> {
     const subscription = await this.getUserSubscription(userId);
     
-    // Treat 'trialing' as active (trial users have full access)
-    if (subscription.status !== 'active' && subscription.status !== 'trialing') {
+    if (subscription.status !== 'active') {
       return false;
     }
 
@@ -199,8 +198,7 @@ export class SubscriptionService {
   static async hasQuota(userId: string, quotaType: keyof UsageQuota): Promise<boolean> {
     const subscription = await this.getUserSubscription(userId);
     
-    // Treat 'trialing' as active (trial users have full access)
-    if (subscription.status !== 'active' && subscription.status !== 'trialing') {
+    if (subscription.status !== 'active') {
       return false;
     }
 

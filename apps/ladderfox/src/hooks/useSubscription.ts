@@ -5,7 +5,7 @@ import { useSession } from 'next-auth/react';
 
 export interface SubscriptionData {
   plan: 'free' | 'basic' | 'pro' | 'team';
-  status: 'active' | 'canceled' | 'past_due' | 'trialing';
+  status: 'active' | 'canceled' | 'past_due';
   features: {
     pdf_export: boolean;
     ai_requests: number;
@@ -22,7 +22,7 @@ export interface SubscriptionData {
     storage: { used: number; limit: number };
     api_calls: { used: number; limit: number };
   };
-  billingCycle: 'monthly' | 'quarterly' | 'yearly';
+  billingCycle: 'monthly' | 'yearly';
   currentPeriodStart: string | null;
   currentPeriodEnd: string | null;
   cancelAtPeriodEnd: boolean;
@@ -136,8 +136,7 @@ export function useSubscription() {
   }, [session, sessionStatus]);
 
   const hasFeature = (feature: keyof SubscriptionData['features']): boolean => {
-    // Treat 'trialing' as active (trial users have full access)
-    if (!subscription || (subscription.status !== 'active' && subscription.status !== 'trialing')) {
+    if (!subscription || subscription.status !== 'active') {
       return false;
     }
 
@@ -157,8 +156,7 @@ export function useSubscription() {
   };
 
   const hasQuota = (quotaType: keyof SubscriptionData['usageQuotas']): boolean => {
-    // Treat 'trialing' as active (trial users have full access)
-    if (!subscription || (subscription.status !== 'active' && subscription.status !== 'trialing')) {
+    if (!subscription || subscription.status !== 'active') {
       return false;
     }
 
@@ -188,7 +186,7 @@ export function useSubscription() {
     hasQuota,
     isPlan,
     isAtLeastPlan,
-    isActive: subscription?.status === 'active' || subscription?.status === 'trialing',
+    isActive: subscription?.status === 'active',
   };
 }
 

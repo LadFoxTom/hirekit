@@ -25,12 +25,11 @@ export const STRIPE_PLANS = {
   },
   basic: {
     name: 'Basic Plan',
-    price: 14.99, // Monthly price after trial
-    priceMonthly: 14.99,
-    priceTrial: 3.99, // Setup fee for 7-day trial (applies to all intervals)
-    priceQuarterly: 11.99, // Per month (€35.97 for 3 months, 20% discount)
-    priceYearly: 83.88, // Per year (€6.99/month, 53% discount)
-    trialDays: 7, // 7-day trial period
+    price: 1.99, // Monthly price in EUR
+    priceMonthly: 1.99, // EUR monthly
+    priceMonthlyUSD: 2.49, // USD monthly
+    priceYearly: 14.99, // EUR yearly
+    priceYearlyUSD: 18.99, // USD yearly
     features: [
       'Unlimited CVs & letters',
       'All premium templates (20+)',
@@ -45,15 +44,6 @@ export const STRIPE_PLANS = {
         EUR: process.env.STRIPE_BASIC_MONTHLY_PRICE_ID_EUR,
         USD: process.env.STRIPE_BASIC_MONTHLY_PRICE_ID_USD
       },
-      trial: {
-        // One-time setup fee for trial
-        EUR: process.env.STRIPE_BASIC_TRIAL_SETUP_FEE_PRICE_ID_EUR,
-        USD: process.env.STRIPE_BASIC_TRIAL_SETUP_FEE_PRICE_ID_USD
-      },
-      quarterly: {
-        EUR: process.env.STRIPE_BASIC_QUARTERLY_PRICE_ID_EUR,
-        USD: process.env.STRIPE_BASIC_QUARTERLY_PRICE_ID_USD
-      },
       yearly: {
         EUR: process.env.STRIPE_BASIC_YEARLY_PRICE_ID_EUR,
         USD: process.env.STRIPE_BASIC_YEARLY_PRICE_ID_USD
@@ -62,7 +52,6 @@ export const STRIPE_PLANS = {
     cvLimit: -1, // Unlimited
     aiEnabled: true,
     exportEnabled: true,
-
   },
   pro: {
     name: 'Pro Plan',
@@ -96,32 +85,25 @@ export const STRIPE_PLANS = {
 
 export const BILLING_INTERVALS = {
   monthly: { label: 'Monthly', months: 1 },
-  quarterly: { label: 'Quarterly', months: 3, savings: 17 },
-  yearly: { label: 'Yearly', months: 12, savings: 17 }
+  yearly: { label: 'Yearly', months: 12, savings: 37 }
 }
 
 export class StripeService {
   // Create a checkout session for subscription
   static async createCheckoutSession(
-    userId: string, 
-    priceId: string, 
-    successUrl: string, 
-    cancelUrl: string,
-    options?: {
-      isTrial?: boolean;
-      trialSetupFeePriceId?: string;
-      currency?: string;
-    }
+    userId: string,
+    priceId: string,
+    successUrl: string,
+    cancelUrl: string
   ) {
     try {
       console.log('[Stripe] Creating checkout session for user:', userId)
       console.log('[Stripe] Price ID:', priceId)
-      console.log('[Stripe] Is Trial:', options?.isTrial)
-      
+
       // Get or create Stripe customer
       const user = await UserService.getUser(userId)
       console.log('[Stripe] User found:', !!user)
-      
+
       let customerId = user?.subscription?.stripeCustomerId
       console.log('[Stripe] Existing customer ID:', customerId)
 
@@ -136,28 +118,19 @@ export class StripeService {
         })
         customerId = customer.id
         console.log('[Stripe] New customer created:', customerId)
-        
+
         // Create subscription record
         await UserService.createSubscription(userId, customerId)
         console.log('[Stripe] Subscription record created')
       }
 
       // Build line items
-      const lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] = []
-      
-      // If trial, add setup fee as one-time payment
-      if (options?.isTrial && options?.trialSetupFeePriceId) {
-        lineItems.push({
-          price: options.trialSetupFeePriceId,
+      const lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] = [
+        {
+          price: priceId,
           quantity: 1,
-        })
-      }
-      
-      // Add subscription price
-      lineItems.push({
-        price: priceId,
-        quantity: 1,
-      })
+        }
+      ]
 
       // Create checkout session config
       const sessionConfig: Stripe.Checkout.SessionCreateParams = {
@@ -168,29 +141,15 @@ export class StripeService {
         success_url: successUrl,
         cancel_url: cancelUrl,
         metadata: {
-          userId: userId,
-          isTrial: options?.isTrial ? 'true' : 'false'
-        }
-      }
-
-      // Add trial period if this is a trial subscription
-      if (options?.isTrial) {
-        sessionConfig.subscription_data = {
-          trial_period_days: 7, // 7-day trial
-          metadata: {
-            userId: userId,
-            isTrial: 'true'
-          }
+          userId: userId
         }
       }
 
       console.log('[Stripe] Creating checkout session with:', {
         customer: customerId,
-        lineItems: lineItems.length,
-        isTrial: options?.isTrial,
-        trialDays: options?.isTrial ? 7 : undefined
+        lineItems: lineItems.length
       })
-      
+
       const session = await stripe.checkout.sessions.create(sessionConfig)
 
       console.log('[Stripe] Checkout session created successfully:', session.id)
@@ -344,17 +303,13 @@ export class StripeService {
     
     // Check Basic plan prices
     const basicMonthlyPrices = Object.values(STRIPE_PLANS.basic.stripePriceIds.monthly || {}).filter(Boolean)
-    const basicQuarterlyPrices = Object.values(STRIPE_PLANS.basic.stripePriceIds.quarterly || {}).filter(Boolean)
     const basicYearlyPrices = Object.values(STRIPE_PLANS.basic.stripePriceIds.yearly || {}).filter(Boolean)
-    const allBasicPrices = [...basicMonthlyPrices, ...basicQuarterlyPrices, ...basicYearlyPrices]
-    
+    const allBasicPrices = [...basicMonthlyPrices, ...basicYearlyPrices]
+
     if (allBasicPrices.includes(priceId)) {
       plan = 'basic'
-      // Determine billing cycle
       if (basicMonthlyPrices.includes(priceId)) {
         billingCycle = 'monthly'
-      } else if (basicQuarterlyPrices.includes(priceId)) {
-        billingCycle = 'quarterly'
       } else if (basicYearlyPrices.includes(priceId)) {
         billingCycle = 'yearly'
       }
@@ -373,9 +328,7 @@ export class StripeService {
     }
 
     // Determine subscription status
-    // If subscription has trial_end in the future, it's in trial
-    const isInTrial = subscription.trial_end && subscription.trial_end > Math.floor(Date.now() / 1000)
-    const subscriptionStatus = isInTrial ? 'trialing' : subscription.status
+    const subscriptionStatus = subscription.status
 
     console.log('[Webhook] Updating subscription:', {
       userId: user.id,

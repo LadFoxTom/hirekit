@@ -103,8 +103,8 @@ export default function ExamplePage({ professionId, type, language }: ExamplePag
   const userMenuRef = useRef<HTMLDivElement>(null)
   const dropdownRef = useRef<HTMLDivElement>(null)
 
-  const isActiveOrTrialing = subscription?.status === 'active' || subscription?.status === 'trialing'
-  const plan = isActiveOrTrialing ? (subscription?.plan || 'free') : 'free'
+  const isActiveSubscription = subscription?.status === 'active'
+  const plan = isActiveSubscription ? (subscription?.plan || 'free') : 'free'
   const isPro = plan !== 'free'
   const subBadge = isPro ? 'Pro' : 'Free'
 

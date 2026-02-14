@@ -18,10 +18,6 @@ const BASIC_PRICE_IDS = {
     EUR: process.env.STRIPE_BASIC_MONTHLY_PRICE_ID_EUR,
     USD: process.env.STRIPE_BASIC_MONTHLY_PRICE_ID_USD,
   },
-  quarterly: {
-    EUR: process.env.STRIPE_BASIC_QUARTERLY_PRICE_ID_EUR,
-    USD: process.env.STRIPE_BASIC_QUARTERLY_PRICE_ID_USD,
-  },
   yearly: {
     EUR: process.env.STRIPE_BASIC_YEARLY_PRICE_ID_EUR,
     USD: process.env.STRIPE_BASIC_YEARLY_PRICE_ID_USD,
@@ -104,7 +100,6 @@ async function fixSubscription(email: string) {
   // Check all basic price IDs
   const allBasicPrices = [
     ...Object.values(BASIC_PRICE_IDS.monthly).filter(Boolean),
-    ...Object.values(BASIC_PRICE_IDS.quarterly).filter(Boolean),
     ...Object.values(BASIC_PRICE_IDS.yearly).filter(Boolean),
   ]
 
@@ -112,16 +107,12 @@ async function fixSubscription(email: string) {
     plan = 'basic'
     if (Object.values(BASIC_PRICE_IDS.monthly).includes(priceId!)) {
       billingCycle = 'monthly'
-    } else if (Object.values(BASIC_PRICE_IDS.quarterly).includes(priceId!)) {
-      billingCycle = 'quarterly'
     } else if (Object.values(BASIC_PRICE_IDS.yearly).includes(priceId!)) {
       billingCycle = 'yearly'
     }
   }
 
-  // Determine status
-  const isInTrial = subscription.trial_end && subscription.trial_end > Math.floor(Date.now() / 1000)
-  const status = isInTrial ? 'trialing' : subscription.status
+  const status = subscription.status
 
   console.log('\n📝 Updating subscription in database...\n')
   console.log('Plan:', plan)

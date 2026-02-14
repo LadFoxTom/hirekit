@@ -109,8 +109,8 @@ model Subscription {
 
   // Subscription details
   plan               String    @default("free") // free, basic, pro, team
-  status             String    @default("active") // active, canceled, past_due, trialing
-  billingCycle       String    @default("monthly") // monthly, quarterly, yearly
+  status             String    @default("active") // active, canceled, past_due
+  billingCycle       String    @default("monthly") // monthly, yearly
   currentPeriodStart DateTime?
   currentPeriodEnd   DateTime?
   cancelAtPeriodEnd  Boolean   @default(false)

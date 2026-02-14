@@ -1099,9 +1099,8 @@ export default function HomePage() {
   const mobileUserMenuRef = useRef<HTMLDivElement>(null);
   
   // Subscription gating
-  // Treat 'trialing' as active (trial users have full access)
-  const isActiveOrTrialing = subscription?.status === 'active' || subscription?.status === 'trialing';
-  const plan = isActiveOrTrialing ? (subscription?.plan || 'free') : 'free';
+  const isActiveSubscription = subscription?.status === 'active';
+  const plan = isActiveSubscription ? (subscription?.plan || 'free') : 'free';
   const isPro = plan !== 'free';
   const isFree = !isPro;
   const subBadge = isPro ? 'Pro' : 'Free';
