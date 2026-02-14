@@ -7,11 +7,6 @@ import { compare } from 'bcryptjs';
 
 const prisma = new PrismaClient();
 
-// Ensure environment variables are available
-if (!process.env.NEXTAUTH_SECRET) {
-  throw new Error('NEXTAUTH_SECRET is not defined');
-}
-
 export const authOptions = {
   secret: process.env.NEXTAUTH_SECRET,
   adapter: PrismaAdapter(prisma),
