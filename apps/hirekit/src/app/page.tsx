@@ -157,7 +157,7 @@ function SolutionSection() {
             <code className="block mb-2">
               <span className="text-pink-400">&lt;script</span>{' '}
               <span className="text-purple-400">src</span>=
-              <span className="text-hk-accent">&quot;https://cdn.hirekit.io/v2.js&quot;</span>
+              <span className="text-hk-accent">&quot;https://your-app.vercel.app/widget/hirekit-widget.iife.js&quot;</span>
               <span className="text-pink-400">&gt;&lt;/script&gt;</span>
             </code>
             <code className="block mb-2" />

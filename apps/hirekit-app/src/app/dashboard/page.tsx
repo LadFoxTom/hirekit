@@ -113,7 +113,7 @@ export default async function DashboardPage() {
                   <span className="text-[#F472B6]">&lt;script</span>
                   <span className="text-[#A78BFA]"> src</span>
                   <span className="text-slate-400">=</span>
-                  <span className="text-[#51CF66]">&quot;https://cdn.hirekit.io/widget.js&quot;</span>
+                  <span className="text-[#51CF66]">&quot;/widget/hirekit-widget.iife.js&quot;</span>
                   <span className="text-[#F472B6]">&gt;&lt;/script&gt;</span>
                   {'\n'}
                   <span className="text-[#F472B6]">&lt;script&gt;</span>

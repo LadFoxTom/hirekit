@@ -6,13 +6,17 @@ import { DashboardLayout } from '@/app/components/DashboardLayout';
 export default function EmbedCodePage() {
   const [companyId, setCompanyId] = useState('');
   const [copied, setCopied] = useState(false);
+  const [appOrigin, setAppOrigin] = useState('');
 
   useEffect(() => {
+    setAppOrigin(window.location.origin);
     fetch('/api/settings')
       .then((r) => r.json())
       .then((data) => setCompanyId(data.company?.id || ''))
       .catch(() => {});
   }, []);
+
+  const widgetUrl = `${appOrigin}/widget/hirekit-widget.iife.js`;
 
   const embedCode = `<!-- HireKit CV Builder Widget -->
 <div id="hirekit-widget"></div>
@@ -20,7 +24,7 @@ export default function EmbedCodePage() {
   (function(w,d,s,o){
     w.HireKitConfig={companyId:'${companyId}'};
     var js=d.createElement(s);js.async=1;
-    js.src='https://cdn.hirekit.io/hirekit-widget.iife.js';
+    js.src='${widgetUrl}';
     js.onload=function(){w.HireKit.init(w.HireKitConfig)};
     d.head.appendChild(js);
   })(window,document,'script');
@@ -99,7 +103,7 @@ export default function EmbedCodePage() {
   (function(w,d,s,o){
     w.HireKitConfig={companyId:'${companyId}',jobId:'YOUR_JOB_ID'};
     var js=d.createElement(s);js.async=1;
-    js.src='https://cdn.hirekit.io/hirekit-widget.iife.js';
+    js.src='${widgetUrl}';
     js.onload=function(){w.HireKit.init(w.HireKitConfig)};
     d.head.appendChild(js);
   })(window,document,'script');
