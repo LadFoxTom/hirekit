@@ -1,5 +1,5 @@
 {
   "framework": "nextjs",
   "installCommand": "cd ../.. && pnpm install",
-  "buildCommand": "next build"
+  "buildCommand": "npx prisma generate --schema=../../packages/database-hirekit/prisma/schema.prisma && next build"
 }
