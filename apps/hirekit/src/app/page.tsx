@@ -131,7 +131,7 @@ function SolutionSection() {
             </span>
             <h2 className="text-4xl mt-4 mb-6 font-bold">Just 5 lines of code.</h2>
             <p className="text-slate-500 text-lg">
-              Copy our embed snippet, drop it into your existing React, Vue, or HTML page, and instantly get a full-featured CV builder. It matches your brand automatically.
+              Copy our embed snippet, drop it into your existing React, Vue, or HTML page, and instantly get a full-featured CV builder or interactive job board. It matches your brand automatically.
             </p>
             <ul className="mt-8 space-y-4">
               {[
@@ -243,6 +243,12 @@ function FeaturesSection() {
             title="Chat Mode"
             description="Candidates can build their CV through an AI-powered conversational interface instead of forms."
             color="#EC4899"
+          />
+          <FeatureCard
+            icon="ph-duotone ph-briefcase"
+            title="Job Board Widget"
+            description="Embed a fully interactive job board on your site. Candidates browse, filter, and apply — all without leaving your page."
+            color="#0EA5E9"
           />
         </div>
       </div>

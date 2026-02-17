@@ -7,6 +7,7 @@ interface WidgetConfig {
   companyId: string;
   jobId?: string;
   containerId?: string;
+  container?: HTMLElement;
 }
 
 const isDev = import.meta.env?.DEV;
@@ -15,10 +16,10 @@ class HireKitWidget {
   private root: ReturnType<typeof createRoot> | null = null;
 
   async init(config: WidgetConfig) {
-    const containerId = config.containerId || 'hirekit-widget';
-    const container = document.getElementById(containerId);
+    const container = config.container
+      || document.getElementById(config.containerId || 'hirekit-widget');
     if (!container) {
-      console.error(`HireKit: Container #${containerId} not found`);
+      console.error(`HireKit: Container #${config.containerId || 'hirekit-widget'} not found`);
       return;
     }
 

@@ -1,0 +1,521 @@
+/* ═══════════════════════════════════════════
+   HireKit Jobs Widget — CSS Custom Properties
+   ═══════════════════════════════════════════ */
+
+:host {
+  --hk-primary: #4F46E5;
+  --hk-primary-hover: #4338CA;
+  --hk-bg: #F8FAFC;
+  --hk-surface: #FFFFFF;
+  --hk-border: #E2E8F0;
+  --hk-text: #1E293B;
+  --hk-text-secondary: #64748B;
+  --hk-text-muted: #94A3B8;
+  --hk-badge-bg: #EEF2FF;
+  --hk-badge-text: #4F46E5;
+  --hk-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  --hk-shadow-lg: 0 4px 12px rgba(0,0,0,0.1);
+  --hk-radius: 12px;
+  --hk-radius-sm: 8px;
+  --hk-font: Inter, system-ui, -apple-system, sans-serif;
+}
+
+/* Dark theme */
+:host(.hk-dark) {
+  --hk-bg: #0F172A;
+  --hk-surface: #1E293B;
+  --hk-border: #334155;
+  --hk-text: #F1F5F9;
+  --hk-text-secondary: #94A3B8;
+  --hk-text-muted: #64748B;
+  --hk-badge-bg: #312E81;
+  --hk-badge-text: #A5B4FC;
+  --hk-shadow: 0 1px 3px rgba(0,0,0,0.3);
+  --hk-shadow-lg: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+/* ═══════════════════════════════════════════
+   BASE
+   ═══════════════════════════════════════════ */
+
+.hk-jobs-root {
+  font-family: var(--hk-font);
+  color: var(--hk-text);
+  background: var(--hk-bg);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  padding: 24px;
+}
+
+.hk-jobs-root *,
+.hk-jobs-root *::before,
+.hk-jobs-root *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ═══════════════════════════════════════════
+   HEADER
+   ═══════════════════════════════════════════ */
+
+.hk-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.hk-header-logo {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--hk-radius-sm);
+  object-fit: contain;
+}
+
+.hk-header-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--hk-text);
+}
+
+.hk-header-count {
+  font-size: 14px;
+  color: var(--hk-text-secondary);
+  margin-left: auto;
+}
+
+/* ═══════════════════════════════════════════
+   FILTERS
+   ═══════════════════════════════════════════ */
+
+.hk-filters {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.hk-search {
+  flex: 1;
+  min-width: 200px;
+  padding: 10px 14px;
+  border: 1px solid var(--hk-border);
+  border-radius: var(--hk-radius-sm);
+  background: var(--hk-surface);
+  color: var(--hk-text);
+  font-size: 14px;
+  font-family: var(--hk-font);
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.hk-search:focus {
+  border-color: var(--hk-primary);
+}
+
+.hk-search::placeholder {
+  color: var(--hk-text-muted);
+}
+
+.hk-select {
+  padding: 10px 32px 10px 14px;
+  border: 1px solid var(--hk-border);
+  border-radius: var(--hk-radius-sm);
+  background: var(--hk-surface);
+  color: var(--hk-text);
+  font-size: 14px;
+  font-family: var(--hk-font);
+  outline: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2364748B' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.hk-select:focus {
+  border-color: var(--hk-primary);
+}
+
+/* ═══════════════════════════════════════════
+   JOB GRID (cards layout)
+   ═══════════════════════════════════════════ */
+
+.hk-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+}
+
+/* ═══════════════════════════════════════════
+   JOB LIST (list layout)
+   ═══════════════════════════════════════════ */
+
+.hk-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ═══════════════════════════════════════════
+   JOB CARD
+   ═══════════════════════════════════════════ */
+
+.hk-card {
+  background: var(--hk-surface);
+  border: 1px solid var(--hk-border);
+  border-radius: var(--hk-radius);
+  padding: 20px;
+  cursor: pointer;
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+.hk-card:hover {
+  box-shadow: var(--hk-shadow-lg);
+  border-color: var(--hk-primary);
+}
+
+.hk-card-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--hk-text);
+  margin-bottom: 8px;
+}
+
+.hk-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.hk-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  background: var(--hk-badge-bg);
+  color: var(--hk-badge-text);
+}
+
+.hk-card-salary {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--hk-text);
+  margin-bottom: 12px;
+}
+
+.hk-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 12px;
+}
+
+.hk-card-date {
+  font-size: 12px;
+  color: var(--hk-text-muted);
+}
+
+.hk-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 18px;
+  border: none;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: var(--hk-font);
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.hk-btn:active {
+  transform: scale(0.97);
+}
+
+.hk-btn-primary {
+  background: var(--hk-primary);
+  color: #fff;
+}
+
+.hk-btn-primary:hover {
+  background: var(--hk-primary-hover);
+}
+
+.hk-btn-outline {
+  background: transparent;
+  color: var(--hk-primary);
+  border: 1px solid var(--hk-primary);
+}
+
+.hk-btn-outline:hover {
+  background: var(--hk-badge-bg);
+}
+
+/* List layout card variant */
+.hk-card--list {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.hk-card--list .hk-card-body {
+  flex: 1;
+}
+
+.hk-card--list .hk-card-actions {
+  flex-shrink: 0;
+}
+
+/* ═══════════════════════════════════════════
+   JOB DETAIL
+   ═══════════════════════════════════════════ */
+
+.hk-detail {
+  background: var(--hk-surface);
+  border: 1px solid var(--hk-border);
+  border-radius: var(--hk-radius);
+  padding: 32px;
+}
+
+.hk-detail-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: var(--hk-primary);
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: var(--hk-font);
+  font-weight: 500;
+  margin-bottom: 20px;
+  padding: 0;
+}
+
+.hk-detail-back:hover {
+  text-decoration: underline;
+}
+
+.hk-detail-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--hk-text);
+  margin-bottom: 12px;
+}
+
+.hk-detail-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.hk-detail-salary {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--hk-text);
+  margin-bottom: 20px;
+}
+
+.hk-detail-description {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--hk-text-secondary);
+  margin-bottom: 24px;
+  white-space: pre-wrap;
+}
+
+.hk-detail-apply {
+  margin-top: 24px;
+}
+
+/* ═══════════════════════════════════════════
+   APPLY MODAL
+   ═══════════════════════════════════════════ */
+
+.hk-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+  padding: 24px;
+}
+
+.hk-modal {
+  background: var(--hk-surface);
+  border-radius: var(--hk-radius);
+  width: 100%;
+  max-width: 700px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+.hk-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--hk-border);
+}
+
+.hk-modal-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--hk-text);
+}
+
+.hk-modal-close {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: var(--hk-bg);
+  color: var(--hk-text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  line-height: 1;
+  font-family: var(--hk-font);
+  transition: background 0.2s;
+}
+
+.hk-modal-close:hover {
+  background: var(--hk-border);
+}
+
+.hk-modal-body {
+  padding: 24px;
+  min-height: 400px;
+}
+
+.hk-modal-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px;
+  color: var(--hk-text-muted);
+  font-size: 14px;
+}
+
+/* ═══════════════════════════════════════════
+   EMPTY STATE
+   ═══════════════════════════════════════════ */
+
+.hk-empty {
+  text-align: center;
+  padding: 48px 24px;
+}
+
+.hk-empty-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+  opacity: 0.4;
+}
+
+.hk-empty-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--hk-text);
+  margin-bottom: 8px;
+}
+
+.hk-empty-text {
+  font-size: 14px;
+  color: var(--hk-text-secondary);
+}
+
+/* ═══════════════════════════════════════════
+   LOADING
+   ═══════════════════════════════════════════ */
+
+.hk-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px;
+}
+
+.hk-spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid var(--hk-border);
+  border-top-color: var(--hk-primary);
+  border-radius: 50%;
+  animation: hk-spin 0.7s linear infinite;
+}
+
+@keyframes hk-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ═══════════════════════════════════════════
+   ERROR
+   ═══════════════════════════════════════════ */
+
+.hk-error {
+  text-align: center;
+  padding: 32px;
+  color: #DC2626;
+  font-size: 14px;
+}
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════ */
+
+@media (max-width: 640px) {
+  .hk-jobs-root {
+    padding: 16px;
+  }
+
+  .hk-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hk-filters {
+    flex-direction: column;
+  }
+
+  .hk-search {
+    min-width: 0;
+  }
+
+  .hk-select {
+    width: 100%;
+  }
+
+  .hk-card--list {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hk-detail {
+    padding: 20px;
+  }
+
+  .hk-detail-title {
+    font-size: 20px;
+  }
+
+  .hk-modal-overlay {
+    padding: 12px;
+  }
+
+  .hk-modal {
+    max-height: 95vh;
+  }
+}
