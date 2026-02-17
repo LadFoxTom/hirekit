@@ -23,7 +23,7 @@ interface Settings {
   templateType: string;
 }
 
-type Tab = 'branding' | 'sections' | 'company';
+type Tab = 'branding' | 'sections' | 'job-listings' | 'company';
 
 export default function SettingsPage() {
   const [settings, setSettings] = useState<Settings | null>(null);
@@ -85,6 +85,7 @@ export default function SettingsPage() {
   const tabs: { id: Tab; label: string; icon: string }[] = [
     { id: 'branding', label: 'Branding', icon: 'ph-paint-brush' },
     { id: 'sections', label: 'CV Sections', icon: 'ph-list-checks' },
+    { id: 'job-listings', label: 'Job Listings', icon: 'ph-briefcase' },
     { id: 'company', label: 'Company', icon: 'ph-buildings' },
   ];
 
@@ -774,6 +775,11 @@ export default function SettingsPage() {
           </div>
         )}
 
+        {/* Job Listings Tab */}
+        {activeTab === 'job-listings' && (
+          <JobListingsTab />
+        )}
+
         {/* Company Tab */}
         {activeTab === 'company' && (
           <div className="bg-white rounded-2xl border border-slate-200 p-8 shadow-sm">
@@ -942,6 +948,244 @@ function TemplateMiniPreview({ template, selected }: { template: WidgetTemplateC
         <div className="h-1.5 w-1/3 rounded-sm bg-slate-200" />
         <div className="h-1.5 w-1/5 rounded-sm bg-slate-200" />
         <div className="h-1.5 w-1/4 rounded-sm bg-slate-200" />
+      </div>
+    </div>
+  );
+}
+
+function JobListingsTab() {
+  const [layout, setLayout] = useState<'cards' | 'list'>('cards');
+  const [theme, setTheme] = useState<'light' | 'dark'>('light');
+  const [showFilters, setShowFilters] = useState(true);
+  const [showSearch, setShowSearch] = useState(true);
+
+  return (
+    <div className="space-y-6">
+      <div className="bg-white rounded-2xl border border-slate-200 p-8 shadow-sm">
+        <div className="flex items-center gap-2 mb-2">
+          <i className="ph-layout text-xl text-[#4F46E5]" />
+          <h3 className="text-lg font-bold text-[#1E293B]">Widget Layout</h3>
+        </div>
+        <p className="text-[15px] text-[#64748B] mb-6">
+          Choose how job listings are displayed on your career page.
+        </p>
+
+        <div className="grid md:grid-cols-2 gap-4">
+          {/* Cards layout */}
+          <button
+            type="button"
+            onClick={() => setLayout('cards')}
+            className={`text-left rounded-2xl border-2 p-6 transition-all duration-300 ${
+              layout === 'cards'
+                ? 'border-[#4F46E5] bg-[#4F46E5]/[0.03] shadow-md shadow-indigo-500/10'
+                : 'border-slate-200 hover:border-slate-300 bg-white'
+            }`}
+          >
+            <div className="flex items-center gap-3 mb-4">
+              <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${
+                layout === 'cards' ? 'bg-[#4F46E5] text-white' : 'bg-slate-100 text-slate-400'
+              }`}>
+                <i className="ph-grid-four text-xl" />
+              </div>
+              <div>
+                <h4 className="font-bold text-[#1E293B] text-sm">Card Grid</h4>
+                <p className="text-xs text-[#64748B]">Responsive grid of job cards</p>
+              </div>
+              {layout === 'cards' && <i className="ph-check-circle-fill text-[#4F46E5] text-xl ml-auto" />}
+            </div>
+            {/* Mini preview */}
+            <div className="bg-slate-50 rounded-xl p-4">
+              <div className="grid grid-cols-2 gap-2">
+                {[1, 2, 3, 4].map((i) => (
+                  <div key={i} className="bg-white border border-slate-200 rounded-lg p-2.5">
+                    <div className="h-2 bg-slate-300 rounded w-3/4 mb-1.5" />
+                    <div className="h-1.5 bg-slate-100 rounded w-1/2 mb-2" />
+                    <div className="flex gap-1">
+                      <div className="h-3 w-10 bg-indigo-50 rounded-full" />
+                      <div className="h-3 w-8 bg-indigo-50 rounded-full" />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <p className="text-xs text-[#94A3B8] mt-3 leading-relaxed">
+              Jobs displayed as cards in a responsive grid. Best for career pages with multiple open positions.
+            </p>
+          </button>
+
+          {/* List layout */}
+          <button
+            type="button"
+            onClick={() => setLayout('list')}
+            className={`text-left rounded-2xl border-2 p-6 transition-all duration-300 ${
+              layout === 'list'
+                ? 'border-[#4F46E5] bg-[#4F46E5]/[0.03] shadow-md shadow-indigo-500/10'
+                : 'border-slate-200 hover:border-slate-300 bg-white'
+            }`}
+          >
+            <div className="flex items-center gap-3 mb-4">
+              <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${
+                layout === 'list' ? 'bg-[#4F46E5] text-white' : 'bg-slate-100 text-slate-400'
+              }`}>
+                <i className="ph-list text-xl" />
+              </div>
+              <div>
+                <h4 className="font-bold text-[#1E293B] text-sm">List View</h4>
+                <p className="text-xs text-[#64748B]">Compact stacked rows</p>
+              </div>
+              {layout === 'list' && <i className="ph-check-circle-fill text-[#4F46E5] text-xl ml-auto" />}
+            </div>
+            {/* Mini preview */}
+            <div className="bg-slate-50 rounded-xl p-4 space-y-2">
+              {[1, 2, 3].map((i) => (
+                <div key={i} className="bg-white border border-slate-200 rounded-lg p-2.5 flex items-center gap-3">
+                  <div className="flex-1">
+                    <div className="h-2 bg-slate-300 rounded w-2/3 mb-1" />
+                    <div className="flex gap-1">
+                      <div className="h-2.5 w-8 bg-indigo-50 rounded-full" />
+                      <div className="h-2.5 w-10 bg-indigo-50 rounded-full" />
+                    </div>
+                  </div>
+                  <div className="h-5 w-12 bg-indigo-100 rounded-full" />
+                </div>
+              ))}
+            </div>
+            <p className="text-xs text-[#94A3B8] mt-3 leading-relaxed">
+              Jobs displayed as stacked rows. More compact, ideal for pages with limited space.
+            </p>
+          </button>
+        </div>
+      </div>
+
+      {/* Theme */}
+      <div className="bg-white rounded-2xl border border-slate-200 p-8 shadow-sm">
+        <div className="flex items-center gap-2 mb-2">
+          <i className="ph-palette text-xl text-[#4F46E5]" />
+          <h3 className="text-lg font-bold text-[#1E293B]">Theme</h3>
+        </div>
+        <p className="text-[15px] text-[#64748B] mb-6">
+          Match the widget appearance to your website. The primary color from your Branding settings is applied automatically.
+        </p>
+
+        <div className="grid md:grid-cols-2 gap-4">
+          <button
+            type="button"
+            onClick={() => setTheme('light')}
+            className={`text-left rounded-2xl border-2 p-6 transition-all duration-300 ${
+              theme === 'light'
+                ? 'border-[#4F46E5] bg-[#4F46E5]/[0.03] shadow-md shadow-indigo-500/10'
+                : 'border-slate-200 hover:border-slate-300 bg-white'
+            }`}
+          >
+            <div className="flex items-center gap-3">
+              <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${
+                theme === 'light' ? 'bg-[#4F46E5] text-white' : 'bg-slate-100 text-slate-400'
+              }`}>
+                <i className="ph-sun text-xl" />
+              </div>
+              <div>
+                <h4 className="font-bold text-[#1E293B] text-sm">Light</h4>
+                <p className="text-xs text-[#64748B]">White background, dark text</p>
+              </div>
+              {theme === 'light' && <i className="ph-check-circle-fill text-[#4F46E5] text-xl ml-auto" />}
+            </div>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setTheme('dark')}
+            className={`text-left rounded-2xl border-2 p-6 transition-all duration-300 ${
+              theme === 'dark'
+                ? 'border-[#4F46E5] bg-[#4F46E5]/[0.03] shadow-md shadow-indigo-500/10'
+                : 'border-slate-200 hover:border-slate-300 bg-white'
+            }`}
+          >
+            <div className="flex items-center gap-3">
+              <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${
+                theme === 'dark' ? 'bg-[#4F46E5] text-white' : 'bg-slate-100 text-slate-400'
+              }`}>
+                <i className="ph-moon text-xl" />
+              </div>
+              <div>
+                <h4 className="font-bold text-[#1E293B] text-sm">Dark</h4>
+                <p className="text-xs text-[#64748B]">Dark background, light text</p>
+              </div>
+              {theme === 'dark' && <i className="ph-check-circle-fill text-[#4F46E5] text-xl ml-auto" />}
+            </div>
+          </button>
+        </div>
+      </div>
+
+      {/* Features toggles */}
+      <div className="bg-white rounded-2xl border border-slate-200 p-8 shadow-sm">
+        <div className="flex items-center gap-2 mb-2">
+          <i className="ph-toggle-right text-xl text-[#4F46E5]" />
+          <h3 className="text-lg font-bold text-[#1E293B]">Widget Features</h3>
+        </div>
+        <p className="text-[15px] text-[#64748B] mb-8">
+          Toggle which features are visible in the job listing widget.
+        </p>
+
+        <div className="space-y-4">
+          <div className="border rounded-2xl p-5 border-slate-200 bg-white">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-4">
+                <div
+                  onClick={() => setShowSearch(!showSearch)}
+                  className={`w-11 h-6 rounded-full cursor-pointer transition-colors duration-300 relative ${
+                    showSearch ? 'bg-[#4F46E5]' : 'bg-slate-200'
+                  }`}
+                >
+                  <div className={`absolute top-[2px] left-[2px] w-5 h-5 bg-white rounded-full transition-transform duration-300 ${
+                    showSearch ? 'translate-x-5' : ''
+                  }`} />
+                </div>
+                <div>
+                  <span className="font-semibold text-sm text-[#1E293B]">Search Bar</span>
+                  <p className="text-xs mt-0.5 text-[#64748B]">
+                    Allow candidates to search jobs by title, description, or keywords
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="border rounded-2xl p-5 border-slate-200 bg-white">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-4">
+                <div
+                  onClick={() => setShowFilters(!showFilters)}
+                  className={`w-11 h-6 rounded-full cursor-pointer transition-colors duration-300 relative ${
+                    showFilters ? 'bg-[#4F46E5]' : 'bg-slate-200'
+                  }`}
+                >
+                  <div className={`absolute top-[2px] left-[2px] w-5 h-5 bg-white rounded-full transition-transform duration-300 ${
+                    showFilters ? 'translate-x-5' : ''
+                  }`} />
+                </div>
+                <div>
+                  <span className="font-semibold text-sm text-[#1E293B]">Filter Dropdowns</span>
+                  <p className="text-xs mt-0.5 text-[#64748B]">
+                    Department, location, and job type filter dropdowns. Auto-hidden when 3 or fewer jobs.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Info box */}
+      <div className="bg-[#E0E7FF] rounded-2xl p-6">
+        <div className="flex items-start gap-3">
+          <i className="ph-lightbulb text-[#4F46E5] text-xl mt-0.5" />
+          <div>
+            <h4 className="font-bold text-[#1E293B] text-sm">How the job listing widget works</h4>
+            <p className="text-sm text-[#64748B] mt-1">
+              The widget displays all your active jobs from the Jobs page. When candidates click &quot;Apply&quot;, it loads the CV builder inline so they can browse and apply without leaving your site. Go to <strong>Embed Code</strong> to get the snippet.
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   );

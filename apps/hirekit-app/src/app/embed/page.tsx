@@ -11,12 +11,6 @@ export default function EmbedCodePage() {
   const [appOrigin, setAppOrigin] = useState('');
   const [tab, setTab] = useState<Tab>('cv-builder');
 
-  // Job listings config
-  const [layout, setLayout] = useState<'cards' | 'list'>('cards');
-  const [theme, setTheme] = useState<'light' | 'dark'>('light');
-  const [showFilters, setShowFilters] = useState(true);
-  const [showSearch, setShowSearch] = useState(true);
-
   useEffect(() => {
     setAppOrigin(window.location.origin);
     fetch('/api/settings')
@@ -40,23 +34,13 @@ export default function EmbedCodePage() {
   })(window,document,'script');
 </script>`;
 
-  const jobsConfigObj = [
-    `companyId:'${companyId}'`,
-    layout !== 'cards' ? `layout:'${layout}'` : '',
-    theme !== 'light' ? `theme:'${theme}'` : '',
-    !showFilters ? 'showFilters:false' : '',
-    !showSearch ? 'showSearch:false' : '',
-  ]
-    .filter(Boolean)
-    .join(',');
-
   const jobsEmbedCode = `<!-- HireKit Job Listings Widget -->
 <div id="hirekit-jobs"></div>
 <script>
   (function(w,d,s){
     var js=d.createElement(s);js.async=1;
     js.src='${jobsWidgetUrl}';
-    js.onload=function(){w.HireKitJobs.init({${jobsConfigObj}})};
+    js.onload=function(){w.HireKitJobs.init({companyId:'${companyId}'})};
     d.head.appendChild(js);
   })(window,document,'script');
 </script>`;
@@ -85,27 +69,27 @@ export default function EmbedCodePage() {
         )}
 
         {/* Tab navigation */}
-        <div className="flex gap-2 mb-8">
+        <div className="flex gap-1 mb-8 bg-white border border-slate-200 p-1.5 rounded-2xl w-fit">
           <button
             onClick={() => setTab('cv-builder')}
-            className={`px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 ${
+            className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all duration-300 ${
               tab === 'cv-builder'
                 ? 'bg-[#4F46E5] text-white shadow-md shadow-indigo-500/25'
-                : 'bg-white border border-slate-200 text-[#64748B] hover:border-[#4F46E5] hover:text-[#4F46E5]'
+                : 'text-[#64748B] hover:text-[#1E293B] hover:bg-[#FAFBFC]'
             }`}
           >
-            <i className="ph-code mr-1.5" />
+            <i className="ph-code" />
             CV Builder
           </button>
           <button
             onClick={() => setTab('job-listings')}
-            className={`px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 ${
+            className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all duration-300 ${
               tab === 'job-listings'
                 ? 'bg-[#4F46E5] text-white shadow-md shadow-indigo-500/25'
-                : 'bg-white border border-slate-200 text-[#64748B] hover:border-[#4F46E5] hover:text-[#4F46E5]'
+                : 'text-[#64748B] hover:text-[#1E293B] hover:bg-[#FAFBFC]'
             }`}
           >
-            <i className="ph-briefcase mr-1.5" />
+            <i className="ph-briefcase" />
             Job Listings
           </button>
         </div>
@@ -189,108 +173,6 @@ export default function EmbedCodePage() {
 
         {tab === 'job-listings' && (
           <div className="space-y-6">
-            {/* Config controls */}
-            <div className="bg-white rounded-2xl border border-slate-200 p-8 shadow-sm">
-              <div className="flex items-center gap-2 mb-2">
-                <i className="ph-sliders-horizontal text-xl text-[#4F46E5]" />
-                <h3 className="text-lg font-bold text-[#1E293B]">Configuration</h3>
-              </div>
-              <p className="text-[15px] text-[#64748B] mb-6">
-                Customize how the job listing widget appears on your site. The code snippet below updates automatically.
-              </p>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label className="block text-sm font-semibold text-[#1E293B] mb-2">Layout</label>
-                  <div className="flex gap-2">
-                    <button
-                      onClick={() => setLayout('cards')}
-                      className={`flex-1 px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${
-                        layout === 'cards'
-                          ? 'bg-[#EEF2FF] text-[#4F46E5] border border-[#4F46E5]'
-                          : 'bg-white border border-slate-200 text-[#64748B] hover:border-slate-300'
-                      }`}
-                    >
-                      <i className="ph-grid-four mr-1.5" />
-                      Cards
-                    </button>
-                    <button
-                      onClick={() => setLayout('list')}
-                      className={`flex-1 px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${
-                        layout === 'list'
-                          ? 'bg-[#EEF2FF] text-[#4F46E5] border border-[#4F46E5]'
-                          : 'bg-white border border-slate-200 text-[#64748B] hover:border-slate-300'
-                      }`}
-                    >
-                      <i className="ph-list mr-1.5" />
-                      List
-                    </button>
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-semibold text-[#1E293B] mb-2">Theme</label>
-                  <div className="flex gap-2">
-                    <button
-                      onClick={() => setTheme('light')}
-                      className={`flex-1 px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${
-                        theme === 'light'
-                          ? 'bg-[#EEF2FF] text-[#4F46E5] border border-[#4F46E5]'
-                          : 'bg-white border border-slate-200 text-[#64748B] hover:border-slate-300'
-                      }`}
-                    >
-                      <i className="ph-sun mr-1.5" />
-                      Light
-                    </button>
-                    <button
-                      onClick={() => setTheme('dark')}
-                      className={`flex-1 px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${
-                        theme === 'dark'
-                          ? 'bg-[#EEF2FF] text-[#4F46E5] border border-[#4F46E5]'
-                          : 'bg-white border border-slate-200 text-[#64748B] hover:border-slate-300'
-                      }`}
-                    >
-                      <i className="ph-moon mr-1.5" />
-                      Dark
-                    </button>
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-semibold text-[#1E293B] mb-2">Show Filters</label>
-                  <button
-                    onClick={() => setShowFilters(!showFilters)}
-                    className={`w-12 h-7 rounded-full transition-all duration-300 relative ${
-                      showFilters ? 'bg-[#4F46E5]' : 'bg-slate-200'
-                    }`}
-                  >
-                    <span
-                      className={`block w-5 h-5 bg-white rounded-full shadow absolute top-1 transition-all duration-300 ${
-                        showFilters ? 'left-6' : 'left-1'
-                      }`}
-                    />
-                  </button>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-semibold text-[#1E293B] mb-2">Show Search</label>
-                  <button
-                    onClick={() => setShowSearch(!showSearch)}
-                    className={`w-12 h-7 rounded-full transition-all duration-300 relative ${
-                      showSearch ? 'bg-[#4F46E5]' : 'bg-slate-200'
-                    }`}
-                  >
-                    <span
-                      className={`block w-5 h-5 bg-white rounded-full shadow absolute top-1 transition-all duration-300 ${
-                        showSearch ? 'left-6' : 'left-1'
-                      }`}
-                    />
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            {/* Embed code */}
             <div className="bg-white rounded-2xl border border-slate-200 p-8 shadow-sm">
               <div className="flex items-center gap-2 mb-2">
                 <i className="ph-code text-xl text-[#4F46E5]" />
@@ -323,9 +205,12 @@ export default function EmbedCodePage() {
               <div className="flex items-start gap-3">
                 <i className="ph-lightbulb text-[#4F46E5] text-xl mt-0.5" />
                 <div>
-                  <h4 className="font-bold text-[#1E293B] text-sm">How it works</h4>
+                  <h4 className="font-bold text-[#1E293B] text-sm">Configuration</h4>
                   <p className="text-sm text-[#64748B] mt-1">
-                    The job listing widget displays all your active jobs. When candidates click &quot;Apply&quot;, it loads the CV builder inline — they can browse and apply without leaving your site.
+                    Customize the layout, theme, and features of your job listing widget under{' '}
+                    <a href="/configuration" className="text-[#4F46E5] font-semibold hover:underline">
+                      Configuration &rarr; Job Listings
+                    </a>.
                   </p>
                 </div>
               </div>
