@@ -7,7 +7,7 @@ import { TrendChart, PipelineChart, SourceChart } from './components/ReportChart
 interface ReportData {
   totalApplications: number;
   trend: { date: string; count: number }[];
-  pipeline: { status: string; count: number }[];
+  pipeline: { status: string; name?: string; color?: string; bgColor?: string; count: number }[];
   sources: { source: string; count: number }[];
   timeToHire: { avg: number; median: number; count: number };
   conversionRate: number;
@@ -192,14 +192,6 @@ export default function ReportsPage() {
                 {data.pipeline.map((stage, i) => {
                   const maxCount = Math.max(...data.pipeline.map((p) => p.count), 1);
                   const pct = (stage.count / maxCount) * 100;
-                  const STATUS_COLORS: Record<string, string> = {
-                    new: '#4F46E5',
-                    screening: '#2563EB',
-                    interviewing: '#7C3AED',
-                    offered: '#F59E0B',
-                    hired: '#16A34A',
-                    rejected: '#EF4444',
-                  };
                   return (
                     <div key={stage.status} className="flex-1 flex flex-col items-center gap-2">
                       <span className="text-sm font-bold text-[#1E293B]">{stage.count}</span>
@@ -207,10 +199,10 @@ export default function ReportsPage() {
                         className="w-full rounded-t-lg transition-all"
                         style={{
                           height: `${Math.max(pct, 4)}%`,
-                          backgroundColor: STATUS_COLORS[stage.status] || '#94A3B8',
+                          backgroundColor: stage.color || '#94A3B8',
                         }}
                       />
-                      <span className="text-[10px] text-[#64748B] capitalize">{stage.status}</span>
+                      <span className="text-[10px] text-[#64748B]">{stage.name || stage.status}</span>
                       {i < data.pipeline.length - 1 && data.pipeline[i].count > 0 && (
                         <span className="text-[10px] text-[#94A3B8]">
                           {Math.round(((data.pipeline[i + 1]?.count || 0) / stage.count) * 100)}%

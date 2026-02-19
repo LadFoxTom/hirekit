@@ -17,7 +17,7 @@ import {
 
 const COLORS = ['#4F46E5', '#2563EB', '#7C3AED', '#DB2777', '#EA580C', '#16A34A', '#94A3B8'];
 
-const STATUS_COLORS: Record<string, string> = {
+const FALLBACK_STATUS_COLORS: Record<string, string> = {
   new: '#4F46E5',
   screening: '#2563EB',
   interviewing: '#7C3AED',
@@ -33,6 +33,8 @@ interface TrendData {
 
 interface PipelineData {
   status: string;
+  name?: string;
+  color?: string;
   count: number;
 }
 
@@ -86,7 +88,10 @@ export function PipelineChart({ data }: { data: PipelineData[] }) {
         <XAxis
           dataKey="status"
           tick={{ fontSize: 11, fill: '#94A3B8' }}
-          tickFormatter={(v) => v.charAt(0).toUpperCase() + v.slice(1)}
+          tickFormatter={(v) => {
+            const item = data.find((d) => d.status === v);
+            return item?.name || v.charAt(0).toUpperCase() + v.slice(1);
+          }}
         />
         <YAxis tick={{ fontSize: 11, fill: '#94A3B8' }} allowDecimals={false} />
         <Tooltip
@@ -95,7 +100,7 @@ export function PipelineChart({ data }: { data: PipelineData[] }) {
         />
         <Bar dataKey="count" radius={[6, 6, 0, 0]}>
           {data.map((entry) => (
-            <Cell key={entry.status} fill={STATUS_COLORS[entry.status] || '#94A3B8'} />
+            <Cell key={entry.status} fill={entry.color || FALLBACK_STATUS_COLORS[entry.status] || '#94A3B8'} />
           ))}
         </Bar>
       </BarChart>

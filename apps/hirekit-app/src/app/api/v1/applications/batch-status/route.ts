@@ -5,8 +5,7 @@ import { db } from '@repo/database-hirekit';
 import { logActivity } from '@/lib/activity';
 import { getCompanyForUser } from '@/lib/company';
 import { triggerAutoEmail } from '@/lib/candidate-email';
-
-const VALID_STATUSES = ['new', 'screening', 'interviewing', 'offered', 'hired', 'rejected'];
+import { isValidStage } from '@/lib/pipeline';
 
 export async function PATCH(request: NextRequest) {
   const session = await getServerSession(authOptions);
@@ -33,7 +32,7 @@ export async function PATCH(request: NextRequest) {
     return NextResponse.json({ error: 'Missing applicationId(s) or status' }, { status: 400 });
   }
 
-  if (!VALID_STATUSES.includes(status)) {
+  if (!(await isValidStage(ctx.companyId, status))) {
     return NextResponse.json({ error: 'Invalid status' }, { status: 400 });
   }
 

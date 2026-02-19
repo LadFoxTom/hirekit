@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { authOptions } from '@/lib/auth';
 import { db } from '@repo/database-hirekit';
 import { getCompanyForUser } from '@/lib/company';
+import { getPipelineStages } from '@/lib/pipeline';
 import { DashboardLayout } from '@/app/components/DashboardLayout';
 import { KanbanBoard } from './components/KanbanBoard';
 import { JobFilter } from './components/JobFilter';
@@ -31,7 +32,7 @@ export default async function ApplicationsPage({
   if (status !== 'all') where.status = status;
   if (jobId) where.jobId = jobId;
 
-  const [applications, total, jobs] = await Promise.all([
+  const [applications, total, jobs, pipelineStages] = await Promise.all([
     db.application.findMany({
       where,
       orderBy: { createdAt: 'desc' },
@@ -44,10 +45,12 @@ export default async function ApplicationsPage({
       select: { id: true, title: true },
       orderBy: { title: 'asc' },
     }),
+    getPipelineStages(ctx.companyId),
   ]);
 
   const totalPages = Math.ceil(total / limit);
-  const statusOptions = ['all', 'new', 'screening', 'interviewing', 'offered', 'hired', 'rejected'];
+  const stageData = pipelineStages.map((s) => ({ slug: s.slug, name: s.name, color: s.color, bgColor: s.bgColor }));
+  const statusOptions = ['all', ...pipelineStages.map((s) => s.slug)];
 
   const buildUrl = (params: Record<string, string>) => {
     const base: Record<string, string> = {};
@@ -106,7 +109,7 @@ export default async function ApplicationsPage({
                     : 'bg-white text-[#64748B] border border-slate-200 hover:border-[#4F46E5] hover:text-[#4F46E5]'
                 }`}
               >
-                {s.charAt(0).toUpperCase() + s.slice(1)}
+                {s === 'all' ? 'All' : pipelineStages.find((st) => st.slug === s)?.name || s}
               </Link>
             ))}
           </div>
@@ -133,6 +136,7 @@ export default async function ApplicationsPage({
               createdAt: app.createdAt.toISOString(),
               job: app.job,
             }))}
+            stages={pipelineStages.map((s) => ({ id: s.slug, label: s.name, color: s.color, bg: s.bgColor }))}
           />
         ) : (
           <>
@@ -147,6 +151,7 @@ export default async function ApplicationsPage({
                 createdAt: app.createdAt.toISOString(),
                 job: app.job,
               }))}
+              stages={stageData}
             />
 
             {/* Pagination */}

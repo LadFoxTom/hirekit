@@ -3,8 +3,7 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { db } from '@repo/database-hirekit';
 import { getCompanyForUser } from '@/lib/company';
-
-const STATUSES = ['new', 'screening', 'interviewing', 'offered', 'hired', 'rejected'];
+import { getPipelineStages } from '@/lib/pipeline';
 
 export async function GET(request: NextRequest) {
   const session = await getServerSession(authOptions);
@@ -47,14 +46,18 @@ export async function GET(request: NextRequest) {
   const trend = Object.entries(trendMap).map(([date, count]) => ({ date, count }));
 
   // Pipeline: status distribution (all time)
+  const stages = await getPipelineStages(companyId);
   const pipelineRaw = await db.application.groupBy({
     by: ['status'],
     where: { companyId },
     _count: { id: true },
   });
-  const pipeline = STATUSES.map((status) => ({
-    status,
-    count: pipelineRaw.find((p) => p.status === status)?._count.id || 0,
+  const pipeline = stages.map((s) => ({
+    status: s.slug,
+    name: s.name,
+    color: s.color,
+    bgColor: s.bgColor,
+    count: pipelineRaw.find((p) => p.status === s.slug)?._count.id || 0,
   }));
 
   // Source breakdown
@@ -69,7 +72,7 @@ export async function GET(request: NextRequest) {
 
   // Time to hire (from applications that have hiredAt)
   const hiredApps = await db.application.findMany({
-    where: { companyId, status: 'hired', hiredAt: { not: null } },
+    where: { companyId, hiredAt: { not: null } },
     select: { createdAt: true, hiredAt: true },
   });
 
@@ -95,8 +98,9 @@ export async function GET(request: NextRequest) {
     take: 10,
   });
 
-  // Conversion rate
-  const hiredCount = pipeline.find((p) => p.status === 'hired')?.count || 0;
+  // Conversion rate — sum positive_end stages
+  const positiveEndSlugs = stages.filter((s) => s.type === 'positive_end').map((s) => s.slug);
+  const hiredCount = pipeline.filter((p) => positiveEndSlugs.includes(p.status)).reduce((sum, p) => sum + p.count, 0);
   const conversionRate = totalApplications > 0 ? Math.round((hiredCount / totalApplications) * 100) : 0;
 
   return NextResponse.json({

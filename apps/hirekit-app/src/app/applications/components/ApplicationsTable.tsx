@@ -16,9 +16,17 @@ interface Application {
   job: { id: string; title: string } | null;
 }
 
-const STATUSES = ['new', 'screening', 'interviewing', 'offered', 'hired', 'rejected'];
+interface StageInfo {
+  slug: string;
+  name: string;
+  color: string;
+  bgColor: string;
+}
 
-export function ApplicationsTable({ applications }: { applications: Application[] }) {
+const DEFAULT_STATUSES = ['new', 'screening', 'interviewing', 'offered', 'hired', 'rejected'];
+
+export function ApplicationsTable({ applications, stages }: { applications: Application[]; stages?: StageInfo[] }) {
+  const STATUSES = stages ? stages.map((s) => s.slug) : DEFAULT_STATUSES;
   const [selected, setSelected] = useState<Set<string>>(new Set());
   const [processing, setProcessing] = useState(false);
   const [showBulkEmail, setShowBulkEmail] = useState(false);
@@ -159,7 +167,7 @@ export function ApplicationsTable({ applications }: { applications: Application[
                     )}
                   </td>
                   <td className="px-6 py-4">
-                    <StatusBadge status={app.status} />
+                    <StatusBadge status={app.status} stages={stages} />
                   </td>
                   <td className="px-6 py-4 text-sm text-[#94A3B8]">
                     {new Date(app.createdAt).toLocaleDateString()}
@@ -188,7 +196,11 @@ export function ApplicationsTable({ applications }: { applications: Application[
             className="bg-white/10 text-white text-sm rounded-lg px-3 py-1.5 border border-white/20 cursor-pointer appearance-none"
           >
             <option value="" disabled>Change Status...</option>
-            {STATUSES.map(s => (
+            {stages ? stages.map(s => (
+              <option key={s.slug} value={s.slug} className="text-[#1E293B]">
+                {s.name}
+              </option>
+            )) : STATUSES.map(s => (
               <option key={s} value={s} className="text-[#1E293B]">
                 {s.charAt(0).toUpperCase() + s.slice(1)}
               </option>

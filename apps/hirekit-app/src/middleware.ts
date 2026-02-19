@@ -42,7 +42,7 @@ export async function middleware(request: NextRequest) {
   }
 
   // Auth Protection (exclude /schedule/* for candidate self-booking)
-  if (pathname.startsWith('/dashboard') || pathname.startsWith('/applications') || pathname.startsWith('/settings') || pathname.startsWith('/onboarding') || pathname.startsWith('/jobs') || pathname.startsWith('/embed') || pathname.startsWith('/configuration') || pathname.startsWith('/reports')) {
+  if (pathname.startsWith('/dashboard') || pathname.startsWith('/applications') || pathname.startsWith('/settings') || pathname.startsWith('/onboarding') || pathname.startsWith('/jobs') || pathname.startsWith('/embed') || pathname.startsWith('/configuration') || pathname.startsWith('/reports') || pathname.startsWith('/talent')) {
     const token = await getToken({ req: request });
     if (!token) {
       return NextResponse.redirect(new URL('/auth/login', request.url));

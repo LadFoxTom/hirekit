@@ -5,8 +5,7 @@ import { db } from '@repo/database-hirekit';
 import { logActivity } from '@/lib/activity';
 import { getCompanyForUser } from '@/lib/company';
 import { triggerAutoEmail } from '@/lib/candidate-email';
-
-const VALID_STATUSES = ['new', 'screening', 'interviewing', 'offered', 'hired', 'rejected'];
+import { isValidStage, getStageBySlug } from '@/lib/pipeline';
 
 export async function PATCH(
   request: NextRequest,
@@ -24,15 +23,22 @@ export async function PATCH(
 
   const body = await request.json();
 
-  if (body.status && !VALID_STATUSES.includes(body.status)) {
+  if (body.status && !(await isValidStage(ctx.companyId, body.status))) {
     return NextResponse.json({ error: 'Invalid status' }, { status: 400 });
+  }
+
+  // Check if this is a positive end stage (e.g. hired)
+  let isPositiveEnd = false;
+  if (body.status) {
+    const stage = await getStageBySlug(ctx.companyId, body.status);
+    isPositiveEnd = stage?.type === 'positive_end';
   }
 
   const application = await db.application.updateMany({
     where: { id: params.id, companyId: ctx.companyId },
     data: {
       ...(body.status && { status: body.status }),
-      ...(body.status === 'hired' && { hiredAt: new Date() }),
+      ...(isPositiveEnd && { hiredAt: new Date() }),
       ...(body.notes !== undefined && { notes: body.notes }),
       ...(body.assignedTo !== undefined && { assignedTo: body.assignedTo }),
     },

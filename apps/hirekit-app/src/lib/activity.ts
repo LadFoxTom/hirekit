@@ -1,5 +1,6 @@
 import { db } from '@repo/database-hirekit';
 import type { Prisma } from '@repo/database-hirekit';
+import { dispatchWebhooks } from './webhooks';
 
 type ActivityType =
   | 'application_created'
@@ -27,6 +28,13 @@ export function logActivity(params: {
       data: params.data as Prisma.InputJsonValue,
       performedBy: params.performedBy ?? null,
     },
+  }).then(() => {
+    // Dispatch webhooks after activity is logged
+    dispatchWebhooks(params.companyId, params.type, {
+      applicationId: params.applicationId,
+      type: params.type,
+      ...params.data,
+    });
   }).catch((err) => {
     console.error('[ActivityLog] Failed to log activity:', err);
   });

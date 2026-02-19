@@ -8,6 +8,7 @@ const navItems = [
   { href: '/dashboard', label: 'Dashboard', icon: 'ph ph-squares-four' },
   { href: '/jobs', label: 'Jobs', icon: 'ph ph-briefcase' },
   { href: '/applications', label: 'Applications', icon: 'ph ph-users' },
+  { href: '/talent', label: 'Talent Pool', icon: 'ph ph-magnifying-glass' },
   { href: '/reports', label: 'Reports', icon: 'ph ph-chart-line' },
   { href: '/configuration', label: 'Configuration', icon: 'ph ph-sliders' },
   { href: '/embed', label: 'Embed Code', icon: 'ph ph-code' },

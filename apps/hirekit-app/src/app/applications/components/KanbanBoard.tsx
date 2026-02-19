@@ -29,14 +29,12 @@ interface ApplicationItem {
   job?: { title: string } | null;
 }
 
-const COLUMNS = [
-  { id: 'new', label: 'New', color: '#4F46E5', bg: '#E0E7FF' },
-  { id: 'screening', label: 'Screening', color: '#D97706', bg: '#FEF3C7' },
-  { id: 'interviewing', label: 'Interviewing', color: '#2563EB', bg: '#DBEAFE' },
-  { id: 'offered', label: 'Offered', color: '#7C3AED', bg: '#F3E8FF' },
-  { id: 'hired', label: 'Hired', color: '#16A34A', bg: '#DCFCE7' },
-  { id: 'rejected', label: 'Rejected', color: '#DC2626', bg: '#FEE2E2' },
-];
+interface StageColumn {
+  id: string;
+  label: string;
+  color: string;
+  bg: string;
+}
 
 function DroppableColumn({
   id,
@@ -88,7 +86,15 @@ function DroppableColumn({
   );
 }
 
-export function KanbanBoard({ applications }: { applications: ApplicationItem[] }) {
+export function KanbanBoard({ applications, stages }: { applications: ApplicationItem[]; stages?: StageColumn[] }) {
+  const COLUMNS: StageColumn[] = stages || [
+    { id: 'new', label: 'New', color: '#4F46E5', bg: '#E0E7FF' },
+    { id: 'screening', label: 'Screening', color: '#D97706', bg: '#FEF3C7' },
+    { id: 'interviewing', label: 'Interviewing', color: '#2563EB', bg: '#DBEAFE' },
+    { id: 'offered', label: 'Offered', color: '#7C3AED', bg: '#F3E8FF' },
+    { id: 'hired', label: 'Hired', color: '#16A34A', bg: '#DCFCE7' },
+    { id: 'rejected', label: 'Rejected', color: '#DC2626', bg: '#FEE2E2' },
+  ];
   const [items, setItems] = useState(applications);
   const [activeId, setActiveId] = useState<string | null>(null);
 

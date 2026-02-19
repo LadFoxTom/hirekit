@@ -2,15 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-
-const STATUSES = [
-  { value: 'new', label: 'New', icon: 'ph ph-envelope-simple', bg: '#E0E7FF', text: '#4F46E5', ring: '#4F46E5' },
-  { value: 'screening', label: 'Screening', icon: 'ph ph-eye', bg: '#FEF3C7', text: '#D97706', ring: '#D97706' },
-  { value: 'interviewing', label: 'Interviewing', icon: 'ph ph-video-camera', bg: '#DBEAFE', text: '#2563EB', ring: '#2563EB' },
-  { value: 'offered', label: 'Offered', icon: 'ph ph-hand-heart', bg: '#F3E8FF', text: '#7C3AED', ring: '#7C3AED' },
-  { value: 'hired', label: 'Hired', icon: 'ph ph-check-circle', bg: '#DCFCE7', text: '#16A34A', ring: '#16A34A' },
-  { value: 'rejected', label: 'Rejected', icon: 'ph ph-x-circle', bg: '#FEE2E2', text: '#DC2626', ring: '#DC2626' },
-];
+import { usePipelineStages } from '@/lib/hooks/usePipelineStages';
 
 export function StatusUpdater({
   applicationId,
@@ -22,6 +14,7 @@ export function StatusUpdater({
   const [status, setStatus] = useState(currentStatus);
   const [saving, setSaving] = useState(false);
   const router = useRouter();
+  const { stages, loading } = usePipelineStages();
 
   const handleChange = async (newStatus: string) => {
     if (newStatus === status || saving) return;
@@ -41,24 +34,28 @@ export function StatusUpdater({
     }
   };
 
+  if (loading) {
+    return <div className="animate-pulse space-y-2">{[1,2,3].map(i => <div key={i} className="h-10 bg-slate-100 rounded-xl" />)}</div>;
+  }
+
   return (
     <div className="space-y-2">
-      {STATUSES.map((s) => {
-        const isActive = s.value === status;
+      {stages.map((s) => {
+        const isActive = s.slug === status;
         return (
           <button
-            key={s.value}
-            onClick={() => handleChange(s.value)}
+            key={s.slug}
+            onClick={() => handleChange(s.slug)}
             disabled={saving}
             className="w-full px-4 py-2.5 rounded-xl text-sm font-semibold text-left flex items-center gap-3 transition-all duration-300 disabled:opacity-50"
             style={{
-              backgroundColor: isActive ? s.bg : '#FAFBFC',
-              color: isActive ? s.text : '#64748B',
-              boxShadow: isActive ? `inset 0 0 0 2px ${s.ring}` : 'inset 0 0 0 1px #E2E8F0',
+              backgroundColor: isActive ? s.bgColor : '#FAFBFC',
+              color: isActive ? s.color : '#64748B',
+              boxShadow: isActive ? `inset 0 0 0 2px ${s.color}` : 'inset 0 0 0 1px #E2E8F0',
             }}
           >
-            <i className={`${s.icon} text-base`} />
-            {s.label}
+            {s.icon && <i className={`${s.icon} text-base`} />}
+            {s.name}
             {isActive && (
               <i className="ph-bold ph-check text-xs ml-auto" />
             )}

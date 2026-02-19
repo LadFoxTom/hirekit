@@ -33,6 +33,8 @@ model Company {
   consentConfig    ConsentConfig?
   candidateConsents CandidateConsent[]
   deletionRequests DataDeletionRequest[]
+  pipelineStages   PipelineStage[]
+  webhooks         Webhook[]
   createdAt    DateTime       @default(now())
   updatedAt    DateTime       @updatedAt
 
@@ -448,4 +450,40 @@ model DataDeletionRequest {
   @@index([companyId])
   @@index([email])
   @@index([status])
+}
+
+// CUSTOM PIPELINE STAGES
+model PipelineStage {
+  id        String   @id @default(cuid())
+  companyId String
+  company   Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  name      String
+  slug      String
+  color     String   @default("#4F46E5")
+  bgColor   String   @default("#E0E7FF")
+  icon      String?
+  order     Int
+  type      String   @default("active")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([companyId, slug])
+  @@index([companyId, order])
+}
+
+// WEBHOOKS
+model Webhook {
+  id              String    @id @default(cuid())
+  companyId       String
+  company         Company   @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  url             String
+  events          String[]
+  secret          String
+  active          Boolean   @default(true)
+  lastError       String?
+  lastTriggeredAt DateTime?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  @@index([companyId])
 }

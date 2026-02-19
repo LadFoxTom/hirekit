@@ -8,6 +8,8 @@ import { TeamTab } from './TeamTab';
 import { CareerPageTab } from './CareerPageTab';
 import { ScorecardsTab } from './ScorecardsTab';
 import { GdprTab } from './GdprTab';
+import { PipelineTab } from './PipelineTab';
+import { WebhooksTab } from './WebhooksTab';
 
 interface Settings {
   company: { id: string; name: string; slug: string };
@@ -39,7 +41,7 @@ interface Settings {
   };
 }
 
-type Tab = 'general' | 'job-listings' | 'cv-builder' | 'email-templates' | 'team' | 'career-page' | 'scorecards' | 'gdpr';
+type Tab = 'general' | 'job-listings' | 'cv-builder' | 'email-templates' | 'team' | 'career-page' | 'scorecards' | 'pipeline' | 'webhooks' | 'gdpr';
 
 export default function SettingsPage() {
   const [settings, setSettings] = useState<Settings | null>(null);
@@ -106,8 +108,10 @@ export default function SettingsPage() {
     { id: 'cv-builder', label: 'CV Builder', icon: 'ph ph-file-text' },
     { id: 'career-page', label: 'Career Page', icon: 'ph ph-globe' },
     { id: 'scorecards', label: 'Scorecards', icon: 'ph ph-clipboard-text' },
+    { id: 'pipeline', label: 'Pipeline', icon: 'ph ph-flow-arrow' },
     { id: 'email-templates', label: 'Email Templates', icon: 'ph ph-envelope' },
     { id: 'team', label: 'Team', icon: 'ph ph-users-three' },
+    { id: 'webhooks', label: 'Webhooks', icon: 'ph ph-webhooks-logo' },
     { id: 'gdpr', label: 'GDPR', icon: 'ph ph-shield-check' },
   ];
 
@@ -893,8 +897,16 @@ export default function SettingsPage() {
           <ScorecardsTab />
         )}
 
+        {activeTab === 'pipeline' && (
+          <PipelineTab />
+        )}
+
         {activeTab === 'team' && (
           <TeamTab />
+        )}
+
+        {activeTab === 'webhooks' && (
+          <WebhooksTab />
         )}
 
         {activeTab === 'gdpr' && (
