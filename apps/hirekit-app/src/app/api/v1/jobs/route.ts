@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { db } from '@repo/database-hirekit';
+import { getCompanyForUser } from '@/lib/company';
 
 export async function GET(request: NextRequest) {
   const session = await getServerSession(authOptions);
@@ -9,10 +10,8 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  const company = await db.company.findFirst({
-    where: { ownerId: session.user.id },
-  });
-  if (!company) {
+  const ctx = await getCompanyForUser(session.user.id);
+  if (!ctx) {
     return NextResponse.json({ error: 'No company found' }, { status: 404 });
   }
 
@@ -20,7 +19,7 @@ export async function GET(request: NextRequest) {
   const active = searchParams.get('active');
   const search = searchParams.get('search');
 
-  const where: Record<string, unknown> = { companyId: company.id };
+  const where: Record<string, unknown> = { companyId: ctx.companyId };
   if (active !== null) where.active = active === 'true';
   if (search) {
     where.title = { contains: search, mode: 'insensitive' };
@@ -43,10 +42,8 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  const company = await db.company.findFirst({
-    where: { ownerId: session.user.id },
-  });
-  if (!company) {
+  const ctx = await getCompanyForUser(session.user.id);
+  if (!ctx) {
     return NextResponse.json({ error: 'No company found' }, { status: 404 });
   }
 
@@ -63,7 +60,7 @@ export async function POST(request: NextRequest) {
 
   const job = await db.job.create({
     data: {
-      companyId: company.id,
+      companyId: ctx.companyId,
       title: body.title as string,
       description: (body.description as string) || null,
       location: (body.location as string) || null,

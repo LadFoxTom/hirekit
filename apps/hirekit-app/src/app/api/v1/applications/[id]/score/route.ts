@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { db } from '@repo/database-hirekit';
+import { getCompanyForUser } from '@/lib/company';
 import { ChatOpenAI } from '@langchain/openai';
 import { logActivity } from '@/lib/activity';
 
@@ -14,15 +15,13 @@ export async function POST(
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  const company = await db.company.findFirst({
-    where: { ownerId: session.user.id },
-  });
-  if (!company) {
+  const ctx = await getCompanyForUser(session.user.id);
+  if (!ctx) {
     return NextResponse.json({ error: 'No company' }, { status: 404 });
   }
 
   const application = await db.application.findFirst({
-    where: { id: params.id, companyId: company.id },
+    where: { id: params.id, companyId: ctx.companyId },
     include: { job: true },
   });
 
@@ -110,7 +109,7 @@ Respond ONLY with valid JSON in this exact format:
     });
 
     logActivity({
-      companyId: company.id,
+      companyId: ctx.companyId,
       applicationId: application.id,
       type: 'ai_scored',
       data: { score: overallScore, summary: scoreData.summary },

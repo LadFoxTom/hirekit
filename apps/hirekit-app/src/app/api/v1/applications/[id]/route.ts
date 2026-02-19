@@ -3,6 +3,8 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { db } from '@repo/database-hirekit';
 import { logActivity } from '@/lib/activity';
+import { getCompanyForUser } from '@/lib/company';
+import { triggerAutoEmail } from '@/lib/candidate-email';
 
 const VALID_STATUSES = ['new', 'screening', 'interviewing', 'offered', 'hired', 'rejected'];
 
@@ -15,10 +17,8 @@ export async function PATCH(
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  const company = await db.company.findFirst({
-    where: { ownerId: session.user.id },
-  });
-  if (!company) {
+  const ctx = await getCompanyForUser(session.user.id);
+  if (!ctx) {
     return NextResponse.json({ error: 'No company' }, { status: 404 });
   }
 
@@ -29,10 +29,11 @@ export async function PATCH(
   }
 
   const application = await db.application.updateMany({
-    where: { id: params.id, companyId: company.id },
+    where: { id: params.id, companyId: ctx.companyId },
     data: {
       ...(body.status && { status: body.status }),
       ...(body.notes !== undefined && { notes: body.notes }),
+      ...(body.assignedTo !== undefined && { assignedTo: body.assignedTo }),
     },
   });
 
@@ -42,16 +43,18 @@ export async function PATCH(
 
   if (body.status) {
     logActivity({
-      companyId: company.id,
+      companyId: ctx.companyId,
       applicationId: params.id,
       type: 'status_change',
       data: { to: body.status },
       performedBy: session.user.id,
     });
+    // Fire-and-forget auto email
+    triggerAutoEmail(ctx.companyId, params.id, body.status).catch(() => {});
   }
   if (body.notes !== undefined) {
     logActivity({
-      companyId: company.id,
+      companyId: ctx.companyId,
       applicationId: params.id,
       type: 'note_added',
       data: { notes: typeof body.notes === 'string' ? body.notes.substring(0, 200) : '' },
@@ -71,15 +74,13 @@ export async function GET(
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  const company = await db.company.findFirst({
-    where: { ownerId: session.user.id },
-  });
-  if (!company) {
+  const ctx = await getCompanyForUser(session.user.id);
+  if (!ctx) {
     return NextResponse.json({ error: 'No company' }, { status: 404 });
   }
 
   const application = await db.application.findFirst({
-    where: { id: params.id, companyId: company.id },
+    where: { id: params.id, companyId: ctx.companyId },
     include: { job: true },
   });
 

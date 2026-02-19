@@ -1,10 +1,19 @@
 import { db } from '@repo/database-hirekit';
+import type { Prisma } from '@repo/database-hirekit';
 
-type ActivityType = 'application_created' | 'status_change' | 'note_added' | 'ai_scored';
+type ActivityType =
+  | 'application_created'
+  | 'status_change'
+  | 'note_added'
+  | 'ai_scored'
+  | 'email_sent'
+  | 'evaluation_added'
+  | 'interview_scheduled'
+  | 'interview_completed';
 
 export function logActivity(params: {
   companyId: string;
-  applicationId: string;
+  applicationId?: string | null;
   type: ActivityType;
   data: Record<string, unknown>;
   performedBy?: string | null;
@@ -13,9 +22,9 @@ export function logActivity(params: {
   db.activityLog.create({
     data: {
       companyId: params.companyId,
-      applicationId: params.applicationId,
+      applicationId: params.applicationId ?? null,
       type: params.type,
-      data: params.data,
+      data: params.data as Prisma.InputJsonValue,
       performedBy: params.performedBy ?? null,
     },
   }).catch((err) => {

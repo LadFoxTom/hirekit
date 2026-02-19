@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { db } from '@repo/database-hirekit';
+import { getCompanyForUser } from '@/lib/company';
 
 export async function GET(
   request: NextRequest,
@@ -12,16 +13,14 @@ export async function GET(
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  const company = await db.company.findFirst({
-    where: { ownerId: session.user.id },
-  });
-  if (!company) {
+  const ctx = await getCompanyForUser(session.user.id);
+  if (!ctx) {
     return NextResponse.json({ error: 'No company' }, { status: 404 });
   }
 
   // Verify application belongs to company
   const application = await db.application.findFirst({
-    where: { id: params.id, companyId: company.id },
+    where: { id: params.id, companyId: ctx.companyId },
     select: { id: true },
   });
   if (!application) {

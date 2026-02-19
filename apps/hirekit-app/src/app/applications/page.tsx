@@ -3,6 +3,7 @@ import { redirect } from 'next/navigation';
 import Link from 'next/link';
 import { authOptions } from '@/lib/auth';
 import { db } from '@repo/database-hirekit';
+import { getCompanyForUser } from '@/lib/company';
 import { DashboardLayout } from '@/app/components/DashboardLayout';
 import { KanbanBoard } from './components/KanbanBoard';
 import { JobFilter } from './components/JobFilter';
@@ -16,10 +17,8 @@ export default async function ApplicationsPage({
   const session = await getServerSession(authOptions);
   if (!session?.user?.id) redirect('/auth/login');
 
-  const company = await db.company.findFirst({
-    where: { ownerId: session.user.id },
-  });
-  if (!company) redirect('/onboarding');
+  const ctx = await getCompanyForUser(session.user.id);
+  if (!ctx) redirect('/onboarding');
 
   const status = searchParams.status || 'all';
   const page = parseInt(searchParams.page || '1', 10);
@@ -28,7 +27,7 @@ export default async function ApplicationsPage({
   const limit = 20;
   const skip = (page - 1) * limit;
 
-  const where: Record<string, unknown> = { companyId: company.id };
+  const where: Record<string, unknown> = { companyId: ctx.companyId };
   if (status !== 'all') where.status = status;
   if (jobId) where.jobId = jobId;
 
@@ -41,7 +40,7 @@ export default async function ApplicationsPage({
     }),
     db.application.count({ where }),
     db.job.findMany({
-      where: { companyId: company.id, active: true },
+      where: { companyId: ctx.companyId, active: true },
       select: { id: true, title: true },
       orderBy: { title: 'asc' },
     }),

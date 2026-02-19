@@ -12,6 +12,20 @@ const navItems = [
   { href: '/embed', label: 'Embed Code', icon: 'ph ph-code' },
 ];
 
+function EmailVerificationBanner() {
+  const { data: session } = useSession();
+  if (!session?.user || (session.user as any).emailVerified) return null;
+
+  return (
+    <div className="bg-amber-50 border-b border-amber-200 px-6 py-3 flex items-center justify-between">
+      <div className="flex items-center gap-2 text-amber-800 text-sm">
+        <i className="ph ph-warning-circle text-lg" />
+        <span>Please verify your email address. Check your inbox for a verification link.</span>
+      </div>
+    </div>
+  );
+}
+
 export function DashboardLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const { data: session } = useSession();
@@ -80,7 +94,10 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
           </div>
         </aside>
         {/* Main Content */}
-        <main className="flex-1 min-w-0">{children}</main>
+        <main className="flex-1 min-w-0">
+          <EmailVerificationBanner />
+          {children}
+        </main>
       </div>
     </>
   );

@@ -30,6 +30,10 @@ function getIcon(type: string): string {
     case 'status_change': return 'ph ph-arrow-right';
     case 'note_added': return 'ph ph-note';
     case 'ai_scored': return 'ph ph-robot';
+    case 'email_sent': return 'ph ph-paper-plane-tilt';
+    case 'evaluation_added': return 'ph ph-star';
+    case 'interview_scheduled': return 'ph ph-calendar-plus';
+    case 'interview_completed': return 'ph ph-calendar-check';
     default: return 'ph ph-clock';
   }
 }
@@ -44,6 +48,14 @@ function getDescription(type: string, data: Record<string, unknown>): string {
       return 'Note added';
     case 'ai_scored':
       return `AI scored candidate: ${data.score}%`;
+    case 'email_sent':
+      return `Email sent: ${data.subject || 'Untitled'}`;
+    case 'evaluation_added':
+      return `Evaluation submitted (${data.rating}/5)`;
+    case 'interview_scheduled':
+      return `Interview scheduled: ${data.title || 'Interview'}`;
+    case 'interview_completed':
+      return `Interview completed: ${data.title || 'Interview'}`;
     default:
       return type.replace(/_/g, ' ');
   }
@@ -55,6 +67,10 @@ function getColor(type: string): string {
     case 'status_change': return '#D97706';
     case 'note_added': return '#64748B';
     case 'ai_scored': return '#16A34A';
+    case 'email_sent': return '#2563EB';
+    case 'evaluation_added': return '#F59E0B';
+    case 'interview_scheduled': return '#8B5CF6';
+    case 'interview_completed': return '#10B981';
     default: return '#94A3B8';
   }
 }

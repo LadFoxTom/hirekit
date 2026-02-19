@@ -7,6 +7,12 @@ import { DashboardLayout } from '@/app/components/DashboardLayout';
 import { StatusUpdater } from './StatusUpdater';
 import { AiScoreCard } from './AiScoreCard';
 import { ActivityTimeline } from './ActivityTimeline';
+import { EmailHistory } from './EmailHistory';
+import { ApplicationEmailButton } from './ApplicationEmailButton';
+import { EvaluationPanel } from './EvaluationPanel';
+import { AssigneeSelector } from './AssigneeSelector';
+import { InterviewSection } from './InterviewSection';
+import { getCompanyForUser } from '@/lib/company';
 
 export default async function ApplicationDetailPage({
   params,
@@ -16,13 +22,11 @@ export default async function ApplicationDetailPage({
   const session = await getServerSession(authOptions);
   if (!session?.user?.id) redirect('/auth/login');
 
-  const company = await db.company.findFirst({
-    where: { ownerId: session.user.id },
-  });
-  if (!company) redirect('/onboarding');
+  const ctx = await getCompanyForUser(session.user.id);
+  if (!ctx) redirect('/onboarding');
 
   const application = await db.application.findFirst({
-    where: { id: params.id, companyId: company.id },
+    where: { id: params.id, companyId: ctx.companyId },
     include: { job: true },
   });
   if (!application) notFound();
@@ -54,7 +58,7 @@ export default async function ApplicationDetailPage({
                 <div className="w-14 h-14 bg-[#4F46E5] rounded-2xl flex items-center justify-center text-white text-xl font-bold shrink-0">
                   {(application.name || 'U')[0].toUpperCase()}
                 </div>
-                <div>
+                <div className="flex-1">
                   <h2 className="text-2xl font-bold text-[#1E293B]">
                     {application.name || 'Unnamed Applicant'}
                   </h2>
@@ -82,6 +86,7 @@ export default async function ApplicationDetailPage({
                     )}
                   </div>
                 </div>
+                <ApplicationEmailButton applicationId={application.id} />
               </div>
             </div>
 
@@ -172,6 +177,12 @@ export default async function ApplicationDetailPage({
               </Section>
             )}
 
+            {/* Interviews */}
+            <InterviewSection applicationId={application.id} candidateEmail={application.email} />
+
+            {/* Email History */}
+            <EmailHistory applicationId={application.id} />
+
             {/* Activity Timeline */}
             <ActivityTimeline applicationId={application.id} />
           </div>
@@ -186,6 +197,12 @@ export default async function ApplicationDetailPage({
               />
             </div>
 
+            {/* Assignee */}
+            <AssigneeSelector
+              applicationId={application.id}
+              currentAssignee={application.assignedTo}
+            />
+
             {/* AI Score */}
             <AiScoreCard
               applicationId={application.id}
@@ -193,6 +210,9 @@ export default async function ApplicationDetailPage({
               currentScoreData={aiScoreData as any}
               hasJob={!!application.job}
             />
+
+            {/* Evaluations */}
+            <EvaluationPanel applicationId={application.id} />
 
             <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
               <h3 className="text-lg font-bold text-[#1E293B] mb-4">Details</h3>

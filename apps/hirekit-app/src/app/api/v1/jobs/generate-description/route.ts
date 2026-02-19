@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { db } from '@repo/database-hirekit';
+import { getCompanyForUser } from '@/lib/company';
 import { ChatOpenAI } from '@langchain/openai';
 
 export async function POST(request: NextRequest) {
@@ -10,8 +11,13 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  const company = await db.company.findFirst({
-    where: { ownerId: session.user.id },
+  const ctx = await getCompanyForUser(session.user.id);
+  if (!ctx) {
+    return NextResponse.json({ error: 'No company' }, { status: 404 });
+  }
+
+  const company = await db.company.findUnique({
+    where: { id: ctx.companyId },
     include: { branding: true },
   });
   if (!company) {

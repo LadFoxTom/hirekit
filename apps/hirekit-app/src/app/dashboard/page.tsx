@@ -3,6 +3,7 @@ import { redirect } from 'next/navigation';
 import Link from 'next/link';
 import { authOptions } from '@/lib/auth';
 import { db } from '@repo/database-hirekit';
+import { getCompanyForUser } from '@/lib/company';
 import { DashboardLayout } from '@/app/components/DashboardLayout';
 import { StatusBadge } from '@/app/components/StatusBadge';
 import { DashboardCharts } from './components/DashboardCharts';
@@ -11,13 +12,16 @@ export default async function DashboardPage() {
   const session = await getServerSession(authOptions);
   if (!session?.user?.id) redirect('/auth/login');
 
-  const company = await db.company.findFirst({
-    where: { ownerId: session.user.id },
+  const ctx = await getCompanyForUser(session.user.id);
+  if (!ctx) redirect('/onboarding');
+
+  const company = await db.company.findUnique({
+    where: { id: ctx.companyId },
     include: { branding: true },
   });
   if (!company) redirect('/onboarding');
 
-  const [totalApplications, newApplications, activeJobs, hiredCount, recentApplications] =
+  const [totalApplications, newApplications, activeJobs, hiredCount, recentApplications, upcomingInterviews] =
     await Promise.all([
       db.application.count({ where: { companyId: company.id } }),
       db.application.count({ where: { companyId: company.id, status: 'new' } }),
@@ -28,6 +32,16 @@ export default async function DashboardPage() {
         orderBy: { createdAt: 'desc' },
         take: 5,
         include: { job: { select: { title: true } } },
+      }),
+      db.interview.findMany({
+        where: {
+          companyId: company.id,
+          startTime: { gte: new Date() },
+          status: { in: ['scheduled', 'confirmed'] },
+        },
+        include: { application: { select: { name: true, email: true } } },
+        orderBy: { startTime: 'asc' },
+        take: 5,
       }),
     ]);
 
@@ -170,6 +184,43 @@ export default async function DashboardPage() {
             </div>
           </div>
         </div>
+
+        {/* Upcoming Interviews */}
+        {upcomingInterviews.length > 0 && (
+          <div className="bg-white rounded-2xl border border-slate-200 shadow-sm mb-8">
+            <div className="px-8 py-5 border-b border-slate-200 flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <i className="ph ph-calendar text-lg text-[#4F46E5]" />
+                <h3 className="text-lg font-bold text-[#1E293B]">Upcoming Interviews</h3>
+              </div>
+            </div>
+            <div className="divide-y divide-slate-100">
+              {upcomingInterviews.map((interview) => (
+                <div key={interview.id} className="flex items-center justify-between px-8 py-4">
+                  <div className="flex items-center gap-4">
+                    <div className="w-10 h-10 bg-[#E0E7FF] rounded-full flex items-center justify-center">
+                      <i className="ph ph-video-camera text-[#4F46E5]" />
+                    </div>
+                    <div>
+                      <p className="font-semibold text-[#1E293B] text-sm">{interview.title}</p>
+                      <p className="text-xs text-[#94A3B8]">
+                        {interview.application.name || interview.application.email}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <p className="text-sm font-medium text-[#1E293B]">
+                      {new Date(interview.startTime).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })}
+                    </p>
+                    <p className="text-xs text-[#94A3B8]">
+                      {new Date(interview.startTime).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* Recent Applications */}
         <div className="bg-white rounded-2xl border border-slate-200 shadow-sm">

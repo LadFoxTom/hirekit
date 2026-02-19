@@ -3,6 +3,8 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { db } from '@repo/database-hirekit';
 import { logActivity } from '@/lib/activity';
+import { getCompanyForUser } from '@/lib/company';
+import { triggerAutoEmail } from '@/lib/candidate-email';
 
 const VALID_STATUSES = ['new', 'screening', 'interviewing', 'offered', 'hired', 'rejected'];
 
@@ -12,10 +14,8 @@ export async function PATCH(request: NextRequest) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  const company = await db.company.findFirst({
-    where: { ownerId: session.user.id },
-  });
-  if (!company) {
+  const ctx = await getCompanyForUser(session.user.id);
+  if (!ctx) {
     return NextResponse.json({ error: 'No company' }, { status: 404 });
   }
 
@@ -38,7 +38,7 @@ export async function PATCH(request: NextRequest) {
   }
 
   const result = await db.application.updateMany({
-    where: { id: { in: ids }, companyId: company.id },
+    where: { id: { in: ids }, companyId: ctx.companyId },
     data: { status },
   });
 
@@ -46,15 +46,16 @@ export async function PATCH(request: NextRequest) {
     return NextResponse.json({ error: 'Not found' }, { status: 404 });
   }
 
-  // Log activity for each updated application
+  // Log activity and trigger auto emails for each updated application
   for (const id of ids) {
     logActivity({
-      companyId: company.id,
+      companyId: ctx.companyId,
       applicationId: id,
       type: 'status_change',
       data: { to: status },
       performedBy: session.user.id,
     });
+    triggerAutoEmail(ctx.companyId, id, status).catch(() => {});
   }
 
   return NextResponse.json({ success: true, updated: result.count });

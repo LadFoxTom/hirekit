@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { StatusBadge } from '@/app/components/StatusBadge';
+import { BulkEmailModal } from './BulkEmailModal';
 
 interface Application {
   id: string;
@@ -20,6 +21,7 @@ const STATUSES = ['new', 'screening', 'interviewing', 'offered', 'hired', 'rejec
 export function ApplicationsTable({ applications }: { applications: Application[] }) {
   const [selected, setSelected] = useState<Set<string>>(new Set());
   const [processing, setProcessing] = useState(false);
+  const [showBulkEmail, setShowBulkEmail] = useState(false);
   const router = useRouter();
 
   const toggleAll = () => {
@@ -193,6 +195,13 @@ export function ApplicationsTable({ applications }: { applications: Application[
             ))}
           </select>
           <button
+            onClick={() => setShowBulkEmail(true)}
+            disabled={processing}
+            className="px-4 py-1.5 bg-[#4F46E5] text-white text-sm font-semibold rounded-lg hover:bg-[#4338CA] transition-colors disabled:opacity-50"
+          >
+            Send Email
+          </button>
+          <button
             onClick={() => handleBulkAction('rejected')}
             disabled={processing}
             className="px-4 py-1.5 bg-red-500 text-white text-sm font-semibold rounded-lg hover:bg-red-600 transition-colors disabled:opacity-50"
@@ -206,6 +215,14 @@ export function ApplicationsTable({ applications }: { applications: Application[
             Clear
           </button>
         </div>
+      )}
+
+      {showBulkEmail && (
+        <BulkEmailModal
+          applicationIds={[...selected]}
+          onClose={() => setShowBulkEmail(false)}
+          onSent={() => { setSelected(new Set()); setShowBulkEmail(false); }}
+        />
       )}
     </>
   );

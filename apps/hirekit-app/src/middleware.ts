@@ -41,8 +41,8 @@ export async function middleware(request: NextRequest) {
     rateLimit.set(ip, { count: 1, resetTime: now + 60000 });
   }
 
-  // Auth Protection
-  if (pathname.startsWith('/dashboard') || pathname.startsWith('/applications') || pathname.startsWith('/settings') || pathname.startsWith('/onboarding')) {
+  // Auth Protection (exclude /schedule/* for candidate self-booking)
+  if (pathname.startsWith('/dashboard') || pathname.startsWith('/applications') || pathname.startsWith('/settings') || pathname.startsWith('/onboarding') || pathname.startsWith('/jobs') || pathname.startsWith('/embed') || pathname.startsWith('/configuration')) {
     const token = await getToken({ req: request });
     if (!token) {
       return NextResponse.redirect(new URL('/auth/login', request.url));

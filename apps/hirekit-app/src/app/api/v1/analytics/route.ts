@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { db } from '@repo/database-hirekit';
+import { getCompanyForUser } from '@/lib/company';
 
 export async function GET(request: NextRequest) {
   const session = await getServerSession(authOptions);
@@ -9,10 +10,8 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  const company = await db.company.findFirst({
-    where: { ownerId: session.user.id },
-  });
-  if (!company) {
+  const ctx = await getCompanyForUser(session.user.id);
+  if (!ctx) {
     return NextResponse.json({ error: 'No company found' }, { status: 404 });
   }
 
@@ -23,7 +22,7 @@ export async function GET(request: NextRequest) {
     // Applications from last 30 days for trend
     db.application.findMany({
       where: {
-        companyId: company.id,
+        companyId: ctx.companyId,
         createdAt: { gte: thirtyDaysAgo },
       },
       select: {
@@ -35,12 +34,12 @@ export async function GET(request: NextRequest) {
     // All applications for pipeline counts
     db.application.groupBy({
       by: ['status'],
-      where: { companyId: company.id },
+      where: { companyId: ctx.companyId },
       _count: { id: true },
     }),
     // Top jobs by application count
     db.job.findMany({
-      where: { companyId: company.id, active: true },
+      where: { companyId: ctx.companyId, active: true },
       include: {
         _count: { select: { applications: true } },
       },

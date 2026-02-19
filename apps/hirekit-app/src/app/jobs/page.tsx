@@ -3,6 +3,7 @@ import { redirect } from 'next/navigation';
 import Link from 'next/link';
 import { authOptions } from '@/lib/auth';
 import { db } from '@repo/database-hirekit';
+import { getCompanyForUser } from '@/lib/company';
 import { DashboardLayout } from '@/app/components/DashboardLayout';
 
 export default async function JobsPage({
@@ -13,23 +14,21 @@ export default async function JobsPage({
   const session = await getServerSession(authOptions);
   if (!session?.user?.id) redirect('/auth/login');
 
-  const company = await db.company.findFirst({
-    where: { ownerId: session.user.id },
-  });
-  if (!company) redirect('/onboarding');
+  const ctx = await getCompanyForUser(session.user.id);
+  if (!ctx) redirect('/onboarding');
 
   const showActive = searchParams.active !== 'false';
 
   const [jobs, activeCount, inactiveCount] = await Promise.all([
     db.job.findMany({
-      where: { companyId: company.id, active: showActive },
+      where: { companyId: ctx.companyId, active: showActive },
       orderBy: { createdAt: 'desc' },
       include: {
         _count: { select: { applications: true } },
       },
     }),
-    db.job.count({ where: { companyId: company.id, active: true } }),
-    db.job.count({ where: { companyId: company.id, active: false } }),
+    db.job.count({ where: { companyId: ctx.companyId, active: true } }),
+    db.job.count({ where: { companyId: ctx.companyId, active: false } }),
   ]);
 
   return (

@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { db } from '@repo/database-hirekit';
+import { getCompanyForUser } from '@/lib/company';
 
 export async function GET(
   request: NextRequest,
@@ -12,15 +13,13 @@ export async function GET(
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  const company = await db.company.findFirst({
-    where: { ownerId: session.user.id },
-  });
-  if (!company) {
+  const ctx = await getCompanyForUser(session.user.id);
+  if (!ctx) {
     return NextResponse.json({ error: 'No company' }, { status: 404 });
   }
 
   const job = await db.job.findFirst({
-    where: { id: params.id, companyId: company.id },
+    where: { id: params.id, companyId: ctx.companyId },
     include: {
       _count: { select: { applications: true } },
     },
@@ -42,10 +41,8 @@ export async function PATCH(
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  const company = await db.company.findFirst({
-    where: { ownerId: session.user.id },
-  });
-  if (!company) {
+  const ctx = await getCompanyForUser(session.user.id);
+  if (!ctx) {
     return NextResponse.json({ error: 'No company' }, { status: 404 });
   }
 
@@ -63,7 +60,7 @@ export async function PATCH(
   if (body.active !== undefined) data.active = Boolean(body.active);
 
   const result = await db.job.updateMany({
-    where: { id: params.id, companyId: company.id },
+    where: { id: params.id, companyId: ctx.companyId },
     data,
   });
 
@@ -83,16 +80,14 @@ export async function DELETE(
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  const company = await db.company.findFirst({
-    where: { ownerId: session.user.id },
-  });
-  if (!company) {
+  const ctx = await getCompanyForUser(session.user.id);
+  if (!ctx) {
     return NextResponse.json({ error: 'No company' }, { status: 404 });
   }
 
   // Soft delete by setting active to false
   const result = await db.job.updateMany({
-    where: { id: params.id, companyId: company.id },
+    where: { id: params.id, companyId: ctx.companyId },
     data: { active: false },
   });
 

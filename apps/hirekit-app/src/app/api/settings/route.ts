@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { db } from '@repo/database-hirekit';
+import { getCompanyForUser } from '@/lib/company';
 
 export async function GET() {
   const session = await getServerSession(authOptions);
@@ -9,8 +10,13 @@ export async function GET() {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  const company = await db.company.findFirst({
-    where: { ownerId: session.user.id },
+  const ctx = await getCompanyForUser(session.user.id);
+  if (!ctx) {
+    return NextResponse.json({ error: 'No company found' }, { status: 404 });
+  }
+
+  const company = await db.company.findUnique({
+    where: { id: ctx.companyId },
     include: {
       branding: true,
       cvTemplate: true,
@@ -84,20 +90,23 @@ export async function PUT(request: NextRequest) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  const company = await db.company.findFirst({
-    where: { ownerId: session.user.id },
-  });
-  if (!company) {
+  const ctx = await getCompanyForUser(session.user.id);
+  if (!ctx) {
     return NextResponse.json({ error: 'No company found' }, { status: 404 });
   }
+
+  const company = await db.company.findUnique({
+    where: { id: ctx.companyId },
+    select: { slug: true, name: true },
+  });
 
   const body = await request.json();
 
   if (body.branding) {
     await db.branding.upsert({
-      where: { companyId: company.id },
+      where: { companyId: ctx.companyId },
       create: {
-        companyId: company.id,
+        companyId: ctx.companyId,
         primaryColor: body.branding.primaryColor || '#4F46E5',
         secondaryColor: body.branding.secondaryColor || '#F8FAFC',
         fontFamily: body.branding.fontFamily || 'Inter',
@@ -116,9 +125,9 @@ export async function PUT(request: NextRequest) {
 
   if (body.sections || body.templateType) {
     await db.cVTemplate.upsert({
-      where: { companyId: company.id },
+      where: { companyId: ctx.companyId },
       create: {
-        companyId: company.id,
+        companyId: ctx.companyId,
         sections: body.sections || {
           personalInfo: { enabled: true },
           experience: { enabled: true, min: 1, max: 10 },
@@ -136,11 +145,11 @@ export async function PUT(request: NextRequest) {
 
   if (body.landingPage) {
     await db.landingPage.upsert({
-      where: { companyId: company.id },
+      where: { companyId: ctx.companyId },
       create: {
-        companyId: company.id,
-        domain: `${company.slug}.hirekit.io`,
-        title: `Apply at ${company.name}`,
+        companyId: ctx.companyId,
+        domain: `${company?.slug || ctx.companyId}.hirekit.io`,
+        title: `Apply at ${ctx.companyName}`,
         successMessage: body.landingPage.successMessage || 'Thank you! Your application has been submitted.',
         redirectUrl: body.landingPage.redirectUrl || null,
         widgetType: body.landingPage.widgetType || 'form',
@@ -155,9 +164,9 @@ export async function PUT(request: NextRequest) {
 
   if (body.jobListingConfig) {
     await db.jobListingConfig.upsert({
-      where: { companyId: company.id },
+      where: { companyId: ctx.companyId },
       create: {
-        companyId: company.id,
+        companyId: ctx.companyId,
         templateId: body.jobListingConfig.templateId || 'simple',
         showFilters: body.jobListingConfig.showFilters ?? true,
         showSearch: body.jobListingConfig.showSearch ?? true,

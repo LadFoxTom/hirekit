@@ -3,6 +3,8 @@
 import { useEffect, useState, useRef } from 'react';
 import { DashboardLayout } from '@/app/components/DashboardLayout';
 import { WIDGET_TEMPLATES, WidgetTemplateConfig, JOB_LISTING_TEMPLATES, JobListingTemplateConfig } from '@repo/types';
+import { EmailTemplatesTab } from './EmailTemplatesTab';
+import { TeamTab } from './TeamTab';
 
 interface Settings {
   company: { id: string; name: string; slug: string };
@@ -34,7 +36,7 @@ interface Settings {
   };
 }
 
-type Tab = 'general' | 'job-listings' | 'cv-builder';
+type Tab = 'general' | 'job-listings' | 'cv-builder' | 'email-templates' | 'team';
 
 export default function SettingsPage() {
   const [settings, setSettings] = useState<Settings | null>(null);
@@ -99,6 +101,8 @@ export default function SettingsPage() {
     { id: 'general', label: 'General', icon: 'ph ph-gear' },
     { id: 'job-listings', label: 'Job Listings', icon: 'ph ph-briefcase' },
     { id: 'cv-builder', label: 'CV Builder', icon: 'ph ph-file-text' },
+    { id: 'email-templates', label: 'Email Templates', icon: 'ph ph-envelope' },
+    { id: 'team', label: 'Team', icon: 'ph ph-users-three' },
   ];
 
   const sectionDefs = [
@@ -867,6 +871,16 @@ export default function SettingsPage() {
         {/* Job Listings Tab */}
         {activeTab === 'job-listings' && (
           <JobListingsTab settings={settings} setSettings={setSettings} />
+        )}
+
+        {/* Email Templates Tab */}
+        {activeTab === 'email-templates' && (
+          <EmailTemplatesTab />
+        )}
+
+        {/* Team Tab */}
+        {activeTab === 'team' && (
+          <TeamTab />
         )}
 
       </div>
