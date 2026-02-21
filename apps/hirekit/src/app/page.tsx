@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { ProblemCard, FeatureCard, HeroMockup } from '@/components/InteractiveCards';
+import { ProblemCard, FeatureCard, FeatureShowcaseBlock, HeroMockup } from '@/components/InteractiveCards';
 
 
 /* ═══════════════════════════════════════════
@@ -16,6 +16,7 @@ function Header() {
           </Link>
           <div className="hidden md:flex gap-8">
             <a href="#features" className="font-medium text-hk-dark hover:text-hk-primary transition-colors">Features</a>
+            <a href="#how-it-works" className="font-medium text-hk-dark hover:text-hk-primary transition-colors">How it Works</a>
             <a href="#pricing" className="font-medium text-hk-dark hover:text-hk-primary transition-colors">Pricing</a>
             <a href="/auth/login" className="font-medium text-hk-dark hover:text-hk-primary transition-colors">Login</a>
           </div>
@@ -46,11 +47,11 @@ function Hero() {
           {/* Left: Copy */}
           <div className="relative z-[2]">
             <h1 className="text-5xl lg:text-[64px] mb-6 font-bold tracking-tight leading-[1.1]">
-              Stop sorting CVs.{' '}
-              <span className="text-hk-primary">Start hiring faster.</span>
+              The all-in-one hiring platform{' '}
+              <span className="text-hk-primary">for growing teams.</span>
             </h1>
             <p className="text-xl mb-10 max-w-[500px] text-slate-500">
-              Embed our powerful CV builder directly into your career portal. Give candidates a beautiful experience and get structured data instantly.
+              ATS pipeline, embeddable widgets, AI scoring, hosted career pages, and everything you need to hire — all in one platform.
             </p>
             <div className="flex gap-4 flex-wrap">
               <a
@@ -135,7 +136,8 @@ function SolutionSection() {
             </p>
             <ul className="mt-8 space-y-4">
               {[
-                'Customize colors and branding from the dashboard',
+                'Hosted career pages with SEO and Google Jobs schema',
+                'Rich text editor for beautiful, structured job listings',
                 'Get structured JSON data for every applicant',
                 'Mobile responsive out of the box',
               ].map((item) => (
@@ -199,56 +201,478 @@ function SolutionSection() {
    FEATURES
    ═══════════════════════════════════════════ */
 function FeaturesSection() {
+  const features = [
+    {
+      icon: 'ph-duotone ph-kanban',
+      title: 'ATS Pipeline',
+      description: 'Custom pipeline stages with drag-and-drop Kanban board to track every candidate.',
+      color: '#F59E0B',
+    },
+    {
+      icon: 'ph-duotone ph-magic-wand',
+      title: 'AI Scoring',
+      description: 'Automatically score and rank candidates based on skills, experience, and job fit.',
+      color: '#8B5CF6',
+    },
+    {
+      icon: 'ph-duotone ph-sparkle',
+      title: 'AI Job Writer',
+      description: 'Generate rich job descriptions, requirements, and benefits with a single click.',
+      color: '#EC4899',
+    },
+    {
+      icon: 'ph-duotone ph-text-aa',
+      title: 'Rich Text Editor',
+      description: 'WYSIWYG editor for beautiful, structured job listings with formatting and media.',
+      color: '#0EA5E9',
+    },
+    {
+      icon: 'ph-duotone ph-globe',
+      title: 'Hosted Career Pages',
+      description: 'Branded career pages with SEO optimization and Google Jobs JSON-LD schema.',
+      color: '#51CF66',
+    },
+    {
+      icon: 'ph-duotone ph-code',
+      title: 'Embeddable Widgets',
+      description: 'CV builder and job board widgets you can embed in your site with just 5 lines of code.',
+      color: '#4F46E5',
+    },
+    {
+      icon: 'ph-duotone ph-magnifying-glass',
+      title: 'Talent Pool',
+      description: 'Search and filter across all candidates and past applicants by name, email, or skills.',
+      color: '#FF6B6B',
+    },
+    {
+      icon: 'ph-duotone ph-calendar',
+      title: 'Interview Scheduling',
+      description: 'Self-scheduling links so candidates can book their own interview slots.',
+      color: '#F59E0B',
+    },
+    {
+      icon: 'ph-duotone ph-envelope',
+      title: 'Email & Communication',
+      description: 'Customizable email templates for every hiring stage, from application to offer.',
+      color: '#8B5CF6',
+    },
+    {
+      icon: 'ph-duotone ph-exam',
+      title: 'Evaluation Scorecards',
+      description: 'Criteria-based scoring for structured, fair, and consistent candidate evaluations.',
+      color: '#EC4899',
+    },
+    {
+      icon: 'ph-duotone ph-users-three',
+      title: 'Team Collaboration',
+      description: 'Invite recruiters, assign roles (admin, recruiter, viewer), and collaborate on hiring.',
+      color: '#0EA5E9',
+    },
+    {
+      icon: 'ph-duotone ph-webhooks-logo',
+      title: 'Webhooks & Integrations',
+      description: 'Connect to Zapier, Slack, or your own API with real-time webhook events.',
+      color: '#51CF66',
+    },
+  ];
+
   return (
     <section id="features" className="py-28">
       <div className="max-w-container mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold">Everything you need to hire</h2>
-          <p className="mt-4 text-slate-500 text-lg">More than just a form builder.</p>
+          <p className="mt-4 text-slate-500 text-lg">A complete hiring platform — not just a form builder.</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <FeatureCard
-            icon="ph-duotone ph-paint-brush-broad"
-            title="Theme Editor"
-            description="Customize fonts, colors, and border radii to match your design system perfectly."
-            color="#FF6B6B"
+          {features.map((f) => (
+            <FeatureCard
+              key={f.title}
+              icon={f.icon}
+              title={f.title}
+              description={f.description}
+              color={f.color}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ═══════════════════════════════════════════
+   HOW IT WORKS — Deep Dive Showcase
+   ═══════════════════════════════════════════ */
+
+function JobFormMockup() {
+  return (
+    <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+      <div className="flex items-center gap-2 mb-4">
+        <i className="ph-fill ph-briefcase text-hk-primary text-lg" />
+        <span className="font-bold text-hk-dark text-sm">New Job Listing</span>
+      </div>
+      <div className="space-y-3">
+        <div className="bg-slate-50 rounded-lg p-3">
+          <div className="text-[10px] text-slate-400 mb-1">Job Title</div>
+          <div className="w-3/4 h-3 bg-slate-200 rounded" />
+        </div>
+        <div className="bg-slate-50 rounded-lg p-3">
+          <div className="text-[10px] text-slate-400 mb-1">Description (Rich Text)</div>
+          <div className="flex gap-1 mb-2">
+            <div className="w-5 h-5 bg-slate-200 rounded" />
+            <div className="w-5 h-5 bg-slate-200 rounded" />
+            <div className="w-5 h-5 bg-slate-200 rounded" />
+            <div className="w-5 h-5 bg-indigo-100 rounded" />
+          </div>
+          <div className="space-y-1.5">
+            <div className="w-full h-2 bg-slate-200 rounded" />
+            <div className="w-5/6 h-2 bg-slate-200 rounded" />
+            <div className="w-2/3 h-2 bg-slate-100 rounded" />
+          </div>
+        </div>
+        <div className="flex gap-3">
+          <div className="flex-1 bg-slate-50 rounded-lg p-3">
+            <div className="text-[10px] text-slate-400 mb-1">Workplace</div>
+            <div className="w-2/3 h-3 bg-slate-200 rounded" />
+          </div>
+          <div className="flex-1 bg-slate-50 rounded-lg p-3">
+            <div className="text-[10px] text-slate-400 mb-1">Salary</div>
+            <div className="w-1/2 h-3 bg-slate-200 rounded" />
+          </div>
+        </div>
+        <div className="flex items-center gap-2 pt-1">
+          <div className="px-3 py-1.5 bg-hk-primary text-white text-[10px] font-semibold rounded-lg">Publish</div>
+          <div className="px-3 py-1.5 bg-indigo-50 text-hk-primary text-[10px] font-semibold rounded-lg flex items-center gap-1">
+            <i className="ph-fill ph-sparkle text-xs" /> Generate with AI
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function CareerPageMockup() {
+  return (
+    <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+      <div className="bg-indigo-600 rounded-xl p-4 mb-4">
+        <div className="flex items-center gap-2 mb-3">
+          <div className="w-8 h-8 bg-white/20 rounded-lg" />
+          <div className="w-24 h-3 bg-white/30 rounded" />
+        </div>
+        <div className="w-3/4 h-4 bg-white/20 rounded mb-1" />
+        <div className="w-1/2 h-3 bg-white/15 rounded" />
+      </div>
+      <div className="space-y-2">
+        {['Senior Frontend Engineer', 'Product Designer', 'DevOps Engineer'].map((job) => (
+          <div key={job} className="flex items-center justify-between p-3 bg-slate-50 rounded-lg">
+            <div>
+              <div className="text-xs font-semibold text-hk-dark">{job}</div>
+              <div className="text-[10px] text-slate-400 mt-0.5">Remote &middot; Full-time</div>
+            </div>
+            <div className="px-2 py-1 bg-hk-primary text-white text-[10px] rounded-md font-medium">Apply</div>
+          </div>
+        ))}
+      </div>
+      <div className="flex items-center gap-1.5 mt-3 text-[10px] text-slate-400">
+        <i className="ph-fill ph-check-circle text-hk-accent" />
+        Google Jobs schema included
+      </div>
+    </div>
+  );
+}
+
+function PipelineMockup() {
+  const stages = [
+    { label: 'Applied', color: '#3B82F6', count: 18 },
+    { label: 'Screening', color: '#F59E0B', count: 9 },
+    { label: 'Interview', color: '#8B5CF6', count: 5 },
+    { label: 'Offer', color: '#4F46E5', count: 2 },
+    { label: 'Hired', color: '#51CF66', count: 1 },
+  ];
+
+  return (
+    <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+      <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center gap-2">
+          <i className="ph-fill ph-kanban text-hk-primary text-lg" />
+          <span className="font-bold text-hk-dark text-sm">Pipeline</span>
+        </div>
+        <div className="flex gap-1.5">
+          <div className="px-2 py-1 bg-hk-primary text-white rounded text-[10px] font-medium">Board</div>
+          <div className="px-2 py-1 bg-slate-100 text-slate-500 rounded text-[10px] font-medium">List</div>
+        </div>
+      </div>
+      <div className="flex gap-2">
+        {stages.map((s) => (
+          <div key={s.label} className="flex-1">
+            <div className="flex items-center gap-1 mb-2">
+              <div className="w-1.5 h-1.5 rounded-full" style={{ background: s.color }} />
+              <span className="text-[10px] font-semibold text-hk-dark">{s.label}</span>
+              <span className="text-[10px] text-slate-400 ml-auto">{s.count}</span>
+            </div>
+            {[...Array(Math.min(s.count, 2))].map((_, i) => (
+              <div key={i} className="bg-slate-50 rounded-md border border-slate-100 p-2 mb-1.5">
+                <div className="w-full h-1.5 bg-slate-200 rounded mb-1" />
+                <div className="w-2/3 h-1.5 bg-slate-100 rounded mb-1.5" />
+                <div className="flex items-center justify-between">
+                  <div className="w-4 h-4 bg-slate-100 rounded-full" />
+                  {i === 0 && (
+                    <div className="flex items-center gap-0.5">
+                      <i className="ph-fill ph-star text-amber-400 text-[8px]" />
+                      <span className="text-[8px] font-bold text-slate-500">{92 - stages.indexOf(s) * 5}</span>
+                    </div>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
+      <div className="flex items-center gap-2 mt-3 p-2 bg-slate-50 rounded-lg">
+        <i className="ph-fill ph-clock-counter-clockwise text-slate-400 text-xs" />
+        <span className="text-[10px] text-slate-400">Activity: Moved to Interview &middot; 2h ago</span>
+      </div>
+    </div>
+  );
+}
+
+function ScorecardMockup() {
+  const criteria = [
+    { name: 'Technical Skills', score: 4 },
+    { name: 'Communication', score: 5 },
+    { name: 'Culture Fit', score: 3 },
+  ];
+
+  return (
+    <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+      <div className="flex items-center gap-2 mb-4">
+        <i className="ph-fill ph-exam text-hk-primary text-lg" />
+        <span className="font-bold text-hk-dark text-sm">Evaluation</span>
+      </div>
+      <div className="space-y-3 mb-4">
+        {criteria.map((c) => (
+          <div key={c.name}>
+            <div className="flex justify-between mb-1">
+              <span className="text-[11px] font-medium text-hk-dark">{c.name}</span>
+              <span className="text-[10px] text-slate-400">{c.score}/5</span>
+            </div>
+            <div className="flex gap-1">
+              {[1, 2, 3, 4, 5].map((n) => (
+                <div
+                  key={n}
+                  className="h-1.5 flex-1 rounded-full"
+                  style={{ background: n <= c.score ? '#4F46E5' : '#E2E8F0' }}
+                />
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+      <div className="border-t border-slate-100 pt-3">
+        <div className="flex items-center gap-2 mb-2">
+          <i className="ph-fill ph-calendar text-hk-primary text-sm" />
+          <span className="text-[11px] font-semibold text-hk-dark">Interview</span>
+        </div>
+        <div className="bg-slate-50 rounded-lg p-2.5 flex items-center justify-between">
+          <div>
+            <div className="text-[10px] font-medium text-hk-dark">Technical Round</div>
+            <div className="text-[9px] text-slate-400">Mon, 10:00 AM &middot; Self-scheduled</div>
+          </div>
+          <div className="px-2 py-1 bg-emerald-50 text-emerald-600 text-[9px] rounded font-medium">Confirmed</div>
+        </div>
+      </div>
+      <div className="border-t border-slate-100 pt-3 mt-3">
+        <div className="flex items-center gap-2">
+          <div className="w-5 h-5 bg-indigo-50 rounded-full flex items-center justify-center">
+            <i className="ph-fill ph-user text-hk-primary text-[10px]" />
+          </div>
+          <div className="w-5 h-5 bg-rose-50 rounded-full flex items-center justify-center">
+            <i className="ph-fill ph-user text-rose-400 text-[10px]" />
+          </div>
+          <span className="text-[10px] text-slate-400 ml-1">2 evaluators</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function EmailMockup() {
+  return (
+    <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+      <div className="flex items-center gap-2 mb-4">
+        <i className="ph-fill ph-envelope text-hk-primary text-lg" />
+        <span className="font-bold text-hk-dark text-sm">Email Templates</span>
+      </div>
+      <div className="space-y-2 mb-4">
+        {[
+          { name: 'Application Received', color: '#3B82F6' },
+          { name: 'Interview Invitation', color: '#8B5CF6' },
+          { name: 'Offer Letter', color: '#51CF66' },
+        ].map((t) => (
+          <div key={t.name} className="flex items-center gap-2 p-2.5 bg-slate-50 rounded-lg">
+            <div className="w-2 h-2 rounded-full" style={{ background: t.color }} />
+            <span className="text-[11px] font-medium text-hk-dark">{t.name}</span>
+            <i className="ph-bold ph-pencil text-slate-300 text-xs ml-auto" />
+          </div>
+        ))}
+      </div>
+      <div className="bg-slate-50 rounded-lg p-3">
+        <div className="text-[10px] text-slate-400 mb-2">Composing to 12 candidates...</div>
+        <div className="space-y-1.5 mb-3">
+          <div className="w-full h-2 bg-slate-200 rounded" />
+          <div className="w-4/5 h-2 bg-slate-200 rounded" />
+          <div className="w-3/5 h-2 bg-slate-100 rounded" />
+        </div>
+        <div className="flex items-center gap-2">
+          <div className="px-2 py-1 bg-hk-primary text-white text-[10px] rounded-md font-medium">Send Bulk</div>
+          <span className="text-[9px] text-slate-400">Personalized with merge tags</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function InsightsMockup() {
+  return (
+    <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+      <div className="flex items-center gap-2 mb-4">
+        <i className="ph-fill ph-chart-line-up text-hk-primary text-lg" />
+        <span className="font-bold text-hk-dark text-sm">Reports</span>
+      </div>
+      <div className="grid grid-cols-3 gap-2 mb-4">
+        {[
+          { label: 'Avg. Time to Hire', value: '18d' },
+          { label: 'Open Positions', value: '12' },
+          { label: 'This Month', value: '47' },
+        ].map((s) => (
+          <div key={s.label} className="bg-slate-50 rounded-lg p-2 text-center">
+            <div className="text-lg font-bold text-hk-dark">{s.value}</div>
+            <div className="text-[9px] text-slate-400">{s.label}</div>
+          </div>
+        ))}
+      </div>
+      {/* Mini chart */}
+      <div className="flex items-end gap-1 h-16 mb-4">
+        {[40, 55, 35, 65, 50, 80, 60, 75, 90, 70, 85, 95].map((h, i) => (
+          <div
+            key={i}
+            className="flex-1 rounded-t"
+            style={{ height: `${h}%`, background: i >= 10 ? '#4F46E5' : '#E0E7FF' }}
           />
-          <FeatureCard
-            icon="ph-duotone ph-database"
-            title="Structured Data"
-            description="Don't guess. Get clean JSON objects for every applicant: work history, skills, education."
-            color="#4F46E5"
+        ))}
+      </div>
+      <div className="border-t border-slate-100 pt-3 space-y-2">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-1.5">
+            <i className="ph-fill ph-webhooks-logo text-slate-400 text-xs" />
+            <span className="text-[10px] text-slate-500">Webhook: Slack #hiring</span>
+          </div>
+          <div className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+        </div>
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-1.5">
+            <i className="ph-fill ph-rss text-slate-400 text-xs" />
+            <span className="text-[10px] text-slate-500">Indeed XML Feed</span>
+          </div>
+          <div className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function HowItWorksSection() {
+  return (
+    <section id="how-it-works" className="py-28 bg-white">
+      <div className="max-w-container mx-auto px-6">
+        <div className="text-center mb-20">
+          <span className="text-hk-primary font-bold uppercase text-sm tracking-widest">How it works</span>
+          <h2 className="text-4xl mt-4 font-bold">From job post to hire, all in one place</h2>
+          <p className="text-slate-500 text-lg mt-4 max-w-[600px] mx-auto">
+            HireKit covers every step of the hiring process. Here&apos;s how teams use it to hire faster and smarter.
+          </p>
+        </div>
+
+        <div className="space-y-24">
+          <FeatureShowcaseBlock
+            icon="ph-fill ph-pencil-simple-line"
+            title="Post Jobs in Minutes"
+            description="Create compelling job listings with our rich text editor or let AI generate the entire description for you. Add salary ranges, workplace type, benefits, and publish instantly."
+            bullets={[
+              'WYSIWYG rich text editor with formatting, lists, and media',
+              'AI job description generator — one click for description, requirements, and benefits',
+              'Salary period, workplace type, department, and benefit tags',
+              'Publish to your career page and Indeed feed simultaneously',
+            ]}
+            visual={<JobFormMockup />}
           />
-          <FeatureCard
-            icon="ph-duotone ph-translate"
-            title="Multi-language"
-            description="Supports multiple languages so candidates can apply in their preferred language."
-            color="#51CF66"
+
+          <FeatureShowcaseBlock
+            icon="ph-fill ph-globe"
+            title="Branded Career Pages"
+            description="Every company gets a hosted career page that looks professional, ranks in search engines, and converts visitors into applicants."
+            bullets={[
+              'SEO-optimized with automatic Google Jobs JSON-LD schema',
+              'Responsive design that works on every device',
+              'Custom branding — your logo, colors, and company info',
+              'Or embed the job board widget on your own website',
+            ]}
+            visual={<CareerPageMockup />}
+            reversed
           />
-          <FeatureCard
-            icon="ph-duotone ph-kanban"
-            title="ATS Pipeline"
-            description="Track candidates through screening, interviews, offers, and hiring with a drag-and-drop Kanban board."
-            color="#F59E0B"
+
+          <FeatureShowcaseBlock
+            icon="ph-fill ph-kanban"
+            title="Track Every Candidate"
+            description="A visual Kanban pipeline that adapts to your hiring process. Customize stages, drag candidates between them, and let AI surface the best fits."
+            bullets={[
+              'Custom pipeline stages with colors, icons, and drag-and-drop reorder',
+              'AI-powered candidate scoring based on job requirements',
+              'Full activity timeline — every action tracked per candidate',
+              'Talent pool search across all candidates and past applicants',
+            ]}
+            visual={<PipelineMockup />}
           />
-          <FeatureCard
-            icon="ph-duotone ph-magic-wand"
-            title="AI Scoring"
-            description="Automatically score and rank candidates based on skills, experience, and job fit using AI."
-            color="#8B5CF6"
+
+          <FeatureShowcaseBlock
+            icon="ph-fill ph-exam"
+            title="Evaluate & Collaborate"
+            description="Make fair, structured hiring decisions with scorecards and interview scheduling. Invite your team to collaborate with role-based access."
+            bullets={[
+              'Criteria-based evaluation scorecards for consistent assessments',
+              'Self-scheduling interview links — candidates pick their own slots',
+              'Team roles: admin, recruiter, and viewer permissions',
+              'Multiple evaluators per candidate with aggregated scores',
+            ]}
+            visual={<ScorecardMockup />}
+            reversed
           />
-          <FeatureCard
-            icon="ph-duotone ph-chat-circle-dots"
-            title="Chat Mode"
-            description="Candidates can build their CV through an AI-powered conversational interface instead of forms."
-            color="#EC4899"
+
+          <FeatureShowcaseBlock
+            icon="ph-fill ph-envelope"
+            title="Communicate at Scale"
+            description="Customizable email templates for every hiring stage. Send personalized bulk emails and keep a complete communication history for every candidate."
+            bullets={[
+              'Pre-built templates for applications, interviews, offers, and rejections',
+              'Bulk email with merge tags for personalization',
+              'Batch status changes across multiple candidates',
+              'Full communication history per candidate',
+            ]}
+            visual={<EmailMockup />}
           />
-          <FeatureCard
-            icon="ph-duotone ph-briefcase"
-            title="Job Board Widget"
-            description="Embed a fully interactive job board on your site. Candidates browse, filter, and apply — all without leaving your page."
-            color="#0EA5E9"
+
+          <FeatureShowcaseBlock
+            icon="ph-fill ph-chart-line-up"
+            title="Insights & Integrations"
+            description="Understand your hiring performance with built-in analytics. Connect HireKit to the tools you already use with webhooks and automated feeds."
+            bullets={[
+              'Pipeline reports, time-to-hire metrics, and CSV export',
+              'Webhooks to Zapier, Slack, or any custom API',
+              'Automatic Indeed XML feed for job syndication',
+              'GDPR compliance tools — consent management and data deletion',
+            ]}
+            visual={<InsightsMockup />}
+            reversed
           />
         </div>
       </div>
@@ -261,7 +685,7 @@ function FeaturesSection() {
    ═══════════════════════════════════════════ */
 function ATSPipelineSection() {
   const stages = [
-    { label: 'New', color: '#3B82F6', icon: 'ph-fill ph-plus-circle', count: 24 },
+    { label: 'Applied', color: '#3B82F6', icon: 'ph-fill ph-plus-circle', count: 24 },
     { label: 'Screening', color: '#F59E0B', icon: 'ph-fill ph-eye', count: 12 },
     { label: 'Interview', color: '#8B5CF6', icon: 'ph-fill ph-video-camera', count: 8 },
     { label: 'Offered', color: '#4F46E5', icon: 'ph-fill ph-handshake', count: 3 },
@@ -269,7 +693,7 @@ function ATSPipelineSection() {
   ];
 
   return (
-    <section className="py-28 bg-white">
+    <section className="py-28">
       <div className="max-w-container mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Left: Copy */}
@@ -282,14 +706,14 @@ function ATSPipelineSection() {
               <span className="text-hk-primary">A complete hiring pipeline.</span>
             </h2>
             <p className="text-slate-500 text-lg mb-8">
-              Manage your entire hiring process from one dashboard. Track candidates through every stage, score them with AI, and make data-driven hiring decisions.
+              Manage your entire hiring process from one dashboard. Customize pipeline stages, score candidates with AI, and track every interaction.
             </p>
             <ul className="space-y-4">
               {[
-                { icon: 'ph-fill ph-kanban', text: 'Drag-and-drop Kanban board for visual pipeline management' },
+                { icon: 'ph-fill ph-kanban', text: 'Custom pipeline stages with drag-and-drop reorder' },
                 { icon: 'ph-fill ph-brain', text: 'AI-powered candidate scoring based on job requirements' },
-                { icon: 'ph-fill ph-chart-line-up', text: 'Analytics dashboard with hiring trends and funnel metrics' },
-                { icon: 'ph-fill ph-briefcase', text: 'Full job management with departments and salary ranges' },
+                { icon: 'ph-fill ph-magnifying-glass', text: 'Talent pool search across all candidates and applicants' },
+                { icon: 'ph-fill ph-clock-counter-clockwise', text: 'Full activity timeline — every action logged per candidate' },
               ].map((item) => (
                 <li key={item.text} className="flex gap-3 items-start">
                   <i className={`${item.icon} text-hk-primary text-xl mt-0.5`} />
@@ -329,7 +753,7 @@ function ATSPipelineSection() {
                       <div className="w-2/3 h-2 bg-slate-100 rounded mb-2" />
                       <div className="flex items-center justify-between">
                         <div className="w-5 h-5 bg-slate-100 rounded-full" />
-                        {i === 0 && stage.label !== 'New' && (
+                        {i === 0 && stage.label !== 'Applied' && (
                           <div className="flex items-center gap-1">
                             <i className="ph-fill ph-star text-amber-400 text-[10px]" />
                             <span className="text-[10px] font-bold text-slate-500">{85 - i * 10}</span>
@@ -352,51 +776,11 @@ function ATSPipelineSection() {
 }
 
 /* ═══════════════════════════════════════════
-   HOW IT WORKS
-   ═══════════════════════════════════════════ */
-function HowItWorksSection() {
-  const steps = [
-    { num: 1, icon: 'ph-duotone ph-code', title: 'Embed Widget', desc: 'Add the Javascript snippet to your career page.' },
-    { num: 2, icon: 'ph-duotone ph-sliders-horizontal', title: 'Configure', desc: 'Set your required fields and branding in our dashboard.' },
-    { num: 3, icon: 'ph-duotone ph-paper-plane-tilt', title: 'Receive CVs', desc: 'Candidates apply and data flows into your database.' },
-  ];
-
-  return (
-    <section className="py-28 bg-white">
-      <div className="max-w-container mx-auto px-6">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold">How it works</h2>
-        </div>
-
-        <div className="flex flex-col md:flex-row justify-between relative mt-16">
-          {/* Gradient line */}
-          <div
-            className="hidden md:block absolute top-10 left-[50px] right-[50px] h-0.5 opacity-30 z-0"
-            style={{ background: 'linear-gradient(90deg, #4F46E5 0%, #FF6B6B 50%, #51CF66 100%)' }}
-          />
-
-          {steps.map((step) => (
-            <div key={step.num} className="relative z-[1] bg-hk-bg p-4 w-full md:w-[30%] text-center">
-              <div className="w-12 h-12 bg-white border-2 border-hk-primary text-hk-primary font-bold rounded-full flex items-center justify-center mx-auto mb-6 text-xl">
-                {step.num}
-              </div>
-              <i className={`${step.icon} text-5xl text-hk-dark mb-4 block`} />
-              <h3 className="font-bold">{step.title}</h3>
-              <p className="text-[15px] text-slate-500 mt-2">{step.desc}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ═══════════════════════════════════════════
    PRICING
    ═══════════════════════════════════════════ */
 function PricingSection() {
   return (
-    <section id="pricing" className="py-28">
+    <section id="pricing" className="py-28 bg-white">
       <div className="max-w-container mx-auto px-6">
         <div className="max-w-[700px] mx-auto text-center">
           <h2 className="text-4xl font-bold">Simple, transparent pricing</h2>
@@ -412,20 +796,30 @@ function PricingSection() {
             </div>
             <h3 className="text-2xl font-bold text-hk-dark mb-2">Early Access</h3>
             <p className="text-slate-500 mb-8">
-              Full access to the CV builder widget, ATS pipeline, AI scoring, and analytics dashboard. No credit card required.
+              Full access to every feature. No credit card required.
             </p>
 
-            <div className="grid grid-cols-2 gap-4 mb-8 text-left max-w-[400px] mx-auto">
+            <div className="grid grid-cols-2 gap-4 mb-8 text-left max-w-[450px] mx-auto">
               {[
                 'Unlimited applications',
-                'Embeddable widget',
-                'Kanban pipeline',
+                'Embeddable widgets',
+                'Custom pipeline stages',
                 'AI candidate scoring',
-                'Job management',
-                'Analytics dashboard',
+                'Hosted career pages',
+                'AI job description writer',
+                'Rich text editor',
+                'Interview scheduling',
+                'Email templates',
+                'Evaluation scorecards',
+                'Team collaboration',
+                'Webhooks & integrations',
+                'Talent pool search',
+                'Reports & CSV export',
+                'GDPR compliance tools',
+                'Indeed XML feed',
               ].map((feature) => (
                 <div key={feature} className="flex items-center gap-2">
-                  <i className="ph-bold ph-check text-hk-accent text-lg" />
+                  <i className="ph-bold ph-check text-hk-accent text-lg shrink-0" />
                   <span className="text-sm text-slate-600">{feature}</span>
                 </div>
               ))}
@@ -452,17 +846,17 @@ function WhyHireKitSection() {
     {
       icon: 'ph-fill ph-lightning',
       title: 'Setup in minutes',
-      desc: 'Copy a snippet, paste it on your career page, and start receiving structured applications immediately.',
+      desc: 'Embed widgets, publish career pages, or configure your pipeline — go live in under 10 minutes.',
     },
     {
       icon: 'ph-fill ph-puzzle-piece',
-      title: 'Widget + ATS in one',
-      desc: 'No need to juggle separate tools. The CV builder and hiring pipeline work together seamlessly.',
+      title: 'Everything in one platform',
+      desc: 'ATS, career pages, widgets, scheduling, email, analytics — no more juggling separate tools.',
     },
     {
       icon: 'ph-fill ph-brain',
       title: 'AI does the heavy lifting',
-      desc: 'Candidates get AI writing help. You get AI-powered scoring and ranking. Everyone wins.',
+      desc: 'AI writes job descriptions, scores candidates, and surfaces the best fits so you can focus on people.',
     },
   ];
 
@@ -530,8 +924,8 @@ export default function Home() {
       <ProblemsSection />
       <SolutionSection />
       <FeaturesSection />
-      <ATSPipelineSection />
       <HowItWorksSection />
+      <ATSPipelineSection />
       <PricingSection />
       <WhyHireKitSection />
       <CTASection />

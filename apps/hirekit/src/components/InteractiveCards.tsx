@@ -157,6 +157,48 @@ export function PricingCard({
   );
 }
 
+/* ── Feature Showcase Block (alternating layout for How It Works) ── */
+export function FeatureShowcaseBlock({
+  icon,
+  title,
+  description,
+  bullets,
+  visual,
+  reversed = false,
+}: {
+  icon: string;
+  title: string;
+  description: string;
+  bullets: string[];
+  visual: React.ReactNode;
+  reversed?: boolean;
+}) {
+  return (
+    <div className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center ${reversed ? 'lg:direction-rtl' : ''}`}>
+      <div className={reversed ? 'lg:order-2' : 'lg:order-1'}>
+        <div className="flex items-center gap-3 mb-4">
+          <div className="w-12 h-12 bg-indigo-50 rounded-2xl flex items-center justify-center">
+            <i className={`${icon} text-hk-primary text-2xl`} />
+          </div>
+          <h3 className="text-2xl font-bold text-hk-dark">{title}</h3>
+        </div>
+        <p className="text-slate-500 text-lg mb-6">{description}</p>
+        <ul className="space-y-3">
+          {bullets.map((bullet) => (
+            <li key={bullet} className="flex gap-3 items-start">
+              <i className="ph-fill ph-check-circle text-hk-accent text-xl mt-0.5 shrink-0" />
+              <span className="text-slate-600">{bullet}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div className={reversed ? 'lg:order-1' : 'lg:order-2'}>
+        {visual}
+      </div>
+    </div>
+  );
+}
+
 /* ── Hero Mockup Window (3D perspective) ── */
 export function HeroMockup() {
   const [hovered, setHovered] = useState(false);
