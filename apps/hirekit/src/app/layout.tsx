@@ -7,6 +7,7 @@ import './globals.css';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://hirekit-nine.vercel.app'),
   title: 'HireKit — Hire Smarter, Faster, All-in-One | ATS, AI Scoring & Career Pages',
   description: 'The all-in-one hiring platform for growing teams. ATS pipeline, AI candidate scoring, hosted career pages, embeddable widgets, interview scheduling, and 15+ tools — all free during early access.',
   openGraph: {
